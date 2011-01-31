@@ -1,7 +1,17 @@
-package models.vivo
+package models
 
-class Person(uri: String) {
+object Person {
 
-  def publications = Publication.test_publications
+  val test_people = Map("http://localhost:9000/smithjm" -> new Person(uri = "http://localhost:9000/smithjm", name = "Smith, Joseph M"))
+
+  def find_by_uri(uri: String) = {
+    test_people.get(uri)
+  }
+
+}
+
+class Person(val uri: String, val name: String) {
+
+  def publications = Publication.find_all_by_person_uri(uri)
 
 }
