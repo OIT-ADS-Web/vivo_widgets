@@ -8,5 +8,9 @@ GET     /                                       Application.index
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+# VIVO Widget API Routes
+
+GET /people/{vivoId}/publications.js                People.publications(format:'js')
+
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+# *       /{controller}/{action}                  {controller}.{action}

@@ -12,6 +12,6 @@ object Person {
 
 class Person(val uri: String, val name: String) {
 
-  def publications = Publication.find_all_by_person_uri(uri)
+  def publications = Publication.findAllForPerson(uri)
 
 }

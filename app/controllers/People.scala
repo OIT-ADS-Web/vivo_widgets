@@ -7,8 +7,11 @@ import models._
 
 object People extends Controller {
 
-  def publications(person_uri: String) = {
-    Template("publications" -> Publication.find_all_by_person_uri(person_uri).get)
+  def publications(vivoId: String) = {
+    Publication.findAllForPerson(Vivo.baseUri+vivoId) match {
+      case Some(publications) => Template("publications" -> publications)
+      case _ => NoContent
+    }
   }
 
 }
