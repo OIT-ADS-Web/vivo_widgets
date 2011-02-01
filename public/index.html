@@ -10,30 +10,7 @@
   <script type='text/javascript' src='javascripts/jquery-1.4.2.min.js'></script>
   <script type='text/javascript' src='javascripts/jquery-tmpl.js'></script>
   <script type='text/javascript' src='javascripts/knockout-1.1.2.js'></script>
-  <script type='text/javascript'>
-              var collections = [          
-                            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-                            { collectionName: 'Articles', description: 'Articles by this person', collectionValue: 1 },
-                            { collectionName: 'Presentations', description: 'Presentations by this person', collectionValue: 2 }
-                          ];
-                              
-    var viewModel = {
-      chosenCollection: ko.observable(collections[0])
 
-    };
-                  
-  function initialize() {
-
-          ko.applyBindings(viewModel);    
-    // Makes Knockout get to work
-       };              
-                     
-                     
-  $(function() {
-     initialize();
-      //chosenCollection: ko.observable(collections[0])
-  });
-  </script>
 </head>
 
 <body>
@@ -47,5 +24,29 @@ Chosen Colleciton: <select data-bind="options: collections,
     <b data-bind="text: chosenCollection().description"></b>
     (Name: <span data-bind='text: chosenCollection().collectionName'></span>)
 </p>
+  <script type='text/javascript'>
+              var collections = [          
+                            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+                            { collectionName: 'Articles', description: 'Articles by this person', collectionValue: 1 },
+                            { collectionName: 'Presentations', description: 'Presentations by this person', collectionValue: 2 }
+                          ];
+                              
+    var viewModel = {
+      chosenCollection: ko.observable(collections[0])
+
+    };
+                  
+  // function initialize() {
+
+          ko.applyBindings(viewModel);    
+    // Makes Knockout get to work
+       // };              
+       //               
+                     
+  // $(function() {
+  //    initialize();
+  //     //chosenCollection: ko.observable(collections[0])
+  // });
+  </script>
 </body>
 </html>
