@@ -21,7 +21,6 @@
                 <p>
                     Collection to Display (?):
                 </p>
-               
                 <select data-bind="options: collections, optionsCaption: 'Select...',
                 optionsText: 'collectionName', value:chosenCollection">
                 </select>
@@ -37,37 +36,66 @@
                 </script>
             </li>
             <li>
-              <p>Number of items to return (?):</p>
-              <select name="noItems">
-                <option>Select...</option>
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-              </select>
+                <p>
+                    Number of items to return (?):
+                </p>
+                <select name="noItems">
+                    <option>Select...</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>15</option>
+                </select>
             </li>
-            <li><p>Display Format (?):</p>
-              <input type="radio" name="format" /> Detailed <input type="radio" name="format" /> Abbreviated
+            <li>
+                <p>
+                    Display Format (?):
+                </p>
+                <input type="radio" name="format" /> Detailed
+                <input type="radio" name="format" /> Abbreviated
             </li>
-                        <li><p>Styled or Unstyled (?):</p>
-              <input type="radio" name="styled" /> Yes <input type="radio" name="styled" /> No
+            <li>
+                <p>
+                    Styled or Unstyled (?):
+                </p>
+                <input type="radio" name="styled" /> Yes
+                <input type="radio" name="styled" /> No
             </li>
-            <li><p>Your Embed Code:</p>
-              
-            </li>
+            <li data-bind="template: 'embedTemplate'">
+                 </li>
+                <script id="embedTemplate" type="text/x-jquery-tmpl" >
+                    {{if chosenCollection}}
+                                        <p>
+                        Your Embed Code:
+                    </p>
+                    <textarea cols="10" rows="5" name="embed" >
+                    %{out.print('&lt;script type="text/javascript" src="${url}"&gt; &lt;/script&gt;')}%
+                    </textarea>
+                    {{/if}}
+                </script>
+        
         </ul>
         <a href="#">Preview</a>
         <script type='text/javascript'>
 
             var viewModel = {
-                collections : [
-                { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-                { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
-                { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
-                ],
-                personId: 1234,
-                chosenCollection: ko.observable()
+            collections : [
+            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+            { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+            { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+            ],
+            personId: 1234,
+            chosenCollection: ko.observable()
 
             };
+            viewModel.url = ko.dependentObservable(function() {
+              alert('url changed');
+            if(viewModel.chosenCollection()) {
+            return 'http://localhost:9000/publications?collection=' + viewModel.chosenCollection().collectionName ;
+            } else {
+            return 'foo';
+            }
+
+            })
 
             ko.applyBindings(viewModel);
 
