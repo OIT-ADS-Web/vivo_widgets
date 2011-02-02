@@ -32,7 +32,12 @@ Chosen Colleciton: <select data-bind="options: collections,
                           ];
                               
     var viewModel = {
-      chosenCollection: ko.observable(collections[0])
+        collections = [          
+                              { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+                              { collectionName: 'Articles', description: 'Articles by this person', collectionValue: 1 },
+                              { collectionName: 'Presentations', description: 'Presentations by this person', collectionValue: 2 }
+                            ];
+        chosenCollection: ko.observable(collections[0])
 
     };
                   
