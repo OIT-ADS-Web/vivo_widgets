@@ -11,6 +11,7 @@ GET     /public/                                staticDir:public
 # VIVO Widget API Routes
 
 GET /people/{vivoId}/publications.js                People.publications(format:'js')
+GET /people/{vivoId}/publications.html              People.publications(format:'html')
 
 # Catch all
 # *       /{controller}/{action}                  {controller}.{action}
