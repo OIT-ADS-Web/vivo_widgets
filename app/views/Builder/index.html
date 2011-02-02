@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <title>Widget Builder</title>
+        <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
+        <script type='text/javascript' src='/javascripts/jquery-1.4.2.min.js'>
+        </script>
+        <script type='text/javascript' src='/javascripts/jquery.tmpl.js'>
+        </script>
+        <script type='text/javascript' src='/javascripts/knockout-1.1.2.js'>
+        </script>
+    </head>
+    <body>
+        <h1>Individual: Test User</h1>
+        <ul>
+            <li>
+                <p>
+                    Collection to Display (?):
+                </p>
+               
+                <select data-bind="options: collections, optionsCaption: 'Select...',
+                optionsText: 'collectionName', value:chosenCollection">
+                </select>
+                <p data-bind="template: 'collectionTemplate'">
+                </p>
+                <script id="collectionTemplate" type="text/x-jquery-tmpl" >
+                    {{if chosenCollection}}
+
+                    You've chosen:
+                    %{out.print('<strong>${chosenCollection().description }</strong>: ${chosenCollection().collectionName }')}%
+
+                    {{/if}}
+                </script>
+            </li>
+            <li>
+              <p>Number of items to return (?):</p>
+              <select name="noItems">
+                <option>Select...</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+              </select>
+            </li>
+            <li><p>Display Format (?):</p>
+              <input type="radio" name="format" /> Detailed <input type="radio" name="format" /> Abbreviated
+            </li>
+                        <li><p>Styled or Unstyled (?):</p>
+              <input type="radio" name="styled" /> Yes <input type="radio" name="styled" /> No
+            </li>
+        </ul>
+        <a href="#">Preview</a>
+        <script type='text/javascript'>
+
+            var viewModel = {
+                collections : [
+                { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+                { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+                { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+                ],
+                personId: 1234,
+                chosenCollection: ko.observable()
+
+            };
+
+            ko.applyBindings(viewModel);
+
+        </script>
+    </body>
+</html>

@@ -1,57 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <title>Widget Builder</title>
-  <link rel='stylesheet' type='text/css' href='stylesheets/main.css' />
-  <script type='text/javascript' src='javascripts/jquery-1.4.2.min.js'></script>
-  <script type='text/javascript' src='javascripts/jquery-tmpl.js'></script>
-  <script type='text/javascript' src='javascripts/knockout-1.1.2.js'></script>
+        <title>Widget Builder</title>
+        <link rel='stylesheet' type='text/css' href='stylesheets/main.css' />
+        <script type='text/javascript' src='javascripts/jquery-1.4.2.min.js'>
+        </script>
+        <script type='text/javascript' src='javascripts/jquery.tmpl.js'>
+        </script>
+        <script type='text/javascript' src='javascripts/knockout-1.1.2.js'>
+        </script>
+    </head>
+    <body>
+        <h1>Individual: </h1>
+        <p>
+            Collection to Display (?):
+        </p>
+        Chosen Colleciton:
+        <select data-bind="options: collections, optionsCaption: 'Select...',
+        optionsText: 'collectionName', value:chosenCollection">
+        </select>
+        <p data-bind="template: 'collectionTemplate'">
+        </p>
+        <script id="collectionTemplate" type="text/x-jquery-tmpl" >
+            {{if chosenCollection}}
 
-</head>
+            You've chosen:
+            <srong>${chosenCollection().description }</strong>: ${chosenCollection().collectionName }
 
-<body>
-<h1>VIVO Widget Builder</h1>
-<p>Collection to Display:</p>
-Chosen Colleciton: <select data-bind="options: collections, 
-                  optionsText: 'collectionName'"></select>
-                  
-                  <p>
-    You've chosen:
-    <b data-bind="text: chosenCollection().description"></b>
-    (Name: <span data-bind='text: chosenCollection().collectionName'></span>)
-</p>
-  <script type='text/javascript'>
-              var collections = [          
-                            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-                            { collectionName: 'Articles', description: 'Articles by this person', collectionValue: 1 },
-                            { collectionName: 'Presentations', description: 'Presentations by this person', collectionValue: 2 }
-                          ];
-                              
-    var viewModel = {
-        collections = [          
-                              { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-                              { collectionName: 'Articles', description: 'Articles by this person', collectionValue: 1 },
-                              { collectionName: 'Presentations', description: 'Presentations by this person', collectionValue: 2 }
-                            ];
-        chosenCollection: ko.observable(collections[0])
+            {{/if}}
+        </script>
+        
+        <a href="#">Preview</a>
+        <script type='text/javascript'>
 
-    };
-                  
-  // function initialize() {
+            var viewModel = {
+                collections : [
+                { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+                { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+                { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+                ],
+                personId: 1234,
+                chosenCollection: ko.observable()
 
-          ko.applyBindings(viewModel);    
-    // Makes Knockout get to work
-       // };              
-       //               
-                     
-  // $(function() {
-  //    initialize();
-  //     //chosenCollection: ko.observable(collections[0])
-  // });
-  </script>
-</body>
+            };
+
+            ko.applyBindings(viewModel);
+
+        </script>
+    </body>
 </html>
