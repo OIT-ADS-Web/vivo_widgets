@@ -75,6 +75,7 @@
         
         </ul>
         <a href="#">Preview</a>
+        <div id="host"></div>
         <script type='text/javascript'>
 
             var viewModel = {
@@ -88,8 +89,16 @@
 
             };
             viewModel.url = ko.dependentObservable(function() {
-              alert('url changed');
+ 
             if(viewModel.chosenCollection()) {
+                           $('#host').html('Loading...');
+            $.ajax({
+                  url: "http://localhost:9000/people/smithjm/publications.html",
+                  success: function(data){
+                    
+                    $('#host').html(data);
+                  }
+                });
             return 'http://localhost:9000/publications?collection=' + viewModel.chosenCollection().collectionName ;
             } else {
             return 'foo';
