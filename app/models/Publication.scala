@@ -50,7 +50,7 @@ class Article(val vivoUri: String,
               val startPage: Int,
               val endPage: Int) extends Publication(vivoUri,vivoType) {
 
-  val citation = authors.mkString(", ")+" ("+year+") "+title
+  val citation = authors.mkString(", ")+" ("+year+"). "+title+". "+publishedIn+". "+volume+"("+issue+"). "+startPage+"-"+endPage+"."
 }
 
 class Book(val vivoUri: String,
@@ -62,5 +62,5 @@ class Book(val vivoUri: String,
            val edition: String,
            val numPages: Int) extends Publication(vivoUri,vivoType) {
 
-  val citation = authors.mkString(", ")+" ("+year+") "+title
+  val citation = authors.mkString(", ")+". "+title+". "+publishedBy+", "+year+"."
 }
