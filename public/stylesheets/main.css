@@ -2,8 +2,12 @@ body {
     background: none repeat scroll 0 0 #596673;
     padding: 0 4em;
     position: relative;
+    font-family:verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size:.9em
 }
-
+h1{ margin:4px;padding:2px;border-bottom:solid 1px #596673}
+#form li{list-style-type:none}
+#form ul {padding:4px;margin:4px}
 /* Forms */
 
 label {
@@ -80,3 +84,6 @@ input.button {
 .success a {
     color: #264409;
 }
+
+#host, #loading {float:right; width:400px; padding:12px;border:solid 1px #000; background-color:#BBB}
+#form {background-color:#BBB; position:relative;padding:12px;width:600px}
