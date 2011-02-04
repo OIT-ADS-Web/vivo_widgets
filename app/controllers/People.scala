@@ -14,8 +14,8 @@ object People extends Controller {
     }
   }
 
-  def publications(vivoId: String) = {
-    Publication.findAllForPerson(Vivo.baseUri+vivoId) match {
+  def publications(vivoId: String, items: Int) = {
+    Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
       case Some(publications) => Template("publications" -> publications)
       case _ => NoContent
     }

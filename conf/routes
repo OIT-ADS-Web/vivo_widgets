@@ -17,7 +17,10 @@ GET /people/{vivoId}/publications/15.jsonp        People.publicationsStub(items:
 GET /people/{vivoId}/publications/all.jsonp       People.publicationsStub(format:'js')
 
 # Publications - JS (document writes)
-GET /people/{vivoId}/publications.js              People.publications(format:'js')
+GET /people/{vivoId}/publications/5.js         People.publications(items:'5',format:'js')
+GET /people/{vivoId}/publications/10.js        People.publications(items:'10',format:'js')
+GET /people/{vivoId}/publications/15.js        People.publications(items:'15',format:'js')
+GET /people/{vivoId}/publications/all.js       People.publications(format:'js')
 
 # Publications - HTML
 GET /people/{vivoId}/publications.html            People.publications(format:'html')
