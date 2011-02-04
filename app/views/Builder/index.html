@@ -15,6 +15,16 @@
         </script>
         <script type='text/javascript' src='/javascripts/knockout-1.1.2.js'>
         </script>
+          <script type="text/javascript">
+        var collections = [
+                { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+                { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+                { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+                ];
+        var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}];</script>
+                <script type='text/javascript' src='/javascripts/app.js'>
+        </script>
+      
     </head>
     <body>
         <div id="host">
@@ -50,106 +60,44 @@
                     </p>
                     <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
                     </select>
-                    <p data-bind="template: 'noItemsTemplate'">
-                    </p>
-                    <script id="noItemsTemplate" type="text/x-jquery-tmpl" >
+                    <!-- <p data-bind="template: 'noItemsTemplate'">
+                                      </p> -->
+                    <!-- <script id="noItemsTemplate" type="text/x-jquery-tmpl" >
                         {{if chosenLimit}}
 
                         You've chosen:
                         %{out.print('<strong>${chosenLimit().label }</strong>: ${chosenLimit().label }')}%
 
                         {{/if}}
-                    </script>
+                    </script> -->
                 </li>
                 <li>
                     <p>
                         Display Format (?):
                     </p>
-                    <input type="radio" name="format" /> Detailed
-                    <input type="radio" name="format" /> Abbreviated
+                   <input type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" /> Abbreviated
+                   <input type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat" /> detailed
+
                 </li>
                 <li>
                     <p>
                         Styled or Unstyled (?):
                     </p>
-                    <input type="radio" name="styled" /> Yes
-                    <input type="radio" name="styled" /> No
+                   <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" /> Yes
+                   <input type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" /> No
+
                 </li>
-                <li data-bind="template: 'embedTemplate'">
-                </li>
-                <script id="embedTemplate" type="text/x-jquery-tmpl" >
-                    {{if chosenCollection}}
-                    <p>
+                <li>
+                                      <p>
                     Your Embed Code:
                     </p>
-                    <textarea cols="10" rows="5" name="embed" >
-                    %{out.print('&lt;script type="text/javascript" src="${url}"&gt; &lt;/script&gt;')}%
+                    <textarea id="embed" cols="10" rows="5" name="embed" >
                     </textarea>
-                    {{/if}}
-                </script>
+                </li>
+              
             </ul>
             <a id="preview" href="#">Preview</a>
         </div>
-        <script type='text/javascript'>
-            function fetchPreview() {
-            $('#host').hide("slide", { direction: "up" }, 150, function() {
-            $('#loading').show("slide", { direction: "down" }, 150);
-            
-            
-            
-            
-            $.getJSON("http://localhost:9000/people/smithjm/publications.jsonp",
-                  function(data) {
-                    alert(data);
-                    $.each(data.results, function(i,item){
-                      alert(item);
-                    });
-                  });
-            
-            
-            
-            // $.ajax({
-            //   url: "http://localhost:9000/people/smithjm/publications.jsonp",
-            //   success: function(data){
-            //   
-            //   $('#host').html("<strong>Preview</strong>" + data);
-            //   // toggleHost(false);
-            //   $('#loading').hide("slide", { direction: "down" }, 150, function() {
-            //   $('#host').show("slide", { direction: "up" }, 150 );
-            //   });
-            }
-            });
-            });
 
-
-            }
-
-
-
-            var collections = [
-              { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-              { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
-              { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
-            ];
-            var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}];
-            var viewModel = {
-
-            personId: 1234,
-            chosenCollection: ko.observable(collections),
-            chosenLimit: ko.observable(noItems)
-
-            };
-
-            ko.applyBindings(viewModel);
-
-            viewModel.url = ko.dependentObservable(function() {
-             fetchPreview();
-              return 'http://localhost:9000/publications?collection=' + this.chosenCollection().collectionName + '&items=' + this.chosenLimit().label ;
-
-            }, viewModel);
-        
-            $('#preview').click(function() { fetchPreview(); return false; });
-            
-        </script>
     </body>
 </html>
