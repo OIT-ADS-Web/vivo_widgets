@@ -10,6 +10,7 @@ GET     /builder/                               Builder.index
 # VIVO Widget API Routes
 
 GET /people/{vivoId}/publications.js                People.publications(format:'js')
+GET /people/{vivoId}/publications.jsonp             People.publicationsStub(format:'js')
 GET /people/{vivoId}/publications.html              People.publications(format:'html')
 
 # Home page
