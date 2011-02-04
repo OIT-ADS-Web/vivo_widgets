@@ -38,7 +38,15 @@ var viewModel = {
     latestUrl: ''
 
 };
-
+function openHelp(helpId) {
+     var $dialog = $('<div></div>')
+    .html(help[helpId].details)
+    .dialog({
+      autoOpen: false,
+      title: help[helpId].title
+    });
+$dialog.dialog('open');
+}
 $(function() {
     ko.applyBindings(viewModel);
 
@@ -59,5 +67,16 @@ $(function() {
               fetchPreview(viewModel.url());
         return false;
     });
+    
+    
+    
+
+  $('.help').click(function() {
+    //$dialog.dialog('open');
+    openHelp(this.id);
+    // prevent the default action, e.g., following a link
+    return false;
+  });
+
 })
 

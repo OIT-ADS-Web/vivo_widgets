@@ -7,9 +7,13 @@
 
         <title>Widget Builder</title>
         <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
-        <script type='text/javascript' src='/javascripts/jquery-1.4.2.min.js'>
+        
+               <link rel='stylesheet' type='text/css' href='/stylesheets/smoothness/jquery-ui-1.8.9.custom.css' />
+
+        
+        <script type='text/javascript' src='/javascripts/jquery-1.4.4.min.js'>
         </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript">
+        <script src="/javascripts/jquery-ui-1.8.9.custom.min.js" type="text/javascript">
         </script>
         <script type='text/javascript' src='/javascripts/jquery.tmpl.js'>
         </script>
@@ -22,6 +26,13 @@
                 { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
                 ];
         var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}, {label: 'all', value: 'all'}];
+        var help = {
+          collectionsHelp: {title: "Collections Help", details: "This is where we'll show some collections specific help!"},
+          itemsHelp: {title: "Items Help", details: "This is where we'll show some items specific help!"},
+          formatHelp: {title: "Display Format Help", details: "This is where we'll show some display format specific help!"},
+          styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
+          embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
+        }
         </script>
                 <script type='text/javascript' src='/javascripts/app.js'>
         </script>
@@ -39,7 +50,7 @@
             <ul>
                 <li>
                     <p>
-                        Collection to Display (?):
+                        Collection to Display (<a href="#" class="help" id="collectionsHelp">?</a>):
                     </p>
                     <select data-bind="options: collections,
                     optionsText: 'collectionName', value:chosenCollection">
