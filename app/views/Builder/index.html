@@ -33,6 +33,16 @@
           styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
           embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
         }
+        var viewModel = {
+
+            chosenCollection: ko.observable(collections),
+            chosenLimit: ko.observable(noItems),
+            chosenFormat: ko.observable('abbreviated'),
+            chosenStyle: ko.observable('yes'),
+            latestUrl: ''
+        
+        };
+
         </script>
                 <script type='text/javascript' src='/javascripts/app.js'>
         </script>
@@ -60,15 +70,15 @@
                     <script id="collectionTemplate" type="text/x-jquery-tmpl" >
                         {{if chosenCollection}}
 
-                        You've chosen:
-                        %{out.print('<strong>${chosenCollection().description }</strong>: ${chosenCollection().collectionName }')}%
+                        You selected:
+                        %{out.print('<strong>${chosenCollection().description }</strong>')}%
 
                         {{/if}}
                     </script>
                 </li>
                 <li>
                     <p>
-                        Number of items to return (?):
+                        Number of items to return (<a href="#" class="help" id="itemsHelp">?</a>):
                     </p>
                     <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
                     </select>
@@ -85,7 +95,7 @@
                 </li>
                 <li>
                     <p>
-                        Display Format (?):
+                        Display Format (<a href="#" class="help" id="formatHelp">?</a>):
                     </p>
                    <input type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" /> Abbreviated
                    <input type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat" /> detailed
@@ -93,7 +103,7 @@
                 </li>
                 <li>
                     <p>
-                        Styled or Unstyled (?):
+                        Styled or Unstyled (<a href="#" class="help" id="styleHelp">?</a>):
                     </p>
                    <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" /> Yes
                    <input type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" /> No
@@ -101,7 +111,7 @@
                 </li>
                 <li>
                                       <p>
-                    Your Embed Code:
+                    Your Embed Code (<a href="#" class="help" id="embedHelp">?</a>):
                     </p>
                     <textarea id="embed" cols="10" rows="5" name="embed" >
                     </textarea>
