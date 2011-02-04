@@ -1,8 +1,9 @@
 function fetchPreview(url) {
+
     $('#host').hide("drop", {  }, 150, function() {
         $('#loading').show("drop", { }, 150);
 
-        $.getJSON(url[0] + '.jsonp' + url[1] + "&callback=?");
+        $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
 
     });
 }
@@ -47,20 +48,20 @@ $( function() {
         + '&format=' + this.chosenFormat()
         + '&style=' + this.chosenStyle();
 
-        fetchPreview([latestUrl, latestParams]);
+        fetchPreview({url: latestUrl, parameters: latestParams});
         var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
         $('#embed').val(script);
         //this.latestUrl = latestUrl;
-        return [latestUrl, latestParams];
+        return {url: latestUrl, parameters: latestParams};
     }, viewModel);
     $('#preview').click( function() {
         fetchPreview(viewModel.url());
         return false;
     });
     $('.help').click( function() {
-        //$dialog.dialog('open');
+       
         openHelp(this.id);
-        // prevent the default action, e.g., following a link
+
         return false;
     });
 })
