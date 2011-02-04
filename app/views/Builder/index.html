@@ -9,120 +9,147 @@
         <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
         <script type='text/javascript' src='/javascripts/jquery-1.4.2.min.js'>
         </script>
-             <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript">
+        </script>
         <script type='text/javascript' src='/javascripts/jquery.tmpl.js'>
         </script>
         <script type='text/javascript' src='/javascripts/knockout-1.1.2.js'>
         </script>
-        
     </head>
     <body>
-              <div id="host"><strong>A preview will appear here </strong> </div>
-        <div style="display:none" id="loading">Loading...</div>
-      <div id="form">
-        <h1>Individual: Test User</h1>
-        <ul>
-            <li>
-                <p>
-                    Collection to Display (?):
-                </p>
-                <select data-bind="options: collections, optionsCaption: 'Select...',
-                optionsText: 'collectionName', value:chosenCollection">
-                </select>
-                <p data-bind="template: 'collectionTemplate'">
-                </p>
-                <script id="collectionTemplate" type="text/x-jquery-tmpl" >
-                    {{if chosenCollection}}
+        <div id="host">
+            <strong>A preview will appear here </strong>
+        </div>
+        <div style="display:none" id="loading">
+            Loading...
+        </div>
+        <div id="form">
+            <h1>Individual: Test User</h1>
+            <ul>
+                <li>
+                    <p>
+                        Collection to Display (?):
+                    </p>
+                    <select data-bind="options: collections,
+                    optionsText: 'collectionName', value:chosenCollection">
+                    </select>
+                    <p data-bind="template: 'collectionTemplate'">
+                    </p>
+                    <script id="collectionTemplate" type="text/x-jquery-tmpl" >
+                        {{if chosenCollection}}
 
-                    You've chosen:
-                    %{out.print('<strong>${chosenCollection().description }</strong>: ${chosenCollection().collectionName }')}%
+                        You've chosen:
+                        %{out.print('<strong>${chosenCollection().description }</strong>: ${chosenCollection().collectionName }')}%
 
-                    {{/if}}
-                </script>
-            </li>
-            <li>
-                <p>
-                    Number of items to return (?):
-                </p>
-                <select name="noItems">
-                    <option>Select...</option>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>15</option>
-                </select>
-            </li>
-            <li>
-                <p>
-                    Display Format (?):
-                </p>
-                <input type="radio" name="format" /> Detailed
-                <input type="radio" name="format" /> Abbreviated
-            </li>
-            <li>
-                <p>
-                    Styled or Unstyled (?):
-                </p>
-                <input type="radio" name="styled" /> Yes
-                <input type="radio" name="styled" /> No
-            </li>
-            <li data-bind="template: 'embedTemplate'">
-                 </li>
+                        {{/if}}
+                    </script>
+                </li>
+                <li>
+                    <p>
+                        Number of items to return (?):
+                    </p>
+                    <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
+                    </select>
+                    <p data-bind="template: 'noItemsTemplate'">
+                    </p>
+                    <script id="noItemsTemplate" type="text/x-jquery-tmpl" >
+                        {{if chosenLimit}}
+
+                        You've chosen:
+                        %{out.print('<strong>${chosenLimit().label }</strong>: ${chosenLimit().label }')}%
+
+                        {{/if}}
+                    </script>
+                </li>
+                <li>
+                    <p>
+                        Display Format (?):
+                    </p>
+                    <input type="radio" name="format" /> Detailed
+                    <input type="radio" name="format" /> Abbreviated
+                </li>
+                <li>
+                    <p>
+                        Styled or Unstyled (?):
+                    </p>
+                    <input type="radio" name="styled" /> Yes
+                    <input type="radio" name="styled" /> No
+                </li>
+                <li data-bind="template: 'embedTemplate'">
+                </li>
                 <script id="embedTemplate" type="text/x-jquery-tmpl" >
                     {{if chosenCollection}}
-                                        <p>
-                        Your Embed Code:
+                    <p>
+                    Your Embed Code:
                     </p>
                     <textarea cols="10" rows="5" name="embed" >
                     %{out.print('&lt;script type="text/javascript" src="${url}"&gt; &lt;/script&gt;')}%
                     </textarea>
                     {{/if}}
                 </script>
-        
-        </ul>
-        <a href="#">Preview</a>
+            </ul>
+            <a id="preview" href="#">Preview</a>
         </div>
-
         <script type='text/javascript'>
+            function fetchPreview() {
+            $('#host').hide("slide", { direction: "up" }, 150, function() {
+            $('#loading').show("slide", { direction: "down" }, 150);
+            
+            
+            
+            
+            $.getJSON("http://localhost:9000/people/smithjm/publications.jsonp",
+                  function(data) {
+                    alert(data);
+                    $.each(data.results, function(i,item){
+                      alert(item);
+                    });
+                  });
+            
+            
+            
+            // $.ajax({
+            //   url: "http://localhost:9000/people/smithjm/publications.jsonp",
+            //   success: function(data){
+            //   
+            //   $('#host').html("<strong>Preview</strong>" + data);
+            //   // toggleHost(false);
+            //   $('#loading').hide("slide", { direction: "down" }, 150, function() {
+            //   $('#host').show("slide", { direction: "up" }, 150 );
+            //   });
+            }
+            });
+            });
 
-            var viewModel = {
-            collections : [
-            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-            { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
-            { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
-            ],
-            personId: 1234,
-            chosenCollection: ko.observable()
 
-            };
-            viewModel.url = ko.dependentObservable(function() {
- 
-            if(viewModel.chosenCollection()) {
-                           // $('#host').html('Loading...');
-                             $('#host').hide("slide", { direction: "up" }, 150, function() {
-                                  $('#loading').show("slide", { direction: "down" }, 150);
-                                   $.ajax({
-                  url: "http://localhost:9000/people/smithjm/publications.html",
-                  success: function(data){
-                   
-                    $('#host').html("<strong>Preview</strong>" + data);
-                     $('#loading').hide("slide", { direction: "down" }, 150, function() { 
-                         $('#host').show("slide", { direction: "up" }, 150 );  
-                        });
-
-                  }
-                });
-                                   });
-
-           
-            return 'http://localhost:9000/publications?collection=' + viewModel.chosenCollection().collectionName ;
-            } else {
-            return 'foo';
             }
 
-            })
+
+
+            var collections = [
+              { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+              { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+              { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+            ];
+            var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}];
+            var viewModel = {
+
+            personId: 1234,
+            chosenCollection: ko.observable(collections),
+            chosenLimit: ko.observable(noItems)
+
+            };
 
             ko.applyBindings(viewModel);
 
+            viewModel.url = ko.dependentObservable(function() {
+             fetchPreview();
+              return 'http://localhost:9000/publications?collection=' + this.chosenCollection().collectionName + '&items=' + this.chosenLimit().label ;
+
+            }, viewModel);
+        
+            $('#preview').click(function() { fetchPreview(); return false; });
+            
         </script>
     </body>
 </html>
