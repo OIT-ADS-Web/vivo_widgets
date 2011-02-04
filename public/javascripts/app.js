@@ -43,9 +43,9 @@ $(function() {
     ko.applyBindings(viewModel);
 
     viewModel.url = ko.dependentObservable( function() {
-        latestUrl = 'http://localhost:9000/people/smithjm/publications.jsonp?collections=' 
+        latestUrl = 'http://localhost:9000/people/smithjm/publications/' + this.chosenLimit().label + '.jsonp?collections=' 
           + this.chosenCollection().collectionName 
-          + '&items=' + this.chosenLimit().label 
+          // + '&items=' + this.chosenLimit().label 
           + '&format=' + this.chosenFormat()
           + '&style=' + this.chosenStyle();
 
