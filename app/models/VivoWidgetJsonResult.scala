@@ -3,7 +3,7 @@ import com.google.gson._
 
 class VivoWidgetJsonResult(results: List[AnyRef]) {
 
-  def get() = {
+  def json = {
     val gson = new Gson()
     val jsonResults = results.map { gson.toJsonTree(_) }
     val headerObj = new JsonObject()
@@ -11,8 +11,6 @@ class VivoWidgetJsonResult(results: List[AnyRef]) {
     val jsonResultsArray = new JsonArray()
     jsonResults.foreach { jsonResultsArray.add(_) }
 
-    headerObj.addProperty("name","Smith, Joseph M.")
-    headerObj.addProperty("id" , "smithjm")
     headerObj.addProperty("items",results.size)
     headerObj.addProperty("date",(new java.util.Date).toString())
 
@@ -22,5 +20,5 @@ class VivoWidgetJsonResult(results: List[AnyRef]) {
     resultObj
   }
 
-  def jsonp = { "vivoWidgetResult("+this.get().toString()+");" }
+  def jsonp = { "vivoWidgetResult("+this.json.toString()+");" }
 }
