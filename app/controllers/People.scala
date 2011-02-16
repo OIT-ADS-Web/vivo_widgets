@@ -7,8 +7,18 @@ import models._
 
 object People extends Controller {
 
-  def publications(person_uri: String) = {
-    Template("publications" -> Publication.find_all_by_person_uri(person_uri).get)
+  def publicationsStub(vivoId: String, items: Int) = {
+    Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
+      case Some(publications) => Json(new VivoWidgetJsonResult(publications.asInstanceOf[List[Publication]]).jsonp)
+      case _ => NoContent
+    }
+  }
+
+  def publications(vivoId: String, items: Int) = {
+    Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
+      case Some(publications) => Template("publications" -> publications)
+      case _ => NoContent
+    }
   }
 
 }

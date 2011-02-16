@@ -2,8 +2,15 @@ body {
     background: none repeat scroll 0 0 #596673;
     padding: 0 4em;
     position: relative;
+    font-family:verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size:.9em
 }
-
+h1{ margin:4px;padding:2px;border-bottom:solid 1px #596673;font-size: 1.2em;color:#596673}
+a { text-decoration:none;color: #596673;font-weight:bold;padding:3px }
+a:hover {background-color:#596673;color:#FFF}
+#form li{list-style-type:none; margin:6px;padding:6px}
+#form ul {padding:4px;margin:4px}
+#menu {margin:4px 0;padding:6px;background-color:#212D34;color:#FFF;border-bottom:solid 1px #D9D9D9;text-align:right}
 /* Forms */
 
 label {
@@ -80,3 +87,6 @@ input.button {
 .success a {
     color: #264409;
 }
+
+#host, #loading {float:right; width:400px; padding:12px;border:solid 4px #D9D9D9; background-color:#FFF}
+#form {background-color:#FFF; position:relative;padding:12px;width:600px;border:solid 4px #D9D9D9}
