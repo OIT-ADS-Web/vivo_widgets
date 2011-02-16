@@ -29,7 +29,7 @@
         var help = {
           collectionsHelp: {title: "Collections Help", details: "This is where we'll show some collections specific help!"},
           itemsHelp: {title: "Items Help", details: "This is where we'll show some items specific help!"},
-          formatHelp: {title: "Display Format Help", details: "This is where we'll show some display format specific help!"},
+          formatHelp: {title: "Display Format Help", details: "<p><strong>This</strong> is where we'll show some display format specific help!</p>"},
           styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
           embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
         }
@@ -60,29 +60,31 @@
             <h1>Individual: Test User</h1>
             <ul>
                 <li>
-                    <p>
+                  
                         Collection to Display (<a href="#" class="help" id="collectionsHelp">?</a>):
-                    </p>
+                     <span>
                     <select data-bind="options: collections,
                     optionsText: 'collectionName', value:chosenCollection">
                     </select>
-                    <p data-bind="template: 'collectionTemplate'">
-                    </p>
-                    <script id="collectionTemplate" type="text/x-jquery-tmpl" >
+                     </span>
+                    <!-- <p data-bind="template: 'collectionTemplate'">
+                    </p> -->
+                    <!-- <script id="collectionTemplate" type="text/x-jquery-tmpl" >
                         {{if chosenCollection}}
 
                         You selected:
                         %{out.print('<strong>${chosenCollection().description }</strong>')}%
 
                         {{/if}}
-                    </script>
+                    </script> -->
                 </li>
                 <li>
-                    <p>
+                    
                         Number of items to return (<a href="#" class="help" id="itemsHelp">?</a>):
-                    </p>
+                   <span>
                     <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
                     </select>
+                     </span>
                     <!-- <p data-bind="template: 'noItemsTemplate'">
                                       </p> -->
                     <!-- <script id="noItemsTemplate" type="text/x-jquery-tmpl" >
@@ -95,26 +97,26 @@
                     </script> -->
                 </li>
                 <li>
-                    <p>
+                   
                         Display Format (<a href="#" class="help" id="formatHelp">?</a>):
-                    </p>
+                    <span>
                    <input type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" /> Abbreviated
                    <input type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat" /> detailed
-
+ </span>
                 </li>
                 <li>
-                    <p>
-                        Styled or Unstyled (<a href="#" class="help" id="styleHelp">?</a>):
-                    </p>
-                   <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" /> Yes
-                   <input type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" /> No
-
+                    
+                       Styling (<a href="#" class="help" id="styleHelp">?</a>):
+                   <span>
+                   <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" /> Styled
+                   <input type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" /> Unstyled
+ </span>
                 </li>
                 <li>
                                       <p>
                     Your Embed Code (<a href="#" class="help" id="embedHelp">?</a>):
                     </p>
-                    <textarea id="embed" cols="10" rows="5" name="embed" >
+                    <textarea id="embed"  rows="5" name="embed" >
                     </textarea>
                 </li>
               

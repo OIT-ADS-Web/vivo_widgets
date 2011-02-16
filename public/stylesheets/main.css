@@ -8,8 +8,10 @@ body {
 h1{ margin:4px;padding:2px;border-bottom:solid 1px #596673;font-size: 1.2em;color:#596673}
 a { text-decoration:none;color: #596673;font-weight:bold;padding:3px }
 a:hover {background-color:#596673;color:#FFF}
-#form li{list-style-type:none; margin:6px;padding:6px}
-#form ul {padding:4px;margin:4px}
+#form li{list-style-type:none; margin:3px;padding:3px 3px 6px; border-bottom: solid 1px #CCC}
+#form ul {padding:2px;margin:2px}
+#form p {margin:2px;padding:2px}
+#form span {display:block; float:right}
 #menu {margin:4px 0;padding:6px;background-color:#212D34;color:#FFF;border-bottom:solid 1px #D9D9D9;text-align:right}
 /* Forms */
 
@@ -89,4 +91,5 @@ input.button {
 }
 
 #host, #loading {float:right; width:400px; padding:12px;border:solid 4px #D9D9D9; background-color:#FFF}
-#form {background-color:#FFF; position:relative;padding:12px;width:600px;border:solid 4px #D9D9D9}
+#form {background-color:#FFF; position:relative;padding:12px;width:500px;border:solid 4px #D9D9D9}
+#preview {display:block; padding:4px;border:solid 2px #596673; width:100px;text-align:center}
