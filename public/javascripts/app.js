@@ -3,11 +3,21 @@ function fetchPreview(url) {
     $('#host').hide("drop", {  }, 150, function() {
         $('#loading').show("drop", { }, 150);
 
-        $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
+        //$.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
+$.ajax({
+  url: url.url + '.html' + url.parameters,
+  success: function(data) {
+     $("#host").html(data);
 
+        $('#loading').hide("drop", { }, 150, function() {
+            $('#host').show("drop", { }, 150);
+
+        });
+  }
+});
     });
 }
-
+// deprecated jsonp
 function vivoWidgetResult(data) {
     if(data.results.length > 0) {
         var resultHtml = ["<h1>Preview Settings</h1><ul>"];
@@ -45,7 +55,7 @@ $( function() {
         latestParams = '?collections='
         + this.chosenCollection().collectionName
         // + '&items=' + this.chosenLimit().label
-        + '&format=' + this.chosenFormat()
+        + '&formating=' + this.chosenFormat()
         + '&style=' + this.chosenStyle();
 
         fetchPreview({url: latestUrl, parameters: latestParams});
