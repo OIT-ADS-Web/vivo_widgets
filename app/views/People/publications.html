@@ -1,5 +1,5 @@
-<ul>
+<ul%{ if (style=="yes") out.print(' style="list-style:none"')}%>
 #{list publications}
-  <li>${_.citation}</li>
+  <li%{ if (style=="yes") out.print(' style="color:#339;padding:.25em"')}%>${_.citation}</li>
 #{/list}
 </ul>
