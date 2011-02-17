@@ -11,10 +11,16 @@ GET     /builder/                               Builder.index
 
 
 # Publications - JSONP
-GET /people/{vivoId}/publications/5.jsonp         People.publicationsStub(items:'5',format:'js')
-GET /people/{vivoId}/publications/10.jsonp        People.publicationsStub(items:'10',format:'js')
-GET /people/{vivoId}/publications/15.jsonp        People.publicationsStub(items:'15',format:'js')
-GET /people/{vivoId}/publications/all.jsonp       People.publicationsStub(format:'js')
+GET /people/{vivoId}/publications/5.jsonp         People.publicationsData(items:'5',format:'jsonp')
+GET /people/{vivoId}/publications/10.jsonp        People.publicationsData(items:'10',format:'jsonp')
+GET /people/{vivoId}/publications/15.jsonp        People.publicationsData(items:'15',format:'jsonp')
+GET /people/{vivoId}/publications/all.jsonp       People.publicationsData(format:'jsonp')
+
+# Publications - JSON
+GET /people/{vivoId}/publications/5.json         People.publicationsData(items:'5',format:'json')
+GET /people/{vivoId}/publications/10.json        People.publicationsData(items:'10',format:'json')
+GET /people/{vivoId}/publications/15.json        People.publicationsData(items:'15',format:'json')
+GET /people/{vivoId}/publications/all.json       People.publicationsData(format:'json')
 
 # Publications - JS (document writes)
 GET /people/{vivoId}/publications/5.js         People.publications(items:'5',format:'js')
@@ -23,7 +29,10 @@ GET /people/{vivoId}/publications/15.js        People.publications(items:'15',fo
 GET /people/{vivoId}/publications/all.js       People.publications(format:'js')
 
 # Publications - HTML
-GET /people/{vivoId}/publications.html            People.publications(format:'html')
+GET /people/{vivoId}/publications/5.html         People.publications(items:'5',format:'html')
+GET /people/{vivoId}/publications/10.html        People.publications(items:'10',format:'html')
+GET /people/{vivoId}/publications/15.html        People.publications(items:'15',format:'html')
+GET /people/{vivoId}/publications/all.html       People.publications(format:'html')
 
 # Home page
 

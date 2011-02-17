@@ -8,9 +8,15 @@ import models._
 
 object People extends Controller {
 
-  def publicationsStub(vivoId: String, items: Int) = {
+  def publicationsData(vivoId: String, items: Int) = {
     Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
-      case Some(publications) => Json(new VivoWidgetJsonResult(publications.asInstanceOf[List[Publication]]).jsonp)
+      case Some(publications) =>
+        val vwr = new VivoWidgetJsonResult(publications.asInstanceOf[List[Publication]])
+        request.format match {
+          case "json" => Json(vwr.json.toString)
+          case "jsonp" => Json(vwr.jsonp)
+          case _ => NoContent
+        }
       case _ => NoContent
     }
   }
@@ -27,12 +33,9 @@ object People extends Controller {
             val documentWrites = lines.map { "document.write('"+_+"')" }
             val documentWritesString = documentWrites.mkString("\n")
             Json(documentWritesString)
-
           case "html" => Html(htmlString)
           case _ => NoContent
         }
-        // TODO: try make this pure Scala, something like:
-        //val strR: String =  "People/publications.html".asTemplate("publications" -> publications).getContent()
       case _ => NoContent
     }
   }
