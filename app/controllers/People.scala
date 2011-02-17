@@ -21,12 +21,13 @@ object People extends Controller {
     }
   }
 
-  def publications(vivoId: String, items: Int, style: String = "yes") = {
+  def publications(vivoId: String, items: Int, formatting: String = "detailed", style: String = "yes") = {
     Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
       case Some(publications) =>
         val modelData = new java.util.HashMap[java.lang.String,java.lang.Object]
         modelData.put("publications",publications)
         modelData.put("style",style)
+        modelData.put("formatting",formatting)
         val htmlString = TemplateLoader.load("People/publications.html").render(modelData)
         request.format.toString match {
           case "js" => 
