@@ -13,6 +13,14 @@ $.ajax({
             $('#host').show("drop", { }, 150);
 
         });
+  },
+  error: function(xhr, status, errorThrown) {
+  	    $("#host").html('<h4>Oops!</h4><p>There was a problem with your request:</p><strong>' + status + '</strong>');
+
+        $('#loading').hide("drop", { }, 150, function() {
+            $('#host').show("drop", { }, 150);
+
+        });
   }
 });
     });
@@ -55,7 +63,7 @@ $( function() {
         latestParams = '?collections='
         + this.chosenCollection().collectionName
         // + '&items=' + this.chosenLimit().label
-        + '&formating=' + this.chosenFormat()
+        + '&formatting=' + this.chosenFormat()
         + '&style=' + this.chosenStyle();
 
         fetchPreview({url: latestUrl, parameters: latestParams});
