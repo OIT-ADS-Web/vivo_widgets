@@ -50,7 +50,9 @@ function openHelp(helpId) {
     .html(help[helpId].details)
     .dialog({
         autoOpen: false,
-        title: help[helpId].title
+        title: help[helpId].title,
+        show: 'drop',
+        hide: 'drop'
     });
     $dialog.dialog('open');
 }
