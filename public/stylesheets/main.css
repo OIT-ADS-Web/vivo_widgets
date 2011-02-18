@@ -170,7 +170,7 @@ input.button {
     border:solid 2px #596673;
     width:100px;
     text-align:center;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
 }
 
