@@ -1,9 +1,9 @@
 <ul%{ if (style=="yes") out.print(' style="list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; "')}%>
 #{list publications}
 %{ if (formatting=="abbreviated") { }%
-  <li%{ if (style=="yes") out.print(' onmouseout="this.style.textDecoration =\'none\';" onmouseover="this.style.textDecoration =\'underline\';this.style.cursor=\'pointer\'" style="color:#333;margin:.45em;padding:.45em"')}%>${_.abbreviated}</li>
+  <li%{ if (style=="yes") out.print(' onmouseout="this.style.textDecoration =\'none\';" onmouseover="this.style.textDecoration =\'underline\';this.style.cursor=\'pointer\'" style="color:#0000FF;margin:.45em;padding:.45em"')}%>${_.abbreviated}</li>
 %{ } else { }%
-  <li%{ if (style=="yes") out.print(' onmouseout="this.style.textDecoration =\'none\';" onmouseover="this.style.textDecoration =\'underline\';this.style.cursor=\'pointer\'"  style="color:#333;margin:.45em;padding:.45em"')}%>${_.citation}</li>
+  <li%{ if (style=="yes") out.print(' onmouseout="this.style.textDecoration =\'none\';" onmouseover="this.style.textDecoration =\'underline\';this.style.cursor=\'pointer\'"  style="color:#0000FF;margin:.45em;padding:.45em"')}%>${_.citation}</li>
 %{ } }%
 #{/list}
 </ul>
