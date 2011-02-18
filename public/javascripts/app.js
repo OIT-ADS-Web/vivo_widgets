@@ -4,27 +4,28 @@ function fetchPreview(url) {
         $('#loading').show("drop", { }, 150);
 
         //$.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
-$.ajax({
-  url: url.url + '.html' + url.parameters,
-  success: function(data) {
-     $("#host").html(data);
+        $.ajax({
+            url: url.url + '.html' + url.parameters,
+            success: function(data) {
+                $("#host").html(data);
 
-        $('#loading').hide("drop", { }, 150, function() {
-            $('#host').show("drop", { }, 150);
+                $('#loading').hide("drop", { }, 150, function() {
+                    $('#host').show("drop", { }, 150);
 
+                });
+            },
+            error: function(xhr, status, errorThrown) {
+                $("#host").html('<h4>Oops!</h4><p>There was a problem with your request:</p><strong>' + status + '</strong>');
+
+                $('#loading').hide("drop", { }, 150, function() {
+                    $('#host').show("drop", { }, 150);
+
+                });
+            }
         });
-  },
-  error: function(xhr, status, errorThrown) {
-  	    $("#host").html('<h4>Oops!</h4><p>There was a problem with your request:</p><strong>' + status + '</strong>');
-
-        $('#loading').hide("drop", { }, 150, function() {
-            $('#host').show("drop", { }, 150);
-
-        });
-  }
-});
     });
 }
+
 // deprecated jsonp
 function vivoWidgetResult(data) {
     if(data.results.length > 0) {
@@ -56,11 +57,17 @@ function openHelp(helpId) {
     });
     $dialog.dialog('open');
 }
+
 function renderSettings() {
-	var style = '';
-	if(viewModel.chosenStyle() === 'yes') { style="styled" } else { style='unstyled' };
-	$('#settings').html('Current Settings: ' + viewModel.chosenLimit().label + ' ' + viewModel.chosenCollection().collectionName + ' in ' + viewModel.chosenFormat() + ' format and ' +  style);
+    var style = '';
+    if(viewModel.chosenStyle() === 'yes') {
+        style="styled"
+    } else {
+        style='unstyled'
+    };
+    $('#settings').html('Current Settings: ' + viewModel.chosenLimit().label + ' ' + viewModel.chosenCollection().collectionName + ' in ' + viewModel.chosenFormat() + ' format and ' +  style);
 }
+
 $( function() {
     ko.applyBindings(viewModel);
 
@@ -84,7 +91,7 @@ $( function() {
         return false;
     });
     $('.help').click( function() {
-       
+
         openHelp(this.id);
 
         return false;

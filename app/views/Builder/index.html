@@ -18,28 +18,28 @@
         <script type='text/javascript' src='/javascripts/knockout-1.1.2.js'>
         </script>
         <script type="text/javascript">
-var collections = [
-{ collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
-{ collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
-{ collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
-];
-var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}, {label: 'all', value: 'all'}];
-var help = {
-collectionsHelp: {title: "Collections Help", details: "This is where we'll show some collections specific help!"},
-itemsHelp: {title: "Items Help", details: "This is where we'll show some items specific help!"},
-formatHelp: {title: "Display Format Help", details: "<p><strong>This</strong> is where we'll show some display format specific help!</p>"},
-styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
-embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
-}
-var viewModel = {
+        	 var collections = [
+            { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
+            { collectionName: 'Courses', description: 'Courses by this person', collectionValue: 1 },
+            { collectionName: 'Grants', description: 'Grants by this person', collectionValue: 2 }
+            ];
+            var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}, {label: 'all', value: 'all'}];
+            var help = {
+                collectionsHelp: {title: "Collections Help", details: "This is where we'll show some collections specific help!"},
+                itemsHelp: {title: "Items Help", details: "This is where we'll show some items specific help!"},
+                formatHelp: {title: "Display Format Help", details: "<p><strong>This</strong> is where we'll show some display format specific help!</p>"},
+                styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
+                embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
+            }
+            var viewModel = {
 
-chosenCollection: ko.observable(collections),
-chosenLimit: ko.observable(noItems),
-chosenFormat: ko.observable('abbreviated'),
-chosenStyle: ko.observable('yes'),
-latestUrl: ''
+                chosenCollection: ko.observable(collections),
+                chosenLimit: ko.observable(noItems),
+                chosenFormat: ko.observable('abbreviated'),
+                chosenStyle: ko.observable('yes'),
+                latestUrl: ''
 
-};
+            };
 
         </script>
         <script type='text/javascript' src='/javascripts/app.js'>
@@ -49,7 +49,8 @@ latestUrl: ''
         <div id="menu">
             Vivo Home | Help
         </div>
-        <div id="settings"></div>
+        <div id="settings">
+        </div>
         <div id="host">
             <strong>A preview will appear here</strong>
         </div>
@@ -61,13 +62,13 @@ latestUrl: ''
             <ul>
                 <li>
 
-                     
-                   Collection to Display: <a href="#" class="help" id="collectionsHelp">?</a> 
+                    Collection to Display:
+                    <a href="#" class="help" id="collectionsHelp">?</a>
                     <span>
                         <select data-bind="options: collections,
                         optionsText: 'collectionName', value:chosenCollection">
                         </select>
-                    </span> 
+                    </span>
                     <!-- <p data-bind="template: 'collectionTemplate'">
                     </p> -->
                     <!-- <script id="collectionTemplate" type="text/x-jquery-tmpl" >
@@ -81,8 +82,8 @@ latestUrl: ''
                 </li>
                 <li>
 
-                     
-                   Number of items to return:  <a href="#" class="help" id="itemsHelp">?</a> 
+                    Number of items to return:
+                    <a href="#" class="help" id="itemsHelp">?</a>
                     <span>
                         <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
                         </select>
@@ -100,28 +101,30 @@ latestUrl: ''
                 </li>
                 <li>
 
-                     Display Format: <a href="#" class="help" id="formatHelp">?</a>
-                    
+                    Display Format:
+                    <a href="#" class="help" id="formatHelp">?</a>
                     <span>
-                        <input type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" />
-                        Abbreviated
-                        <input type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat" />
-                        Detailed
+                        <input id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" />
+                        <label for="abbreviated">Abbreviated</label>
+                        <input id="detailed" type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat" />
+                        <label for="detailed">Detailed</label>
                     </span>
                 </li>
                 <li>
- Styling:  <a href="#" class="help" id="styleHelp">?</a>
+                    Styling:
+                    <a href="#" class="help" id="styleHelp">?</a>
                     <span>
-                        <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" />
-                        Styled
-                        <input type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" />
-                        Unstyled
+                        <input id="styled" type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" />
+                        <label for="styled">Styled</label>
+                        <input id="unstyled" type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle" />
+                        <label for="unstyled">Unstyled</label>
                     </span>
                 </li>
                 <li style="border-bottom:none">
                     <p>
-                    	
-                       Your Embed Code:  <a href="#" class="help" id="embedHelp">?</a> 
+
+                        Your Embed Code:
+                        <a href="#" class="help" id="embedHelp">?</a>
                     </p>
                     <textarea id="embed"  rows="5" name="embed" >
                     </textarea>

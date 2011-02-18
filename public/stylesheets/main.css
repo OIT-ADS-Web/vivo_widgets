@@ -42,11 +42,6 @@ a:hover {
 }
 /* Forms */
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-top: 0.5em;
-}
 fieldset {
     border: 1px solid #CCCCCC;
     margin: 0 0 1.5em;
