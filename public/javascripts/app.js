@@ -54,7 +54,11 @@ function openHelp(helpId) {
     });
     $dialog.dialog('open');
 }
-
+function renderSettings() {
+	var style = '';
+	if(viewModel.chosenStyle() === 'yes') { style="styled" } else { style='unstyled' };
+	$('#settings').html('Current Settings: ' + viewModel.chosenLimit().label + ' ' + viewModel.chosenCollection().collectionName + ' in ' + viewModel.chosenFormat() + ' format and ' +  style);
+}
 $( function() {
     ko.applyBindings(viewModel);
 
@@ -70,6 +74,7 @@ $( function() {
         var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
         $('#embed').val(script);
         //this.latestUrl = latestUrl;
+        renderSettings();
         return {url: latestUrl, parameters: latestParams};
     }, viewModel);
     $('#preview').click( function() {

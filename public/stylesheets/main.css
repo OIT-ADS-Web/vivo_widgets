@@ -5,14 +5,41 @@ body {
     font-family:verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size:.9em
 }
-h1{ margin:4px;padding:2px;border-bottom:solid 1px #596673;font-size: 1.2em;color:#596673}
-a { text-decoration:none;color: #596673;font-weight:bold;padding:3px }
-a:hover {background-color:#596673;color:#FFF}
-#form li{list-style-type:none; margin:3px;padding:3px 3px 6px; border-bottom: solid 1px #CCC}
-#form ul {padding:2px;margin:2px}
-#form p {margin:2px;padding:2px}
-#form span {display:block; float:right}
-#menu {margin:4px 0;padding:6px;background-color:#212D34;color:#FFF;border-bottom:solid 1px #D9D9D9;text-align:right}
+h1 {
+    margin:4px;
+    padding:2px;
+    border-bottom:solid 1px #596673;
+    font-size: 1.2em;
+    color:#596673;
+}
+a {
+    text-decoration:none;
+    color: #596673;
+    font-weight:bold;
+    padding:3px
+}
+a:hover {
+    background-color:#596673;
+    color:#FFF
+}
+#form li {
+    list-style-type:none;
+    margin:6px;
+    padding:6px;
+    border-bottom: solid 1px #CCC
+}
+#form ul {
+    padding:2px;
+    margin:2px
+}
+#form p {
+    margin:2px;
+    padding:2px
+}
+#form span {
+    display:block;
+    float:right
+}
 /* Forms */
 
 label {
@@ -45,6 +72,9 @@ input.title {
 }
 textarea {
     width: 90%;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px
 }
 input.button {
     margin: 1em 0;
@@ -54,6 +84,12 @@ input.button {
     display: block;
     margin-bottom: 1em;
     padding: 0.8em;
+}
+.help {
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:solid 1px #CCC;
+    padding:4px
 }
 .error {
     background: none repeat scroll 0 0 #FBE3E4;
@@ -89,7 +125,55 @@ input.button {
 .success a {
     color: #264409;
 }
-
-#host, #loading {float:right; width:400px; padding:12px;border:solid 4px #D9D9D9; background-color:#FFF}
-#form {background-color:#FFF; position:relative;padding:12px;width:500px;border:solid 4px #D9D9D9}
-#preview {display:block; padding:4px;border:solid 2px #596673; width:100px;text-align:center}
+#menu {
+    margin:4px 0 0 0;
+    padding:6px;
+    background-color:#212D34;
+    color:#FFF;
+   
+    text-align:right;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+#settings {
+    font-size:.9em;
+    background-color:#FFF;
+    padding:4px;
+    border:solid 2px #212D34;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom:3px
+}
+#host, #loading {
+    float:right;
+    width:400px;
+    margin-left:-400px;
+    padding:12px;
+    border:solid 2px #212D34;
+    background-color:#FFF;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+#form {
+    background-color:#FFF;
+    position:relative;
+    padding:12px;
+    /*width:500px;*/
+    margin-right:450px;
+    border:solid 2px #212D34;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+#preview {
+    display:block;
+    padding:4px;
+    border:solid 2px #596673;
+    width:100px;
+    text-align:center;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}

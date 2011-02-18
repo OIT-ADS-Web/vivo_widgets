@@ -49,6 +49,7 @@ latestUrl: ''
         <div id="menu">
             Vivo Home | Help
         </div>
+        <div id="settings"></div>
         <div id="host">
             <strong>A preview will appear here</strong>
         </div>
@@ -60,13 +61,13 @@ latestUrl: ''
             <ul>
                 <li>
 
-                    Collection to Display (
-                    <a href="#" class="help" id="collectionsHelp">?</a>):
+                     
+                   Collection to Display: <a href="#" class="help" id="collectionsHelp">?</a> 
                     <span>
                         <select data-bind="options: collections,
                         optionsText: 'collectionName', value:chosenCollection">
                         </select>
-                    </span>
+                    </span> 
                     <!-- <p data-bind="template: 'collectionTemplate'">
                     </p> -->
                     <!-- <script id="collectionTemplate" type="text/x-jquery-tmpl" >
@@ -80,8 +81,8 @@ latestUrl: ''
                 </li>
                 <li>
 
-                    Number of items to return (
-                    <a href="#" class="help" id="itemsHelp">?</a>):
+                     
+                   Number of items to return:  <a href="#" class="help" id="itemsHelp">?</a> 
                     <span>
                         <select data-bind="options: noItems, optionsText: 'label', value:chosenLimit">
                         </select>
@@ -99,8 +100,8 @@ latestUrl: ''
                 </li>
                 <li>
 
-                    Display Format (
-                    <a href="#" class="help" id="formatHelp">?</a>):
+                     Display Format: <a href="#" class="help" id="formatHelp">?</a>
+                    
                     <span>
                         <input type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat" />
                         Abbreviated
@@ -109,9 +110,7 @@ latestUrl: ''
                     </span>
                 </li>
                 <li>
-
-                    Styling (
-                    <a href="#" class="help" id="styleHelp">?</a>):
+ Styling:  <a href="#" class="help" id="styleHelp">?</a>
                     <span>
                         <input type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle" />
                         Styled
@@ -121,8 +120,8 @@ latestUrl: ''
                 </li>
                 <li>
                     <p>
-                        Your Embed Code (
-                        <a href="#" class="help" id="embedHelp">?</a>):
+                    	
+                       Your Embed Code:  <a href="#" class="help" id="embedHelp">?</a> 
                     </p>
                     <textarea id="embed"  rows="5" name="embed" >
                     </textarea>
