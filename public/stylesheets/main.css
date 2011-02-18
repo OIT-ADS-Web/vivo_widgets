@@ -88,7 +88,7 @@ input.button {
 .help {
     -moz-border-radius: 15px;
     border-radius: 15px;
-    border:solid 1px #CCC;
+    border:solid 1px #FFF;
     padding:4px
 }
 .error {
