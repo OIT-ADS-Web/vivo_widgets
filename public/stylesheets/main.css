@@ -125,6 +125,7 @@ input.button {
 .success a {
     color: #264409;
 }
+
 #menu {
     margin:4px 0 0 0;
     padding:6px;
@@ -177,3 +178,4 @@ input.button {
     -moz-border-radius: 15px;
     border-radius: 15px;
 }
+
