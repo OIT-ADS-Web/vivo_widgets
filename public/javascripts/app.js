@@ -47,6 +47,40 @@ function renderSettings() {
     };
     $('#settings').html('Current Settings: ' + viewModel.chosenLimit().label + ' ' + viewModel.chosenCollection().collectionName + ' in ' + viewModel.chosenFormat() + ' format and ' +  style);
 }
+/* Clipboard from http://code.google.com/p/zeroclipboard/ */
+function initializeClipboard() {
+		var clip = null;
+		
+		// function $(id) { return document.getElementById(id); }
+		// 
+		
+			
+			clip = new ZeroClipboard.Client();
+			clip.setHandCursor( true );
+			
+			clip.addEventListener('load', function (client) {
+				//alert("Flash movie loaded and ready.");
+			});
+			
+			clip.addEventListener('mouseOver', function (client) {
+				// update the text on mouse over
+				clip.setText( $('#embed').val() );
+			});
+			
+			clip.addEventListener('complete', function (client, text) {
+				alert("Copied text to clipboard: " + text );
+			});
+			
+			clip.glue( 'd_clip_button', 'd_clip_container' );
+	
+		
+		// function debugstr(msg) {
+		// 	var p = document.createElement('p');
+		// 	p.innerHTML = msg;
+		// 	$('d_debug').appendChild(p);
+		// }
+
+}
 
 // Initialization
 
@@ -78,5 +112,8 @@ $(function() {
 
         return false;
     });
+    
+    initializeClipboard();
 });
+
 

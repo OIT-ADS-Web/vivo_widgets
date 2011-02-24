@@ -140,6 +140,9 @@ width: 386px;
 text-indent: -5000px;
 border:none
 }
+li.no_border {
+	border-bottom:none
+}
 #menu {
     margin:4px 0 0 0;
     padding:6px;
@@ -187,13 +190,15 @@ border:none
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-#preview {
+.action {
     display:block;
     padding:4px;
     border:solid 2px #DCE4E3;
     width:100px;
     text-align:center;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-decoration: none
 }
-
+/*#preview { float:right }
+*/

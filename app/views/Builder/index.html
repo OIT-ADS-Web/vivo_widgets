@@ -17,6 +17,7 @@
         </script>
         <script type='text/javascript' src='/javascripts/knockout-1.1.2.js'>
         </script>
+        <script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>
         <script type="text/javascript">
         	 var collections = [
             { collectionName: 'Publications', description: 'Publications by this person', collectionValue: 0 },
@@ -121,7 +122,8 @@
                         <label for="unstyled">Unstyled</label>
                     </span>
                 </li>
-                <li style="border-bottom:none">
+                <li class="no_border"><a class='action' id="preview" href="#">Preview</a></li>
+                <li class="no_border">
                     <p>
 
                         Your Embed Code:
@@ -130,8 +132,14 @@
                     <textarea id="embed"  rows="5" name="embed" >
                     </textarea>
                 </li>
-            </ul>
-            <a id="preview" href="#">Preview</a>
+           
+            <li class="no_border">
+     				<div id="d_clip_container" style="position:relative">
+					<div id="d_clip_button"  class="action">Copy</div>
+					</li>
+					 </ul>
+				</div>
+
         </div>
     </body>
 </html>
