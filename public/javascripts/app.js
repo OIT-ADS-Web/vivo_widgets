@@ -114,7 +114,7 @@ $(function() {
 
         return false;
     });
-    $('#embed').focus(function(){ this.select(); })
+    $('#embed').focus(function(){ this.select(); });
     initializeClipboard();
     
 });
