@@ -68,7 +68,9 @@ function initializeClipboard() {
 			});
 			
 			clip.addEventListener('complete', function (client, text) {
-				alert("Copied text to clipboard: " + text );
+				//alert("Copied text to clipboard: " + text );
+				 $('#embed').effect("highlight", {}, 1500);
+
 			});
 			
 			clip.glue( 'd_clip_button', 'd_clip_container' );
