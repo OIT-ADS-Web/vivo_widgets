@@ -1,4 +1,4 @@
 /tmp/*
-
 /.project
 /test-result
+conf/application.conf
