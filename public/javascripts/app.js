@@ -2,7 +2,7 @@ function fetchPreview(url) {
 
 	$('#host').hide("drop", {  }, 150, function() {
 		$('#loading').show("drop", { }, 150);
-
+//  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
 		$.ajax({
 			url: url.url + '.html' + url.parameters,
 			success: function(data) {
@@ -44,7 +44,10 @@ function renderSettings() {
 	} else {
 		style='unstyled'
 	};
-	$('#settings').html('Current Settings: ' + viewModel.chosenLimit().label + ' ' + viewModel.chosenCollection().collectionName + ' in ' + viewModel.chosenFormat() + ' format and ' +  style);
+	$('#settings').html(viewModel.chosenLimit().label 
+	+ ' ' + viewModel.chosenCollection().collectionName + ' in '
+	+ viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
+
 }
 
 /* Clipboard from http://code.google.com/p/zeroclipboard/ */
@@ -84,7 +87,13 @@ $( function() {
 		fetchPreview({url: latestUrl, parameters: latestParams});
 		var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
 		$('#embed').val(script);
-
+		$("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
+		$("#html").attr("href", latestUrl +".html" + latestParams);
+		$("#js").attr("href", latestUrl + ".js" + latestParams);
+		// $('#jsonp').html(latestUrl + latestParams);
+	 // $.getJSON(viewModel.url	 + '.jsonp' + url.parameters + "&callback=?");
+	// render Other Formats
+	
 		renderSettings();
 		return {url: latestUrl, parameters: latestParams};
 	}, viewModel);

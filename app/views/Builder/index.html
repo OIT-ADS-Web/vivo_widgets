@@ -37,12 +37,14 @@
 		embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
 	}
 	var viewModel = {
-
+		
 		chosenCollection: ko.observable(collections),
 		chosenLimit: ko.observable(noItems),
 		chosenFormat: ko.observable('abbreviated'),
 		chosenStyle: ko.observable('yes'),
-		latestUrl: ''
+		latestUrl: '',
+		
+		
 
 	};
 
@@ -55,8 +57,7 @@
 		<div id="menu">
 			Vivo Home | Help
 		</div>
-		<div id="settings">
-		</div>
+	
 		<div id="host">
 			<strong>A preview will appear here</strong>
 		</div>
@@ -64,7 +65,9 @@
 			Loading...
 		</div>
 		<div id="form">
-			<h1>Individual: Test User</h1>
+			<h1>John Smith's VIVO Feeds</h1>
+				<div id="settings">
+		</div>
 			<ul>
 				<li>
 
@@ -154,9 +157,16 @@
 						<div id="d_clip_button"  class="action">
 							Copy
 						</div>
+						</div>
+				</li>
+								<li id="otherFormats">
+					<h1>Other formats</h1> 
+							<a href="#" id="jsonp">JSONP</a>
+							<a href="#" id="html">HTML</a>
+							<a href="#" id="js">JavaScript</a>
 				</li>
 			</ul>
 		</div>
-		</div>
+		
 	</body>
 </html>
