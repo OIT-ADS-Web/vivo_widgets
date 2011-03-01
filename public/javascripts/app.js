@@ -109,6 +109,17 @@ $( function() {
 
 		return false;
 	});
+	
+		$('#advanced').click( function() {
+		if($('#otherFormats').is(":visible")) {
+			$('#otherFormats').hide("fade", { }, 150);
+		} else	{
+			$('#otherFormats').show("fade", { }, 150);
+		}
+		
+
+		return false;
+	});
 	$('#embed').focus( function() {
 		this.select();
 	});
