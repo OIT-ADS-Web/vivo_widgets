@@ -3,7 +3,8 @@ package models
 import org.scardf.{Node, TypedLiteral, PlainLiteral}
 import org.scardf.NodeConverter._
 
-object VivoPerson {
+trait VivoModel {
+
   def getString(node: Node): String = {
     node match {
       case n: PlainLiteral => n / asString
@@ -17,7 +18,7 @@ object VivoPerson {
     }
   }
 
-  def finderSparql(uri: String): String  = """
+  def sparqlPrefixes: String = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -36,16 +37,29 @@ object VivoPerson {
     PREFIX scires: <http://vivoweb.org/ontology/scientific-research#>
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX core: <http://vivoweb.org/ontology/core#>
+  """
 
+  def select(sparql: String) = {
+    // TODO: handle empty results, specify return type
+    Vivo.queryJenaCache(sparql)(0)
+  }
+
+}
+
+object VivoPerson extends VivoModel {
+
+  def finderSparql(uri: String): String  = sparqlPrefixes + """
     SELECT distinct ?name ?title
     WHERE{
-      <"""+uri+"""> rdfs:label ?name
+      <"""+uri+"""> rdf:type core:FacultyMember .
+      <"""+uri+"""> rdfs:label ?name .
       OPTIONAL{ <"""+uri+"""> vitro:moniker ?title } .
     }
   """
 
   def find(uri: String): VivoPerson = {
-    val result = Vivo.queryJenaCache(finderSparql(uri))(0)
+    val result = select(finderSparql(uri))
+    // TODO: handle empty results
     new VivoPerson(uri,getString(result('name)),getString(result('title)))
   }
 
@@ -53,6 +67,6 @@ object VivoPerson {
 
 
 class VivoPerson(val uri: String, val name: String, val title: String) {
-
-
 }
+
+
