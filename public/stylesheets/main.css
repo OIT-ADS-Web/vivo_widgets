@@ -156,19 +156,21 @@ input.button {
 	border-top-right-radius: 5px;
 }
 #settings {
-	font-size:.9em;
+	font-size:1.2em;
+	margin:8px;
+	padding:2px;
 	/* background-color:#F7F9F9;*/
-	padding:4px;
-	color:#FFF;
-	/*  border:solid 1px #DCE4E3;*/
+	/*padding:4px;*/
+	/*color:#FFF;*/
+	/* border-bottom:solid 1px #DCE4E3;*/
 	/*    -moz-border-radius-bottomleft: 5px;
  	-moz-border-radius-bottomright: 5px;
  	border-bottom-left-radius: 5px;
  	border-bottom-right-radius: 5px;*/
 	/*        -moz-border-radius: 5px;
  	border-radius: 5px;*/
-	margin-top:60px;
-	margin-bottom:3px
+/*	margin-top:60px;
+	margin-bottom:3px*/
 }
 #host, #loading {
 	float:right;
@@ -179,6 +181,7 @@ input.button {
 	background-color:#FFF;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	margin-top:60px;
 }
 #form {
 	background-color:#FFF;
@@ -186,6 +189,7 @@ input.button {
 	padding:12px;
 	/*width:500px;*/
 	margin-right:450px;
+	margin-top:60px;
 	border:solid 2px #DCE4E3;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -194,7 +198,7 @@ input.button {
 	display:block;
 	padding:4px;
 	border:solid 2px #DCE4E3;
-	width:100px;
+	width:200px;
 	text-align:center;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
