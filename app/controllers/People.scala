@@ -32,7 +32,7 @@ object People extends Controller {
         request.format.toString match {
           case "js" => 
             val lines = htmlString.split('\n').toList
-            val documentWrites = lines.map { "document.write('"+_+"');" }
+            val documentWrites = lines.map { "document.write('"+_.replaceAll("'","\\\\'")+"');" }
             val documentWritesString = documentWrites.mkString("\n")
             Json(documentWritesString)
           case "html" => Html(htmlString)
