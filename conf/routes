@@ -36,7 +36,7 @@ GET /people/{vivoId}/publications/all.html       People.publications(format:'htm
 
 # Home page
 
-GET     /                                       staticDir:public
+GET     /                                        Builder.root
 
 # Catch all
 # *       /{controller}/{action}                  {controller}.{action}
