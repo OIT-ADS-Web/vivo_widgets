@@ -7,9 +7,11 @@ import models._
 
 object Builder extends Controller {
 
-  def index(vivoId: String) = {
+  def index(vivoId: String = "") = {
     Template
   }
+
+  def root = Action(index())
 
 }
 
