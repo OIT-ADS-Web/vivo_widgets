@@ -1,7 +1,7 @@
 var firstRun = true;
 function openModal(hrefUrl) {
 	var embedSrc = '<textarea id="embed"  rows="5" name="embed" ><script type="text/javascript" src="' + hrefUrl
-	+ '"> </script></textarea><a href="/builder">Need more options or help?</a><br /><br />'
+	+ '"> </script></textarea><a href="/builder/">Need more options or help?</a><br /><br />'
 	+ '<div id="d_clip_container" style="position:relative"><div id="d_clip_button"  class="action">'
 	+ 'Copy</div></div>';
 
@@ -31,9 +31,9 @@ function initializeClipboard() {
 	clip = new ZeroClipboard.Client();
 	clip.setHandCursor( true );
 
-	// clip.addEventListener('load', function (client) {
-	// 	//alert("Flash movie loaded and ready.");
-	// });
+	 clip.addEventListener('load', function (client) {
+	 	//alert("Flash movie loaded and ready.");
+	 });
 	//
 	clip.addEventListener('mouseOver', function (client) {
 		clip.setText( $('#embed').val() );
