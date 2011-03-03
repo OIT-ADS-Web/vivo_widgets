@@ -2,7 +2,7 @@ function fetchPreview(url) {
 
 	$('#host').hide("drop", {  }, 150, function() {
 		$('#loading').show("drop", { }, 150);
-//  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
+		//  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
 		$.ajax({
 			url: url.url + '.html' + url.parameters,
 			success: function(data) {
@@ -44,7 +44,7 @@ function renderSettings() {
 	} else {
 		style='unstyled'
 	};
-	$('#settings').html(viewModel.chosenLimit().label 
+	$('#settings').html(viewModel.chosenLimit().label
 	+ ' ' + viewModel.chosenCollection().collectionName + ' in '
 	+ viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
 
@@ -78,27 +78,26 @@ $( function() {
 	ko.applyBindings(viewModel);
 
 	viewModel.url = ko.dependentObservable( function() {
-		//latestUrl = 'http://localhost:9000/people/smithjm/publications/' + this.chosenLimit().label;
+
 		latestUrl = window.location.toString().replace(window.location.pathname.toString(),"/people/smithjm/publications/") + this.chosenLimit().label;
 		latestParams = '?collections='
 		+ this.chosenCollection().collectionName
 		+ '&formatting=' + this.chosenFormat()
 		+ '&style=' + this.chosenStyle();
-
+		// Refresh Display
 		fetchPreview({url: latestUrl, parameters: latestParams});
+	
+		// Update TextArea
 		var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
 		$('#embed').val(script);
+		// Update other feeds
+		$("#rss").attr("href", latestUrl + ".rss" + latestParams);
 		$("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
 		$("#html").attr("href", latestUrl +".html" + latestParams);
 		$("#js").attr("href", latestUrl + ".js" + latestParams);
-		// $('#jsonp').html(latestUrl + latestParams);
-	 // $.getJSON(viewModel.url	 + '.jsonp' + url.parameters + "&callback=?");
-	// render Other Formats
-	
-		renderSettings();
+	renderSettings();
 		return {url: latestUrl, parameters: latestParams};
 	}, viewModel);
-	
 	// Event handlers
 	$('#preview').click( function() {
 		fetchPreview(viewModel.url());
@@ -110,21 +109,18 @@ $( function() {
 
 		return false;
 	});
-	
-		$('#advanced').click( function() {
+	$('#advanced').click( function() {
 		if($('#otherFormats').is(":visible")) {
 			$('#otherFormats').hide("fade", { }, 150);
-		} else	{
+		} else {
 			$('#otherFormats').show("fade", { }, 150);
 		}
-		
 
 		return false;
 	});
 	$('#embed').focus( function() {
 		this.select();
 	});
-	
 	initializeClipboard();
 
 });
