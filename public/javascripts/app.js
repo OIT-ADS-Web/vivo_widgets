@@ -86,7 +86,7 @@ $( function() {
 		+ '&style=' + this.chosenStyle();
 		// Refresh Display
 		fetchPreview({url: latestUrl, parameters: latestParams});
-	
+		renderSettings();
 		// Update TextArea
 		var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
 		$('#embed').val(script);
@@ -95,7 +95,7 @@ $( function() {
 		$("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
 		$("#html").attr("href", latestUrl +".html" + latestParams);
 		$("#js").attr("href", latestUrl + ".js" + latestParams);
-	renderSettings();
+
 		return {url: latestUrl, parameters: latestParams};
 	}, viewModel);
 	// Event handlers
