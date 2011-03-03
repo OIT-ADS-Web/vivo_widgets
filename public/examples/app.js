@@ -31,9 +31,9 @@ function initializeClipboard() {
 	clip = new ZeroClipboard.Client();
 	clip.setHandCursor( true );
 
-	// clip.addEventListener('load', function (client) {
-	// 	//alert("Flash movie loaded and ready.");
-	// });
+	 clip.addEventListener('load', function (client) {
+	 	//alert("Flash movie loaded and ready.");
+	 });
 	//
 	clip.addEventListener('mouseOver', function (client) {
 		clip.setText( $('#embed').val() );
