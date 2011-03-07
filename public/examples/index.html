@@ -16,12 +16,30 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+#modal {
+	width:300px;
+	border: solid 2px #DCE4E3;
+	position:absolute;
+	padding:8px;
+	background-color:#FFF;
+		-moz-border-radius: 5px;
+	border-radius: 5px
+}
+#close {
+	display:block;
+	
+	float:right
+}
 .mysite {
 	float:right;
 	font-size:.8em
 }
-ul {
+.body ul {
 	width:575px
+}
+#modal ul {
+	margin:2px;
+	padding:2px
 }
 li {
 	list-style-type:none
@@ -86,6 +104,19 @@ li {
 					</ul>
 				</li>
 			</ul>
+		</div>
+		<div id="modal">
+			<a id="close" href="#">X</a>
+			<ul>
+				<li><textarea id="embed"  rows="5" name="embed" ></textarea></li>
+				<li><a href="/builder/">Need more options or help?</a></li>
+				<li><div id="d_clip_container" style="position:relative">
+				<div id="d_clip_button"  class="action">Copy</div>
+			</div></li>
+			</ul>
+			
+			
+			
 		</div>
 	</body>
 </html>
