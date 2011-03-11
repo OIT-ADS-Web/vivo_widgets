@@ -1,24 +1,24 @@
 (function() {
 	function fetchPreview(url) {
 
-		$('#host').hide("drop", {  }, 150, function() {
-			$('#loading').show("drop", { }, 150);
+		$('#host').hide("blind", {  }, 150, function() {
+			$('#loading').show("blind", { }, 150);
 			//  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
 			$.ajax({
 				url: url.url + '.html' + url.parameters,
 				success: function(data) {
 					$("#host").html(data);
 
-					$('#loading').hide("drop", { }, 150, function() {
-						$('#host').show("drop", { }, 150);
+					$('#loading').hide("blind", { }, 150, function() {
+						$('#host').show("blind", { }, 150);
 
 					});
 				},
 				error: function(xhr, status, errorThrown) {
 					$("#host").html('<h4>Oops!</h4><p>There was a problem with your request:</p><strong>' + status + '</strong>');
 
-					$('#loading').hide("drop", { }, 150, function() {
-						$('#host').show("drop", { }, 150);
+					$('#loading').hide("blind", { }, 150, function() {
+						$('#host').show("blind", { }, 150);
 
 					});
 				}
@@ -100,10 +100,10 @@
 			return {url: latestUrl, parameters: latestParams};
 		}, viewModel);
 		// Event handlers
-		$('#preview').click( function() {
-			fetchPreview(viewModel.url());
-			return false;
-		});
+		// $('#preview').click( function() {
+		// 	fetchPreview(viewModel.url());
+		// 	return false;
+		// });
 		$('.help').click( function() {
 
 			openHelp(this.id);
@@ -112,9 +112,9 @@
 		});
 		$('#advanced').click( function() {
 			if($('#otherFormats').is(":visible")) {
-				$('#otherFormats').hide("fade", { }, 150);
+				$('#otherFormats').hide("blind", { }, 200);
 			} else {
-				$('#otherFormats').show("fade", { }, 150);
+				$('#otherFormats').show("blind", { }, 200);
 			}
 
 			return false;

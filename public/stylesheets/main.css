@@ -190,6 +190,9 @@ input.button {
 
 
 }
+#loading {
+text-align:center
+}
 #form {
 	background-color:#FFF;
 	position:relative;
