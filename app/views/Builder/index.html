@@ -34,7 +34,7 @@
 		itemsHelp: {title: "Items Help", details: "This is where we'll show some items specific help!"},
 		formatHelp: {title: "Display Format Help", details: "<p><strong>This</strong> is where we'll show some display format specific help!</p>"},
 		styleHelp: {title: "Styling Help", details: "This is where we'll show some styling specific help!"},
-		embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"},
+		embedHelp: {title: "Embed Help", details: "This is where we'll show some embed specific help!"}
 	}
 	var viewModel = {
 		
@@ -42,7 +42,7 @@
 		chosenLimit: ko.observable(noItems),
 		chosenFormat: ko.observable('abbreviated'),
 		chosenStyle: ko.observable('yes'),
-		latestUrl: '',
+		latestUrl: ''
 		
 		
 
@@ -57,17 +57,20 @@
 		<div id="menu">
 			Vivo Home | Help
 		</div>
-	
+<div id="rightCol">
+						<div id="settings">
+		</div>
 		<div id="host">
 			<strong>A preview will appear here</strong>
 		</div>
 		<div style="display:none" id="loading">
-			Loading...
+			<img alt="Loading..." src="/public/images/loading.gif" />
 		</div>
+</div>
+		
 		<div id="form">
 			<h1>John Smith's VIVO Feeds</h1>
-				<div id="settings">
-		</div>
+
 			<ul>
 				<li>
 
@@ -157,9 +160,9 @@
 						</div>
 						</div>
 				</li>
-					<li class="no_border">
-					<a class='action' id="preview" href="#">Refresh Preview</a>
-				</li>
+					<!-- <li class="no_border">
+									<a class='action' id="preview" href="#">Refresh Preview</a>
+								</li> -->
 				<li class="no_border"><a id="advanced" href="#" class="action">Advanced</a></li>
 								<li style="display:none" id="otherFormats">
 					<h1>Other formats</h1> 

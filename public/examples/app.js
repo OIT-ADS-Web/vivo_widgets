@@ -1,27 +1,21 @@
-var firstRun = true;
-function openModal(hrefUrl) {
-	var embedSrc = '<textarea id="embed"  rows="5" name="embed" ><script type="text/javascript" src="' + hrefUrl
-	+ '"> </script></textarea><a href="/builder/">Need more options or help?</a><br /><br />'
-	+ '<div id="d_clip_container" style="position:relative"><div id="d_clip_button"  class="action">'
-	+ 'Copy</div></div>';
+function closeModal() {
+	$('#modal').hide("drop", { }, 200, function() {
 
-	var $dialog = $('<div></div>')
-	.html(embedSrc)
-	.dialog({
-		autoOpen: false,
-		title: 'Embed in your web site',
-		show: 'fade',
-		hide: 'fade',
-		modal: true,
-		width: 460
 	});
-	$dialog.dialog('open');
-	if (firstRun) {
+}
 
-		initializeClipboard();
-		firstRun = false;
-	}
+function openModal(obj) {
+	var embedSrc = '<script type="text/javascript" src="' + obj.href + '"> </script>';
 
+	$('#embed').val(embedSrc);
+	var pos = $(obj).offset();
+	var width = $(obj).width();
+
+	$("#modal").css( { "left": (pos.left + width) + "px", "top":pos.top + "px" } );
+
+	$('#modal').show("drop", { }, 150, function() {
+
+	});
 }
 
 /* Clipboard from http://code.google.com/p/zeroclipboard/ */
@@ -31,9 +25,9 @@ function initializeClipboard() {
 	clip = new ZeroClipboard.Client();
 	clip.setHandCursor( true );
 
-	 clip.addEventListener('load', function (client) {
-	 	//alert("Flash movie loaded and ready.");
-	 });
+	clip.addEventListener('load', function (client) {
+
+	});
 	//
 	clip.addEventListener('mouseOver', function (client) {
 		clip.setText( $('#embed').val() );
@@ -43,19 +37,33 @@ function initializeClipboard() {
 
 	});
 	clip.glue( 'd_clip_button', 'd_clip_container' );
-
+	$('#modal').hide();
 }
 
 $( function() {
-	$('.mysite').click( function() {
-
-		openModal(this.href);
+	$('.body').click( function() {
+		if($('#modal').is(':visible')) {
+			closeModal();
+		}
 
 		return false;
 	});
-	$('#embed').live('focus', function() {
+	$('.mysite').click( function() {
+		var that = this;
+		openModal(that);
+
+		return false;
+	});
+	$('#embed').focus( function() {
 
 		this.select();
 
 	});
+	$('#close').click( function() {
+		closeModal();
+
+		return false;
+	});
+	initializeClipboard();
+
 });

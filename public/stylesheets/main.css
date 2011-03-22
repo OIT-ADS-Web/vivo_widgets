@@ -156,9 +156,11 @@ input.button {
 	border-top-right-radius: 5px;
 }
 #settings {
+	
 	font-size:1.2em;
 	margin:8px;
 	padding:2px;
+	border-bottom: solid 1px #DCE4E3
 	/* background-color:#F7F9F9;*/
 	/*padding:4px;*/
 	/*color:#FFF;*/
@@ -172,16 +174,24 @@ input.button {
 /*	margin-top:60px;
 	margin-bottom:3px*/
 }
-#host, #loading {
+#rightCol {
+	margin-top:60px;
 	float:right;
 	width:400px;
 	margin-left:-400px;
-	padding:12px;
-	border:solid 2px #DCE4E3;
+		border:solid 2px #DCE4E3;
 	background-color:#FFF;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	margin-top:60px;
+	}
+#host, #loading {
+
+	padding:12px;
+
+
+}
+#loading {
+text-align:center
 }
 #form {
 	background-color:#FFF;
