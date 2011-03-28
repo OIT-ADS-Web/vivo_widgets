@@ -3,10 +3,10 @@ import play.jobs._
 
 import models._
 
-//@OnApplicationStart
+@OnApplicationStart
 class LoadJenaCache extends Job {
 
   override def doJob() {
-    Vivo.initializeJenaCache()
+    VivoConnection.server.initializeJenaCache()
   }
 }
