@@ -6,6 +6,6 @@ object VivoConnection {
   val server = new Vivo( url      = play.configuration.conf.getProperty("vivo.jdbc.url"),
                          user     = play.configuration.conf.getProperty("vivo.jdbc.user"),
                          password = play.configuration.conf.getProperty("vivo.jdbc.password"),
-                         dbType   = play.configuration.conf.getProperty("vivo.jdbc.dbType")
+                         dbType   = play.configuration.conf.getProperty("vivo.jdbc.dbType"),
                          driver   = play.configuration.conf.getProperty("vivo.jdbc.driver"))
 }
