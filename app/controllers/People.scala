@@ -27,8 +27,13 @@ object People extends Controller {
   def publications(vivoId: String, items: Int, formatting: String = "detailed", style: String = "yes") = {
     Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
       case Some(person) => {
+        val publications = person.publications.sortBy{p => p.getOrElse("year","")}.reverse
         val modelData = new java.util.HashMap[java.lang.String,java.lang.Object]
-        modelData.put("publications",person.publications)
+        if (items > 0) {
+          modelData.put("publications",publications.slice(0,items))
+        } else {
+          modelData.put("publications",publications)
+        }
         modelData.put("style",style)
         modelData.put("formatting",formatting)
         val htmlString = TemplateLoader.load("People/publications.html").render(modelData)

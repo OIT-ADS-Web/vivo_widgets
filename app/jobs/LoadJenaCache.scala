@@ -5,7 +5,7 @@ import models._
 
 import edu.duke.oit.vw.solr._
 
-@OnApplicationStart
+//@OnApplicationStart
 class LoadJenaCache extends Job {
 
   override def doJob() {
