@@ -1,5 +1,5 @@
 %{ if (_formatting=="abbreviated") { }%
-  ${_publication.title} (${_publication.get("year")})
+  ${_publication.title} (${_publication.get("year")?.split("-")?.getAt(0)})
 %{ } else { }%
 %{
     typeParts = _publication.vivoType.split("/")
