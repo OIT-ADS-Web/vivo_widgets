@@ -4,28 +4,36 @@ import play._
 import play.mvc._
 import play.templates._
 
-import models._
+import models.{SolrConnection,VivoConnection,VivoWidgetJsonResult}
+import edu.duke.oit.vw.solr._
 
 object People extends Controller {
 
   def publicationsData(vivoId: String, items: Int) = {
-    Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
-      case Some(publications) =>
-        val vwr = new VivoWidgetJsonResult(publications.asInstanceOf[List[Publication]])
+    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
+      case Some(person) => { 
+        val vwr = new VivoWidgetJsonResult(person.publications)
         request.format match {
           case "json" => Json(vwr.json.toString)
           case "jsonp" => Json(vwr.jsonp)
           case _ => NoContent
         }
-      case _ => NoContent
+      }
+      case _ => NotFound
     }
+
   }
 
   def publications(vivoId: String, items: Int, formatting: String = "detailed", style: String = "yes") = {
-    Publication.findAllForPerson(Vivo.baseUri+vivoId,items) match {
-      case Some(publications) =>
+    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
+      case Some(person) => {
+        val publications = person.publications.sortBy{p => p.getOrElse("year","")}.reverse
         val modelData = new java.util.HashMap[java.lang.String,java.lang.Object]
-        modelData.put("publications",publications)
+        if (items > 0) {
+          modelData.put("publications",publications.slice(0,items))
+        } else {
+          modelData.put("publications",publications)
+        }
         modelData.put("style",style)
         modelData.put("formatting",formatting)
         val htmlString = TemplateLoader.load("People/publications.html").render(modelData)
@@ -38,8 +46,10 @@ object People extends Controller {
           case "html" => Html(htmlString)
           case _ => NoContent
         }
-      case _ => NoContent
+      }
+      case _ => "Not Found"
     }
+
   }
 
 }

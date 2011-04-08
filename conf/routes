@@ -6,7 +6,8 @@
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
-GET     /builder/                               Builder.index
+GET     /builder/                               Builder.index(vivoId: "")
+GET     /builder/{vivoId}                       Builder.index
 # VIVO Widget API Routes
 
 

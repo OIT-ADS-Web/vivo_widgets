@@ -80,10 +80,8 @@
 
 		viewModel.url = ko.dependentObservable( function() {
 
-			latestUrl = window.location.toString().replace(window.location.pathname.toString(),"/people/smithjm/publications/") + this.chosenLimit().label;
-			latestParams = '?collections='
-			+ this.chosenCollection().collectionName
-			+ '&formatting=' + this.chosenFormat()
+			latestUrl = window.location.toString().replace(window.location.pathname.toString(),"/people/" + $("#vivoId").attr("value") + "/" + this.chosenCollection().collectionName.toLowerCase() + "/") + this.chosenLimit().label;
+			latestParams = '?formatting=' + this.chosenFormat()
 			+ '&style=' + this.chosenStyle();
 			// Refresh Display
 			fetchPreview({url: latestUrl, parameters: latestParams});

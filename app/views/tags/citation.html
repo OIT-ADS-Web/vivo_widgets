@@ -1,0 +1,13 @@
+%{ if (_formatting=="abbreviated") { }%
+  ${_publication.title} (${_publication.get("year")?.split("-")?.getAt(0)})
+%{ } else { }%
+%{
+    typeParts = _publication.vivoType.split("/")
+    tagName = _publication.vivoType.split("/")[typeParts.length-1]
+    try {
+       invokeTag(1,tagName,[publication: _publication, formatting: _formatting],{})
+     } catch (play.exceptions.TemplateNotFoundException e) { }%
+       ${_publication.title}: please define tag for ${tagName}
+  %{ } }%
+%{ } }%
+
