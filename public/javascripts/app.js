@@ -80,7 +80,7 @@
 
 		viewModel.url = ko.dependentObservable( function() {
 
-			latestUrl = window.location.toString().replace(window.location.pathname.toString(),"/people/" + $("#vivoId").attr("value") + "/" + this.chosenCollection().collectionName.toLowerCase() + "/") + this.chosenLimit().label;
+      latestUrl = window.location.toString().replace(/builder(.*)/,"people") + "/" + $("#vivoId").attr("value") + "/" + this.chosenCollection().collectionName.toLowerCase() + "/" + this.chosenLimit().label;
 			latestParams = '?formatting=' + this.chosenFormat()
 			+ '&style=' + this.chosenStyle();
 			// Refresh Display
