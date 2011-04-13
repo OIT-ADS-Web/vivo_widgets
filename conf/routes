@@ -35,6 +35,9 @@ GET /people/{vivoId}/publications/10.html        People.publications(items:'10',
 GET /people/{vivoId}/publications/15.html        People.publications(items:'15',format:'html')
 GET /people/{vivoId}/publications/all.html       People.publications(format:'html')
 
+# Search
+GET /search.json                                 Search.index(format:'json')
+
 # Home page
 
 GET     /                                        Builder.root

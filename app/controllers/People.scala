@@ -10,7 +10,7 @@ import edu.duke.oit.vw.solr._
 object People extends Controller {
 
   def publicationsData(vivoId: String, items: Int) = {
-    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
+    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.widgetServer) match {
       case Some(person) => { 
         val vwr = new VivoWidgetJsonResult(person.publications)
         request.format match {
@@ -25,7 +25,7 @@ object People extends Controller {
   }
 
   def publications(vivoId: String, items: Int, formatting: String = "detailed", style: String = "yes") = {
-    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
+    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.widgetServer) match {
       case Some(person) => {
         val publications = person.publications.sortBy{p => p.getOrElse("year","")}.reverse
         val modelData = new java.util.HashMap[java.lang.String,java.lang.Object]

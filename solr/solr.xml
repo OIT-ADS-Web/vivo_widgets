@@ -30,5 +30,6 @@
   -->
   <cores adminPath="/admin/cores">
     <core name="vivowidgetcore" instanceDir="vivowidgetcore" />
+    <core name="vivocore" instanceDir="vivocore" />
   </cores>
 </solr>

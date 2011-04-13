@@ -3,4 +3,5 @@
 /test-result
 conf/application.conf
 solr/vivowidgetcore/data*
+solr/vivocore/data*
 precompiled/*
