@@ -37,6 +37,8 @@ GET /people/{vivoId}/publications/all.html       People.publications(format:'htm
 
 # Search
 GET /search.json                                 Search.index(format:'json')
+GET /search.jsonp                                Search.index(format:'jsonp')
+GET /search.html                                 Search.index(format:'html')
 
 # Home page
 

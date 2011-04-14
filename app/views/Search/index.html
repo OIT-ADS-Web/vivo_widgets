@@ -1,0 +1,11 @@
+<h3>Showing ${result.numFound} result(s) for: ${query}</h3>
+<ul>
+#{list result.groups.keys()}
+  <li>${_} (${result.groups.apply(_)})</li>
+#{/list}
+</ul>
+<ul>
+#{list result.items}
+  <li><a href="${_.uri}">${_.name}</a></li>
+#{/list}
+</ul>
