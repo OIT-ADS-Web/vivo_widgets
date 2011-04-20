@@ -35,6 +35,30 @@ GET /people/{vivoId}/publications/10.html        People.publications(items:'10',
 GET /people/{vivoId}/publications/15.html        People.publications(items:'15',format:'html')
 GET /people/{vivoId}/publications/all.html       People.publications(format:'html')
 
+# Grants - JSONP
+GET /people/{vivoId}/grants/5.jsonp         People.grantsData(items:'5',format:'jsonp')
+GET /people/{vivoId}/grants/10.jsonp        People.grantsData(items:'10',format:'jsonp')
+GET /people/{vivoId}/grants/15.jsonp        People.grantsData(items:'15',format:'jsonp')
+GET /people/{vivoId}/grants/all.jsonp       People.grantsData(format:'jsonp')
+
+# Grants - JSON
+GET /people/{vivoId}/grants/5.json         People.grantsData(items:'5',format:'json')
+GET /people/{vivoId}/grants/10.json        People.grantsData(items:'10',format:'json')
+GET /people/{vivoId}/grants/15.json        People.grantsData(items:'15',format:'json')
+GET /people/{vivoId}/grants/all.json       People.grantsData(format:'json')
+
+# Grants - JS (document writes)
+GET /people/{vivoId}/grants/5.js         People.grants(items:'5',format:'js')
+GET /people/{vivoId}/grants/10.js        People.grants(items:'10',format:'js')
+GET /people/{vivoId}/grants/15.js        People.grants(items:'15',format:'js')
+GET /people/{vivoId}/grants/all.js       People.grants(format:'js')
+
+# Grants - HTML
+GET /people/{vivoId}/grants/5.html         People.grants(items:'5',format:'html')
+GET /people/{vivoId}/grants/10.html        People.grants(items:'10',format:'html')
+GET /people/{vivoId}/grants/15.html        People.grants(items:'15',format:'html')
+GET /people/{vivoId}/grants/all.html       People.grants(format:'html')
+
 # Search
 GET /search.json                                 Search.index(format:'json')
 GET /search.jsonp                                Search.index(format:'jsonp')
