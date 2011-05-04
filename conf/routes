@@ -2,42 +2,40 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-
-
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 GET     /builder/                               Builder.index(vivoId: "")
 GET     /builder/{vivoId}                       Builder.index
+
 # VIVO Widget API Routes
+# Person Collection Data - JSONP
+GET /people/{vivoId}/{collectionName}/5.jsonp         People.collectionData(items:'5',format:'jsonp')
+GET /people/{vivoId}/{collectionName}/10.jsonp        People.collectionData(items:'10',format:'jsonp')
+GET /people/{vivoId}/{collectionName}/15.jsonp        People.collectionData(items:'15',format:'jsonp')
+GET /people/{vivoId}/{collectionName}/all.jsonp       People.collectionData(format:'jsonp')
 
+# Person Collection Data - JSON
+GET /people/{vivoId}/{collectionName}/5.json         People.collectionData(items:'5',format:'json')
+GET /people/{vivoId}/{collectionName}/10.json        People.collectionData(items:'10',format:'json')
+GET /people/{vivoId}/{collectionName}/15.json        People.collectionData(items:'15',format:'json')
+GET /people/{vivoId}/{collectionName}/all.json       People.collectionData(format:'json')
 
-# Publications - JSONP
-GET /people/{vivoId}/publications/5.jsonp         People.publicationsData(items:'5',format:'jsonp')
-GET /people/{vivoId}/publications/10.jsonp        People.publicationsData(items:'10',format:'jsonp')
-GET /people/{vivoId}/publications/15.jsonp        People.publicationsData(items:'15',format:'jsonp')
-GET /people/{vivoId}/publications/all.jsonp       People.publicationsData(format:'jsonp')
+# Person Collection - JS (document writes)
+GET /people/{vivoId}/{collectionName}/5.js         People.collection(items:'5',format:'js')
+GET /people/{vivoId}/{collectionName}/10.js        People.collection(items:'10',format:'js')
+GET /people/{vivoId}/{collectionName}/15.js        People.collection(items:'15',format:'js')
+GET /people/{vivoId}/{collectionName}/all.js       People.collection(format:'js')
 
-# Publications - JSON
-GET /people/{vivoId}/publications/5.json         People.publicationsData(items:'5',format:'json')
-GET /people/{vivoId}/publications/10.json        People.publicationsData(items:'10',format:'json')
-GET /people/{vivoId}/publications/15.json        People.publicationsData(items:'15',format:'json')
-GET /people/{vivoId}/publications/all.json       People.publicationsData(format:'json')
+# Person Collection - HTML
+GET /people/{vivoId}/{collectionName}/5.html         People.collection(items:'5',format:'html')
+GET /people/{vivoId}/{collectionName}/10.html        People.collection(items:'10',format:'html')
+GET /people/{vivoId}/{collectionName}/15.html        People.collection(items:'15',format:'html')
+GET /people/{vivoId}/{collectionName}/all.html       People.collection(format:'html')
 
-# Publications - JS (document writes)
-GET /people/{vivoId}/publications/5.js         People.publications(items:'5',format:'js')
-GET /people/{vivoId}/publications/10.js        People.publications(items:'10',format:'js')
-GET /people/{vivoId}/publications/15.js        People.publications(items:'15',format:'js')
-GET /people/{vivoId}/publications/all.js       People.publications(format:'js')
-
-# Publications - HTML
-GET /people/{vivoId}/publications/5.html         People.publications(items:'5',format:'html')
-GET /people/{vivoId}/publications/10.html        People.publications(items:'10',format:'html')
-GET /people/{vivoId}/publications/15.html        People.publications(items:'15',format:'html')
-GET /people/{vivoId}/publications/all.html       People.publications(format:'html')
+# Search Routes
+GET /search.json                                 Search.index(format:'json')
+GET /search.jsonp                                Search.index(format:'jsonp')
+GET /search.html                                 Search.index(format:'html')
 
 # Home page
-
 GET     /                                        Builder.root
-
-# Catch all
-# *       /{controller}/{action}                  {controller}.{action}

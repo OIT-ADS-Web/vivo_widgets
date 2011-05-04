@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="vivolucene" version="1.11">
+    
+    <types>
+        <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+
+        <fieldType name="vivo" class="solr.TextField" positionIncrementGap="100" omitNorms="true" >
+            <analyzer>
+                <tokenizer class="solr.HTMLStripStandardTokenizerFactory"/>
+                <filter class="solr.LowerCaseFilterFactory"/>
+                <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+                <filter class="solr.ASCIIFoldingFilterFactory"/>
+                <filter class="solr.RemoveDuplicatesTokenFilterFactory"/> 
+            </analyzer>
+        </fieldType>
+
+        <fieldType name="vivo-stemmed" class="solr.TextField" positionIncrementGap="100" omitNorms="true" >
+            <analyzer>
+                <tokenizer class="solr.HTMLStripStandardTokenizerFactory"/>
+                <filter class="solr.LowerCaseFilterFactory"/>
+                <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+                <filter class="solr.ASCIIFoldingFilterFactory"/>
+                <filter class="solr.PorterStemFilterFactory" language="English" />
+                <filter class="solr.RemoveDuplicatesTokenFilterFactory"/> 
+            </analyzer>
+        </fieldType>
+    </types>
+
+    <fields>
+        <!-- These fields have been analyzed/indexed -->
+        <field name="ALLTEXT" type="vivo-stemmed" indexed="true" stored="false" omitNorms="true" /> 
+        <field name="ALLTEXTUNSTEMMED" type="vivo" indexed="true" stored="true" omitNorms="true" /> 
+        <field name="name" type="vivo-stemmed" indexed="true" stored="true" omitNorms="true" /> 
+        <field name="nameunstemmed" type="vivo" indexed="true" stored="false" omitNorms="true" /> 
+
+        <!-- These fields have NOT been analyzed -->
+        <field name="URI" type="string" indexed="true" stored="true" required="true" />
+        <field name="nameunanalyzed" type="string" indexed="false" stored="true" /> 
+        <field name="type" type="string" indexed="false" stored="true" multiValued="true" /> 
+        <field name="type_label" type="string" indexed="false" stored="true" multiValued="true" /> 
+        <field name="classgroup" type="string" indexed="false" stored="true" multiValued="true" /> 
+        <field name="DocId" type="string" indexed="false" stored="true" /> 
+        <field name="JCLASS" type="string" indexed="false" stored="true" /> 
+        <field name="SUNRISE" type="string" indexed="false" stored="true" /> 
+        <field name="SUNSET" type="string" indexed="false" stored="true" /> 
+        <field name="THUMBNAIL" type="string" indexed="false" stored="true" /> 
+        <field name="TIMEKEY" type="string" indexed="false" stored="true" /> 
+        <field name="indexedTime" type="string" indexed="false" stored="true" /> 
+        <field name="modTime" type="string" indexed="false" stored="true" /> 
+        <field name="FLAG2" type="string" indexed="false" stored="false" /> 
+        <field name="portal" type="string" indexed="false" stored="false" multiValued="true" /> 
+        <field name="moniker" type="string" indexed="false" stored="true" /> 
+
+        <!-- Fields created dynamically to store VIVO properties -->
+        <dynamicField name="http://*" type="vivo" indexed="false" stored="true" multiValued="true" />
+        <dynamicField name="labels_http://*" type="vivo" indexed="false" stored="true" multiValued="true" />
+    </fields>
+
+    <uniqueKey>URI</uniqueKey>
+    <defaultSearchField>ALLTEXTUNSTEMMED</defaultSearchField>
+    <solrQueryParser defaultOperator="OR"/>
+
+</schema>

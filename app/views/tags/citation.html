@@ -3,7 +3,9 @@
 %{ } else { }%
 %{
     typeParts = _publication.vivoType.split("/")
-    tagName = _publication.vivoType.split("/")[typeParts.length-1]
+    lastPart = typeParts[typeParts.length-1]
+    subParts = lastPart.split("#")
+    tagName = subParts[subParts.length-1]
     try {
        invokeTag(1,tagName,[publication: _publication, formatting: _formatting],{})
      } catch (play.exceptions.TemplateNotFoundException e) { }%

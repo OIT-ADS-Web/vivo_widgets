@@ -9,7 +9,7 @@ import edu.duke.oit.vw.solr._
 class LoadJenaCache extends Job {
 
   override def doJob() {
-    val vsi = new VivoSolrIndexer(VivoConnection.server, SolrConnection.server)
+    val vsi = new VivoSolrIndexer(VivoConnection.server, SolrConnection.widgetServer)
     vsi.indexPeople
   }
 }

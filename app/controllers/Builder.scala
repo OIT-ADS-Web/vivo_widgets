@@ -10,8 +10,8 @@ import edu.duke.oit.vw.solr._
 object Builder extends Controller {
 
   def index(vivoId: String) = {
-    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.server) match {
-      case Some(person) => Template("vivoId" -> vivoId, "person" -> person)
+    Person.find(VivoConnection.baseUri+vivoId, SolrConnection.widgetServer) match {
+      case Some(person) => Template('vivoId -> vivoId, 'person -> person)
       case _ => NotFound
     }
   }
