@@ -1,0 +1,18 @@
+-# include template helpers
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+-@ var formatting: String = "abbreviated"
+
+-# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
+-@ import var it: edu.duke.oit.vw.solr.Publication
+
+- val year = it.getOrElse("year","").split("-")(0)
+
+- formatting match 
+  - case "abbreviated" =>
+    span
+      | #{title} 
+      - if (!empty(year))
+        | (#{year})
+  - case _ =>
+    = render(tpath("shared/" + subType + ".jade"), Map("it" -> it, "year" -> year))
+    -# span #{title} (#{year}) #{vivoType} - #{subType}

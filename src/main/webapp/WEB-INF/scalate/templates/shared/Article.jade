@@ -1,0 +1,17 @@
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+-@ val year: String
+
+-# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
+-@ import var it: edu.duke.oit.vw.solr.Publication
+
+= authors.mkString("; ")
+- if(!empty(year)) 
+  | (#{year}).
+| "#{title}." #{getOrElse("publishedIn","")}.
+| #{get("volume") ?: ""}
+- if(!empty(get("issue"))) 
+  | (#{get("issue")})
+- if(!empty(get("startPage")))
+  |  : #{get("startPage")}
+- if(!empty(get("endPage")))
+  | -  #{get("endPage")}

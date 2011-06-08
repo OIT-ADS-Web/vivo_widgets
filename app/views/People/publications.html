@@ -1,5 +1,0 @@
-<ul%{ if (style=="yes") out.print(' style="list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; "')}%>
-#{list publications}
-<li%{ if (style=="yes") out.print(' style="margin:.45em;padding:.45em"')}%>#{citation publication:_, formatting: formatting /} <a onmouseout="this.style.textDecoration ='underline';" onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" style="color:#2485AE;text-decoration:underline" href="${_.uri}">More info</a></li>
-#{/list}
-</ul>
