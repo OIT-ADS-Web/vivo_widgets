@@ -1,0 +1,8 @@
+-# include template helpers
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+
+-# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
+-@ import val it: edu.duke.oit.vw.solr.Publication
+-@ val year: String
+
+| #{authors.mkString(", ")}. #{title}. #{get("publishedBy") ?: ""}. #{year}.
