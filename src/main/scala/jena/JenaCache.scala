@@ -1,10 +1,10 @@
-package edu.duke.oit.jena.actor
+package edu.duke.oit.vw.actor
 
 import scala.actors.Actor
 import scala.actors.Actor._
 
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
-import edu.duke.oit.jena.connection._
+import edu.duke.oit.vw.connection._
 import org.scardf.jena.JenaGraph
 import com.hp.hpl.jena.tdb.TDBFactory
 

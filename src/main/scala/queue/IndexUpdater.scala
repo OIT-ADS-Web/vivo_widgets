@@ -17,7 +17,7 @@ object IndexUpdater { // }extends Logging {
 
 }
 
-import edu.duke.oit.jena.utils._
+import edu.duke.oit.vw.utils._
 
 case class UpdateMessage(uri:String, from:Option[String])
 

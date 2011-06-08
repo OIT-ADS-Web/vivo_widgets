@@ -1,6 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
-import edu.duke.oit.jena.utils.{ElvisOperator,Json,Int}
+import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int}
 import edu.duke.oit.vw.solr.{Person,VivoSearcher}
 import java.net.URL
 import org.scalatra._
@@ -15,11 +15,8 @@ object FormatJS extends FormatType
 object FormatJSON extends FormatType
 object FormatJSONP extends FormatType
 
-// class WidgetsFilter extends ScalatraFilter with ScalateSupport with WidgetInitialization {
-// class WidgetsServlet extends ScalatraServlet 
 class WidgetsFilter extends ScalatraFilter
   with ScalateSupport 
-  // with WidgetInitialization 
   with ScalateTemplateStringify {
   
   // GET /people/{vivoId}/{collectionName}/5.jsonp
@@ -51,7 +48,7 @@ class WidgetsFilter extends ScalatraFilter
   }
   
   get("/builder/:vivoId") {
-    import edu.duke.oit.jena.utils.ElvisOperator._
+    import edu.duke.oit.vw.utils.ElvisOperator._
     Person.find(WidgetsConfig.baseUri + params("vivoId"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         val d = Map(
@@ -142,28 +139,11 @@ class WidgetsFilter extends ScalatraFilter
   }
   
   protected def uriPrefix() = {
-    import edu.duke.oit.jena.utils.ElvisOperator._
+    import edu.duke.oit.vw.utils.ElvisOperator._
     (request.getContextPath() ?: "") + (request.getServletPath() ?: "")
   }
 
-  
   notFound {
-    /*
-    // If no route matches, then try to render a Scaml template
-    val templateBase = requestPath match {
-      case s if s.endsWith("/") => s + "index"
-      case s => s
-    }
-    val templatePath = "/WEB-INF/scalate/templates/" + templateBase + ".scaml"
-    servletContext.getResource(templatePath) match {
-      case url: URL => 
-        contentType = "text/html"
-        templateEngine.layout(templatePath)
-      case _ => 
-        
-        "none"
-    }
-    */
     filterChain.doFilter(request, response)
   }
   

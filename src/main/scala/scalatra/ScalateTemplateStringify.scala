@@ -1,6 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
-import edu.duke.oit.jena.utils.Timer
+import edu.duke.oit.vw.utils.Timer
 import java.io.{StringWriter,PrintWriter}
 import javax.servlet.ServletContext
 import org.fusesource.scalate.servlet.ServletResourceLoader

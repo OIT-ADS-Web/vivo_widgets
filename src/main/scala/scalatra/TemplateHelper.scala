@@ -1,6 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
-import edu.duke.oit.jena.utils.ElvisOperator
+import edu.duke.oit.vw.utils.ElvisOperator
 
 object TemplateHelpers extends ElvisOperator {
   import org.fusesource.scalate.RenderContext.capture

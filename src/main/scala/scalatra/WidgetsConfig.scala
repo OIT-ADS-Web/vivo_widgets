@@ -29,7 +29,6 @@ object WidgetsConfig extends Logging {
   var widgetServer:SolrServer = _
   var vivoConfiguration:SolrConfig = _
   var vivoServer:SolrServer = _
-  // var indexUpdaterUuid:Uuid = _
   
   def setupConfig = {
     
@@ -49,15 +48,10 @@ object WidgetsConfig extends Logging {
                                        coreName  = "vivocore")
     vivoServer = Solr.solrServer(vivoConfiguration)
 
-    // import edu.duke.oit.vw.solr.VivoSolrIndexer
-    // val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)  
-    
-    log.info("%%%%%% start the actor!!!")
-    // start the index updater
+    log.info("Start IndexUpdater")
     import edu.duke.oit.vw.queue._
     val indexUpdater = Actor.actorOf[IndexUpdater].start
-    // indexUpdaterUuid = indexUpdater.uuid
-    log.info("finished starting!!!")
+    log.info("IndexUpdater started.")
   }
 
   def loadProperties() = {

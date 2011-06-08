@@ -9,9 +9,9 @@ import org.scardf.Node
 import org.scardf.NodeConverter._
 import org.scardf.jena.JenaGraph
 
-import edu.duke.oit.jena.connection._
-import edu.duke.oit.jena.actor.JenaCache
-import edu.duke.oit.jena.utils._
+import edu.duke.oit.vw.connection._
+import edu.duke.oit.vw.actor.JenaCache
+import edu.duke.oit.vw.utils._
 
 import com.hp.hpl.jena.sdb.SDBFactory
 import com.hp.hpl.jena.sdb.sql.SDBConnection
@@ -94,11 +94,9 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
 }
 
 
-import edu.duke.oit.jena.utils._
+import edu.duke.oit.vw.utils._
 
-class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) extends Timer {
-
-  val log = LoggerFactory.getLogger(classOf[VivoSolrIndexer])
+class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) extends Timer with WidgetLogging {
 
   def indexPeople(useCache: Boolean = true) = {
     val peopleUris = vivo.select(vivo.sparqlPrefixes + """
@@ -111,14 +109,11 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) extends Timer {
   }
 
   def reindexUri(uri: String) = {
-    timer("initializeJenaCache") {
-//      vivo.initializeJenaCache
-      vivo.loadDriver()
-    }
+    vivo.loadDriver()
     var query = new SolrQuery();
     query.setQuery( "uris:\"" + uri + "\"" )
-    var rsp = timer("solr query") { solr.query( query ) }.asInstanceOf[QueryResponse]
-    val docs:SolrDocumentList = timer("solr get doc list") { rsp.getResults() }.asInstanceOf[SolrDocumentList]
+    var rsp = solr.query( query )
+    val docs:SolrDocumentList = rsp.getResults()
     timer("reindex docs") {
       docs.map {doc => reindexPerson(doc.getFieldValue("id").asInstanceOf[String])}
     }
@@ -130,14 +125,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) extends Timer {
       PersonIndexer.index(uri, vivo, solr, useCache)
     }
     solr.commit
-  }
-
-  def testSearch(queryStr: String) = {
-    var query = new SolrQuery();
-    query.setQuery( queryStr )
-    var rsp = solr.query( query )
-    val docs = rsp.getResults()
-    docs.map {doc => doc.getFieldValue("id").asInstanceOf[String]}
   }
 
   def getPerson(uri: String): Option[Person] = {

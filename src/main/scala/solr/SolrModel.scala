@@ -6,7 +6,7 @@ import org.apache.solr.common.{SolrInputDocument,SolrDocumentList,SolrDocument}
 import java.util.ArrayList
 import scala.collection.JavaConversions._
 
-import edu.duke.oit.jena.utils._
+import edu.duke.oit.vw.utils._
 
 // use scala collections with java iterators
 import scala.collection.JavaConversions._

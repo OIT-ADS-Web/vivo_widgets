@@ -1,4 +1,4 @@
-package edu.duke.oit.jena.utils
+package edu.duke.oit.vw.utils
 
 import org.scardf._
 import org.scardf.NodeConverter._
@@ -7,6 +7,13 @@ trait ToMethods {
   implicit def toMethods(obj: AnyRef) = new {
     def methods = obj.getClass.getMethods.map(_.getName)
   }
+}
+
+trait WidgetLogging {
+  import org.slf4j.Logger
+  import org.slf4j.LoggerFactory
+  
+  val log = LoggerFactory.getLogger(this.getClass)
 }
 
 trait Timer {

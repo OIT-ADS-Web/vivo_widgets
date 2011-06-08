@@ -1,6 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
-import edu.duke.oit.jena.utils.{ElvisOperator,Json,Int}
+import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,WidgetLogging}
 import edu.duke.oit.vw.solr.VivoSolrIndexer
 import edu.duke.oit.vw.solr.{Person,VivoSearcher}
 import java.net.URL
@@ -11,8 +11,9 @@ import akka.actor.Actor._
 import akka.actor.Actor
 import edu.duke.oit.vw.queue._
 
-// class WidgetUpdatesServlet extends ScalatraServlet 
-class WidgetUpdatesFilter extends ScalatraFilter with AuthenticationSupport {
+class WidgetUpdatesFilter extends ScalatraFilter 
+  with AuthenticationSupport 
+  with WidgetLogging {
   
   post("/updates/rebuild/index") {
     basicAuth
@@ -29,7 +30,7 @@ class WidgetUpdatesFilter extends ScalatraFilter with AuthenticationSupport {
         val actors = Actor.registry.actorsFor[IndexUpdater] 
         actors.length match {
           case 0 => {
-            println(">> ERROR: actor not found IndexUpdater in registry")
+            log.error(">> ERROR: actor not found IndexUpdater in registry")
             Json.toJson(Map("error" -> "IndexUpdater not in registry"))
           }
           case _ => {
