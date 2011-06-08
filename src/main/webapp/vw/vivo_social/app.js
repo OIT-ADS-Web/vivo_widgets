@@ -35,6 +35,7 @@ function initialize() {
 
 	}
 
+  // Bevaviors
 	$('#searchButton').click( function() {
 
 		if($('[name=searchTerm]').val() !== "") {
