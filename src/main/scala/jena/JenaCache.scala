@@ -5,8 +5,8 @@ import scala.actors.Actor._
 
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
 import edu.duke.oit.vw.connection._
-import org.scardf.jena.JenaGraph
 import com.hp.hpl.jena.tdb.TDBFactory
+import edu.duke.oit.vw.sparql.Sparqler
 
 case object Graph
 
@@ -59,8 +59,7 @@ object JenaCache {
     val model = jenaActor !? Graph
     model match {
       case Some(m: JModel) => {
-        var jg = new JenaGraph(m)
-        jg.select(query)
+        Sparqler.selectingFromModel(m,query){resultsSet => Sparqler.simpleResults(resultsSet)}
       }
       case _ => List()
     }

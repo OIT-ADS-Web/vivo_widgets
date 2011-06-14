@@ -4,14 +4,10 @@ import org.apache.solr.client.solrj.{SolrServer,SolrQuery}
 import org.apache.solr.client.solrj.response.QueryResponse
 import org.apache.solr.common.{SolrInputDocument,SolrDocumentList}
 
-import org.scardf._
-import org.scardf.Node
-import org.scardf.NodeConverter._
-import org.scardf.jena.JenaGraph
-
 import edu.duke.oit.vw.connection._
 import edu.duke.oit.vw.actor.JenaCache
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.sparql.Sparqler
 
 import com.hp.hpl.jena.sdb.SDBFactory
 import com.hp.hpl.jena.sdb.sql.SDBConnection
@@ -38,7 +34,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
                               "http://vitro.mannlib.cornell.edu/default/vitro-kb-2")
   }
 
-  def queryJenaCache(sparql: String) = {
+  def queryJenaCache(sparql: String): List[Map[Symbol,String]] = {
     JenaCache.getModel match {
       case Some(m: JModel) => true
       case _ => initializeJenaCache()
@@ -46,7 +42,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
     JenaCache.queryModel(sparql)
   }
 
-  def queryLive(sparql: String) = {
+  def queryLive(sparql: String): List[Map[Symbol,String]] = {
     val sdbConnection = new SDBConnection(url,user,password)
     try {
       val ds = DatasetFactory.create(SDBFactory.connectDataset(sdbConnection,Jena.storeDesc(Some(dbType))))
@@ -54,12 +50,12 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
       val owl = ds.getNamedModel("http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.2.owl")
       val queryModel = ModelFactory.createUnion(kb2,owl)
       try {
-        new JenaGraph(queryModel).select(sparql)
+        Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
       } finally { ds.close() }
     } finally { sdbConnection.close() }
   }
 
-  def select(sparql: String, useCache: Boolean = false) = {
+  def select(sparql: String, useCache: Boolean = false): List[Map[Symbol,String]] = {
     if (useCache) {
       queryJenaCache(sparql)
     } else {
@@ -67,9 +63,9 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
     }
   }
 
-  def numPeople(useCache: Boolean = false) = asInt(select(sparqlPrefixes + """
+  def numPeople(useCache: Boolean = false) = select(sparqlPrefixes + """
     select (count(?p) as ?numPeople) where { ?p rdf:type core:FacultyMember }
-  """,useCache)(0)('numPeople).asInstanceOf[NodeFromGraph])
+  """,useCache)(0)('numPeople).toInt
 
   def sparqlPrefixes: String = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -172,12 +168,12 @@ object PersonIndexer extends SimpleConversion with Timer {
       }
       """
 
-      val publicationData:List[Map[QVar, Node]] = timer("select pubs") { vivo.select(pubSparql,useCache) }.asInstanceOf[List[Map[QVar, Node]]]
+      val publicationData:List[Map[Symbol, String]] = timer("select pubs") { vivo.select(pubSparql,useCache) }.asInstanceOf[List[Map[Symbol, String]]]
 
-      val pubs: List[Publication] = publicationData.map( pub => new Publication(uri      = getString(pub('publication)).replaceAll("<|>",""),
-                                                                                vivoType = getString(pub('type)).replaceAll("<|>",""),
-                                                                                title    = getString(pub('title)),
-                                                                                authors  = getAuthors(getString(pub('publication)).replaceAll("<|>",""),vivo,useCache),
+      val pubs: List[Publication] = publicationData.map( pub => new Publication(uri      = pub('publication).replaceAll("<|>",""),
+                                                                                vivoType = pub('type).replaceAll("<|>",""),
+                                                                                title    = pub('title),
+                                                                                authors  = getAuthors(pub('publication).replaceAll("<|>",""),vivo,useCache),
                                                                                 extraItems = parseExtraItems(pub,List('publication,'type,'title)))).asInstanceOf[List[Publication]]
 
       val grantSparql = vivo.sparqlPrefixes + """
@@ -192,11 +188,11 @@ object PersonIndexer extends SimpleConversion with Timer {
       }
       """
 
-      val grantData = timer("select grants") { vivo.select(grantSparql,useCache) }.asInstanceOf[List[Map[QVar, Node]]]
+      val grantData = timer("select grants") { vivo.select(grantSparql,useCache) }.asInstanceOf[List[Map[Symbol, String]]]
 
-      val grants: List[Grant] = grantData.map(grant => new Grant(uri      = getString(grant('agreement)).replaceAll("<|>",""),
-                                                                 vivoType = getString(grant('type)).replaceAll("<|>",""),
-                                                                 name     = getString(grant('grantName)),
+      val grants: List[Grant] = grantData.map(grant => new Grant(uri      = grant('agreement).replaceAll("<|>",""),
+                                                                 vivoType = grant('type).replaceAll("<|>",""),
+                                                                 name     = grant('grantName),
                                                                  extraItems = parseExtraItems(grant,List('agreement,'type,'grantName)))).asInstanceOf[List[Grant]]
 
       val courseSparql = vivo.sparqlPrefixes + """
@@ -213,15 +209,15 @@ object PersonIndexer extends SimpleConversion with Timer {
 
       val courseData = vivo.select(courseSparql,useCache)
 
-      val courses: List[Course] = courseData.map(course => new Course(uri      = getString(course('course)).replaceAll("<|>",""),
-                                                                      vivoType = getString(course('type)).replaceAll("<|>",""),
-                                                                      name     = getString(course('courseName)),
+      val courses: List[Course] = courseData.map(course => new Course(uri      = course('course).replaceAll("<|>",""),
+                                                                      vivoType = course('type).replaceAll("<|>",""),
+                                                                      name     = course('courseName),
                                                                       extraItems = parseExtraItems(course,List('course,'type,'courseName)))).asInstanceOf[List[Course]]
 
       val p = new Person(uri,
-                         vivoType = getString(personData(0)('type)).replaceAll("<|>",""),
-                         name     = getString(personData(0)('name)),
-                         title    = getString(personData(0)('title)),
+                         vivoType = personData(0)('type).replaceAll("<|>",""),
+                         name     = personData(0)('name),
+                         title    = personData(0)('title),
                          publications = pubs,
                          grants = grants,
                          courses = courses,
@@ -236,9 +232,9 @@ object PersonIndexer extends SimpleConversion with Timer {
     }
   }
 
-  def parseExtraItems(resultMap: Map[QVar,Node], requiredKeys: List[QVar]): Option[Map[String,String]] = {
+  def parseExtraItems(resultMap: Map[Symbol,String], requiredKeys: List[Symbol]): Option[Map[String,String]] = {
     val extraItems = resultMap -- requiredKeys
-    Option(extraItems.map(kvp => (kvp._1.name -> getString(kvp._2))))
+    Option(extraItems.map(kvp => (kvp._1.name -> kvp._2)))
   }
 
   def getAuthors(pubURI: String, vivo: Vivo,useCache:Boolean = false): List[String] = {
@@ -251,7 +247,7 @@ object PersonIndexer extends SimpleConversion with Timer {
        OPTIONAL { ?authorship core:authorRank ?rank }
      }
     """,useCache)
-    val authorsWithRank = authorData.map(a => (getString(a('authorName)),getString(a.getOrElse('rank, Node.from("0"))))).distinct
-    authorsWithRank.sortWith((a1,a2) => (a1._2.toInt < a2._2.toInt)).map(_._1)
+    val authorsWithRank = authorData.map(a => (a('authorName),a.getOrElse('rank, 0))).distinct
+    authorsWithRank.sortWith((a1,a2) => (Int(a1._2.toString).get < Int(a2._2.toString).get)).map(_._1)
   }
 }

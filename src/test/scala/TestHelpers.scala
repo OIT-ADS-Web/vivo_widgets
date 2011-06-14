@@ -2,6 +2,7 @@ package edu.duke.oit.test.helpers
 
 import edu.duke.oit.vw.solr._
 import org.specs._
+import com.hp.hpl.jena.rdf.model.{Model => JModel,ModelFactory}
 
 object TestServers {
   val currentDirectory = new java.io.File(".").getCanonicalPath
@@ -21,8 +22,9 @@ object TestServers {
 
   val vivo = new Vivo(url,user,password,dbType,"org.h2.Driver")
 
+
   def loadSampleData = {
-    import edu.duke.oit.jena.connection._
+    import edu.duke.oit.vw.connection._
     import com.hp.hpl.jena.rdf.model._
     import com.hp.hpl.jena.util.FileManager
     import java.io.InputStream
@@ -46,6 +48,16 @@ object TestServers {
     println("[DONE]")
 
   }
+}
+
+object TestModels {
+   import com.hp.hpl.jena.util.FileManager
+
+   val currentDirectory = new java.io.File(".").getCanonicalPath
+
+   val sampleInstanceFile = currentDirectory+"/src/test/resources/kb2.rdf"
+
+   val sampleInstanceModel: JModel = ModelFactory.createDefaultModel().read(FileManager.get.open(sampleInstanceFile),null)
 }
 
 /**
