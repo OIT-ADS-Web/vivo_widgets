@@ -1,0 +1,12 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+select  *
+where {
+  <${uri}> core:hasResearcherRole ?role .
+  ?role rdfs:label ?roleName .
+  ?role core:roleIn ?agreement .
+  ?agreement rdf:type ?type .
+  ?agreement rdfs:label ?grantName .
+  FILTER(?type = core:Grant)
+}

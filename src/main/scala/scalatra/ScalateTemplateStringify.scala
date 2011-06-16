@@ -5,13 +5,12 @@ import java.io.{StringWriter,PrintWriter}
 import javax.servlet.ServletContext
 import org.fusesource.scalate.servlet.ServletResourceLoader
 import org.fusesource.scalate._
+import org.fusesource.scalate.util.{Resource,FileResource,FileResourceLoader}
 
-trait ScalateTemplateStringify extends Timer {
+trait ScalateTemplateStringify {
   protected var stringifyTemplateEngine: Option[TemplateEngine] = None
 
-  def renderTemplateString(servletContext: ServletContext, templatePath: String, context: Map[String, Any]) = {
-    val buffer = new StringWriter()
-    
+  def renderTemplateString(servletContext: ServletContext, templatePath: String, context: Map[String, Any]):String = {
     /**
      * Grab the template engine from a cached version of the engine.
      */
@@ -24,9 +23,29 @@ trait ScalateTemplateStringify extends Timer {
       }
       case Some(engine) => engine
     }
+    
+    renderFromEngine(engine, templatePath, context)
+  }
 
+  def renderFromClassPath(templatePath: String, context: Map[String, Any]=Map[String,Any]()):String = {
+
+    val engine = stringifyTemplateEngine match {
+      case None => {
+        var engine = new TemplateEngine
+        engine.resourceLoader = new FileResourceLoader
+        stringifyTemplateEngine = Some(engine)
+        engine
+      }
+      case Some(engine) => engine
+    }
+
+    renderFromEngine(engine, templatePath, context)
+  }
+  
+  def renderFromEngine(engine:TemplateEngine, templatePath: String, context: Map[String, Any]):String = {
+    val buffer = new StringWriter()
+    
     val templateSource = engine.source(templatePath)
-    // val template = timer("template 1") { engine.load(templateSource, Nil) }.asInstanceOf[Template]
     val template = engine.load(templateSource)
 
     val renderContext = new DefaultRenderContext(templatePath, engine, new PrintWriter(buffer))
@@ -36,5 +55,6 @@ trait ScalateTemplateStringify extends Timer {
 
     buffer.toString
   }
+
 
 }

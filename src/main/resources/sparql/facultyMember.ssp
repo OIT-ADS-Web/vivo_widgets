@@ -1,0 +1,2 @@
+${include("sparql/prefixes.ssp")}
+select ?person where { ?person rdf:type core:FacultyMember }

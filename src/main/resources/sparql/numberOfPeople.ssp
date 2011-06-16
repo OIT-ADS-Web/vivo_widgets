@@ -1,0 +1,3 @@
+${include("sparql/prefixes.ssp")}
+
+select (count(?p) as ?numPeople) where { ?p rdf:type core:FacultyMember }

@@ -1,0 +1,10 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+select ?authorName ?rank
+where {
+  <${uri}> core:informationResourceInAuthorship ?authorship .
+  ?authorship core:linkedAuthor ?author .
+  ?author rdfs:label ?authorName .
+  OPTIONAL { ?authorship core:authorRank ?rank }
+}
