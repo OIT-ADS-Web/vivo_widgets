@@ -1,6 +1,7 @@
 package edu.duke.oit.vw.solr
 
 import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer
+import org.apache.solr.client.solrj.impl.CommonsHttpSolrServer
 import org.apache.solr.client.solrj.SolrServer
 import org.apache.solr.core.CoreContainer
 
@@ -17,6 +18,10 @@ object Solr {
 
     container.load( solrConfig.directory, configFile )
     new EmbeddedSolrServer( container, solrConfig.coreName )
+  }
+
+  def solrServer(url: String):SolrServer = {
+    new CommonsHttpSolrServer(url)
   }
 
 }
