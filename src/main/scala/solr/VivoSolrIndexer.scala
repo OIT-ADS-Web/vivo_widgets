@@ -22,6 +22,10 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
 
 import akka.util._
+import org.apache.commons.httpclient._
+import org.apache.commons.httpclient.methods._
+import org.apache.commons.httpclient.params._
+import org.apache.commons.httpclient.cookie._
 
 class Vivo(url: String, user: String, password: String, dbType: String, driver: String) extends ScalateTemplateStringify{
 
@@ -53,6 +57,18 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
         Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
       } finally { ds.close() }
     } finally { sdbConnection.close() }
+  }
+
+  def queryPerson(personUri: String,sparql: String): List[Map[Symbol,String]] = {
+    // simple 1st pass
+    // use http to get richexport dump
+    // build model in memory of just that rdf
+    // run sparql as before...
+    //val client = new HttpClient()
+    //val method = new GetMethod("http://localhost:8080/individual?uri="+personUri+"&format=rdfxml&include=all")
+    //val result = client.executeMethod(method)
+    val queryModel = ModelFactory.createDefaultModel.read("http://localhost:8080/individual?uri="+personUri+"&format=rdfxml&include=all")
+    Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
   }
 
   def select(sparql: String, useCache: Boolean = false): List[Map[Symbol,String]] = {
@@ -111,6 +127,23 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
 
 }
 
+object RichPersonIndexer extends SimpleConversion 
+  with Timer
+  with ScalateTemplateStringify 
+  with WidgetLogging {
+
+  def index(uri: String,solr: SolrServer) = {
+    val personModel = ModelFactory.createDefaultModel().read("http://localhost:8080/individual?uri="+uri+"&format=rdfxml&include=all")
+    val ontologyModel = ModelFactory.createDefaultModel().read("http://vivoweb.org/ontology/core")
+    //val queryModel = ModelFactory.createUnion(personModel,ontologyModel)
+    //val personSparql = renderFromClassPath("rich_export_sparql/personData.ssp", Map("uri" -> uri))
+    //val personData = Sparqler.selectingFromModel(personModel,personSparql){ results => Sparqler.simpleResults(results)}
+    //println(personData)
+    val publicationSparql = renderFromClassPath("rich_export_sparql/publications.ssp")
+    val publicationData = Sparqler.selectingFromModel(personModel,publicationSparql){ results => Sparqler.simpleResults(results)}
+    println(publicationData)
+  }
+}
 object PersonIndexer extends SimpleConversion 
   with Timer
   with ScalateTemplateStringify 
