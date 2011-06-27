@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.connection
+package edu.duke.oit.vw.jena
 
 import com.hp.hpl.jena.db.DBConnection
 import com.hp.hpl.jena.ontology.OntModel

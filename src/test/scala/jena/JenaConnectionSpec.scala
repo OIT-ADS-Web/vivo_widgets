@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.connection.test
+package edu.duke.oit.vw.jena.test
 
 import com.hp.hpl.jena.rdf.model.{ModelFactory, Model => JModel}
 import org.specs._
@@ -9,8 +9,7 @@ import org.scardf.Node
 import org.scardf.NodeConverter._
 
 import edu.duke.oit.vw.utils._
-import edu.duke.oit.vw.connection._
-import edu.duke.oit.vw.actor.JenaCache
+import edu.duke.oit.vw.jena._
 
 object JenaConnectionSpec extends Specification with Timer with SimpleConversion {
 

@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.actor
+package edu.duke.oit.vw.jena
 
 import scala.actors.Actor
 import scala.actors.Actor._
@@ -6,7 +6,6 @@ import scala.actors.Actor._
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
 import edu.duke.oit.vw.connection._
 import com.hp.hpl.jena.tdb.TDBFactory
-import edu.duke.oit.vw.sparql.Sparqler
 
 case object Graph
 

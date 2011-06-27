@@ -5,9 +5,8 @@ import org.apache.solr.client.solrj.response.QueryResponse
 import org.apache.solr.common.{SolrInputDocument,SolrDocumentList}
 
 import edu.duke.oit.vw.connection._
-import edu.duke.oit.vw.actor.JenaCache
+import edu.duke.oit.vw.jena._
 import edu.duke.oit.vw.utils._
-import edu.duke.oit.vw.sparql.Sparqler
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import com.hp.hpl.jena.sdb.SDBFactory
