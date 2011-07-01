@@ -27,6 +27,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
       PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr,useCache)
     }
     solr.commit()
+    JenaCache.clear
   }
 
   def reindexUri(uri: String) = {
