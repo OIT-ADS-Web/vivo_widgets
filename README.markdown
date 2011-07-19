@@ -16,26 +16,24 @@ VIVO Widgets is made of up the following parts.
 
 # Building from Source
 
-  1. Download and setup [sbt](http://code.google.com/p/simple-build-tool/).
+  1. Clone the VIVO Widgets project.
 
-  2. Clone the VIVO Widgets project.
-
-  3. Copy or symlink your VIVO deploy.properties into src/main/resources/ and add:
+  2. Copy or symlink your VIVO deploy.properties into src/main/resources/ and add:
       WidgetsSolr.directory=<path to the solr directory in the vivo_widgets project>
 
-  4. Change into the project directory and launch [sbt](http://code.google.com/p/simple-build-tool).
+  3. Change into the project directory and launch [sbt](http://code.google.com/p/simple-build-tool).
 
-      $ sbt
+      $ ./sbt
 
-  5. Fetch the dependencies.
+  4. Fetch the dependencies.
 
       > update
 
-  6. Start Jetty, enabling continuous compilation and reloading.
+  5. Start Jetty, enabling continuous compilation and reloading.
 
       > jetty-run
 
-  7. Browse to http://localhost:8081/.
+  6. Browse to http://localhost:8081/.
 
 # Adding "Add to my web site" links to VIVO
 
