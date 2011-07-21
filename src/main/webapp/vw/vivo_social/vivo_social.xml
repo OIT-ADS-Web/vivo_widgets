@@ -24,7 +24,7 @@
 		<![CDATA[
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="http://static.calendar.duke.edu/vivo_social/app.js" type="text/javascript"></script>
+		<script src="http://gadgets-dev.oit.duke.edu/vivo_social/app.js" type="text/javascript"></script>
 
 		<script type="text/javascript">
 		// var msg = new gadgets.MiniMessage(__MODULE_ID__);
@@ -32,50 +32,64 @@
 		</script>
 		<style type="text/css">
 		p {padding:2px;margin:0 }
-		li{ list-style-type:none;padding:10px;border-bottom:solid 1px #CCC}
+		li{ list-style-type:none;padding:8px;}
 		ul{ padding:0;margin:0}
 		h4{ padding:0; margin:0; font-size:1.2em; }
+
+
+		#hideSearch{
+		  padding:2px;
+		  margin:1px;
+		  float:right;
+		  cursor:pointer;
+		  border:solid 1px #FFF
+		}
+	
 		#searchContainer {
-		padding-bottom:8px;
-		border-bottom:solid 1px #333;
-		color:#FFF;
-		background-image: url('http://static.calendar.duke.edu/vivo_social/headerbg.gif');
-		padding:0 0 7px 7px;
-		border-bottom:solid 2px #FFF;
+		border-bottom:solid 1px #FFF;
 		
-			
+		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/headerbg.gif');
 		
+		padding:4px;
+		
+		
+	
 		}
-		
-		#showSearch, #hideSearch, #refreshHistory, #clearAllHistory {
-		border-bottom:solid 1px #2485AE;
-		border-left:solid 1px #2485AE;
-		background-color:#FFF;cursor:pointer;float:right;padding:4px;
-		opacity:0.6;
-		-moz-border-radius-bottomleft: 9px;
 
-		border-bottom-left-radius: 8px;
-		color:#2485AE;
-		font-weight:bold
-		}
-		#clearAllHistory {
-		-moz-border-radius-bottomright: 9px;
-
-		border-bottom-right-radius: 8px;
-		}
-		#search, #follow, #history { font-size:.8em }
+	    #loading {
+	       position:absolute;
+	       top:30px;
+	       left:20px;
+	       background-color:#FFF;
+	       -moz-border-radius: 4px;
+           border-radius: 4px;
+	       }
 		a { text-decoration:none;color:#2485AE;margin-right:20px}
 		 a:visited {color:#2485AE}
 		 a:hover { text-decoration:none;text-decoration:underline }
-		#main { background-color: #F3F3F0}
-		.read_list {padding:6px; display:block;float: right;}
-		.unread {font-weight:bold}
-		#readHistory, #searchHistory {
-		font-size:1em;
-		}
+		#main { background-color: #F3F3F0; font-size:.8em}
+		
+		
+	    #refreshHistory {
+	       float:right;
+	       color:#FFF;
+	       padding:5px;
+	       border-left:solid 1px #FFF;
+	       cursor:pointer
+	       }
+		#history {
+		  position:absolute;
+		  top:20px;
+		  right:0px;
+		  width:150px;
+		  background-color:#FFF;
+		  padding:6px;        
+		  -moz-border-radius: 4px;
+        border-radius: 4px;
+		  }
 		#results_header, .header {
 		font-size:1.1em;
-		background-image: url('http://static.calendar.duke.edu/vivo_social/headerbg.gif');
+		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/headerbg.gif');
 		color:#FFF;
 		-moz-border-radius-bottomleft: 8px;
 
@@ -87,7 +101,7 @@
 
 		}
 		.tablib_unselected {
-		background-image: url('http://static.calendar.duke.edu/vivo_social/taboff.gif');
+		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/taboff.gif');
 		padding: 3px 0px;
 		background-color: #85C13D;
 		/*  border: 1px solid #273d6c;
@@ -98,7 +112,7 @@
 		cursor: pointer;
 		}
 		.tablib_selected {
-		background-image: url('http://static.calendar.duke.edu/vivo_social/tab.gif');
+		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/tab.gif');
 		padding: 3px 0px;
 		/* background-color: #273d6c;*/
 		/* border: 1px solid #000;*/
@@ -111,50 +125,70 @@
 		}
 		.group {
 			font-weight:bold;
-			border-bottom:solid 2px #CCC;
+			border-bottom:solid 1px #CCC;
 			font-size:1.1em
 		}
 		.result_summary{
 			font-weight:normal;
 			font-size:.9em;
-			
+			border-bottom:solid 1px #CCC
 		}
 		#result_summary_container li {
 			display:inline;
-			
+			padding:3px;
 			border:none
 		}
 		.summary_header {
 			font-weight:bold;
 			display:block
 		}
+		input {
+		  border:solid 1px #000;
+		  padding:2px
+		  
+		}
 		</style>
 		<div id="main">
+		      <!--     <div id="showSearch">New Search</div> -->
 		<div id="search">
-		<div style="display:none" id="showSearch">New Search</div>
+		  <div id="refreshHistory" href="#">Recent</div>
 		<div id="searchContainer">
-		<div id="hideSearch">Hide</div>
+		
 
-		<p>Enter Search Term</p>
+       <!--  <div id="hideSearch">Hide</div> -->
 		<input type="text" name="searchTerm" />
 
-		<button id="searchButton" type="button" name="startSearch">Save</button>
+		<button id="searchButton" type="button" name="startSearch">Search</button>
+	
 		</div>
-		<div id="loading" style="display:none"><img src="http://static.calendar.duke.edu/vivo_social/ajax-loader.gif" /></div>
-		<div><ul style="display:none" id="results"></ul></div>
+		
+
+
+	
 		</div>
+		    
+
+              <div style="display:none" id="history">
+        <!--     <div id="hideHistory">Hide</div> -->
+             <div id="clearAllHistory">Clear All History</div>
+        <ul>
+        
+        <li><div id="searchHistory"></div></li>
+        <li style="display:none"><div id="readHistory"></div></li>
+        </ul>
+
+        </div>
+		  <div id="result_body">
+            
+            
+            <ul style="display:none" id="results"></ul>
+        </div>
+        <div id="loading" style="display:none">
+                <img src="http://gadgets-dev.oit.duke.edu/vivo_social/ajax-loader.gif" />
+            </div>
 		<div style="display:none" id="visi">visualization</div>
 		<div style="display:none" id="follow"><ul><li class="header">Currently Following</li><li>You are not following anyone.</li></ul></div>
-		<div style="display:none" id="history">
-			 <div id="refreshHistory" href="#">Show latest history</div>
-			 <div id="clearAllHistory">Clear All History</div>
-		<ul>
-		<li class="header">Search History</li>
-		<li><div id="searchHistory"></div></li>
-		<li style="display:none"><div id="readHistory"></div></li>
-		</ul>
-
-		</div>
+		
 		</div>
 
 		]]>
