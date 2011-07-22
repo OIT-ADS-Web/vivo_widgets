@@ -3,208 +3,186 @@
  */
 
 var prefs = new _IG_Prefs();
+var userHistory = new SearchHistory("#searchHistory");
+
 var settings = {
     currentTerm : '',
     endPoint : 'http://scholars-test.oit.duke.edu/widgets/search.jsonp?query='
 };
 function initialize() {
 
-    var search_terms = prefs.getString("searchList");
-    var searchTermsArray = search_terms.split('|');
+    userHistory.initialize();
+
+    Search.execute(settings.currentTerm);
+
+    // initializeHistory(prefs.getString("searchList"));
+    initializeBehaviors();
+
+}
+
+// Commands
+
+var PrefHandler = {
+
+    to_array : function(pref) {
+        var prefArray = pref.split('|');
+        var finalArray = [];
+        var prefLength = prefArray.length;
+        for(var i = 0; i < prefLength; i++) {
+
+            if(prefArray[i] !== " ") {
+                //alert(prefArray[i].charCodeAt(0));
+                finalArray.push(prefArray[i]);
+            }
+        }
+
+        return finalArray;
+    },
+    scan : function(term, searchArray) {
+
+        var searchArrayLength = searchArray.length;
+        for(var i = 0; i < searchArrayLength; i++) {
+            if(searchArray[i] === term) {
+                var caughtSearch = searchArray.splice(i, 1);
+                searchArray.push(caughtSearch);
+                return {
+                    result : true,
+                    patchedArray : searchArray
+                }
+            }
+        }
+
+        return {
+            result : false,
+            patchedArray : undefined
+        };
+
+    }
+};
+
+var Search = {
+    execute : function(term) {
+        if(term.length > 0) {
+            startSearchAnimations();
+            this.vivo(term);
+        }
+    },
+    vivo : function(search) {
+         this.load(settings.endPoint + search + '*');
+    },
+    load : function(url) {
+        var surl = url + '&callback=?';
+        $.getJSON(surl);
+    }
+}
+
+
+
+// function executeSearch(term) {
+    // if(term.length > 0) {
+        // startSearchAnimations();
+        // searchVivo(term);
+    // }
+// 
+// }
+
+
+
+// function loadData(url) {
+// 
+    // var surl = url + '&callback=?';
+    // $.getJSON(surl);
+// 
+// }
+// 
+// function searchVivo(search) {
+// 
+    // loadData(settings.endPoint + search + '*');
+// }
+
+
+
+
+
+// Objects
+
+function SearchHistory(dom_id) {
+    this.dom_id = dom_id;
+
+}
+
+SearchHistory.prototype.initialize = function() {
+    var searchTermsArray = PrefHandler.to_array(prefs.getString("searchList"));
     var lastSearch = searchTermsArray.pop();
 
     if(searchTermsArray.length > 0) {
         if(lastSearch !== "") {
-            executeSearch(lastSearch);
+
             settings.currentTerm = lastSearch;
         }
 
     }
 
-    // Bevaviors
-    $('#searchButton').click(function() {
-
-        if($('[name=searchTerm]').val() !== "") {
-            executeSearch($('[name=searchTerm]').val());
-            saveSearch($('[name=searchTerm]').val());
-        }
-
-    });
-    $('#showSearch').click(function() {
-        stopSearchAnimations();
-    });
-    $('#hideSearch').click(function() {
-        $('#searchContainer').hide("fold", {
-            direction : "up"
-        }, 150, function() {
-            // $('#showSearch').show("slide", {
-            // direction: "up"
-            // }, 150);
-
-        });
-    });
-    $('#refreshHistory').click(function() {
-        updateHistory();
-        // $('#search').hide("slide", {
-        // direction: "right"
-        // }, 150, function() {
-        if($('#history').is(":visible")) {
-            $('#history').hide("fold", {
-                direction : "up"
-            }, 150);
-        } else {
-            $('#history').show("fold", {
-                direction : "down"
-            }, 150);
-        }
-
-    });
-    // });
-    // $('#hideHistory').click( function() {
-    //
-    // $('#history').hide("fold", {
-    // direction: "up"
-    // }, 150, function() {
-    // // $('#search').show("slide", {
-    // // direction: "right"
-    // // }, 150);
-    //
-    // });
-    // });
-    $('#clearAllHistory').click(function() {
-        clearAllHistory();
-    });
-    // $('.read_list').live('change', function() {
-    //
-    // if($(this).is(':checked') && searchReadList($(this).prev().attr('href')) === false) {
-    //
-    // $(this).prev().removeClass('unread');
-    // $(this).attr("disabled", true);
-    // var read_list = prefs.getString("readList");
-    //
-    // prefs.set("readList", read_list + '|' +  $(this).prev().attr('href'));
-    //
-    // }
-    //
-    // });
-    $('.recent_search').live('click', function() {
-
-        //tabs.setSelectedTab(0);
-        executeSearch($(this).html());
-        saveSearch($(this).html());
-        return false;
-
-    });
-    $('#search input').bind('keydown', function(e) {
-        var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13) { //Enter keycode
-            if($('[name=searchTerm]').val() !== "") {
-                executeSearch($('[name=searchTerm]').val());
-                saveSearch($('[name=searchTerm]').val());
-            }
-        }
-
-    });
-    updateHistory();
-
+   this.updateHistory();
 }
+SearchHistory.prototype.saveSearch = function(search) {
+    
+    var search_terms = PrefHandler.to_array(prefs.getString("searchList"));
 
-function executeSearch(term) {
-    startSearchAnimations();
-    searchVivo(term);
+    var testResult = PrefHandler.scan(search, search_terms);
 
-}
-
-function startSearchAnimations() {
-    $('#loading').show("slide", {
-        direction : "up"
-    }, 50);
-    // $('#searchContainer').hide("fold", {
-    // direction: "up"
-    // }, 150, function() {
-    // // $('#showSearch').show("slide", {
-    // // direction: "up"
-    // // }, 150);
-    //
-    // });
-}
-
-function stopSearchAnimations() {
-    // $('#showSearch').hide("slide", {
-    // direction: "up"
-    // }, 150, function() {
-    // $('#searchContainer').show("fold", {
-    // direction: "up"
-    // }, 150);
-    // });
-}
-
-function loadData(url) {
-
-    var surl = url + '&callback=?';
-    $.getJSON(surl);
-
-}
-
-function scanForDuplicateSearch(term, searchArray) {
-    var searchArrayLength = searchArray.length;
-    for(var i = 0; i < searchArrayLength; i++) {
-        if(searchArray[i] === term) {
-            var caughtSearch = searchArray.splice(i, 1);
-            searchArray.push(caughtSearch);
-            return {
-                result : true,
-                patchedArray : searchArray
-            }
-        }
-    }
-
-    return {
-        result : false,
-        patchedArray : undefined
-    };
-}
-
-function saveSearch(search) {
-    item = search;
-
-    var search_terms = prefToArray(prefs.getString("searchList"));
-    // var searchArray = search_terms.split('|');
-    var testResult = scanForDuplicateSearch(item, search_terms);
     if(!testResult.result) {
-        search_terms.push(item);
+        search_terms.push(search);
         // 1994 character max!
 
         prefs.set("searchList", search_terms.join('|'));
     } else {
         prefs.set("searchList", testResult.patchedArray.join('|'));
     }
-    settings.currentTerm = item;
+    settings.currentTerm = search;
 }
 
-function searchVivo(search) {
+SearchHistory.prototype.updateHistory = function() {
 
-    loadData(settings.endPoint + search + '*');
+    $(this.dom_id).html(this.renderSearchList(PrefHandler.to_array(prefs.getString("searchList"))).join(" "));
+    
+    return false;
+}
+SearchHistory.prototype.renderSearchList = function(listArray) {
+    finalHtml = ["<ul>"];
+    var listArrayLength = listArray.length;
+    for(var i = 0; i < listArrayLength; i++) {
+        if(listArray[i]) {
+            finalHtml.push('<li><a class="recent_search" href="' + settings.endPoint + listArray[i] + '*">' + listArray[i] + '</a></li>');
+            console.log("<li>" + listArray[i] + "</li>");
+        }
+
+    }
+    finalHtml.push("</ul>");
+
+    return finalHtml;
+}
+SearchHistory.prototype.clearAllHistory = function() {
+    prefs.set("searchList", ' ');
+    prefs.set("readList", ' ');
+
+    this.updateHistory();
+    return false;
 }
 
-// function searchReadList(term) {
-// var read_list = prefs.getString("readList");
-// var readArray = read_list.split('|');
-// var loopCount = readArray.length;
-// for(var i=0; i < loopCount; i++) {
-// if (readArray[i] === term) {
-// return true;
-// }
-// }
-// return false;
-// }
+
+// Scripts
+
+
+
+
 
 function sortResults(searchArray, groups) {
     var resultsString = ['<ul id="result_summary_container">'];
     var searchArrayLength = searchArray.length;
     var filteredResults = {};
     if($.isEmptyObject(groups)) {
-        console.log(groups);
+       
         return searchArray;
     }
     for(var key in groups) {
@@ -288,47 +266,59 @@ function vivoSearchResult(data) {
 
 }
 
-function prefToArray(pref) {
-    var prefArray = pref.split('|');
-    var finalArray = [];
-    var prefLength = prefArray.length;
-    for(var i = 0; i < prefLength; i++) {
 
-        if(prefArray[i] !== " ") {
-            //alert(prefArray[i].charCodeAt(0));
-            finalArray.push(prefArray[i]);
-        }
-    }
+    // Bevaviors
 
-    return finalArray;
+function startSearchAnimations() {
+    $('#loading').show("slide", {
+        direction : "up"
+    }, 50);
+
 }
 
-function renderSearchList(listArray) {
-    finalHtml = ["<ul>"];
-    var listArrayLength = listArray.length;
-    for(var i = 0; i < listArrayLength; i++) {
-        if(listArray[i]) {
-            finalHtml.push('<li><a class="recent_search" href="' + settings.endPoint + listArray[i] + '*">' + listArray[i] + '</a></li>');
-            console.log("<li>" + listArray[i] + "</li>");
+function initializeBehaviors() {
+
+    $('#searchButton').click(function() {
+
+        if($('[name=searchTerm]').val() !== "") {
+            Search.execute($('[name=searchTerm]').val());
+            userHistory.saveSearch($('[name=searchTerm]').val());
         }
 
-    }
-    finalHtml.push("</ul>");
+    });
+    $('#refreshHistory').click(function() {
+        userHistory.updateHistory();
 
-    return finalHtml;
-}
+        if($('#history').is(":visible")) {
+            $('#history').hide("slide", {
+                direction : "up"
+            }, 90);
+        } else {
+            $('#history').show("slide", {
+                direction : "up"
+            }, 90);
+        }
 
-function updateHistory() {
+    });
+    $('#clearAllHistory').click(function() {
+        userHistory.clearAllHistory();
+    });
+    $('.recent_search').live('click', function() {
 
-    $('#searchHistory').html(renderSearchList(prefToArray(prefs.getString("searchList"))).join(" "));
-    $('#readHistory').html('<h4>Read Item URLs</h4>' + prefToArray(prefs.getString("readList")).join('<br />'));
-    return false;
-}
+        //tabs.setSelectedTab(0);
+        Search.execute($(this).html());
+        userHistory.saveSearch($(this).html());
+        return false;
 
-function clearAllHistory() {
-    prefs.set("searchList", ' ');
-    prefs.set("readList", ' ');
+    });
+    $('#search input').bind('keydown', function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13) { //Enter keycode
+            if($('[name=searchTerm]').val() !== "") {
+                Search.execute($('[name=searchTerm]').val());
+                userHistory.saveSearch($('[name=searchTerm]').val());
+            }
+        }
 
-    updateHistory();
-    return false;
+    });
 }
