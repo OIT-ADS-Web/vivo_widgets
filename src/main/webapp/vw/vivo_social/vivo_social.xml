@@ -75,15 +75,15 @@
 	       
 	       color:#FFF;
 	       padding-left:3px;
-	       border-left:solid 2px #000;
+	      
 	       cursor:pointer;
 	       position:absolute;
-	       top:9px;
-	       left:150px;
+	       top:11px;
+	       left:153px;
 	    }
 		#history {
     		  position:absolute;
-    		  top:26px;
+    		  top:29px;
     		  left:7px;
     		    /*  left: 50%;
                 margin-left: -70px; */
