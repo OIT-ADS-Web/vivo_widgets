@@ -19,7 +19,7 @@
 	<EnumValue value="2" display_value="Following"/>
 	</UserPref> -->
 	<UserPref name="searchList" display_name="Recent Search Terms" datatype="hidden" />
-	<UserPref name="readList" display_name="list of read items" datatype="hidden" />
+	
 	<Content type="html" view="home,profile,canvas,default">
 		<![CDATA[
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script>
@@ -58,8 +58,8 @@
 
 	    #loading {
 	       position:absolute;
-	       top:30px;
-	       left:20px;
+	       top:70px;
+	       left:30px;
 	       background-color:#FFF;
 	       -moz-border-radius: 4px;
            border-radius: 4px;
@@ -98,11 +98,18 @@
       -o-box-shadow: 2px 2px 2px #333;
       box-shadow: 2px 2px 2px #333;
 		  }
-		#clearAllHistory {
-		  border-bottom:solid 1px #CCC;
-		  padding-bottom:3px;
-		  cursor:pointer
-		}
+          #history li {
+            
+            padding:8px
+          }
+        #clearAllHistory {
+          border:solid 1px #000;
+          padding:8px;
+          cursor:pointer;
+          background-color:#2485AE;
+          font-weight:bold;
+          color:#FFF
+        }
 		#results_header, .header, #search {
     		font-size:1.1em;
     		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/headerbg.gif');
@@ -169,13 +176,13 @@
 		}
 		</style>
 		<div id="main">
-		      <!--     <div id="showSearch">New Search</div> -->
+		    
 		<div id="search">
-		  <div id="refreshHistory" href="#"><img src="http://gadgets-dev.oit.duke.edu/vivo_social/recent.gif" /> </div>
+		  <div id="refreshHistory" href="#"><img id="recent_img" src="http://gadgets-dev.oit.duke.edu/vivo_social/recent.gif" /> </div>
 		<div id="searchContainer">
 		
 
-       <!--  <div id="hideSearch">Hide</div> -->
+
 		<input type="text" name="searchTerm" />
 
 		<button id="searchButton" type="button" name="startSearch">Search</button>
@@ -189,12 +196,12 @@
 		    
 
               <div style="display:none" id="history">
-        <!--     <div id="hideHistory">Hide</div> -->
+       
             
-        <ul>
+        <ul id="searchHistory">
         
-        <li><div id="searchHistory"></div></li>
-        <li style="display:none"><div id="readHistory"></div></li>
+  
+       
         </ul>
  <div id="clearAllHistory">Clear All History</div>
         </div>
