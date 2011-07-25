@@ -118,29 +118,6 @@
             border-radius: 4px;
 
 		}
-		.tablib_unselected {
-    		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/taboff.gif');
-    		padding: 3px 0px;
-    		background-color: #85C13D;
-    		/*  border: 1px solid #273d6c;
-    		border-bottom-color: #676767;*/
-    		border:none;
-    		color: #FFF;
-    		width: 80px;
-    		cursor: pointer;
-		}
-		.tablib_selected {
-    		background-image: url('http://gadgets-dev.oit.duke.edu/vivo_social/tab.gif');
-    		padding: 3px 0px;
-    		/* background-color: #273d6c;*/
-    		/* border: 1px solid #000;*/
-    		border:none;
-    		border-bottom-width: 0px;
-    		color: #FFF;
-    		font-weight: bold;
-    		width: 80px;
-    		cursor: default;
-		}
 		.group {
 			font-weight:bold;
 			border-bottom:solid 1px #CCC;
@@ -213,8 +190,7 @@
         <div id="loading" style="display:none">
                 <img src="http://gadgets-dev.oit.duke.edu/vivo_social/ajax-loader.gif" />
             </div>
-		<div style="display:none" id="visi">visualization</div>
-		<div style="display:none" id="follow"><ul><li class="header">Currently Following</li><li>You are not following anyone.</li></ul></div>
+	
 		
 		</div>
 

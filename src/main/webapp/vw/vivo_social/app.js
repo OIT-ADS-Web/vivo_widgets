@@ -26,7 +26,6 @@ var Template = {
     },
     results_group_summary : function(name) {
         return '<li class="result_summary">' + name + '</li>';
-      
     },
     results_group_header : function(name) {
         return '<li id="' + name + '" class="group">' + name + '</li>';
@@ -91,7 +90,22 @@ var PrefHandler = {
 
     }
 };
+var Scroll = {
+    to : function(elementId, offset) {
+               console.log(elementId);
+        $('html,body').animate({
+            scrollTop: $(elementId).offset().top + offset
+        },
+        {
+            duration: 'slow',
+            easing: 'swing'
+        });
+    }
+}
+function scrollTo(elementId, offset) {
 
+
+}
 var Search = {
     execute : function(term) {
         if(term.length > 0) {
@@ -227,7 +241,7 @@ SearchHistory.prototype.updateHistory = function() {
     return false;
 }
 SearchHistory.prototype.renderSearchList = function(listArray) {
-    finalHtml = ["<ul>"];
+    finalHtml = [];
     var listArrayLength = listArray.length;
     for(var i = 0; i < listArrayLength; i++) {
         if(listArray[i]) {
@@ -236,7 +250,7 @@ SearchHistory.prototype.renderSearchList = function(listArray) {
         }
 
     }
-    finalHtml.push("</ul>");
+    // finalHtml.push("</ul>");
 
     return finalHtml;
 }
@@ -264,11 +278,16 @@ var Behaviors = {
         $('#clearAllHistory').click(function() {
            that.clear_history();
         });
-        $('.recent_search').live('click', function() {
-    
-            return that.select_history_item(this);
-    
+        
+        $('#results').delegate("#result_summary_container li a", "click", function() {
+     
+            Scroll.to($(this).attr("href"), 0);
+            return false;
         });
+        $('#searchHistory').delegate("li a", "click", function() {
+            return that.select_history_item(this);
+        });
+        
         $('#search input').bind({      
             'keydown' : function(e) {
                 that.keyboard(e);
