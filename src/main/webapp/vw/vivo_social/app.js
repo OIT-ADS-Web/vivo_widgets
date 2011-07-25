@@ -35,25 +35,23 @@ var Template = {
     },
     history_menu : function(url, term) {
         return '<li><a class="recent_search" href="' + url + term + '*">' + term + '</a></li>'
-      
-    }
-    
-}
 
+    }
+}
 
 // Commands
 var Prefs = {
-        // history : {
-            // searchList: "cat|dog|obesity|food|pharm"
-        // },
-        set : function (pref, new_val) {
-            prefs.set(pref, new_val);
-           //this.history[pref] = new_val;
-        },
-        getString : function(pref) {
-            return prefs.getString(pref);
-            //return this.history[pref];
-           }
+    // history : {
+    // searchList: "cat|dog|obesity|food|pharm"
+    // },
+    set : function(pref, new_val) {
+        prefs.set(pref, new_val);
+        //this.history[pref] = new_val;
+    },
+    getString : function(pref) {
+        return prefs.getString(pref);
+        //return this.history[pref];
+    }
 }
 
 var PrefHandler = {
@@ -92,20 +90,15 @@ var PrefHandler = {
 };
 var Scroll = {
     to : function(elementId, offset) {
-               console.log(elementId);
         $('html,body').animate({
-            scrollTop: $(elementId).offset().top + offset
-        },
-        {
-            duration: 'slow',
-            easing: 'swing'
+            scrollTop : $(elementId).offset().top + offset
+        }, {
+            duration : 'slow',
+            easing : 'swing'
         });
     }
 }
-function scrollTo(elementId, offset) {
 
-
-}
 var Search = {
     execute : function(term) {
         if(term.length > 0) {
@@ -116,7 +109,7 @@ var Search = {
         }
     },
     vivo : function(search) {
-         this.load(settings.endPoint + search + '*');
+        this.load(settings.endPoint + search + '*');
     },
     load : function(url) {
         var surl = url + '&callback=?';
@@ -124,17 +117,17 @@ var Search = {
     }
 }
 
-
 // Objects
 function Results() {
     this.groups = {};
 }
+
 Results.prototype.sort = function(searchArray) {
     var resultsString = ['<ul id="result_summary_container">'];
     var searchArrayLength = searchArray.length;
     var filteredResults = {};
     if($.isEmptyObject(this.groups)) {
-       
+
         return searchArray;
     }
     for(var key in this.groups) {
@@ -143,7 +136,7 @@ Results.prototype.sort = function(searchArray) {
             name : key
         }];
         resultsString.push(Template.results_submenu(key, this.groups[key]));
-       
+
     }
     resultsString.push("</ul>");
     for(var i = 0; i < searchArrayLength; i++) {
@@ -162,29 +155,28 @@ Results.prototype.sort = function(searchArray) {
         sortedResults = sortedResults.concat(filteredResults[key]);
 
     }
-   
+
     return sortedResults;
 }
 Results.prototype.render = function(data) {
     Behaviors.stop_loading();
 
     results.groups = data.groups;
-   
+
     $('#results').html(this.html(results.sort(data.items)).join(" "));
 }
-Results.prototype.html  = function(sorted_data) {
+Results.prototype.html = function(sorted_data) {
     var html = [];
     var count = sorted_data.length;
-    console.log("rendering current: " + settings.currentTerm);
     html.push(Template.results_header(settings.currentTerm, count));
-    
+
     for(var i = 0; i < count; i++) {
         if(sorted_data[i].uri !== '#' && sorted_data[i].uri !== '#result') {
             html.push(Template.results_item(sorted_data[i].uri, sorted_data[i].name));
         } else {
             if(sorted_data[i].uri === '#result') {
                 html.push(Template.results_group_summary(sorted_data[i].name));
-                
+
             } else {
                 html.push(Template.results_group_header(sorted_data[i].name));
             }
@@ -194,7 +186,6 @@ Results.prototype.html  = function(sorted_data) {
     };
     return html;
 }
-
 function SearchHistory(dom_id) {
     this.dom_id = dom_id;
 
@@ -202,42 +193,32 @@ function SearchHistory(dom_id) {
 
 SearchHistory.prototype.initialize = function() {
     var searchTermsArray = PrefHandler.to_array(Prefs.getString("searchList"));
-       if(searchTermsArray.length > 0) {
-    var lastSearch = searchTermsArray.pop();
-  
-
-        console.log("setting current: " + lastSearch);
+    if(searchTermsArray.length > 0) {
+        var lastSearch = searchTermsArray.pop();
         if(lastSearch !== "") {
-            
             settings.currentTerm = lastSearch;
-           
         }
-
     }
 
-   this.updateHistory();
+    this.updateHistory();
 }
 SearchHistory.prototype.saveSearch = function(search) {
-    
-    var search_terms = PrefHandler.to_array(Prefs.getString("searchList"));
 
+    var search_terms = PrefHandler.to_array(Prefs.getString("searchList"));
     var testResult = PrefHandler.scan(search, search_terms);
 
     if(!testResult.result) {
         search_terms.push(search);
         // 1994 character max!
-
         Prefs.set("searchList", search_terms.join('|'));
     } else {
         Prefs.set("searchList", testResult.patchedArray.join('|'));
     }
     settings.currentTerm = search;
-    console.log("saving current: " + settings.currentTerm);
 }
-
 SearchHistory.prototype.updateHistory = function() {
     $(this.dom_id).html(this.renderSearchList(PrefHandler.to_array(Prefs.getString("searchList"))).join(" "));
-    
+
     return false;
 }
 SearchHistory.prototype.renderSearchList = function(listArray) {
@@ -246,7 +227,7 @@ SearchHistory.prototype.renderSearchList = function(listArray) {
     for(var i = 0; i < listArrayLength; i++) {
         if(listArray[i]) {
             finalHtml.push(Template.history_menu(settings.endPoint, listArray[i]));
-           
+
         }
 
     }
@@ -256,39 +237,35 @@ SearchHistory.prototype.renderSearchList = function(listArray) {
 }
 SearchHistory.prototype.clearAllHistory = function() {
     Prefs.set("searchList", ' ');
-  
 
     this.updateHistory();
     return false;
 }
-
-    // Bevaviors
+// Bevaviors
 
 var Behaviors = {
     initialize : function() {
         that = this;
         $('#searchButton').click(function() {
             that.search();
-    
+
         });
         $('#refreshHistory').click(function() {
-           that.history();
-    
+            that.history();
+
         });
         $('#clearAllHistory').click(function() {
-           that.clear_history();
+            that.clear_history();
         });
-        
         $('#results').delegate("#result_summary_container li a", "click", function() {
-     
+
             Scroll.to($(this).attr("href"), 0);
             return false;
         });
         $('#searchHistory').delegate("li a", "click", function() {
             return that.select_history_item(this);
         });
-        
-        $('#search input').bind({      
+        $('#search input').bind({
             'keydown' : function(e) {
                 that.keyboard(e);
             },
@@ -298,7 +275,7 @@ var Behaviors = {
         });
 
     },
-    search : function() {   
+    search : function() {
         term = $('[name=searchTerm]').val();
         if(term !== "") {
             Search.execute(term);
@@ -306,20 +283,20 @@ var Behaviors = {
         }
     },
     history_hide : function() {
-          if($('#history').is(":visible")) {
-              $('#recent_img').attr("src","http://gadgets-dev.oit.duke.edu/vivo_social/recent.gif");
-             $('#history').hide("slide", {
-                    direction : "up"
-             }, 90);
-            }
+        if($('#history').is(":visible")) {
+            $('#recent_img').attr("src", "http://gadgets-dev.oit.duke.edu/vivo_social/recent.gif");
+            $('#history').hide("slide", {
+                direction : "up"
+            }, 90);
+        }
     },
     history : function() {
-         userHistory.updateHistory();
+        userHistory.updateHistory();
 
         if($('#history').is(":visible")) {
-           this.history_hide();
+            this.history_hide();
         } else {
-            $('#recent_img').attr("src","http://gadgets-dev.oit.duke.edu/vivo_social/recent-on.gif");
+            $('#recent_img').attr("src", "http://gadgets-dev.oit.duke.edu/vivo_social/recent-on.gif");
             $('#history').show("slide", {
                 direction : "up"
             }, 90);
@@ -329,36 +306,36 @@ var Behaviors = {
         userHistory.clearAllHistory();
     },
     select_history_item : function(caller) {
-       
+
         Search.execute($(caller).html());
         userHistory.saveSearch($(caller).html());
         return false;
     },
     keyboard : function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13) { 
+        if(code == 13) {
             if($('[name=searchTerm]').val() !== "") {
                 Search.execute($('[name=searchTerm]').val());
                 userHistory.saveSearch($('[name=searchTerm]').val());
             }
         }
     },
-    start_loading: function() {
+    start_loading : function() {
         $('#loading').show("slide", {
             direction : "up"
         }, 50);
     },
-    stop_loading: function() {
-     $('#loading').hide("slide", {
-        direction : "up"
-         }, 150, function() {
-        if(!$('#results').is(":visible")) {
-            $('#results').show("slide", {
-                direction : "up"
-            }, 150);
-        }
+    stop_loading : function() {
+        $('#loading').hide("slide", {
+            direction : "up"
+        }, 150, function() {
+            if(!$('#results').is(":visible")) {
+                $('#results').show("slide", {
+                    direction : "up"
+                }, 150);
+            }
 
-    });
+        });
     }
 }
 // Script
@@ -366,4 +343,3 @@ function vivoSearchResult(data) {
     results.render(data);
 
 }
-
