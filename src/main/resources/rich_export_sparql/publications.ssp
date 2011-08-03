@@ -1,0 +1,32 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+select *
+where {
+  ?publication core:informationResourceInAuthorship ?authorship .
+  ?publication rdfs:label ?title .
+  ?publication rdf:type ?type .
+  OPTIONAL {
+     ?publication rdf:type ?otherType .
+     ?otherType rdfs:subClassOf ?type .
+     FILTER(?otherType != ?type)
+  }
+  FILTER(!BOUND(?otherType) && ?type != owl:Thing && ?type != vitro:Flag1Value1Thing)
+  OPTIONAL { ?publication bibo:numPages ?numPages . }
+  OPTIONAL { ?publication bibo:edition ?edition . }
+  OPTIONAL { ?publication bibo:volume ?volume . }
+  OPTIONAL { ?publication bibo:issue ?issue . }
+  OPTIONAL { 
+    ?publication core:hasPublicationVenue ?publicationVenue . 
+    ?publicationVenue rdfs:label ?publishedIn .
+  }
+  OPTIONAL { 
+    ?publication core:publisher ?publisher. ?publisher rdfs:label ?publishedBy .
+  }
+  OPTIONAL { ?publication bibo:pageStart ?startPage .}
+  OPTIONAL { ?publication bibo:pageEnd ?endPage .}
+  OPTIONAL { 
+    ?publication core:dateTimeValue ?datetime . ?datetime core:dateTime ?year .
+  }
+}
+

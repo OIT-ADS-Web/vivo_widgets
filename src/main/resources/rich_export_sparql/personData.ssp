@@ -1,0 +1,14 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT *
+WHERE {
+      <${ uri }> vitro:moniker ?title .
+      <${ uri }> rdf:type ?type .
+      <${ uri }> rdfs:label ?name .
+  OPTIONAL {
+     <${ uri }> rdf:type ?otherType .
+     ?otherType rdfs:subClassOf ?type .
+     FILTER(?otherType != ?type)
+  }
+}
