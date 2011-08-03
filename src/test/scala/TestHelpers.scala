@@ -24,7 +24,7 @@ object TestServers {
 
 
   def loadSampleData = {
-    import edu.duke.oit.vw.connection._
+    import edu.duke.oit.vw.jena._
     import com.hp.hpl.jena.rdf.model._
     import com.hp.hpl.jena.util.FileManager
     import java.io.InputStream

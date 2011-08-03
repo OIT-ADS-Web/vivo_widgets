@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.sparql
+package edu.duke.oit.vw.jena
 
 import com.hp.hpl.jena.rdf.model.{Model => JModel}
 import com.hp.hpl.jena.query.{QueryFactory,Query,QueryExecutionFactory,QueryExecution,ResultSet,QuerySolution}

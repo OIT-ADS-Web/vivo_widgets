@@ -12,7 +12,7 @@ object IndexUpdater { // }extends Logging {
 
   def start(vsi: Option[VivoSolrIndexer], hostname:String, port:Int, serviceId: String="VivoWidgets") = {
     Actor.remote.start(hostname, port) //Start the server
-    Actor.remote.register(serviceId, Actor.actorOf(new IndexUpdater(vsi))) //Register the actor with the specified service id
+    Actor.remote.register(serviceId, Actor.actorOf[IndexUpdater]) //Register the actor with the specified service id
   }
 
 }
@@ -37,11 +37,7 @@ object UpdateMessage {
 }
 
 
-class IndexUpdater(vsi: Option[VivoSolrIndexer]=None) extends Actor with Logging {
-
-  def this() = {
-    this(None)
-  }
+class IndexUpdater extends Actor with Logging {
 
   def receive = {
     case msg:String => {

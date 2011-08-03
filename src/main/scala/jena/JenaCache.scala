@@ -1,37 +1,42 @@
-package edu.duke.oit.vw.actor
+package edu.duke.oit.vw.jena
 
-import scala.actors.Actor
-import scala.actors.Actor._
+import akka.actor.Actor._
+import akka.actor.Actor
 
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
-import edu.duke.oit.vw.connection._
 import com.hp.hpl.jena.tdb.TDBFactory
-import edu.duke.oit.vw.sparql.Sparqler
+import edu.duke.oit.vw.utils.WidgetLogging
 
-case object Graph
-
+object GetGraph
+object ClearModel
 case class SetModel(model: JModel)
 
-object JenaActor extends Actor {
+class JenaActor extends Actor {
 
-  def act = {
-    var model: Option[JModel] = None
-    loop {
-      react {
-        case SetModel(m: JModel) => model = Some(m)
-        case Graph => {
-          reply(model)
-        }
-        case _ => println("JenaActor message not found.")
-      }
+  var model: Option[JModel] = None
+
+  def receive = {
+    case SetModel(m: JModel) => {
+      log.debug("set model")
+      model = Some(m)
     }
+    case GetGraph => {
+      self.reply(model)
+    }
+    case ClearModel => {
+      // just making sure all statements are garbage collected
+      model.getOrElse(TDBFactory.createModel).removeAll()
+      model = None
+      log.debug("cleared model")
+    }
+    case _ => println("JenaActor message not found.")
   }
 
 }
 
 object JenaCache {
 
-  val jenaActor = JenaActor.start
+  val jenaActor = actorOf[JenaActor].start
 
   def setFromDatabase(cInfo: JenaConnectionInfo, modelUri: String) {
     Jena.sdbModel(cInfo, modelUri) {
@@ -49,15 +54,20 @@ object JenaCache {
   }
 
   def getModel: Option[JModel] = {
-    (jenaActor !? Graph) match {
+    val res = jenaActor !! GetGraph
+    res match {
       case Some(m: JModel) => Some(m)
       case _ => None
     }
   }
 
+  def clear = {
+    jenaActor !! ClearModel
+  }
+
   def queryModel(query: String) = {
-    val model = jenaActor !? Graph
-    model match {
+    val model = jenaActor !! GetGraph
+    model.getOrElse(None) match {
       case Some(m: JModel) => {
         Sparqler.selectingFromModel(m,query){resultsSet => Sparqler.simpleResults(resultsSet)}
       }

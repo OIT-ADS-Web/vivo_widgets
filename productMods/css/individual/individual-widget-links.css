@@ -1,0 +1,52 @@
+#modal {
+  width:300px;
+  border: solid 2px #DCE4E3;
+  position:absolute;
+  padding:8px;
+  background-color:#FFF;
+  -moz-border-radius: 5px;
+  border-radius: 5px
+}
+
+#modal .action {
+  display: block;
+  padding: 4px;
+  border: solid 2px #DCE4E3;
+  width: 200px;
+  text-align: center;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #2485AE;
+  font-weight: bold;
+}
+
+#close {
+  display:block;
+  float:right
+}
+
+.mysite {
+  float:right;
+  font-size:0.8em
+}
+
+.body ul {
+  width:575px
+}
+
+#modal ul {
+  margin:2px;
+  padding:2px
+}
+
+li {
+  list-style-type:none
+}
+
+textarea#embed {
+  width: 90%;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 3px;
+}
+

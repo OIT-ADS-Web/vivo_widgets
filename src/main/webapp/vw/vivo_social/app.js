@@ -1,316 +1,362 @@
 /**
  * @author Jeremy Bandini
- *
- * hide search menu after search X
- * add section/filters for organization etc... X
- * scrunch things up X
- * Read/unread toggle
- * implement search history X
- *
  */
+
 var prefs = new _IG_Prefs();
+var userHistory = new SearchHistory("#searchHistory");
+var results = new Results();
+
 var settings = {
-	currentTerm: '',
-	endPoint: 'http://scholars-test.oit.duke.edu/widgets/search.jsonp?query='
+    currentTerm : '',
+    endPoint : 'http://scholars-test.oit.duke.edu/widgets/search.jsonp?query='
 };
+
 function initialize() {
+    userHistory.initialize();
+    Search.execute(settings.currentTerm);
+    Behaviors.initialize();
+}
 
-	console.log('starting up!');
-	tabs = new gadgets.TabSet("vivo_social", "Main");
-	tabs.addTab("Search", "search");
-	// tabs.addTab("Visualization", "visi");
-	tabs.addTab("Following", "follow");
-	tabs.addTab("History", "history");
-	tabs.setSelectedTab("search");
+var Template = {
+    results_header : function(term, count) {
+        return '<li id="results_header"><strong>' + term + '</strong></li><li>Showing <strong>' + count + '</strong> results</li>';
+    },
+    results_item : function(uri, name) {
+        return '<li><a target="_blank" href="' + uri + '">' + name + '</a></li>';
+    },
+    results_group_summary : function(name) {
+        return '<li class="result_summary">' + name + '</li>';
+    },
+    results_group_header : function(name) {
+        return '<li id="' + name + '" class="group">' + name + '</li>';
+    },
+    results_submenu : function(name, count) {
+        return '<li><a href="#' + name + '">' + name + ': ' + count + '</a></li>';
+    },
+    history_menu : function(url, term) {
+        return '<li><a class="recent_search" href="' + url + term + '*">' + term + '</a></li>'
 
-	var search_terms = prefs.getString("searchList");
-	var searchTermsArray = search_terms.split('|');
-	var lastSearch = searchTermsArray.pop();
+    }
+}
 
-	if(searchTermsArray.length > 0) {
-		if(lastSearch !== "") {
-			executeSearch(lastSearch);
-			settings.currentTerm = lastSearch;
-		}
+// Commands
+var Prefs = {
+    // history : {
+    // searchList: "cat|dog|obesity|food|pharm"
+    // },
+    set : function(pref, new_val) {
+        prefs.set(pref, new_val);
+        //this.history[pref] = new_val;
+    },
+    getString : function(pref) {
+        return prefs.getString(pref);
+        //return this.history[pref];
+    }
+}
 
-	}
+var PrefHandler = {
 
-  // Bevaviors
-	$('#searchButton').click( function() {
+    to_array : function(pref) {
+        var prefArray = pref.split('|');
+        var finalArray = [];
+        var prefLength = prefArray.length;
+        for(var i = 0; i < prefLength; i++) {
+            if(prefArray[i] !== " ") {
+                finalArray.push(prefArray[i]);
+            }
+        }
 
-		if($('[name=searchTerm]').val() !== "") {
-			executeSearch($('[name=searchTerm]').val());
-			saveSearch($('[name=searchTerm]').val());
-		}
+        return finalArray;
+    },
+    scan : function(term, searchArray) {
+        var searchArrayLength = searchArray.length;
+        for(var i = 0; i < searchArrayLength; i++) {
+            if(searchArray[i] === term) {
+                var caughtSearch = searchArray.splice(i, 1);
+                searchArray.push(caughtSearch);
+                return {
+                    result : true,
+                    patchedArray : searchArray
+                }
+            }
+        }
 
-	});
-	$('#showSearch').click( function() {
-		stopSearchAnimations();
-	});
-	$('#hideSearch').click( function() {
-		$('#searchContainer').hide("slide", {
-			direction: "up"
-		}, 150, function() {
-			$('#showSearch').show("slide", {
-				direction: "up"
-			}, 150);
+        return {
+            result : false,
+            patchedArray : undefined
+        };
 
-		});
-	});
-	$('#refreshHistory').click( function() {
-		updateHistory();
-	});
-	$('#clearAllHistory').click( function() {
-		clearAllHistory();
-	});
-	$('.read_list').live('change', function() {
+    }
+};
+var Scroll = {
+    to : function(elementId, offset) {
+        $('html,body').animate({
+            scrollTop : $(elementId).offset().top + offset
+        }, {
+            duration : 'slow',
+            easing : 'swing'
+        });
+    }
+}
 
-		if($(this).is(':checked') && searchReadList($(this).prev().attr('href')) === false) {
+var Search = {
+    execute : function(term) {
+        if(term.length > 0) {
+            $('[name=searchTerm]').val(term);
+            Behaviors.history_hide();
+            Behaviors.start_loading();
+            this.vivo(term);
+        }
+    },
+    vivo : function(search) {
+        this.load(settings.endPoint + search + '*');
+    },
+    load : function(url) {
+        var surl = url + '&callback=?';
+        $.getJSON(surl);
+    }
+}
 
-			$(this).prev().removeClass('unread');
-			$(this).attr("disabled", true);
-			var read_list = prefs.getString("readList");
+// Objects
+function Results() {
+    this.groups = {};
+}
 
-			prefs.set("readList", read_list + '|' +  $(this).prev().attr('href'));
+Results.prototype.sort = function(searchArray) {
+    var resultsString = ['<ul id="result_summary_container">'];
+    var searchArrayLength = searchArray.length;
+    var filteredResults = {};
+    if($.isEmptyObject(this.groups)) {
 
-		}
+        return searchArray;
+    }
+    for(var key in this.groups) {
+        filteredResults[key] = [{
+            uri : '#',
+            name : key
+        }];
+        resultsString.push(Template.results_submenu(key, this.groups[key]));
 
-	});
-	$('.recent_search').live('click', function() {
+    }
+    resultsString.push("</ul>");
+    for(var i = 0; i < searchArrayLength; i++) {
 
-		tabs.setSelectedTab(0);
-		executeSearch($(this).html());
-		saveSearch($(this).html());
-		return false;
+        if(filteredResults[searchArray[i].group]) {
+            filteredResults[searchArray[i].group].push(searchArray[i]);
+        }
 
-	});
-	$('#search input').bind('keydown', function(e) {
-		var code = (e.keyCode ? e.keyCode : e.which);
-		if(code == 13) { //Enter keycode
-			if($('[name=searchTerm]').val() !== "") {
-				executeSearch($('[name=searchTerm]').val());
-				saveSearch($('[name=searchTerm]').val());
-			}
-		}
+    }
+    var sortedResults = [{
+        uri : '#result',
+        name : resultsString.join(" ")
+    }];
 
-	});
-	updateHistory();
+    for(var key in this.groups) {
+        sortedResults = sortedResults.concat(filteredResults[key]);
+
+    }
+
+    return sortedResults;
+}
+Results.prototype.render = function(data) {
+    Behaviors.stop_loading();
+
+    results.groups = data.groups;
+
+    $('#results').html(this.html(results.sort(data.items)).join(" "));
+}
+Results.prototype.html = function(sorted_data) {
+    var html = [];
+    var count = sorted_data.length;
+    html.push(Template.results_header(settings.currentTerm, count));
+
+    for(var i = 0; i < count; i++) {
+        if(sorted_data[i].uri !== '#' && sorted_data[i].uri !== '#result') {
+            html.push(Template.results_item(sorted_data[i].uri, sorted_data[i].name));
+        } else {
+            if(sorted_data[i].uri === '#result') {
+                html.push(Template.results_group_summary(sorted_data[i].name));
+
+            } else {
+                html.push(Template.results_group_header(sorted_data[i].name));
+            }
+
+        }
+
+    };
+    return html;
+}
+function SearchHistory(dom_id) {
+    this.dom_id = dom_id;
 
 }
 
-function executeSearch(term) {
-	startSearchAnimations();
-	searchVivo(term);
+SearchHistory.prototype.initialize = function() {
+    var searchTermsArray = PrefHandler.to_array(Prefs.getString("searchList"));
+    if(searchTermsArray.length > 0) {
+        var lastSearch = searchTermsArray.pop();
+        if(lastSearch !== "") {
+            settings.currentTerm = lastSearch;
+        }
+    } else {
+         Behaviors.history_button_hide();
+    }
 
+    this.updateHistory();
 }
+SearchHistory.prototype.saveSearch = function(search) {
 
-function startSearchAnimations() {
-	$('#loading').show("slide", {
-		direction: "up"
-	}, 50);
-	$('#searchContainer').hide("slide", {
-		direction: "up"
-	}, 150, function() {
-		$('#showSearch').show("slide", {
-			direction: "up"
-		}, 150);
+    var search_terms = PrefHandler.to_array(Prefs.getString("searchList"));
+    var testResult = PrefHandler.scan(search, search_terms);
 
-	});
+    if(!testResult.result) {
+        search_terms.push(search);
+        // 1994 character max!
+        Prefs.set("searchList", search_terms.join('|'));
+    } else {
+        Prefs.set("searchList", testResult.patchedArray.join('|'));
+    }
+    Behaviors.history_button_show();
+   
+    settings.currentTerm = search;
 }
+SearchHistory.prototype.updateHistory = function() {
+    $(this.dom_id).html(this.renderSearchList(PrefHandler.to_array(Prefs.getString("searchList"))).join(" "));
 
-function stopSearchAnimations() {
-	$('#showSearch').hide("slide", {
-		direction: "up"
-	}, 150, function() {
-		$('#searchContainer').show("slide", {
-			direction: "up"
-		}, 150);
-	});
+    return false;
 }
+SearchHistory.prototype.renderSearchList = function(listArray) {
+    finalHtml = [];
+    var listArrayLength = listArray.length;
+    for(var i = 0; i < listArrayLength; i++) {
+        if(listArray[i]) {
+            finalHtml.push(Template.history_menu(settings.endPoint, listArray[i]));
 
-function loadData(url) {
+        }
 
-	var surl = url + '&callback=?';
-	$.getJSON(surl);
+    }
+    // finalHtml.push("</ul>");
 
+    return finalHtml;
 }
-
-function scanForDuplicateSearch(term, searchArray) {
-	var searchArrayLength = searchArray.length;
-	for(var i=0; i < searchArrayLength; i++ ) {
-		if(searchArray[i] === term) {
-			var caughtSearch = searchArray.splice(i,1);
-			searchArray.push(caughtSearch);
-			return {
-				result: true,
-				patchedArray: searchArray
-			}
-		}
-	}
-
-	return {
-		result: false,
-		patchedArray: undefined
-	};
+SearchHistory.prototype.clearAllHistory = function() {
+    Prefs.set("searchList", ' ');
+    Behaviors.history_button_hide();
+    Behaviors.history_hide();
+    this.updateHistory();
+    return false;
 }
+// Bevaviors
 
-function saveSearch(search) {
-	item = search;
+var Behaviors = {
+    initialize : function() {
+        that = this;
+        $('#searchButton').click(function() {
+            that.search();
 
-	var search_terms = prefToArray(prefs.getString("searchList"));
-	// var searchArray = search_terms.split('|');
-	var testResult = scanForDuplicateSearch(item, search_terms);
-	if(!testResult.result) {
-		search_terms.push(item); // 1994 character max!
+        });
+        $('#refreshHistory').click(function() {
+            that.history();
 
-		prefs.set("searchList", search_terms.join('|'));
-	} else {
-		prefs.set("searchList", testResult.patchedArray.join('|'));
-	}
-	settings.currentTerm = item;
+        });
+        $('#clearAllHistory').click(function() {
+            that.clear_history();
+            
+        });
+        $('#results').delegate("#result_summary_container li a", "click", function() {
+
+            Scroll.to($(this).attr("href"), 0);
+            return false;
+        });
+        $('#searchHistory').delegate("li a", "click", function() {
+            return that.select_history_item(this);
+        });
+        $('#search input').bind({
+            'keydown' : function(e) {
+                that.keyboard(e);
+            },
+            focus : function() {
+                Behaviors.history_hide();
+            }
+        });
+
+    },
+    search : function() {
+        term = $('[name=searchTerm]').val();
+        if(term !== "") {
+            Search.execute(term);
+            userHistory.saveSearch(term);
+        }
+    },
+    history_hide : function() {
+        if($('#history').is(":visible")) {
+            $('#recent_img').attr("src", "http://gadgets-dev.oit.duke.edu/vivo_social/recent.gif");
+            $('#history').hide("slide", {
+                direction : "up"
+            }, 90);
+        }
+    },
+    history_button_hide : function() {
+        
+        if($("#refreshHistory").is(':visible')) {
+            $("#refreshHistory").css('display', 'none');
+        }
+    },
+    history_button_show : function() {
+        if(!$("#refreshHistory").is(':visible')) {
+            $("#refreshHistory").css('display', 'block');
+        }
+    },
+    history : function() {
+        userHistory.updateHistory();
+
+        if($('#history').is(":visible")) {
+            this.history_hide();
+        } else {
+            $('#recent_img').attr("src", "http://gadgets-dev.oit.duke.edu/vivo_social/recent-on.gif");
+            $('#history').show("slide", {
+                direction : "up"
+            }, 90);
+        }
+    },
+    clear_history : function() {
+        userHistory.clearAllHistory();
+    },
+    select_history_item : function(caller) {
+
+        Search.execute($(caller).html());
+        userHistory.saveSearch($(caller).html());
+        return false;
+    },
+    keyboard : function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13) {
+            if($('[name=searchTerm]').val() !== "") {
+                Search.execute($('[name=searchTerm]').val());
+                userHistory.saveSearch($('[name=searchTerm]').val());
+            }
+        }
+    },
+    start_loading : function() {
+        $('#loading').show("slide", {
+            direction : "up"
+        }, 50);
+    },
+    stop_loading : function() {
+        $('#loading').hide("slide", {
+            direction : "up"
+        }, 150, function() {
+            if(!$('#results').is(":visible")) {
+                $('#results').show("slide", {
+                    direction : "up"
+                }, 150);
+            }
+
+        });
+    }
 }
-
-function searchVivo(search) {
-
-	loadData(settings.endPoint + search + '*');
-}
-
-function searchReadList(term) {
-	var read_list = prefs.getString("readList");
-	var readArray = read_list.split('|');
-	var loopCount = readArray.length;
-	for(var i=0; i < loopCount; i++) {
-		if (readArray[i] === term) {
-			return true;
-		}
-	}
-	return false;
-}
-
-function sortResults(searchArray, groups) {
-	var resultsString = ['<ul id="result_summary_container">'];
-	var searchArrayLength = searchArray.length;
-	var filteredResults = {};
-	if($.isEmptyObject(groups)) {
-		console.log(groups);
-		return searchArray;
-	}
-	for (var key in groups) {
-		//var obj = groups[key];
-
-		// alert(prop + " = " + obj[prop]);
-		filteredResults[key] = [{
-			uri:'#',
-			name:key
-		}];
-		resultsString.push('<li><a href="#' + key + '">' + key + ': ' + groups[key] + '</a></li>');
-	}
-	resultsString.push("</ul>");
-	for(var i=0; i < searchArrayLength; i++) {
-		//console.log(searchArray[i].group);
-		if(filteredResults[searchArray[i].group]) {
-			filteredResults[searchArray[i].group].push(searchArray[i]);
-		}
-
-	}
-	var sortedResults = [{
-		uri:'#result',
-		name:resultsString.join(" ")
-	}];
-
-	for (var key in groups) {
-		//	var obj = groups[key];
-
-		// alert(prop + " = " + obj[prop]);
-		sortedResults = sortedResults.concat(filteredResults[key]);
-
-	}
-	//var sortedResults = filteredResults.publications.concat(filteredResults.activities,filteredResults.organizations, filteredResults.people, filteredResults.locations);
-
-	return sortedResults;
-}
-
+// Script
 function vivoSearchResult(data) {
-	$('#loading').hide("slide", {
-		direction: "up"
-	}, 150, function() {
-		$('#results').show("slide", {
-			direction: "up"
-		}, 150);
-	});
-	//console.profile()
-	var search_terms = prefs.getString("searchList");
-	var searchArray = search_terms.split('|');
+    results.render(data);
 
-	var groups = data.groups;
-	var finalArray = sortResults(data.items, groups);
-	var dataItems = finalArray.length;
-
-	var finalStr = [];
-
-	finalStr.push('<li id="results_header">Search Term: <strong>' + settings.currentTerm + '</strong> Results: <strong>' + dataItems  + '</strong></li>');
-
-	for (var i = 0; i < dataItems; i++) {
-		if(finalArray[i].uri !== '#' && finalArray[i].uri !== '#result') {
-
-			if(!searchReadList(finalArray[i].uri)) {
-				finalStr.push('<li><a target="_blank" class="unread" href="' + finalArray[i].uri + '">' + finalArray[i].name + '</a><input class="read_list" type="checkbox" /></li>');
-			} else {
-				finalStr.push('<li><a target="_blank" href="' + finalArray[i].uri + '">' + finalArray[i].name + '</a><input class="read_list" checked="true" disabled="true" type="checkbox" /></li>')
-			}
-		} else {
-			if(finalArray[i].uri === '#result') {
-				finalStr.push('<li class="group result_summary">' + finalArray[i].name + '</li>');
-			} else {
-				finalStr.push('<li id="' + finalArray[i].name + '" class="group">' + finalArray[i].name + '</li>');
-			}
-
-		}
-
-	};
-	$('#results').html(finalStr.join(" "));
-	//console.profileEnd()
-
-}
-
-function prefToArray(pref) {
-	var prefArray = pref.split('|');
-	var finalArray = [];
-	var prefLength = prefArray.length;
-	for(var i=0; i<prefLength; i++) {
-
-		if(prefArray[i] !== " ") {
-			//alert(prefArray[i].charCodeAt(0));
-			finalArray.push(prefArray[i]);
-		}
-	}
-
-	return finalArray;
-}
-
-function renderSearchList(listArray) {
-	finalHtml = ["<ul>"];
-	var listArrayLength = listArray.length;
-	for(var i = 0; i < listArrayLength; i++) {
-		finalHtml.push('<li><a class="recent_search" href="' + settings.endPoint + listArray[i] + '*">' + listArray[i] + '</li>');
-		console.log("<li>" + listArray[i] + "</li>");
-	}
-	finalHtml.push("</ul>");
-
-	return finalHtml;
-}
-
-function updateHistory() {
-
-	$('#searchHistory').html(renderSearchList(prefToArray(prefs.getString("searchList"))).join(" "));
-	$('#readHistory').html('<h4>Read Item URLs</h4>' + prefToArray(prefs.getString("readList")).join('<br />') );
-	return false;
-}
-
-function clearAllHistory() {
-	prefs.set("searchList", ' ');
-	prefs.set("readList", ' ');
-
-	updateHistory();
-	return false;
 }

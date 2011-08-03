@@ -2,7 +2,7 @@ package edu.duke.oit.vw.sparql.test
 
 import org.specs._
 import edu.duke.oit.test.helpers.TestModels
-import edu.duke.oit.vw.sparql.Sparqler
+import edu.duke.oit.vw.jena.Sparqler
 import com.hp.hpl.jena.query.{QueryFactory,Query,QueryExecutionFactory,QueryExecution,ResultSet}
 
 class SparqlerSpec extends Specification {
