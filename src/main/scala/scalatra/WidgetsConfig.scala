@@ -38,15 +38,12 @@ object WidgetsConfig extends Logging {
                       dbType   = properties("VitroConnection.DataSource.dbtype"),
                       driver   = properties("VitroConnection.DataSource.driver"))
 
-    widgetConfiguration = new SolrConfig(file      = properties("WidgetsSolr.directory") + "/solr.xml",
-                                         directory = properties("WidgetsSolr.directory"),
-                                         coreName  = "vivowidgetcore")
-    widgetServer = Solr.solrServer(widgetConfiguration)
+    // Check vivo solr for widget core - build if necessary
+    val vivoBaseServer = Solr.solrServer(properties("vitro.local.solr.url"))
+    Solr.addCore(vivoBaseServer, "vivowidgetcore","widgets")
 
-    vivoConfiguration = new SolrConfig(file      = properties("WidgetsSolr.directory") + "/solr.xml",
-                                       directory = properties("WidgetsSolr.directory"),
-                                       coreName  = "vivocore")
-    vivoServer = Solr.solrServer(vivoConfiguration)
+    widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/vivowidgetcore")
+    vivoServer = Solr.solrServer(properties("vitro.local.solr.url") + "/collection1")
 
     log.info("Start IndexUpdater")
     import edu.duke.oit.vw.queue._
