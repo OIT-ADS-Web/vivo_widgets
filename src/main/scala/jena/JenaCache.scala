@@ -43,7 +43,7 @@ object JenaCache {
       dbModel =>
         var model = TDBFactory.createModel // ModelFactory.createDefaultModel
         model.add(dbModel)
-        Jena.sdbModel(cInfo,"http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.2.owl") { vivoOwl => model.add(vivoOwl) }
+        Jena.sdbModel(cInfo,"http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.3.owl") { vivoOwl => model.add(vivoOwl) }
         setModel(model)
     }
 
@@ -53,10 +53,10 @@ object JenaCache {
     jenaActor ! new SetModel(m)
   }
 
-  def getModel: Option[JModel] = {
-    val res = jenaActor !! GetGraph
-    res match {
+  def getModel = {
+    (jenaActor !! GetGraph) match {
       case Some(m: JModel) => Some(m)
+      case (Some(m: Option[JModel])) => m
       case _ => None
     }
   }

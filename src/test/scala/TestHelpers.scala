@@ -8,8 +8,8 @@ object TestServers {
   val currentDirectory = new java.io.File(".").getCanonicalPath
   val widgetSolrCfg = new SolrConfig(currentDirectory+"/solr/solr.xml",currentDirectory+"/solr","vivowidgetcore")
   val widgetSolr = Solr.solrServer(widgetSolrCfg)
-  val vivoSolrCfg = new SolrConfig(currentDirectory+"/solr/solr.xml",currentDirectory+"/solr","vivocore")
-  val vivoSolr = Solr.solrServer(vivoSolrCfg)
+  //val vivoSolrCfg = new SolrConfig(currentDirectory+"/solr/solr.xml",currentDirectory+"/solr","vivocore")
+  val vivoSolr = Solr.solrServer("http://localhost:8080/apache-solr-3.1.0")
 
   // no longer used
   //val vivo = new Vivo("jdbc:mysql://localhost:3306/vitrodb","root","","MySQL","com.mysql.jdbc.Driver")

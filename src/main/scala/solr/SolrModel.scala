@@ -43,7 +43,7 @@ trait SolrModel {
   def parseItemList(docList: SolrDocumentList): List[VivoSearchResultItem] = {
     docList.toList filter  (_.get("classgroup") != null ) map { doc =>
       new VivoSearchResultItem(doc.get("URI").toString,
-                               doc.get("nameraw").toString,
+                               doc.get("nameRaw").toString,
                                doc.get("classgroup") match {
                                  case a: ArrayList[String] => parseClassGroupName(a(0))
                                  case s: String => parseClassGroupName(s)
