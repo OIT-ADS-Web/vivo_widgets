@@ -36,7 +36,7 @@ html(lang="en")
       var viewModel = {
         chosenCollection: ko.observable(collections),
         chosenLimit: ko.observable(noItems),
-        chosenFormat: ko.observable('abbreviated'),
+        chosenFormat: ko.observable('detailed'),
         chosenStyle: ko.observable('yes'),
         latestUrl: ''
       };
@@ -71,10 +71,10 @@ html(lang="en")
           | Display Format:
           a(href="#" class="help" id="formatHelp") ?
           span
-            input(id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat")/
-            label(for="abbreviated") Abbreviated
             input(id="detailed" type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat")/
             label(for="detailed") Detailed
+            input(id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat")/
+            label(for="abbreviated") Abbreviated
         li
           | Styling:
           a(href="#" class="help" id="styleHelp") ?
@@ -98,7 +98,6 @@ html(lang="en")
           a(id="advanced" href="#" class="action") Advanced
         li(style="display:none" id="otherFormats")
           h1 Other formats
-          a(href="#" id="rss") RSS
           a(href="#" id="jsonp") JSONP
           a(href="#" id="html") HTML
           a(href="#" id="js") JavaScript
