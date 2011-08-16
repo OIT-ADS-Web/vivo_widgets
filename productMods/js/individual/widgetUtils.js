@@ -8,6 +8,7 @@ function openModal(obj) {
   var embedSrc = '<script type="text/javascript" src="' + obj.href + '"> </script>';
 
   $('#embed').val(embedSrc);
+  $('#embedDescription').html("Embed code for 5 " + obj.getAttribute('collection') + ", in detailed format with default style rules applied:")
   var pos = $(obj).offset();
   var width = $(obj).width();
 
@@ -38,10 +39,6 @@ function initializeClipboard() {
       });
   clip.glue( 'd_clip_button', 'd_clip_container' );
   $('#modal').hide();
-}
-
-function widgetCollectionLink(collection) {
-  return '<a href="' + WidgetConfig.urlBase + '/builder/' + WidgetConfig.vivoId + '/' + collection + '/5.js" class="mysite">[Add to my web site]</a>'
 }
 
 $(document).ready(function(){
