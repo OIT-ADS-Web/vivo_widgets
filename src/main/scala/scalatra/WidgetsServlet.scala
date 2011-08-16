@@ -20,9 +20,9 @@ class WidgetsFilter extends ScalatraFilter
   with ScalateTemplateStringify {
   
   // GET /people/{vivoId}/{collectionName}/5.jsonp
-  get("/people/:vivoId/:collectionName/:count.:format") {
+  get("/people/:collectionName/:count.:format") {
     requestSetup
-    Person.find(WidgetsConfig.baseUri + params("vivoId"), WidgetsConfig.widgetServer) match {
+    Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => { 
         params.getOrElse('collectionName, "") match {
           case "publications" => renderCollectionData(person.publications)
@@ -47,14 +47,13 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
   
-  get("/builder/:vivoId") {
+  get("/builder") {
     import edu.duke.oit.vw.utils.ElvisOperator._
-    Person.find(WidgetsConfig.baseUri + params("vivoId"), WidgetsConfig.widgetServer) match {
+    Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         val d = Map(
           "uriPrefix" -> uriPrefix(),
           "contextUri" -> (request.getContextPath() ?: ""),
-          "vivoId" -> params.getOrElse("vivoId", ""),
           "person" -> person
           )
         contentType = "text/html"
