@@ -3,12 +3,11 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
 <script type="text/javascript">
   WidgetConfig = {
     "urlBase" : window.location.protocol + "//" + window.location.host + "/widgets",
-    "vivoId"  : "${individual.uri?split('/')?last?js_string}",
     "builderLink"    : function() {
-      return this.urlBase + "/builder/" + this.vivoId
+      return this.urlBase + "/builder?uri=${individual.uri}"
     },
     "collectionLink" : function(collection) {
-      return '<a href="' + this.urlBase + '/people/' + this.vivoId + '/' + collection + '/5.js" class="mysite" collection="' + collection + '">[Add to my web site]</a>'
+      return '<a href="' + this.urlBase + '/people/' + collection + '/5.js?uri=${individual.uri}" class="mysite" collection="' + collection + '">[Add to my web site]</a>'
     },
     "collectionLinkMap" : {
        "h3#authorInAuthorship" : "publications",
