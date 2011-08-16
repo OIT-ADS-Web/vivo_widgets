@@ -49,7 +49,6 @@ VIVO Widgets is made of up the following parts.
   3. To customize link formatting and locations modify the WidgetConfig javascript object in individual--widget-links.ftl using any combination of javascript, freemarker or text:
 
   * urlBase: points to url where the widget app is deployed
-  * vivoId:  person URI minus your default namespace (this will be removed in the next iteration and the full URI will be passed automatically in the generated url's in the query string)
   * builderLink: url of the full builder for the given URI
   * collectionLink: function returning the HTML the will link to the default embed code for a given collections, takes the collection name as an argument
   * collectionLinkMap: maps CSS selector -> collection name, a collection link for the mapped collection will be inserted after any HTML element matching the specified CSS selector
