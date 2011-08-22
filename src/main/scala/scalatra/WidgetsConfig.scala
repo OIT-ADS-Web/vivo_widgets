@@ -29,6 +29,14 @@ object WidgetsConfig extends Logging {
   var widgetServer:SolrServer = _
   var vivoConfiguration:SolrConfig = _
   var vivoServer:SolrServer = _
+
+  def prepareCore = {
+    log.info("Adding Widgets core to VIVO solr index")
+    Solr.addCore(vivoServer, "vivowidgetcore","/Users/jimwood/dev/tomcat_deployments/widgets/data/solr")
+
+    log.info("Connecting Widgets Core")
+    widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/vivowidgetcore")
+  }
   
   def setupConfig = {
     log.info("Configuring VIVO Widgets...")
@@ -39,16 +47,8 @@ object WidgetsConfig extends Logging {
                       dbType   = properties("VitroConnection.DataSource.dbtype"),
                       driver   = properties("VitroConnection.DataSource.driver"))
 
-    // Check vivo solr for widget core - build if necessary - SKIPPING for now due to tomcat issue
-    //log.info("Connecting to VIVO Solr instance")
-    //val vivoBaseServer = Solr.solrServer(properties("vitro.local.solr.url"))
-    //log.info("Adding Widgets core to VIVO solr index")
-    //Solr.addCore(vivoBaseServer, "vivowidgetcore","widgets")
-
-    log.info("Connecting Widgets Core")
-    widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/vivowidgetcore")
     log.info("Connecting VIVO Core")
-    vivoServer = Solr.solrServer(properties("vitro.local.solr.url") + "/collection1")
+    vivoServer = Solr.solrServer(properties("vitro.local.solr.url"))
 
     log.info("Start IndexUpdater")
     import edu.duke.oit.vw.queue._

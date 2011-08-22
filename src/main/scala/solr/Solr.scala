@@ -27,6 +27,7 @@ object Solr {
   }
 
   def addCore(solrServer: SolrServer, name: String, instanceDir: String): Boolean = {
+    // Check vivo solr for widget core - build if necessary
     val statusResponse: CoreAdminResponse = CoreAdminRequest.getStatus(name, solrServer);
     val coreExists = statusResponse.getCoreStatus(name).size() > 0
     if (!coreExists) {

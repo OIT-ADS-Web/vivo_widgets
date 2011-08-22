@@ -17,6 +17,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
   
   post("/updates/rebuild/index") {
     basicAuth
+    WidgetsConfig.prepareCore
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     vsi.indexPeople()
     Json.toJson(Map("complete" -> true))
@@ -24,6 +25,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
   
   post("/updates/person/uri") {
     basicAuth
+    WidgetsConfig.prepareCore
     params.get("message") match {
       case Some(message:String) => {
         val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)

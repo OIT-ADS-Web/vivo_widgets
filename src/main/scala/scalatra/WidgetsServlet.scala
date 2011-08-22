@@ -21,6 +21,7 @@ class WidgetsFilter extends ScalatraFilter
   
   // GET /people/{vivoId}/{collectionName}/5.jsonp
   get("/people/:collectionName/:count.:format") {
+    WidgetsConfig.prepareCore
     requestSetup
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => { 
@@ -48,6 +49,7 @@ class WidgetsFilter extends ScalatraFilter
   }
   
   get("/builder") {
+    WidgetsConfig.prepareCore
     import edu.duke.oit.vw.utils.ElvisOperator._
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
