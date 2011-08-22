@@ -34,6 +34,32 @@ VIVO Widgets is made of up the following parts.
       > jetty-run
 
   6. Browse to http://localhost:8081/.
+  
+# Pushing Updates to VIVO Widgets
+
+Since VIVO has a separate SOLR index which needs to be kept up to date when changes occur in VIVO.  To accomplish this, we need to a couple of Java files to your VIVO src before you build/deploy it.
+
+  1. Copy the src files to your VIVO src directory:
+  
+    > cp -R listener/src/ <your vivo src directory>/src/
+      
+  2. Add the following lines with correct information to your deploy.properties for VIVO:
+  
+    <pre>
+    WidgetUpdateSetup.endpointUri=http://127.0.0.1:8080/widgets/updates/person/uri
+    WidgetUpdateSetup.username=username for update request
+    WidgetUpdateSetup.password=password for update request
+    </pre>
+      
+  Update the username and password with the values you want to use for your application.  The endpointUri is the location of VIVO widgets.
+  
+  3. Update your web.xml file in <your vivo src directory>/productMods/WEB-INF/web.xml to include a new listener (add just after the edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup listener):
+
+```
+      <listener>
+         <listener-class>edu.duke.oit.vw.vivo.http.WidgetUpdateSetup</listener-class>
+      </listener>
+```
 
 # Adding "Add to my web site" links to VIVO
 
@@ -41,8 +67,10 @@ VIVO Widgets is made of up the following parts.
 
   2. Add the following to the bottom of your VIVO productMods/templates/freemarker/body/individual/individual--foaf-person.ftl file:
 
+```
       <#-- Widget Links -->
       <#include "individual--widget-links.ftl">
+```
 
   The individual--widget-links.ftl template will use javascript to decorate the page with links to the widget application.
 
