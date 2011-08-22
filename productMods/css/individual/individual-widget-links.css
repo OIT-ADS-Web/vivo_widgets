@@ -1,6 +1,6 @@
 #modal {
   width:300px;
-  border: solid 2px #DCE4E3;
+  border: solid 2px #c7c9ca;
   position:absolute;
   padding:8px;
   background-color:#FFF;
@@ -11,7 +11,7 @@
 #modal .action {
   display: block;
   padding: 4px;
-  border: solid 2px #DCE4E3;
+  border: solid 2px #c7c9ca;
   width: 200px;
   text-align: center;
   -moz-border-radius: 5px;
@@ -47,6 +47,18 @@ textarea#embed {
   width: 90%;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  border: 2px solid #c7c9ca;
   padding: 3px;
+  margin-bottom: 3px
 }
 
+#embedDescription {
+  background-color: #DCE4E3;
+  margin-right: 1em;
+  padding: 0.5em;
+  font-size: 0.8em;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px solid #c7c9ca;
+  margin-bottom: 3px
+}

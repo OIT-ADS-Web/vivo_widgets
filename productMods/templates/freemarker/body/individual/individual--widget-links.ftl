@@ -23,12 +23,12 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
   <h5 id="embedDescription"></h5>
   <ul>
     <li><textarea id="embed"  rows="5" name="embed" ></textarea></li>
-    <li><a class="widgetBuilderLink" href="#">Need more options?</a></li>
     <li>
       <div id="d_clip_container" style="position:relative">
         <div id="d_clip_button"  class="action">Copy</div>
       </div>
     </li>
+    <li><a class="widgetBuilderLink" href="#">Need more options?</a></li>
   </ul>
 </div>
 
