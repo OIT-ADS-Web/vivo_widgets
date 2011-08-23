@@ -29,7 +29,6 @@
     If 'null' (or absent), cores will not be manageable via request handler
   -->
   <cores adminPath="/admin/cores">
-    <core name="vivowidgetcore" instanceDir="vivowidgetcore" />
-    <core name="vivocore" instanceDir="vivocore" />
+    <core name="vivowidgetcore" instanceDir="." />
   </cores>
 </solr>
