@@ -32,7 +32,7 @@ object WidgetsConfig extends Logging {
 
   def prepareCore = {
     log.info("Adding Widgets core to VIVO solr index")
-    Solr.addCore(vivoServer, "vivowidgetcore","/Users/jimwood/dev/tomcat_deployments/widgets/data/solr")
+    Solr.addCore(vivoServer, "vivowidgetcore",properties("WidgetsSolr.directory"))
 
     log.info("Connecting Widgets Core")
     widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/vivowidgetcore")
