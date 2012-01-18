@@ -3,7 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT *
 WHERE {
-      <${ uri }> vitro:moniker ?title .
+      <${ uri }> core:preferredTitle ?title .
       <${ uri }> rdf:type ?type .
       <${ uri }> rdfs:label ?name .
 }

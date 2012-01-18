@@ -5,8 +5,7 @@ select  *
 where {
   <${uri}> core:hasTeacherRole ?role .
   ?role rdfs:label ?roleName .
-  ?role core:roleIn ?course .
-  ?course rdf:type ?type .
+  ?role core:roleRealizedIn ?course .
+  ?course vitro:mostSpecificType ?type .
   ?course rdfs:label ?courseName .
-  FILTER(?type = core:Course)
 }

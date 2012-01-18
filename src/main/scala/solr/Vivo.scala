@@ -16,7 +16,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
   def initializeJenaCache() = {
     loadDriver()
     JenaCache.setFromDatabase(new JenaConnectionInfo(url,user,password,dbType),
-                              "http://vitro.mannlib.cornell.edu/default/vitro-kb-2")
+                              "urn:x-arq:UnionGraph")
   }
 
   def queryJenaCache(sparql: String): List[Map[Symbol,String]] = {
@@ -31,9 +31,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
     val sdbConnection = new SDBConnection(url,user,password)
     try {
       val ds = DatasetFactory.create(SDBFactory.connectDataset(sdbConnection,Jena.storeDesc(Some(dbType))))
-      val kb2 = ds.getNamedModel("http://vitro.mannlib.cornell.edu/default/vitro-kb-2")
-      val owl = ds.getNamedModel("http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.3.owl")
-      val queryModel = ModelFactory.createUnion(kb2,owl)
+      val queryModel = ds.getNamedModel("urn:x-arq:UnionGraph")
       try {
         Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
       } finally { ds.close() }

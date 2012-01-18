@@ -13,9 +13,9 @@ import edu.duke.oit.vw.jena._
 
 object JenaConnectionSpec extends Specification with Timer with SimpleConversion {
 
-  val dbURL = "jdbc:mysql://localhost:3306/vitrodb"
-  val dbUser = "root"
-  val dbPassword = ""
+  val dbURL = "jdbc:mysql://localhost:3306/vivo_development"
+  val dbUser = "vivodev"
+  val dbPassword = "local_vivo_work"
   val dbType = "MYSQL"
   var className = "com.mysql.jdbc.Driver"
 
@@ -31,7 +31,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
     }
 
     "run queries againts sdb" in {
-      Jena.sdbModel(jenaConnection, "http://vitro.mannlib.cornell.edu/default/vitro-kb-2") {
+      Jena.sdbModel(jenaConnection, "urn:x-arq:UnionGraph") {
         dbModel =>
           println("------------------------------------\nMemory Model:")
           var model = ModelFactory.createDefaultModel
@@ -45,7 +45,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
       }
 
 
-      Jena.sdbModel(jenaConnection, "http://vitro.mannlib.cornell.edu/default/vitro-kb-2") {
+      Jena.sdbModel(jenaConnection, "urn:x-arq:UnionGraph") {
         dbModel =>
           println("------------------------------------\ndbModel:")
           QueryRunner.run(dbModel)
@@ -59,7 +59,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
 
       println("------------------------------------\nMemory Model (disconnect from db):")
       var tModel = ModelFactory.createDefaultModel
-      Jena.sdbModel(jenaConnection, "http://vitro.mannlib.cornell.edu/default/vitro-kb-2") {
+      Jena.sdbModel(jenaConnection, "urn:x-arq:UnionGraph") {
         dbModel =>
           timer("loading memory model: ") {
             tModel.add(dbModel)
@@ -72,7 +72,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
     } //tag ("focus")
 
     "use Jena cache" in {
-      JenaCache.setFromDatabase(jenaConnection, "http://vitro.mannlib.cornell.edu/default/vitro-kb-2")
+      JenaCache.setFromDatabase(jenaConnection, "urn:x-arq:UnionGraph")
       timer("results 1") {
         val results = JenaCache.queryModel(QueryRunner.queryString3)
         println(" r: " + results.size)

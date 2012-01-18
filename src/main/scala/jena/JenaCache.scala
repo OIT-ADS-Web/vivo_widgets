@@ -43,7 +43,6 @@ object JenaCache {
       dbModel =>
         var model = TDBFactory.createModel // ModelFactory.createDefaultModel
         model.add(dbModel)
-        Jena.sdbModel(cInfo,"http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.3.owl") { vivoOwl => model.add(vivoOwl) }
         setModel(model)
     }
 

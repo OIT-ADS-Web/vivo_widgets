@@ -20,6 +20,7 @@ object PersonIndexer extends SimpleConversion
     if (personData.size > 0) {
 
       val pubSparql = renderFromClassPath("sparql/publications.ssp", Map("uri" -> uri))
+      log.debug("pub sparql: " + pubSparql)
       val publicationData:List[Map[Symbol, String]] = timer("select pubs") { vivo.select(pubSparql,useCache) }.asInstanceOf[List[Map[Symbol, String]]]
 
       val pubs: List[Publication] = publicationData.map( pub => new Publication(uri      = pub('publication).replaceAll("<|>",""),

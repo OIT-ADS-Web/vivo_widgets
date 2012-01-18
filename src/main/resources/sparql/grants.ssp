@@ -3,10 +3,9 @@ ${include("sparql/prefixes.ssp")}
 
 select  *
 where {
-  <${uri}> core:hasResearcherRole ?role .
+  <${uri}> core:hasPrincipalInvestigatorRole ?role .
   ?role rdfs:label ?roleName .
-  ?role core:roleIn ?agreement .
-  ?agreement rdf:type ?type .
+  ?role core:roleContributesTo ?agreement .
+  ?agreement vitro:mostSpecificType ?type .
   ?agreement rdfs:label ?grantName .
-  FILTER(?type = core:Grant)
 }
