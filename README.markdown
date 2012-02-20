@@ -53,12 +53,11 @@ Since VIVO has a separate SOLR index which needs to be kept up to date when chan
       
   Update the username and password with the values you want to use for your application.  The endpointUri is the location of VIVO widgets.
   
-  3. Update your web.xml file in <your vivo src directory>/productMods/WEB-INF/web.xml to include a new listener (add just after the edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup):
+  3. Update <your vivo src directory>/productMods/WEB-INF/resources/startup\_listeners.txt to include a new listener (add just after the edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup):
 
 ```
-      <listener>
-         <listener-class>edu.duke.oit.vw.vivo.http.WidgetUpdateSetup</listener-class>
-      </listener>
+         edu.duke.oit.vw.vivo.http.WidgetUpdateSetup
+```
 ```
 
 # Adding "Add to my web site" links to VIVO
