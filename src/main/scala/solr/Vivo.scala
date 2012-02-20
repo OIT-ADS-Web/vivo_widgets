@@ -28,14 +28,9 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
   }
 
   def queryLive(sparql: String): List[Map[Symbol,String]] = {
-    val sdbConnection = new SDBConnection(url,user,password)
-    try {
-      val ds = DatasetFactory.create(SDBFactory.connectDataset(sdbConnection,Jena.storeDesc(Some(dbType))))
-      val queryModel = ds.getNamedModel("urn:x-arq:UnionGraph")
-      try {
-        Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
-      } finally { ds.close() }
-    } finally { sdbConnection.close() }
+    Jena.sdbModel(new JenaConnectionInfo(url,user,password,dbType),"urn:x-arq:UnionGraph") { queryModel =>
+      Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
+    }
   }
 
   def select(sparql: String, useCache: Boolean = false): List[Map[Symbol,String]] = {

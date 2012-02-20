@@ -48,7 +48,7 @@ object Jena {
     new StoreDesc(LayoutType.fetch(layoutType), DatabaseType.fetch(dt))
   }
 
-  def connectionSDB(cInfo: JenaConnectionInfo)(mFactory: (SDBConnection) => Unit) = {
+  def connectionSDB[T](cInfo: JenaConnectionInfo)(mFactory: (SDBConnection) => T) = {
     val sdbConnection = new SDBConnection(cInfo.url, cInfo.user, cInfo.password)
     try {
       mFactory(sdbConnection)
@@ -73,7 +73,7 @@ object Jena {
     }
   }
 
-  def sdbStore(cInfo: JenaConnectionInfo)(mFactory: (Store) => Unit) = {
+  def sdbStore[T](cInfo: JenaConnectionInfo)(mFactory: (Store) => T) = {
     connectionSDB(cInfo) {
       sdbConnection =>
         val store = SDBFactory.connectStore(sdbConnection, storeDesc(Some(cInfo.dbType)))
@@ -87,7 +87,7 @@ object Jena {
     }
   }
 
-  def sdbModel(cInfo: JenaConnectionInfo, modelUri: String)(mFactory: (JModel) => Unit) = {
+  def sdbModel[T](cInfo: JenaConnectionInfo, modelUri: String)(mFactory: (JModel) => T) = {
     sdbStore(cInfo) {
       store =>
         mFactory(SDBFactory.connectNamedModel(store, modelUri))
