@@ -3,6 +3,7 @@
 -@ val uriPrefix: String = ""
 -@ val vivoId: String = ""
 -@ val contextUri: String = ""
+-@ val theme: String = ""
 -@ import val person: edu.duke.oit.vw.solr.Person
 
 !!!
@@ -12,7 +13,8 @@ html(lang="en")
     meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
 
     title Widget Builder
-    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/main.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/reset.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/#{theme}/stylesheets/main.css")/
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/smoothness/jquery-ui-1.8.9.custom.css")/
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery-1.4.4.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript")
@@ -41,63 +43,64 @@ html(lang="en")
         latestUrl: ''
       };
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/app.js")
-  body
-    h1(class="vivo_logo") VIVO
-    div(id="menu") Vivo Home | Help
-    div(id="rightCol")
-      div(id="env" style="color:red;padding:0.5em")
-        | TEST: For testing purposing only and the data may not be accurate.
-      div(id="settings")
-      div(id="host")
-        strong A preview will appear here
-      div(style="display:none" id="loading")
-        img(alt="Loading..." src="#{contextUri}/vw/images/loading.gif")/
-    div(id="form")
-      input(id="uri" type="hidden" value="#{person.uri}")
-      h1 #{person.name}'s VIVO Feeds
+  body(class="display")
+    div(id="wrapper-main")
+      div(id="branding")
+        h1(class="vivo_logo") VIVO
+      div(id="rightCol")
+        div(id="env" style="color:red;padding:0.5em")
+          | TEST: For testing purposing only and the data may not be accurate.
+        div(id="settings")
+        div(id="host")
+          strong A preview will appear here
+        div(style="display:none" id="loading")
+          img(alt="Loading..." src="#{contextUri}/vw/themes/#{theme}/images/loading.gif")/
+      div(id="form")
+        input(id="uri" type="hidden" value="#{person.uri}")
+        h1 #{person.name}'s VIVO Feeds
 
-      ul
-        li
-          | Collection to Display:
-          a(href="#" class="help" id="collectionsHelp") ?
-          span
-            select(data-bind="options: collections, optionsText: 'collectionName', value:chosenCollection")
-        li
-          | Number of items to return:
-          a(href="#" class="help" id="itemsHelp") ?
-          span
-            select(data-bind="options: noItems, optionsText: 'label', value:chosenLimit")
-        li
-          | Display Format:
-          a(href="#" class="help" id="formatHelp") ?
-          span
-            input(id="detailed" type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat")/
-            label(for="detailed") Detailed
-            input(id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat")/
-            label(for="abbreviated") Abbreviated
-        li
-          | Styling:
-          a(href="#" class="help" id="styleHelp") ?
-          span
-            input(id="styled" type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle")/
-            label(for="styled") Styled
-            input(id="unstyled" type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle")/
-            label(for="unstyled") Unstyled
-        li(class="no_border")
-          p
-            | Your Embed Code:
-            / a(href="#" class="help" id="embedHelp") ?
-          textarea(id="embed"  rows="5" name="embed")
-          p(class="instructions")
-            | After making your selection, copy and paste the embed code above. 
-            | The code changes based on your selection.
-        li(class="no_border")
-          div(id="d_clip_container" style="position:relative")
-            div(id="d_clip_button"  class="action") Copy to Clipboard
-        li(class="no_border")
-          a(id="advanced" href="#" class="action") Advanced
-        li(style="display:none" id="otherFormats")
-          h1 Other formats
-          a(href="#" id="jsonp") JSONP
-          a(href="#" id="html") HTML
-          a(href="#" id="js") JavaScript
+        ul
+          li
+            | Collection to Display:
+            a(href="#" class="help" id="collectionsHelp") ?
+            span
+              select(data-bind="options: collections, optionsText: 'collectionName', value:chosenCollection")
+          li
+            | Number of items to return:
+            a(href="#" class="help" id="itemsHelp") ?
+            span
+              select(data-bind="options: noItems, optionsText: 'label', value:chosenLimit")
+          li
+            | Display Format:
+            a(href="#" class="help" id="formatHelp") ?
+            span
+              input(id="detailed" type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat")/
+              label(for="detailed") Detailed
+              input(id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat")/
+              label(for="abbreviated") Abbreviated
+          li
+            | Styling:
+            a(href="#" class="help" id="styleHelp") ?
+            span
+              input(id="styled" type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle")/
+              label(for="styled") Styled
+              input(id="unstyled" type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle")/
+              label(for="unstyled") Unstyled
+          li(class="no_border")
+            p
+              | Your Embed Code:
+              / a(href="#" class="help" id="embedHelp") ?
+            textarea(id="embed"  rows="5" name="embed")
+            p(class="instructions")
+              | After making your selection, copy and paste the embed code above. 
+              | The code changes based on your selection.
+          li(class="no_border")
+            div(id="d_clip_container" style="position:relative")
+              div(id="d_clip_button"  class="action") Copy to Clipboard
+          li(class="no_border")
+            a(id="advanced" href="#" class="action") Advanced
+          li(style="display:none" id="otherFormats")
+            h1 Other formats
+            a(href="#" id="jsonp") JSONP
+            a(href="#" id="html") HTML
+            a(href="#" id="js") JavaScript

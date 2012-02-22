@@ -56,7 +56,8 @@ class WidgetsFilter extends ScalatraFilter
         val d = Map(
           "uriPrefix" -> uriPrefix(),
           "contextUri" -> (request.getContextPath() ?: ""),
-          "person" -> person
+          "person" -> person,
+          "theme" -> WidgetsConfig.theme
           )
         contentType = "text/html"
         templateEngine.layout(TemplateHelpers.tpath("builder/index.jade"), d)

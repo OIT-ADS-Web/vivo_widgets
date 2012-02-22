@@ -21,6 +21,10 @@ object WidgetsConfig extends Logging {
     properties("Vitro.defaultNamespace")
   }
 
+  def theme = {
+    properties.getOrElse("Widgets.theme","default")
+  }
+
   def updatesUserName = "widgets"
   def updatesPassword = "vivo"
   
