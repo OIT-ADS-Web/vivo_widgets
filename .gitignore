@@ -12,5 +12,5 @@ project/build/target/*
 sqlnet.log
 target*
 .ensime
-src/main/resources/deploy.properties
+src/main/resources/*deploy.properties
 .project
