@@ -1,0 +1,6 @@
+${include("sparql/prefixes.ssp")}
+
+select *
+where {
+  <${root_organization_uri}> vivo:hasSubOrganization+ ?organization
+}
