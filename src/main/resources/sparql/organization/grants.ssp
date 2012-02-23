@@ -3,6 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT *
 WHERE {
-      <${uri}> core:administers ?grant .
-       ?grant rdfs:label ?name .
+      <${uri}> core:administers ?agreement .
+       ?agreement rdfs:label ?grantName .
+       ?agreement vitro:mostSpecificType ?type .
 }

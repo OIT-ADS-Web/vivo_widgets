@@ -1,6 +1,7 @@
+<%@ val root_organization_uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
 select *
 where {
-  <${root_organization_uri}> vivo:hasSubOrganization+ ?organization
+  <${root_organization_uri}> core:hasSubOrganization+ ?organization
 }
