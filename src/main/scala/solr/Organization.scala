@@ -19,7 +19,7 @@ case class Organization(uri:String,
                   people:List[PersonReference],
                   grants:List[Grant],
                   extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson 
+     extends ExtraItems(extraItems) with AddToJson
 {
 
   override def uris() = {

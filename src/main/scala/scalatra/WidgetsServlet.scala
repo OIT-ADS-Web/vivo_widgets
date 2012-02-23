@@ -1,7 +1,8 @@
 package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int}
-import edu.duke.oit.vw.solr.{Person,VivoSearcher}
+//import edu.duke.oit.vw.solr.{Person,Organization,SolrEntity,VivoSearcher}
+import edu.duke.oit.vw.solr._
 import java.net.URL
 import org.scalatra._
 import scalate.ScalateSupport
@@ -48,7 +49,7 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
   
-  get("/builder") {
+  get("/bob") {
     WidgetsConfig.prepareCore
     import edu.duke.oit.vw.utils.ElvisOperator._
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
@@ -65,10 +66,39 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "NoContent"
     }
   }
-  
-  
-  
-  
+
+  get("/builder") {
+    WidgetsConfig.prepareCore
+    import edu.duke.oit.vw.utils.ElvisOperator._
+    SolrEntity.getDocumentById(params("uri"), WidgetsConfig.widgetServer) match {
+      case Some(solrDocument) => {
+        solrDocument.getFieldValue("group").asInstanceOf[String] match {
+          case "people" => {
+            val d = Map(
+              "uriPrefix" -> uriPrefix(),
+              "contextUri" -> (request.getContextPath() ?: ""),
+              "person" -> PersonExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
+              "theme" -> WidgetsConfig.theme
+              )
+            contentType = "text/html"
+            templateEngine.layout(TemplateHelpers.tpath("builder/index.jade"), d)
+          }
+          case "organizations" => {
+            val d = Map(
+              "uriPrefix" -> uriPrefix(),
+              "contextUri" -> (request.getContextPath() ?: ""),
+              "organization" -> OrganizationExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
+              "theme" -> WidgetsConfig.theme
+              )
+            contentType = "text/html"
+            templateEngine.layout(TemplateHelpers.tpath("builder/organization.jade"), d)
+          }
+        }
+      }
+      case _ => "NoContent"
+    }
+  }
+
   protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String) = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     items match {
