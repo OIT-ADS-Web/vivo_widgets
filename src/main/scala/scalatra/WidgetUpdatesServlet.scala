@@ -20,10 +20,11 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     vsi.indexPeople()
+    vsi.indexOrganizations()
     Json.toJson(Map("complete" -> true))
   }
-  
-  post("/updates/person/uri") {
+
+  post("/updates/uri") {
     basicAuth
     WidgetsConfig.prepareCore
     params.get("message") match {

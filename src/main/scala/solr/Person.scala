@@ -21,7 +21,7 @@ case class Person(uri:String,
                   grants:List[Grant],
                   courses:List[Course],
                   extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson 
+     extends ExtraItems(extraItems) with AddToJson
 {
 
   override def uris() = {

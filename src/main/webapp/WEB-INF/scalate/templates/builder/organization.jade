@@ -1,0 +1,106 @@
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+-@ var style: String = ""
+-@ val uriPrefix: String = ""
+-@ val vivoId: String = ""
+-@ val contextUri: String = ""
+-@ val theme: String = ""
+-@ import val organization: edu.duke.oit.vw.solr.Organization
+
+!!!
+
+html(lang="en")
+  head
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+
+    title Widget Builder
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/reset.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/#{theme}/stylesheets/main.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/smoothness/jquery-ui-1.8.9.custom.css")/
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery-1.4.4.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript")
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery.tmpl.js")
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/knockout-1.1.2.js")
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/ZeroClipboard.js")
+    :javascript
+      var collections = [
+      { collectionName: 'People', description: 'People in this organization', collectionValue: 0 },
+      { collectionName: 'Grants', description: 'Grants administered by this organization', collectionValue: 1 }
+      ];
+      var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}, {label: 'all', value: 'all'}];
+      var help = {
+         collectionsHelp: {title: "Collections Help", details: "You can set up a feed to display people or grants from this organization's VIVO profile on your personal web page.  From the drop-down list on the right, select People or Grants. When new people or grants are added to this organization's VIVO page, they will also appear on the web page. The Preview panel on the right shows how the list will look based on the current selections."},
+         itemsHelp: {title: "Items Help", details: "Select the number of people or grants from the drop-down list. You can display the five, 10, 15 most recent items, or all items. The Preview panel displays the list based on the current selections."},
+         formatHelp: {title: "Display Format Help", details: "Select Abbreviated to display a shorter version of each person or grant on your web page. Select Detailed to display the full person or grant.  The Preview panel shows how the items will look in either display format."},
+         styleHelp: {title: "Styling Help", details: "Choose Styled to use embedded styles, or choose Unstyled to use the styles on your web page. The Unstyled selection displays items in a bulleted list. The Preview panel displays both options."},
+         embedHelp: {title: "Embed Help", details: "To create a feed of people or grants from this organization's VIVO profile on your personal web page, click the Copy button to copy this embed code to your clipboard. In the source code for your web page, paste the embed code where you'd like to display the list. When new publications, courses or grants are added to your VIVO page, they will also appear on your web page, depending on the selections you chose to create the feed."}
+      }
+      var viewModel = {
+        chosenCollection: ko.observable(collections),
+        chosenLimit: ko.observable(noItems),
+        chosenFormat: ko.observable('detailed'),
+        chosenStyle: ko.observable('yes'),
+        latestUrl: ''
+      };
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/app.js")
+  body(class="display")
+    input(id="group" type="hidden" value="organizations")
+    div(id="wrapper-main")
+      div(id="branding")
+        h1(class="vivo_logo") VIVO
+      div(id="rightCol")
+        div(id="env" style="color:red;padding:0.5em")
+          | TEST: For testing purposing only and the data may not be accurate.
+        div(id="settings")
+        div(id="host")
+          strong A preview will appear here
+        div(style="display:none" id="loading")
+          img(alt="Loading..." src="#{contextUri}/vw/themes/#{theme}/images/loading.gif")/
+      div(id="form")
+        input(id="uri" type="hidden" value="#{organization.uri}")
+        h1 #{organization.name}'s VIVO Feeds
+
+        ul
+          li
+            | Collection to Display:
+            a(href="#" class="help" id="collectionsHelp") ?
+            span
+              select(data-bind="options: collections, optionsText: 'collectionName', value:chosenCollection")
+          li
+            | Number of items to return:
+            a(href="#" class="help" id="itemsHelp") ?
+            span
+              select(data-bind="options: noItems, optionsText: 'label', value:chosenLimit")
+          li
+            | Display Format:
+            a(href="#" class="help" id="formatHelp") ?
+            span
+              input(id="detailed" type="radio" name="formatGroup" value="detailed" data-bind="checked: chosenFormat")/
+              label(for="detailed") Detailed
+              input(id="abbreviated"type="radio" name="formatGroup" value="abbreviated" data-bind="checked: chosenFormat")/
+              label(for="abbreviated") Abbreviated
+          li
+            | Styling:
+            a(href="#" class="help" id="styleHelp") ?
+            span
+              input(id="styled" type="radio" name="styleGroup" value="yes" data-bind="checked: chosenStyle")/
+              label(for="styled") Styled
+              input(id="unstyled" type="radio" name="styleGroup" value="no" data-bind="checked: chosenStyle")/
+              label(for="unstyled") Unstyled
+          li(class="no_border")
+            p
+              | Your Embed Code:
+              / a(href="#" class="help" id="embedHelp") ?
+            textarea(id="embed"  rows="5" name="embed")
+            p(class="instructions")
+              | After making your selection, copy and paste the embed code above. 
+              | The code changes based on your selection.
+          li(class="no_border")
+            div(id="d_clip_container" style="position:relative")
+              div(id="d_clip_button"  class="action") Copy to Clipboard
+          li(class="no_border")
+            a(id="advanced" href="#" class="action") Advanced
+          li(style="display:none" id="otherFormats")
+            h1 Other formats
+            a(href="#" id="jsonp") JSONP
+            a(href="#" id="html") HTML
+            a(href="#" id="js") JavaScript

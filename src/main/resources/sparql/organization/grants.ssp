@@ -1,0 +1,9 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT *
+WHERE {
+      <${uri}> core:administers ?agreement .
+       ?agreement rdfs:label ?grantName .
+       ?agreement vitro:mostSpecificType ?type .
+}

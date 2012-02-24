@@ -9,27 +9,17 @@ import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
 
-object PersonIndexer extends SimpleConversion 
+object OrganizationIndexer extends SimpleConversion 
   with Timer
   with ScalateTemplateStringify 
   with WidgetLogging {
 
   def index(uri: String,vivo: Vivo,solr: SolrServer,useCache: Boolean = false) = {
-    val query = renderFromClassPath("sparql/personData.ssp", Map("uri" -> uri))
-    val personData = vivo.select(query,useCache)
-    if (personData.size > 0) {
+    val query = renderFromClassPath("sparql/organizationData.ssp", Map("uri" -> uri))
+    val organizationData = vivo.select(query,useCache)
+    if (organizationData.size > 0) {
 
-      val pubSparql = renderFromClassPath("sparql/publications.ssp", Map("uri" -> uri))
-      log.debug("pub sparql: " + pubSparql)
-      val publicationData:List[Map[Symbol, String]] = timer("select pubs") { vivo.select(pubSparql,useCache) }.asInstanceOf[List[Map[Symbol, String]]]
-
-      val pubs: List[Publication] = publicationData.map( pub => new Publication(uri      = pub('publication).replaceAll("<|>",""),
-                                                                                vivoType = pub('type).replaceAll("<|>",""),
-                                                                                title    = pub('title),
-                                                                                authors  = getAuthors(pub('publication).replaceAll("<|>",""),vivo,useCache),
-                                                                                extraItems = parseExtraItems(pub,List('publication,'type,'title)))).asInstanceOf[List[Publication]]
-
-      val grantSparql = renderFromClassPath("sparql/grants.ssp", Map("uri" -> uri))
+      val grantSparql = renderFromClassPath("sparql/organization/grants.ssp", Map("uri" -> uri))
       log.debug("grant sparql: " + grantSparql)
       val grantData = timer("select grants") { vivo.select(grantSparql,useCache) }.asInstanceOf[List[Map[Symbol, String]]]
 
@@ -39,29 +29,28 @@ object PersonIndexer extends SimpleConversion
                                                                  extraItems = parseExtraItems(grant,List('agreement,'type,'grantName)))).asInstanceOf[List[Grant]]
 
 
-      val courseSparql = renderFromClassPath("sparql/courses.ssp", Map("uri" -> uri))
-      log.debug("course sparql: " + courseSparql)
-      val courseData = vivo.select(courseSparql,useCache)
+      val personSparql = renderFromClassPath("sparql/organization/people.ssp", Map("uri" -> uri))
+      log.debug("person sparql: " + personSparql)
+      val personData = vivo.select(personSparql,useCache)
 
-      val courses: List[Course] = courseData.map(course => new Course(uri      = course('course).replaceAll("<|>",""),
-                                                                      vivoType = course('type).replaceAll("<|>",""),
-                                                                      name     = course('courseName),
-                                                                      extraItems = parseExtraItems(course,List('course,'type,'courseName)))).asInstanceOf[List[Course]]
+      val people: List[PersonReference] = personData.map(person => new PersonReference(uri      = person('person).replaceAll("<|>",""),
+                                                                                        vivoType = person('type).replaceAll("<|>",""),
+                                                                                        name     = person('name),
+                                                                                        title     = person('title),
+                                                                                        extraItems = parseExtraItems(person,List('person,'type,'name,'title)))).asInstanceOf[List[PersonReference]]
 
-      val p = new Person(uri,
-                         vivoType = personData(0)('type).replaceAll("<|>",""),
-                         name     = personData(0)('name),
-                         title    = personData(0)('title),
-                         publications = pubs,
-                         grants = grants,
-                         courses = courses,
-                         extraItems = parseExtraItems(personData(0),List('type,'name,'title)))
+      val o = new Organization(uri,
+                               vivoType = organizationData(0)('type).replaceAll("<|>",""),
+                               name     = organizationData(0)('name),
+                               people = people,
+                               grants = grants,
+                               extraItems = parseExtraItems(organizationData(0),List('type,'name)))
       timer("add solr doc") {
       val solrDoc = new SolrInputDocument()
-      solrDoc.addField("id",p.uri)
-      solrDoc.addField("group","people")
-      solrDoc.addField("json",p.toJson)
-      p.uris.map {uri => solrDoc.addField("uris",uri)}
+      solrDoc.addField("id",o.uri)
+      solrDoc.addField("group","organizations")
+      solrDoc.addField("json",o.toJson)
+      o.uris.map {uri => solrDoc.addField("uris",uri)}
       solr.add(solrDoc)
       }
     }

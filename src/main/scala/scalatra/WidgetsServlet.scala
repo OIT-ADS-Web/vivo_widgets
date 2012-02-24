@@ -1,7 +1,8 @@
 package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int}
-import edu.duke.oit.vw.solr.{Person,VivoSearcher}
+//import edu.duke.oit.vw.solr.{Person,Organization,SolrEntity,VivoSearcher}
+import edu.duke.oit.vw.solr._
 import java.net.URL
 import org.scalatra._
 import scalate.ScalateSupport
@@ -18,8 +19,8 @@ object FormatJSONP extends FormatType
 class WidgetsFilter extends ScalatraFilter
   with ScalateSupport 
   with ScalateTemplateStringify {
-  
-  // GET /people/{vivoId}/{collectionName}/5.jsonp
+
+  // GET /people/{collectionName}/5.jsonp?uri={uri}
   get("/people/:collectionName/:count.:format") {
     WidgetsConfig.prepareCore
     requestSetup
@@ -35,7 +36,23 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "Not Found"
     }
   }
-  
+
+  // GET /organizations/{collectionName}/5.jsonp?uri={uri}
+  get("/organizations/:collectionName/:count.:format") {
+    WidgetsConfig.prepareCore
+    requestSetup
+    Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
+      case Some(organization) => {
+        params.getOrElse('collectionName, "") match {
+          case "people" => renderCollectionData(organization.people)
+          case "grants" => renderCollectionData(organization.grants)
+          case x => "Collection not found: " + x
+        }
+      }
+      case _ => "Not Found"
+    }
+  }
+
   // GET /search.json?query=theory*
   get("/search.:format") {
     requestSetup
@@ -47,28 +64,39 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "NoContent"
     }
   }
-  
+
   get("/builder") {
     WidgetsConfig.prepareCore
     import edu.duke.oit.vw.utils.ElvisOperator._
-    Person.find(params("uri"), WidgetsConfig.widgetServer) match {
-      case Some(person) => {
-        val d = Map(
-          "uriPrefix" -> uriPrefix(),
-          "contextUri" -> (request.getContextPath() ?: ""),
-          "person" -> person,
-          "theme" -> WidgetsConfig.theme
-          )
-        contentType = "text/html"
-        templateEngine.layout(TemplateHelpers.tpath("builder/index.jade"), d)
+    SolrEntity.getDocumentById(params("uri"), WidgetsConfig.widgetServer) match {
+      case Some(solrDocument) => {
+        solrDocument.getFieldValue("group").asInstanceOf[String] match {
+          case "people" => {
+            val d = Map(
+              "uriPrefix" -> uriPrefix(),
+              "contextUri" -> (request.getContextPath() ?: ""),
+              "person" -> PersonExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
+              "theme" -> WidgetsConfig.theme
+              )
+            contentType = "text/html"
+            templateEngine.layout(TemplateHelpers.tpath("builder/person.jade"), d)
+          }
+          case "organizations" => {
+            val d = Map(
+              "uriPrefix" -> uriPrefix(),
+              "contextUri" -> (request.getContextPath() ?: ""),
+              "organization" -> OrganizationExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
+              "theme" -> WidgetsConfig.theme
+              )
+            contentType = "text/html"
+            templateEngine.layout(TemplateHelpers.tpath("builder/organization.jade"), d)
+          }
+        }
       }
       case _ => "NoContent"
     }
   }
-  
-  
-  
-  
+
   protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String) = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     items match {
