@@ -81,7 +81,7 @@ class WidgetsFilter extends ScalatraFilter
               "theme" -> WidgetsConfig.theme
               )
             contentType = "text/html"
-            templateEngine.layout(TemplateHelpers.tpath("builder/index.jade"), d)
+            templateEngine.layout(TemplateHelpers.tpath("builder/person.jade"), d)
           }
           case "organizations" => {
             val d = Map(
