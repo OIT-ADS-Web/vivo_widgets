@@ -19,8 +19,8 @@ object FormatJSONP extends FormatType
 class WidgetsFilter extends ScalatraFilter
   with ScalateSupport 
   with ScalateTemplateStringify {
-  
-  // GET /people/{vivoId}/{collectionName}/5.jsonp
+
+  // GET /people/{collectionName}/5.jsonp?uri={uri}
   get("/people/:collectionName/:count.:format") {
     WidgetsConfig.prepareCore
     requestSetup
@@ -36,7 +36,23 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "Not Found"
     }
   }
-  
+
+  // GET /organizations/{collectionName}/5.jsonp?uri={uri}
+  get("/organizations/:collectionName/:count.:format") {
+    WidgetsConfig.prepareCore
+    requestSetup
+    Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
+      case Some(organization) => {
+        params.getOrElse('collectionName, "") match {
+          case "people" => renderCollectionData(organization.people)
+          case "grants" => renderCollectionData(organization.grants)
+          case x => "Collection not found: " + x
+        }
+      }
+      case _ => "Not Found"
+    }
+  }
+
   // GET /search.json?query=theory*
   get("/search.:format") {
     requestSetup
@@ -45,24 +61,6 @@ class WidgetsFilter extends ScalatraFilter
       case FormatJSON => result.toJson
       case FormatHTML => "TODO: html" // Template('query -> query, 'result -> result)
       case FormatJSONP => "vivoSearchResult("+result.toJson+")" //.toJson
-      case _ => "NoContent"
-    }
-  }
-  
-  get("/bob") {
-    WidgetsConfig.prepareCore
-    import edu.duke.oit.vw.utils.ElvisOperator._
-    Person.find(params("uri"), WidgetsConfig.widgetServer) match {
-      case Some(person) => {
-        val d = Map(
-          "uriPrefix" -> uriPrefix(),
-          "contextUri" -> (request.getContextPath() ?: ""),
-          "person" -> person,
-          "theme" -> WidgetsConfig.theme
-          )
-        contentType = "text/html"
-        templateEngine.layout(TemplateHelpers.tpath("builder/index.jade"), d)
-      }
       case _ => "NoContent"
     }
   }
