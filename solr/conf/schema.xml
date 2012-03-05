@@ -24,6 +24,7 @@
  <fields>   
    <!-- general -->
    <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
+   <field name="group" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
    <field name="json" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
    <field name="uris" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
  </fields>

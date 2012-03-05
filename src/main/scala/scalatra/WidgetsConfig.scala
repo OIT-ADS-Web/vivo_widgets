@@ -25,8 +25,17 @@ object WidgetsConfig extends Logging {
     properties.getOrElse("Widgets.theme","default")
   }
 
-  def updatesUserName = "widgets"
-  def updatesPassword = "vivo"
+  def topLevelOrg = {
+    properties.getOrElse("Widgets.topLevelOrg",properties.get("visualization.topLevelOrg"))
+  }
+
+  def updatesUserName = {
+    properties.getOrElse("WidgetUpdateSetup.username","widgets")
+  }
+
+  def updatesPassword = {
+    properties.getOrElse("WidgetUpdateSetup.password","vivo")
+  }
   
   var server:Vivo = _
   var widgetConfiguration:SolrConfig = _

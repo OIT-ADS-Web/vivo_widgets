@@ -1,0 +1,7 @@
+<%@ val root_organization_uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+select *
+where {
+  <${root_organization_uri}> core:hasSubOrganization+ ?organization
+}
