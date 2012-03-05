@@ -2,10 +2,23 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT *
-WHERE {
+WHERE {{
       <${uri}> core:organizationForPosition ?position .
+      <${uri}> rdfs:label ?organizationName .
+      ?position core:positionInOrganization ?organization .
       ?position core:positionForPerson ?person .
       ?person rdfs:label ?name .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
 }
+UNION
+ {
+      <${uri}> core:hasSubOrganization+ ?organization .
+      ?organization core:organizationForPosition ?position .
+      ?organization rdfs:label ?organizationName .
+      ?position core:positionForPerson ?person .
+      ?person rdfs:label ?name .
+      ?position core:hrJobTitle ?title .
+      ?person vitro:mostSpecificType ?type .
+}}
+

@@ -49,6 +49,11 @@ class VivoSolrIndexerSpec extends Specification with SampleLoader with ScalateTe
       // println(">>>> person: " + person)
     } tag ("focus")
 
+    "be able to execute a sparql 1.1 recursive query" in {
+      val model = Map("root_organization_uri" -> "http://localhost/individual/n3590");
+      val organizations = vivo.select(renderFromClassPath("sparql/organization.ssp",model));
+    }
+
   } tag("focus")
 
 

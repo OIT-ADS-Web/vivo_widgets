@@ -5,6 +5,7 @@ project/boot/
 .idea/
 activemq-data/
 *.iml
+solr/data
 solr/vivowidgetcore/data*
 solr/vivocore/data*
 outtenr*
@@ -14,3 +15,4 @@ target*
 .ensime
 src/main/resources/*deploy.properties
 .project
+*.orig

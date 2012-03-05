@@ -19,7 +19,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   with Timer
   with ScalateTemplateStringify {
 
-  def indexPeople(useCache: Boolean = true) = {
+  def indexPeople(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/facultyMember.ssp")
     log.debug("sparql>>>> " + sparql)
@@ -31,16 +31,27 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     JenaCache.clear
   }
 
-  def indexOrganizations(useCache: Boolean = true) = {
+  def indexOrganizations(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/organization.ssp", Map("root_organization_uri" -> WidgetsConfig.topLevelOrg))
     log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql,useCache).map(_('organization))
     for (o <- organizationUris) {
+      log.debug("org>>>>> " + o)
       OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr,useCache)
     }
     solr.commit()
-    JenaCache.clear
+    if (clearCacheOnFinish) {
+      JenaCache.clear
+    }
+  }
+
+  def indexAll(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
+    indexPeople(useCache,false);
+    indexOrganizations(useCache,false);
+    if (clearCacheOnFinish) {
+      JenaCache.clear
+    }
   }
 
   def reindexUri(uri: String) = {

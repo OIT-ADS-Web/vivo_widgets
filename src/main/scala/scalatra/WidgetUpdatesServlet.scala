@@ -19,8 +19,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     basicAuth
     WidgetsConfig.prepareCore
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
-    vsi.indexPeople()
-    vsi.indexOrganizations()
+    vsi.indexAll()
     Json.toJson(Map("complete" -> true))
   }
 
