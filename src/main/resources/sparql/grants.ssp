@@ -9,3 +9,4 @@ where {
   ?agreement vitro:mostSpecificType ?type .
   ?agreement rdfs:label ?grantName .
 }
+order by ?grantName
