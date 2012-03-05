@@ -28,7 +28,9 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
       PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr,useCache)
     }
     solr.commit()
-    JenaCache.clear
+    if (clearCacheOnFinish) {
+      JenaCache.clear
+    }
   }
 
   def indexOrganizations(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {

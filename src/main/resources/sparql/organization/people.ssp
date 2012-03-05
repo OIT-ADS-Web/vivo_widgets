@@ -21,4 +21,4 @@ UNION
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
 }}
-
+ORDER BY ?name
