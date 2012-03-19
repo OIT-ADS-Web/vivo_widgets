@@ -17,7 +17,7 @@
 ul(style=ulStyle)
   - for (grant <- grants)
     - val roleName = grant.getOrElse("roleName","")
-    - val roleText = if(roleName != "") "(#{grant.getRoleName})" else ""
+    - val roleText = if(roleName != "") "(%s)".format(roleName) else ""
     li(style=liStyle) 
       | #{grant.name} #{roleText}
       a(onmouseout="this.style.textDecoration ='underline';"
