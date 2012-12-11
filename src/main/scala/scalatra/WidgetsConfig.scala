@@ -59,6 +59,7 @@ object WidgetsConfig extends Logging {
                       password = properties("VitroConnection.DataSource.password"),
                       dbType   = properties("VitroConnection.DataSource.dbtype"),
                       driver   = properties("VitroConnection.DataSource.driver"))
+    server.loadDriver();
 
     log.info("Connecting VIVO Core")
     vivoServer = Solr.solrServer(properties("vitro.local.solr.url"))
