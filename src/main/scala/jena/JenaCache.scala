@@ -1,7 +1,7 @@
 package edu.duke.oit.vw.jena
 
 import akka.actor.Actor._
-import akka.actor.Actor
+import akka.actor.{Actor,ActorSystem,Props}
 
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
 import com.hp.hpl.jena.tdb.TDBFactory
@@ -11,7 +11,7 @@ object GetGraph
 object ClearModel
 case class SetModel(model: JModel)
 
-class JenaActor extends Actor {
+class JenaActor extends Actor with WidgetLogging {
 
   var model: Option[JModel] = None
 
@@ -21,7 +21,8 @@ class JenaActor extends Actor {
       model = Some(m)
     }
     case GetGraph => {
-      self.reply(model)
+      // self.reply(model)
+      sender ! model
     }
     case ClearModel => {
       // just making sure all statements are garbage collected
@@ -34,9 +35,16 @@ class JenaActor extends Actor {
 
 }
 
+import akka.pattern.{ ask, pipe }
+import akka.util.Timeout
+import scala.concurrent.Await
+import scala.concurrent.duration._
+
 object JenaCache {
 
-  val jenaActor = actorOf[JenaActor].start
+  val system = ActorSystem("JenaCache")
+  val jenaActor = system.actorOf(Props[JenaActor], name = "jenacache")
+    implicit val timeout = Timeout(5 seconds)
 
   def setFromDatabase(cInfo: JenaConnectionInfo, modelUri: String) {
     Jena.sdbModel(cInfo, modelUri) {
@@ -53,7 +61,7 @@ object JenaCache {
   }
 
   def getModel = {
-    (jenaActor !! GetGraph) match {
+    Await.result((jenaActor ? GetGraph), timeout.duration).asInstanceOf[Option[JModel]] match {
       case Some(m: JModel) => Some(m)
       case (Some(m: Option[JModel])) => m
       case _ => None
@@ -61,12 +69,11 @@ object JenaCache {
   }
 
   def clear = {
-    jenaActor !! ClearModel
+    jenaActor ! ClearModel
   }
 
   def queryModel(query: String) = {
-    val model = jenaActor !! GetGraph
-    model.getOrElse(None) match {
+    Await.result((jenaActor ? GetGraph), timeout.duration).asInstanceOf[Option[JModel]].getOrElse(None) match {
       case Some(m: JModel) => {
         Sparqler.selectingFromModel(m,query){resultsSet => Sparqler.simpleResults(resultsSet)}
       }

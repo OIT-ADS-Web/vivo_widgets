@@ -1,7 +1,7 @@
 package edu.duke.oit.vw.jena.test
 
 import com.hp.hpl.jena.rdf.model.{ModelFactory, Model => JModel}
-import org.specs._
+import org.specs2.mutable._
 
 import org.scardf.jena.JenaGraph
 import org.scardf._
@@ -11,9 +11,11 @@ import org.scardf.NodeConverter._
 import edu.duke.oit.vw.utils._
 import edu.duke.oit.vw.jena._
 
-object JenaConnectionSpec extends Specification with Timer with SimpleConversion {
+object JenaConnectionSpec extends Specification with Timer with SimpleConversion with Tags {
 
-  val dbURL = "jdbc:mysql://localhost:3306/vivo_development"
+  skipAllIf(true)
+
+  val dbURL = "jdbc:mysql://localhost:3306/dev_vivo"
   val dbUser = "vivodev"
   val dbPassword = "local_vivo_work"
   val dbType = "MYSQL"
@@ -92,10 +94,9 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
         }
       }
 
+    }
 
-    } tag ("focus")
-
-  } tag ("focus")
+  }
 
 
 }
