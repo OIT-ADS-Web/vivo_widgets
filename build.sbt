@@ -22,3 +22,5 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (prev) =>
 mainClass in assembly := Some("edu.duke.oit.vw.JettyLauncher")
 
 publishArtifact in Test := false
+
+test in assembly := {}
