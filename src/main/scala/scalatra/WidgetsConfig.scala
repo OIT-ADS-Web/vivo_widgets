@@ -68,6 +68,8 @@ object WidgetsConfig {
                       password = properties("VitroConnection.DataSource.password"),
                       dbType   = properties("VitroConnection.DataSource.dbtype"),
                       driver   = properties("VitroConnection.DataSource.driver"))
+    server.loadDriver()
+    server.setupConnectionPool()
 
     log.info("Connecting VIVO Core")
     vivoServer = Solr.solrServer(properties("vitro.local.solr.url"))

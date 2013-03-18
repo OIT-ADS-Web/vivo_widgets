@@ -45,6 +45,9 @@ trait ScalateTemplateStringify {
   def renderFromEngine(engine:TemplateEngine, templatePath: String, context: Map[String, Any]):String = {
     val buffer = new StringWriter()
     
+    engine.allowReload = false
+    engine.allowCaching = true
+
     val templateSource = engine.source(templatePath)
     val template = engine.load(templateSource)
 

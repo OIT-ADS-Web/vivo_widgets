@@ -58,6 +58,8 @@ object VivowidgetsBuild extends Build {
 
         "mysql" % "mysql-connector-java" % "5.1.14",
         "com.h2database" % "h2" % "1.3.154" % "test",
+        "com.mchange" % "c3p0" % "0.9.2",
+            
     
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.0.6",

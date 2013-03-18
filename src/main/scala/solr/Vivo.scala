@@ -13,10 +13,15 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
   def loadDriver() = {
     Class.forName(driver)
   }
+
   def initializeJenaCache() = {
     loadDriver()
     JenaCache.setFromDatabase(new JenaConnectionInfo(url,user,password,dbType),
                               "urn:x-arq:UnionGraph")
+  }
+
+  def setupConnectionPool() = {
+    Jena.setupConnectionPool(new JenaConnectionInfo(url,user,password,dbType), driver)
   }
 
   def queryJenaCache(sparql: String): List[Map[Symbol,String]] = {

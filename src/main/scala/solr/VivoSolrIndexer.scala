@@ -22,12 +22,9 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   def indexPeople(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/facultyMember.ssp")
-    println("sparql>>>> " + sparql)
-    println("select>>> " + (vivo.select(sparql,useCache)))
+    log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql,useCache).map(_('person))
-    println("peopleUris>>>" + peopleUris)
     for (p <- peopleUris) {
-      println("indexing: " + p)
       PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr,useCache)
     }
     solr.commit()
@@ -39,7 +36,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   def indexOrganizations(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/organization.ssp", Map("root_organization_uri" -> WidgetsConfig.topLevelOrg))
-    println("sparql>>>> " + sparql)
+    log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql,useCache).map(_('organization))
     for (o <- organizationUris) {
       log.debug("org>>>>> " + o)
@@ -52,7 +49,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   }
 
   def indexAll(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
-println("indexAll!!!")
     indexPeople(useCache,false);
     indexOrganizations(useCache,false);
     if (clearCacheOnFinish) {
