@@ -24,3 +24,5 @@ mainClass in assembly := Some("edu.duke.oit.vw.JettyLauncher")
 publishArtifact in Test := false
 
 test in assembly := {}
+
+jarName in assembly := "vivo-widgets.jar"
