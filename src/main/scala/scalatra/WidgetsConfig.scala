@@ -44,7 +44,16 @@ object WidgetsConfig {
   def updatesPassword = {
     properties.getOrElse("WidgetUpdateSetup.password","vivo")
   }
+
+  def baseProtocolAndDomain = {
+    properties.get("Widgets.baseProtocolAndDomain")
+  }
   
+  def defaultBaseProtocolAndDomain = {
+    properties.getOrElse("Widgets.defaultBaseProtocolAndDomain", 
+                         "http://vivoweb.org")
+  }
+
   var server:Vivo = _
   var widgetConfiguration:SolrConfig = _
   var widgetServer:SolrServer = _

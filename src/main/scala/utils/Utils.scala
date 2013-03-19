@@ -96,5 +96,3 @@ trait ElvisOperator {
 object ElvisOperator extends ElvisOperator
 
 
-
-
