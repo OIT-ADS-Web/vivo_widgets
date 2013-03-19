@@ -49,11 +49,6 @@ object WidgetsConfig {
     properties.get("Widgets.baseProtocolAndDomain")
   }
   
-  def defaultBaseProtocolAndDomain = {
-    properties.getOrElse("Widgets.defaultBaseProtocolAndDomain", 
-                         "http://vivoweb.org")
-  }
-
   var server:Vivo = _
   var widgetConfiguration:SolrConfig = _
   var widgetServer:SolrServer = _
