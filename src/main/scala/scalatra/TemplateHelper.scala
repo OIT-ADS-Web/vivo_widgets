@@ -17,8 +17,8 @@ object TemplateHelpers extends ElvisOperator {
 
   def fixURL(url:String) = {
     WidgetsConfig.baseProtocolAndDomain match {
-      case Some(base) => url.replaceFirst(WidgetsConfig.defaultBaseProtocolAndDomain, 
-                                          base)
+      /* match the protocol://domain.com  */
+      case Some(base) => url.replaceFirst("^(\\w+:\\/\\/)?[\\w+.]+(?=(\\/|:\\d+))", base)
       case _ => url
     }
     
