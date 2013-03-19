@@ -102,7 +102,6 @@ class ExtraItems(extraItems:Option[Map[String, String]]) extends ToMethods with 
     \(key) match {
       case null => default
       case m:String => m
-      // case _ => null
     }
   }
 
