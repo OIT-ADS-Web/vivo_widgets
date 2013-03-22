@@ -85,16 +85,29 @@ object WidgetsConfig {
   }
 
   def loadProperties() = {
-    import java.io.InputStream;
-    import java.util.Properties;
+    import java.io.InputStream
+    import java.util.Properties
+    import java.io.FileInputStream
     val props:Properties = new Properties
     
     try {
-      var inStream:InputStream = classOf[WidgetInitialization].getClassLoader().getResourceAsStream("deploy.properties")
+      var inStream:InputStream = classOf[WidgetInitialization].getClassLoader().
+        getResourceAsStream("deploy.properties")
       // Load a properties object
       props.load(inStream)
     } catch  {
-      case _ : Throwable  => println(">>>> couldn't load deploy.properties <<<<")
+      case _ : Throwable  => {
+        println(">>>> couldn't load deploy.properties, looking for system property.")
+        try {
+          var i = System.getProperty("properties.location")
+          props.load(new FileInputStream(i))
+        } catch {
+          case _ : Throwable => {
+            println(">>>> couldn't load the deploy properties from system property.")
+          }
+        }
+
+      }
     } finally {
       
     }
