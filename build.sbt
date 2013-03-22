@@ -15,6 +15,7 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (prev) =>
     case PathList("javax", "xml", xs @ _*) => MergeStrategy.first
     case PathList("org","apache","commons","collections", xs @ _*) => MergeStrategy.first
     case "about.html" => MergeStrategy.discard
+    case "deploy.properties" => MergeStrategy.discard
     case x => prev(x)
   }
 }
