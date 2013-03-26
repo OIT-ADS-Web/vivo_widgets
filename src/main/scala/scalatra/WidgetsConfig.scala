@@ -1,16 +1,24 @@
 package edu.duke.oit.vw.scalatra
 
-import akka.actor.Actor
-import akka.util.Logging
+import akka.actor.{Actor,ActorSystem,Props}
+import akka.event.Logging
 import edu.duke.oit.vw.solr.{Solr,Vivo,SolrConfig}
 import org.apache.solr.client.solrj.SolrServer
 
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
-object WidgetsConfig extends Logging {
+import org.slf4j.{Logger, LoggerFactory}
+
+object WidgetsConfig {
 
   var _properties:Map[String,String] = _
+  val system = ActorSystem()
+  val log =  LoggerFactory.getLogger(getClass)
+
+  // TODO: put somewhere else - temporary 
+  WidgetsConfig.setProperties
+
   def setProperties() = {
     this._properties = loadProperties()
     setupConfig
@@ -36,6 +44,10 @@ object WidgetsConfig extends Logging {
   def updatesPassword = {
     properties.getOrElse("WidgetUpdateSetup.password","vivo")
   }
+
+  def baseProtocolAndDomain = {
+    properties.get("Widgets.baseProtocolAndDomain")
+  }
   
   var server:Vivo = _
   var widgetConfiguration:SolrConfig = _
@@ -44,7 +56,8 @@ object WidgetsConfig extends Logging {
   var vivoServer:SolrServer = _
 
   def prepareCore = {
-    log.info("Adding Widgets core to VIVO solr index")
+    log.info("Adding Widgets core to VIVO solr index...")
+    log.info("getting from: " + properties("WidgetsSolr.directory"))
     Solr.addCore(vivoServer, "vivowidgetcore",properties("WidgetsSolr.directory"))
 
     log.info("Connecting Widgets Core")
@@ -59,13 +72,15 @@ object WidgetsConfig extends Logging {
                       password = properties("VitroConnection.DataSource.password"),
                       dbType   = properties("VitroConnection.DataSource.dbtype"),
                       driver   = properties("VitroConnection.DataSource.driver"))
+    server.loadDriver()
+    server.setupConnectionPool()
 
     log.info("Connecting VIVO Core")
     vivoServer = Solr.solrServer(properties("vitro.local.solr.url"))
 
     log.info("Start IndexUpdater")
     import edu.duke.oit.vw.queue._
-    val indexUpdater = Actor.actorOf[IndexUpdater].start
+    val indexUpdater = system.actorOf(Props[IndexUpdater])
     log.info("IndexUpdater started.")
   }
 
@@ -79,12 +94,13 @@ object WidgetsConfig extends Logging {
       // Load a properties object
       props.load(inStream)
     } catch  {
-      case _  => println(">>>> couldn't load deploy.properties <<<<")
+      case _ : Throwable  => println(">>>> couldn't load deploy.properties <<<<")
     } finally {
       
     }
     // create a real immutable map out of the java Properties
     props.foldLeft(Map[String,String]()){(m, p) => m ++ Map(p._1 -> p._2)}
   }
-  
+
+
 }

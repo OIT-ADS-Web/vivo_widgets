@@ -16,12 +16,12 @@ trait WidgetLogging {
   val log = LoggerFactory.getLogger(this.getClass)
 }
 
-trait Timer {
+trait Timer extends WidgetLogging {
   def timer(label: String = "")(continue: => Any) = {
     var a = System.currentTimeMillis
     var r = continue
     var b = System.currentTimeMillis
-    println(label + " | Total Time(msec): " + (b.toInt - a.toInt))
+    log.debug(label + " | Total Time(msec): " + (b.toInt - a.toInt))
     r
   }
 }
@@ -94,7 +94,5 @@ trait ElvisOperator {
 }
 
 object ElvisOperator extends ElvisOperator
-
-
 
 

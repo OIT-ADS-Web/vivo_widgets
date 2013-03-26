@@ -1,19 +1,17 @@
 package edu.duke.oit.vw.queue
 
-import org.apache.activemq.broker.{BrokerService,TransportConnector}
 import java.net.URI
 
 import edu.duke.oit.vw.solr.VivoSolrIndexer
 
 import akka.actor.Actor
-import akka.util.Logging
 
-object IndexUpdater { // }extends Logging {
+object IndexUpdater {
 
-  def start(vsi: Option[VivoSolrIndexer], hostname:String, port:Int, serviceId: String="VivoWidgets") = {
-    Actor.remote.start(hostname, port) //Start the server
-    Actor.remote.register(serviceId, Actor.actorOf[IndexUpdater]) //Register the actor with the specified service id
-  }
+  // def start(vsi: Option[VivoSolrIndexer], hostname:String, port:Int, serviceId: String="VivoWidgets") = {
+  //   Actor.remote.start(hostname, port) //Start the server
+  //   Actor.remote.register(serviceId, Actor.actorOf[IndexUpdater]) //Register the actor with the specified service id
+  // }
 
 }
 
@@ -37,23 +35,23 @@ object UpdateMessage {
 }
 
 
-class IndexUpdater extends Actor with Logging {
+class IndexUpdater extends Actor {
 
   def receive = {
     case msg:String => {
-      log.debug(">> received message")
+      // log.debug(">> received message")
       val msgString = msg // .bodyAs[String]
-      log.debug(">> msgString: " +msgString)
+      // log.debug(">> msgString: " +msgString)
       val updateMessage = UpdateMessage(msgString)
 
-      log.debug(">> reindex: " + updateMessage.uri)
+      // log.debug(">> reindex: " + updateMessage.uri)
       
       import edu.duke.oit.vw.solr.VivoSolrIndexer
       import edu.duke.oit.vw.scalatra.WidgetsConfig
       
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)  
       vsi.reindexUri(updateMessage.uri)
-      log.debug(">> finished reindexing " + updateMessage.uri)
+      // log.debug(">> finished reindexing " + updateMessage.uri)
     }
     case _ => { 
       println(">> no message!!")

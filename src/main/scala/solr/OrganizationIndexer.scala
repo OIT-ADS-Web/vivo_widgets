@@ -46,12 +46,12 @@ object OrganizationIndexer extends SimpleConversion
                                grants = grants,
                                extraItems = parseExtraItems(organizationData(0),List('type,'name)))
       timer("add solr doc") {
-      val solrDoc = new SolrInputDocument()
-      solrDoc.addField("id",o.uri)
-      solrDoc.addField("group","organizations")
-      solrDoc.addField("json",o.toJson)
-      o.uris.map {uri => solrDoc.addField("uris",uri)}
-      solr.add(solrDoc)
+        val solrDoc = new SolrInputDocument()
+        solrDoc.addField("id",o.uri)
+        solrDoc.addField("group","organizations")
+        solrDoc.addField("json",o.toJson)
+        o.uris.map {uri => solrDoc.addField("uris",uri)}
+        solr.add(solrDoc)
       }
     }
   }

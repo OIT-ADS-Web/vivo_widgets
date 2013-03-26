@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0">
+
+  <!--
+    This listener loads a class in the default package called Scalatra.
+    That class should implement org.scalatra.LifeCycle.  Your app can be
+    configured in Scala code there.
+  -->
+  <!--
+  <listener>
+    <listener-class>org.scalatra.servlet.ScalatraListener</listener-class>
+  </listener>
+  -->
+
+
+  <filter>
+    <filter-name>widgets</filter-name>
+    <filter-class>
+      edu.duke.oit.vw.scalatra.WidgetsFilter
+    </filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>widgetUpdates</filter-name>
+    <filter-class>
+      edu.duke.oit.vw.scalatra.WidgetUpdatesFilter
+    </filter-class>
+  </filter>
+
+
+  <filter-mapping>
+    <filter-name>widgetUpdates</filter-name>
+    <url-pattern>/updates/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>widgets</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>edu.duke.oit.vw.scalatra.VivoWidgetsInitializer</listener-class>
+  </listener>
+
+
+</web-app>

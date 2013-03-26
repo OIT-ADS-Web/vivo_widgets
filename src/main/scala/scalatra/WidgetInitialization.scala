@@ -4,10 +4,10 @@ import org.scalatra.Initializable
 
 trait WidgetInitialization extends Initializable {
     
-  abstract override def initialize(config: Config) {
-    super.initialize(config)
-    // WidgetsConfig.setProperties(setProperties())
-  }
+  // abstract override def initialize(config: Config) {
+  //   super.initialize(config)
+  //   // WidgetsConfig.setProperties(setProperties())
+  // }
   
   
 }
