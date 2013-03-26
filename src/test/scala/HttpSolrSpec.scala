@@ -1,11 +1,12 @@
 package edu.duke.oit.vw.sparql.test
 
-import org.specs._
+import org.specs2.mutable._
 import edu.duke.oit.test.helpers._
 import edu.duke.oit.vw.solr._
 import org.apache.solr.client.solrj.{SolrServer,SolrQuery}
 
 class HttpSolrSpec extends Specification {
+  skipAllIf(true)
 
   "Experimenting with Vivo solr index" should {
     val vivoSolr = TestServers.vivoSolr

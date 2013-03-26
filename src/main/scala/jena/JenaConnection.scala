@@ -16,6 +16,8 @@ import com.hp.hpl.jena.sdb.util.StoreUtils
 import com.hp.hpl.jena.graph.Graph
 import com.hp.hpl.jena.rdf.model.{Resource, ModelFactory, ModelMaker, Model => JModel}
 
+import com.mchange.v2.c3p0.ComboPooledDataSource
+
 import _root_.scala.None
 
 class JenaConnectionInfo(val url: String,
@@ -24,6 +26,21 @@ class JenaConnectionInfo(val url: String,
                          val dbType: String)
 
 object Jena {
+
+  // Connection Pool
+
+  var cpds = new ComboPooledDataSource
+
+  def setupConnectionPool(cInfo: JenaConnectionInfo, dbDriver: String) = {
+    cpds.setDriverClass(dbDriver)
+    cpds.setJdbcUrl(cInfo.url)
+    cpds.setUser(cInfo.user)
+    cpds.setPassword(cInfo.password)
+
+    cpds.setMinPoolSize(1)
+    cpds.setAcquireIncrement(1)
+    cpds.setMaxPoolSize(20)
+  }
 
   // RDB
 
@@ -49,7 +66,7 @@ object Jena {
   }
 
   def connectionSDB[T](cInfo: JenaConnectionInfo)(mFactory: (SDBConnection) => T) = {
-    val sdbConnection = new SDBConnection(cInfo.url, cInfo.user, cInfo.password)
+    val sdbConnection = new SDBConnection(cpds)
     try {
       mFactory(sdbConnection)
     }

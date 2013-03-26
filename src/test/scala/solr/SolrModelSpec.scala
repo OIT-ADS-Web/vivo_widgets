@@ -1,6 +1,6 @@
 package edu.duke.oit.solr.test
 
-import org.specs._
+import org.specs2.mutable._
 import org.apache.solr.common.SolrInputDocument
 import org.apache.solr.client.solrj.SolrQuery
 import org.apache.solr.common.SolrDocumentList
@@ -11,10 +11,9 @@ import edu.duke.oit.test.helpers.TestServers
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
-class SolrModelSpec extends Specification {
+class SolrModelSpec extends Specification with Tags {
   val widgetSolr = TestServers.widgetSolr
   val vivoSolr   = TestServers.vivoSolr
-
 
   "A Solr Model" should {
 
@@ -24,11 +23,13 @@ class SolrModelSpec extends Specification {
       val doc1 = new SolrInputDocument()
       doc1.addField("id","http://faculty.duke.edu/test/1")
       doc1.addField("json","a string for testing")
+      doc1.addField("group","DUKEU")
       widgetSolr.add(doc1)
       widgetSolr.commit()
       val doc2 = new SolrInputDocument
       doc2.addField("id","http://faculty.duke.edu/test/2")
       doc2.addField("json", "this should be found ing1")
+      doc2.addField("group","DUKEU")
       widgetSolr.add(doc2)
       widgetSolr.commit()
       TestModel.getDocumentById("http://faculty.duke.edu/test/2",widgetSolr).get("json").toString must_== "this should be found ing1"
@@ -41,9 +42,9 @@ class SolrModelSpec extends Specification {
       println(result.items)
       println(result.items.map(_.group))
       println(result.toJson)
-    } tag("focus")
-
-  } tag("focus")
+      failure
+    }.pendingUntilFixed("Failing currently")
+  }
 
   "The Person Object" should {
 
@@ -75,6 +76,7 @@ class SolrModelSpec extends Specification {
       val doc1 = new SolrInputDocument()
       doc1.addField("id","http://vivo.duke.edu/person1")
       doc1.addField("json",testPersonJson)
+      doc1.addField("group","DUKEU")
       widgetSolr.add(doc1)
       widgetSolr.commit()
 

@@ -1,6 +1,7 @@
 package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.ElvisOperator
+import edu.duke.oit.vw.scalatra.WidgetsConfig
 
 object TemplateHelpers extends ElvisOperator {
   import org.fusesource.scalate.RenderContext.capture
@@ -12,5 +13,14 @@ object TemplateHelpers extends ElvisOperator {
     if ((value ?: "") != "") {
       capture(body)
     }
+  }
+
+  def fixURL(url:String) = {
+    WidgetsConfig.baseProtocolAndDomain match {
+      /* match the protocol://domain.com  */
+      case Some(base) => url.replaceFirst("^(\\w+:\\/\\/)?[\\w+.]+(?=(\\/|:\\d+))", base)
+      case _ => url
+    }
+    
   }
 }
