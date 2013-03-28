@@ -8,9 +8,9 @@
   </appender>
 
   <logger name="edu.duke.oit.vw.utils.Timer" level="debug" />
-  <logger name="edu.duke.oit.vw.scalatra" level="debug" />
+  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="debug" />
 
-  <root level="debug">
+  <root level="info">
     <appender-ref ref="STDOUT" />
   </root>
 
