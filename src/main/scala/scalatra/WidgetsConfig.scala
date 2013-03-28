@@ -56,8 +56,8 @@ object WidgetsConfig {
   var vivoServer:SolrServer = _
 
   def prepareCore = {
-    log.info("Adding Widgets core to VIVO solr index...")
-    log.info("getting from: " + properties("WidgetsSolr.directory"))
+    log.debug("Adding Widgets core to VIVO solr index...")
+    log.debug("getting from: " + properties("WidgetsSolr.directory"))
     Solr.addCore(vivoServer, "vivowidgetcore",properties("WidgetsSolr.directory"))
 
     log.info("Connecting Widgets Core")
@@ -65,7 +65,7 @@ object WidgetsConfig {
   }
   
   def setupConfig = {
-    log.info("Configuring VIVO Widgets...")
+    log.debug("Configuring VIVO Widgets...")
     
     server = new Vivo(url      = properties("VitroConnection.DataSource.url"),
                       user     = properties("VitroConnection.DataSource.username"),

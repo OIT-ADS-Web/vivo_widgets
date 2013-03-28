@@ -40,6 +40,8 @@ object Jena {
     cpds.setMinPoolSize(1)
     cpds.setAcquireIncrement(1)
     cpds.setMaxPoolSize(20)
+    cpds.setMaxConnectionAge(3600)
+    cpds.setMaxIdleTime(1800)
   }
 
   // RDB

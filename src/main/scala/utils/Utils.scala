@@ -12,7 +12,7 @@ trait ToMethods {
 trait WidgetLogging {
   import org.slf4j.Logger
   import org.slf4j.LoggerFactory
-  
+
   val log = LoggerFactory.getLogger(this.getClass)
 }
 

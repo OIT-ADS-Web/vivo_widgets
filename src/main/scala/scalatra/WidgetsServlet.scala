@@ -1,7 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int}
-//import edu.duke.oit.vw.solr.{Person,Organization,SolrEntity,VivoSearcher}
 import edu.duke.oit.vw.solr._
 import java.net.URL
 import org.scalatra._

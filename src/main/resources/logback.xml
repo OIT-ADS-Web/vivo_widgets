@@ -7,7 +7,11 @@
     </encoder>
   </appender>
 
-  <root level="info">
+  <logger name="edu.duke.oit.vw.utils.Timer" level="debug" />
+  <logger name="edu.duke.oit.vw.scalatra" level="debug" />
+
+  <root level="debug">
     <appender-ref ref="STDOUT" />
   </root>
+
 </configuration>
