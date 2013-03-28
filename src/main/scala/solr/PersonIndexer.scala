@@ -82,20 +82,3 @@ object PersonIndexer extends SimpleConversion
   }
 }
 
-//object RichPersonIndexer extends SimpleConversion 
-  //with Timer
-  //with ScalateTemplateStringify 
-  //with WidgetLogging {
-
-  //def index(uri: String,solr: SolrServer) = {
-    //val personModel = ModelFactory.createDefaultModel().read("http://localhost:8080/individual?uri="+uri+"&format=rdfxml&include=all")
-    //val ontologyModel = ModelFactory.createDefaultModel().read("http://vivoweb.org/ontology/core")
-    //val queryModel = ModelFactory.createUnion(personModel,ontologyModel)
-    //val personSparql = renderFromClassPath("rich_export_sparql/personData.ssp", Map("uri" -> uri))
-    //val personData = Sparqler.selectingFromModel(personModel,personSparql){ results => Sparqler.simpleResults(results)}
-    //println(personData)
-    //val publicationSparql = renderFromClassPath("rich_export_sparql/publications.ssp")
-    //val publicationData = Sparqler.selectingFromModel(personModel,publicationSparql){ results => Sparqler.simpleResults(results)}
-    //println(publicationData)
-  //}
-//}
