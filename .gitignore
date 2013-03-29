@@ -76,3 +76,5 @@ solr/data
 src/main/resources/*deploy.properties
 .project
 *.orig
+
+!Gemfile.lock
