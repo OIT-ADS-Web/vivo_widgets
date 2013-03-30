@@ -14,3 +14,12 @@ case class Grant(uri:String,
   }
 
 }
+
+object Grant extends ExtraParams {
+  def build(grant:Map[Symbol,String]) = {
+    new Grant(uri         = grant('agreement).replaceAll("<|>",""),
+              vivoType    = grant('type).replaceAll("<|>",""),
+              name        = grant('grantName),
+              extraItems  = parseExtraItems(grant, List('agreement,'type,'grantName)))
+  }
+}
