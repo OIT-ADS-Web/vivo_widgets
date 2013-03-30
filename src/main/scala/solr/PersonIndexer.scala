@@ -4,7 +4,6 @@ import org.apache.solr.client.solrj.SolrServer
 import org.apache.solr.common.SolrInputDocument
 
 import edu.duke.oit.vw.utils._
-import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
@@ -23,15 +22,8 @@ object PersonIndexer extends SimpleConversion
       val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext, useCache)
       if (personData.size > 0) {
 
-        // val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext, useCache)
-        // val pubs             = publicationData.map(Publication.build(vivo, _)).asInstanceOf[List[Publication]]
         val pubs = Publication.fromUri(vivo, uriContext, useCache)
-
-        val grantData = vivo.selectFromTemplate("sparql/grants.ssp", uriContext, useCache)
-        val grants    = grantData.map(Grant.build(_)).asInstanceOf[List[Grant]]
-
-        // val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext, useCache)
-        // val courses     = courseData.map(Course.build(_)).asInstanceOf[List[Course]]
+        val grants = Grant.fromUri(vivo, uriContext, useCache)
         val courses = Course.fromUri(vivo, uriContext, useCache)
 
         val p = Person.build(uri, personData(0), pubs, grants, courses)

@@ -1,7 +1,6 @@
 package edu.duke.oit.vw.solr
 
 import edu.duke.oit.vw.utils._
-import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 case class Publication(uri:String,
                        vivoType:String,
@@ -24,7 +23,7 @@ case class Publication(uri:String,
   }
 }
 
-object Publication extends ExtraParams  with ScalateTemplateStringify {
+object Publication extends ExtraParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
     val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext, useCache)
@@ -40,8 +39,9 @@ object Publication extends ExtraParams  with ScalateTemplateStringify {
   }
 
   def getAuthors(pubURI: String, vivo: Vivo,useCache:Boolean = false): List[String] = {
-    val authorSparql = renderFromClassPath("sparql/authors.ssp", Map("uri" -> pubURI))
-    val authorData = vivo.select(authorSparql,useCache)
+    // val authorSparql = renderFromClassPath("sparql/authors.ssp", Map("uri" -> pubURI))a
+    // val authorData = vivo.select(authorSparql,useCache)
+    val authorData = vivo.selectFromTemplate("sparql/authors.ssp", Map("uri" -> pubURI), useCache)
 
     val authorsWithRank = authorData.map(a => (a('authorName),a.getOrElse('rank, 0))).distinct
     authorsWithRank.sortWith((a1,a2) => (Int(a1._2.toString).get < Int(a2._2.toString).get)).map(_._1)
