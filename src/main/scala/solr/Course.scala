@@ -14,3 +14,19 @@ case class Course(uri:String,
   }
 
 }
+
+object Course extends ExtraParams {
+
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
+    val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext, useCache)
+    courseData.map(build(_)).asInstanceOf[List[Course]]
+  }
+
+  def build(course:Map[Symbol,String]) = {
+    new Course(uri      = course('course).replaceAll("<|>",""),
+               vivoType = course('type).replaceAll("<|>",""),
+               name     = course('courseName),
+               extraItems = parseExtraItems(course,List('course,'type,'courseName)))
+  }
+
+}

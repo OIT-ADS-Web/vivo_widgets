@@ -95,4 +95,10 @@ trait ElvisOperator {
 
 object ElvisOperator extends ElvisOperator
 
+trait ExtraParams {
+  def parseExtraItems(resultMap: Map[Symbol,String], requiredKeys: List[Symbol]): Option[Map[String,String]] = {
+    val extraItems = resultMap -- requiredKeys
+    Option(extraItems.map(kvp => (kvp._1.name -> kvp._2)))
+  }
 
+}
