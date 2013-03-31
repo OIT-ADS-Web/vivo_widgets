@@ -1,6 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
-import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int}
+import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,Timer}
 import edu.duke.oit.vw.solr._
 import java.net.URL
 import org.scalatra._
@@ -17,7 +17,8 @@ object FormatJSONP extends FormatType
 
 class WidgetsFilter extends ScalatraFilter
   with ScalateSupport 
-  with ScalateTemplateStringify {
+  with ScalateTemplateStringify 
+  with Timer {
 
   // GET /people/{collectionName}/5.jsonp?uri={uri}
   get("/people/:collectionName/:count.:format") {
@@ -96,21 +97,22 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
 
-  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String) = {
+  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     items match {
       case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
       case _ => modelData.put(collectionName, collection)
     }
-    modelData.put("style",style)
-    modelData.put("formatting",formatting)
-    modelData.put("searchURI",uri("/search.html"))
+    modelData.put("style", style)
+    modelData.put("formatting", formatting)
+    modelData.put("searchURI", uri("/search.html"))
+    modelData.put("layout", "")
 
     val template = TemplateHelpers.tpath(collectionName + ".jade")
-    formatType match {
-      case FormatJS => renderTemplateString(servletContext, template, modelData.toMap)
-      case FormatHTML => templateEngine.layout(template, modelData.toMap)
-    }
+
+    timer("WidgetsServlet.renderTemplateString") {
+      renderTemplateString(servletContext, template, modelData.toMap)
+    }.asInstanceOf[String]
   }
   
   protected def renderCollectionData(collection: List[AnyRef]) = {
@@ -118,11 +120,13 @@ class WidgetsFilter extends ScalatraFilter
       case FormatJSON => Json.toJson(collection)
       case FormatJSONP => "vivoWidgetResult(" + Json.toJson(collection) + ");"
       case FormatHTML => {
-        formatCollection(FormatHTML, params("collectionName"),
-                         collection,
-                         Int(params.getOrElse("count", "all")),
-                         params.getOrElse("formatting", "detailed"),
-                         params.getOrElse("style", "yes"))
+        timer("WidgetsServlet.renderCollectionData") {
+          formatCollection(FormatHTML, params("collectionName"),
+                           collection,
+                           Int(params.getOrElse("count", "all")),
+                           params.getOrElse("formatting", "detailed"),
+                           params.getOrElse("style", "yes"))
+        }
       }
       case FormatJS => {
         val output = formatCollection(FormatJS, params("collectionName"),
