@@ -6,6 +6,7 @@ import edu.duke.oit.vw.jena.Sparqler
 import com.hp.hpl.jena.query.{QueryFactory,Query,QueryExecutionFactory,QueryExecution,ResultSet}
 
 class SparqlerSpec extends Specification {
+  skipAllIf(true)
 
   "A Sparqler" should {
 

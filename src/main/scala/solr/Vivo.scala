@@ -3,12 +3,18 @@ package edu.duke.oit.vw.solr
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import edu.duke.oit.vw.jena._
+import edu.duke.oit.vw.utils._
+
 import com.hp.hpl.jena.sdb.SDBFactory
 import com.hp.hpl.jena.sdb.sql.SDBConnection
 import com.hp.hpl.jena.query._
 import com.hp.hpl.jena.rdf.model.{Model => JModel, ModelFactory}
 
-class Vivo(url: String, user: String, password: String, dbType: String, driver: String) extends ScalateTemplateStringify{
+
+class Vivo(url: String, user: String, password: String, dbType: String, driver: String) 
+  extends ScalateTemplateStringify
+  with WidgetLogging 
+  with Timer {
 
   def loadDriver() = {
     Class.forName(driver)
@@ -16,7 +22,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
 
   def initializeJenaCache() = {
     loadDriver()
-    JenaCache.setFromDatabase(new JenaConnectionInfo(url,user,password,dbType),
+    JenaCache.setFromDatabase(new JenaConnectionType(dbType),
                               "urn:x-arq:UnionGraph")
   }
 
@@ -33,7 +39,7 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
   }
 
   def queryLive(sparql: String): List[Map[Symbol,String]] = {
-    Jena.sdbModel(new JenaConnectionInfo(url,user,password,dbType),"urn:x-arq:UnionGraph") { queryModel =>
+    Jena.sdbModel(new JenaConnectionType(dbType),"urn:x-arq:UnionGraph") { queryModel =>
       Sparqler.selectingFromModel(queryModel,sparql) { resultSet => Sparqler.simpleResults(resultSet) }
     }
   }
@@ -47,5 +53,11 @@ class Vivo(url: String, user: String, password: String, dbType: String, driver: 
   }
 
   def numPeople(useCache: Boolean = false) = select(renderFromClassPath("sparql/numberOfPeople.ssp"),useCache)(0)('numPeople).toInt
+
+  def selectFromTemplate(sparqlTemplate: String, context: Map[String, Any], useCache: Boolean = false): List[Map[Symbol, String]] = {
+    val sparql = renderFromClassPath(sparqlTemplate, context)
+    log.debug("sparql: " + sparql)
+    timer("select $sparqlTemplate") { select(sparql, useCache) }.asInstanceOf[List[Map[Symbol, String]]]
+  }
 
 }
