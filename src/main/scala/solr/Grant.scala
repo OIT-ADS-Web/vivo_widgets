@@ -24,8 +24,8 @@ object Grant extends ExtraParams {
   }
 
   def build(grant:Map[Symbol,String]) = {
-    new Grant(uri         = grant('agreement).replaceAll("<|>",""),
-              vivoType    = grant('type).replaceAll("<|>",""),
+    new Grant(uri         = grant('agreement).stripBrackets(),
+              vivoType    = grant('type).stripBrackets(),
               name        = grant('grantName),
               extraItems  = parseExtraItems(grant, List('agreement,'type,'grantName)))
   }
