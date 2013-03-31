@@ -23,8 +23,8 @@ object Course extends ExtraParams {
   }
 
   def build(course:Map[Symbol,String]) = {
-    new Course(uri      = course('course).replaceAll("<|>",""),
-               vivoType = course('type).replaceAll("<|>",""),
+    new Course(uri      = course('course).stripBrackets(),
+               vivoType = course('type).stripBrackets(),
                name     = course('courseName),
                extraItems = parseExtraItems(course,List('course,'type,'courseName)))
   }
