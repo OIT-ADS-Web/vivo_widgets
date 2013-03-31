@@ -30,20 +30,18 @@ object Publication extends ExtraParams {
     publicationData.map(build(vivo, _)).asInstanceOf[List[Publication]]
   }
 
-  def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean = false) = {
-    new Publication(uri      = pub('publication).replaceAll("<|>",""),
-                    vivoType = pub('type).replaceAll("<|>",""),
+  def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean=false, authors: (String, Vivo, Boolean) => List[String]=Publication.getAuthors) = {
+    new Publication(uri      = pub('publication).stripBrackets(),
+                    vivoType = pub('type).stripBrackets(),
                     title    = pub('title),
-                    authors  = getAuthors(pub('publication).replaceAll("<|>",""), vivo, useCache),
+                    authors  = authors(pub('publication).stripBrackets(), vivo, useCache),
                     extraItems = parseExtraItems(pub,List('publication,'type,'title)))
   }
 
   def getAuthors(pubURI: String, vivo: Vivo,useCache:Boolean = false): List[String] = {
-    // val authorSparql = renderFromClassPath("sparql/authors.ssp", Map("uri" -> pubURI))a
-    // val authorData = vivo.select(authorSparql,useCache)
     val authorData = vivo.selectFromTemplate("sparql/authors.ssp", Map("uri" -> pubURI), useCache)
 
-    val authorsWithRank = authorData.map(a => (a('authorName),a.getOrElse('rank, 0))).distinct
+    val authorsWithRank = authorData.map(a => (a('authorName), a.getOrElse('rank, 0))).distinct
     authorsWithRank.sortWith((a1,a2) => (Int(a1._2.toString).get < Int(a2._2.toString).get)).map(_._1)
   }
 

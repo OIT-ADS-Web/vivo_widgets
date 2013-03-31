@@ -20,10 +20,14 @@ import com.mchange.v2.c3p0.ComboPooledDataSource
 
 import _root_.scala.None
 
+abstract class JenaConnectionBase(val dbType: String)
+
 class JenaConnectionInfo(val url: String,
                          val user: String,
                          val password: String,
-                         val dbType: String)
+                         dbType: String) extends JenaConnectionBase(dbType)
+
+class JenaConnectionType(dbType: String) extends JenaConnectionBase(dbType)
 
 object Jena {
 
@@ -67,8 +71,13 @@ object Jena {
     new StoreDesc(LayoutType.fetch(layoutType), DatabaseType.fetch(dt))
   }
 
-  def connectionSDB[T](cInfo: JenaConnectionInfo)(mFactory: (SDBConnection) => T) = {
-    val sdbConnection = new SDBConnection(cpds)
+  def connectionSDB[T](cBase: JenaConnectionBase)(mFactory: (SDBConnection) => T) = {
+    // if it is the full connection info, establish the connection;
+    // otherwise use the connection pool
+    val sdbConnection = cBase match {
+      case cInfo:JenaConnectionInfo => new SDBConnection(cInfo.url, cInfo.user, cInfo.password)
+      case _                        => new SDBConnection(cpds)
+    }
     try {
       mFactory(sdbConnection)
     }
@@ -77,9 +86,9 @@ object Jena {
     }
   }
 
-  def truncateAndCreateStore(cInfo: JenaConnectionInfo) = {
-    connectionSDB(cInfo) { sdbConnection =>
-      val store = SDBFactory.connectStore(sdbConnection, storeDesc(Some(cInfo.dbType)))
+  def truncateAndCreateStore(cBase: JenaConnectionBase) = {
+    connectionSDB(cBase) { sdbConnection =>
+      val store = SDBFactory.connectStore(sdbConnection, storeDesc(Some(cBase.dbType)))
       try {
         if (StoreUtils.isFormatted(store)) {
           store.getTableFormatter().truncate()
@@ -92,12 +101,12 @@ object Jena {
     }
   }
 
-  def sdbStore[T](cInfo: JenaConnectionInfo)(mFactory: (Store) => T) = {
-    connectionSDB(cInfo) {
+  def sdbStore[T](cBase: JenaConnectionBase)(mFactory: (Store) => T) = {
+    connectionSDB(cBase) {
       sdbConnection =>
-        val store = SDBFactory.connectStore(sdbConnection, storeDesc(Some(cInfo.dbType)))
+        val store = SDBFactory.connectStore(sdbConnection, storeDesc(Some(cBase.dbType)))
       try {
-        val graph: Graph = SDBFactory.connectDefaultGraph(storeDesc(Some(cInfo.dbType)))
+        val graph: Graph = SDBFactory.connectDefaultGraph(storeDesc(Some(cBase.dbType)))
         mFactory(store)
       }
       finally {
@@ -106,15 +115,15 @@ object Jena {
     }
   }
 
-  def sdbModel[T](cInfo: JenaConnectionInfo, modelUri: String)(mFactory: (JModel) => T) = {
-    sdbStore(cInfo) {
+  def sdbModel[T](cBase: JenaConnectionBase, modelUri: String)(mFactory: (JModel) => T) = {
+    sdbStore(cBase) {
       store =>
         mFactory(SDBFactory.connectNamedModel(store, modelUri))
     }
   }
 
-  def sdbDefaultModel(cInfo: JenaConnectionInfo)(mFactory: (JModel) => Unit) = {
-    sdbStore(cInfo) {
+  def sdbDefaultModel(cBase: JenaConnectionBase)(mFactory: (JModel) => Unit) = {
+    sdbStore(cBase) {
       store =>
         mFactory(SDBFactory.connectDefaultModel(store))
     }

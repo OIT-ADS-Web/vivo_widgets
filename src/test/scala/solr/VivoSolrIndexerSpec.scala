@@ -9,11 +9,11 @@ import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 import edu.duke.oit.test.helpers.{TestServers,SampleLoader}
 
 class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
-  // skipAllIf(true)
+  skipAllIf(true)
   
   val vivo = TestServers.vivo
   val solrSrv = TestServers.widgetSolr
-  TestServers.loadSampleData
+  // TestServers.loadSampleData
 
   "A Vivo Solr Indexer" should {
     solrSrv.deleteByQuery("*:*")

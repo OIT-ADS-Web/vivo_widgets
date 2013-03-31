@@ -43,7 +43,6 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
           QueryRunner.run(model)
           println("------------------------------------\ndbModel:")
           QueryRunner.run(dbModel)
-
       }
 
 
@@ -70,8 +69,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
       println("sleeping...")
       Thread.sleep(10000)
       QueryRunner.run(tModel)
-
-    } //tag ("focus")
+    }
 
     "use Jena cache" in {
       JenaCache.setFromDatabase(jenaConnection, "urn:x-arq:UnionGraph")
@@ -93,7 +91,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
           println("r4: " + results2.size)
         }
       }
-
+     
     }
 
   }
