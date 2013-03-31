@@ -24,7 +24,7 @@ trait Timer {
     val a = System.currentTimeMillis
     var r = continue
     val b = System.currentTimeMillis
-    timerLog.debug("$label | Total Time(msec): " + (b.toInt - a.toInt))
+    timerLog.debug(label + " | Total Time(msec): " + (b.toInt - a.toInt))
     r
   }
 }
