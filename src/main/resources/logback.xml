@@ -9,7 +9,7 @@
   </appender>
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${widgetLoggingDir-./}widgets.log</file>
+    <file>${widget.logging.dir:-}widgets.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
       <fileNamePattern>widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
