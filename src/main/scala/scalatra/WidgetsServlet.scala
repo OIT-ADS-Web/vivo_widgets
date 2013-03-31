@@ -110,7 +110,7 @@ class WidgetsFilter extends ScalatraFilter
 
     val template = TemplateHelpers.tpath(collectionName + ".jade")
 
-    timer("WidgetsServlet.renderTemplateString") {
+    timer("WidgetsServlet.formatCollection") {
       renderTemplateString(servletContext, template, modelData.toMap)
     }.asInstanceOf[String]
   }
