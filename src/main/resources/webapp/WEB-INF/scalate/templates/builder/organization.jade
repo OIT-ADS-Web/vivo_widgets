@@ -6,7 +6,7 @@
 -@ val theme: String = ""
 -@ import val organization: edu.duke.oit.vw.solr.Organization
 
-!!!
+!!! 5
 
 html(lang="en")
   head
@@ -48,8 +48,6 @@ html(lang="en")
       div(id="branding")
         h1(class="vivo_logo") VIVO
       div(id="rightCol")
-        div(id="env" style="color:red;padding:0.5em")
-          | TEST: For testing purposing only and the data may not be accurate.
         div(id="settings")
         div(id="host")
           strong A preview will appear here
@@ -57,8 +55,9 @@ html(lang="en")
           img(alt="Loading..." src="#{contextUri}/vw/themes/#{theme}/images/loading.gif")/
       div(id="form")
         input(id="uri" type="hidden" value="#{organization.uri}")
-        h1 #{organization.name}&#x27;s VIVO Feeds
-
+        h1 
+          a(href="#{fixURL(organization.uri)}") #{organization.name}&#x27;s
+          | Widgets
         ul
           li
             | Collection to Display:
@@ -96,9 +95,9 @@ html(lang="en")
               | The code changes based on your selection.
           li(class="no_border")
             div(id="d_clip_container" style="position:relative")
-              div(id="d_clip_button"  class="action") Copy to Clipboard
+              div(id="d_clip_button"  class="btn vivo-style") Copy to Clipboard
           li(class="no_border")
-            a(id="advanced" href="#" class="action") Advanced
+            a(id="advanced" href="#" class="btn vivo-style") Advanced
           li(style="display:none" id="otherFormats")
             h1 Other formats
             a(href="#" target="_blank" id="jsonp") JSONP
