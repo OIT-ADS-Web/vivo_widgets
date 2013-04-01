@@ -1,4 +1,5 @@
 <configuration>
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <!-- encoders are assigned the type
          ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
@@ -7,11 +8,34 @@
     </encoder>
   </appender>
 
-  <logger name="edu.duke.oit.vw.utils.Timer" level="debug" />
-  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="debug" />
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${widget.logging.dir:-}widgets.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+
+      <!-- keep 20 days' worth of history -->
+      <maxHistory>20</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender> 
+
+  <logger name="widget.timer" level="debug">
+    <appender-ref ref="FILE"/>
+  </logger>
+  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="debug">
+    <appender-ref ref="FILE"/>
+  </logger>
+  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="debug">
+    <appender-ref ref="FILE"/>
+  </logger>
 
   <root level="info">
     <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE"/>
   </root>
 
 </configuration>

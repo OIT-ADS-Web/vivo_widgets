@@ -46,14 +46,13 @@ object JenaCache {
   val jenaActor = system.actorOf(Props[JenaActor], name = "jenacache")
   implicit val timeout = Timeout(5 seconds)
 
-  def setFromDatabase(cInfo: JenaConnectionInfo, modelUri: String) {
-    Jena.sdbModel(cInfo, modelUri) {
+  def setFromDatabase(cBase: JenaConnectionBase, modelUri: String) {
+    Jena.sdbModel(cBase, modelUri) {
       dbModel =>
         var model = TDBFactory.createModel // ModelFactory.createDefaultModel
         model.add(dbModel)
         setModel(model)
     }
-
   }
 
   def setModel(m: JModel) = {

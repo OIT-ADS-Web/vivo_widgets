@@ -3,6 +3,9 @@ package edu.duke.oit.vw.utils
 import org.scardf._
 import org.scardf.NodeConverter._
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 trait ToMethods {
   implicit def toMethods(obj: AnyRef) = new {
     def methods = obj.getClass.getMethods.map(_.getName)
@@ -10,18 +13,18 @@ trait ToMethods {
 }
 
 trait WidgetLogging {
-  import org.slf4j.Logger
-  import org.slf4j.LoggerFactory
-
   val log = LoggerFactory.getLogger(this.getClass)
 }
 
-trait Timer extends WidgetLogging {
+trait Timer {
+
   def timer(label: String = "")(continue: => Any) = {
-    var a = System.currentTimeMillis
+    val timerLog = LoggerFactory.getLogger("widget.timer")
+    val c = this.getClass
+    val a = System.currentTimeMillis
     var r = continue
-    var b = System.currentTimeMillis
-    log.debug(label + " | Total Time(msec): " + (b.toInt - a.toInt))
+    val b = System.currentTimeMillis
+    timerLog.debug(label + " | Total Time(msec): " + (b.toInt - a.toInt))
     r
   }
 }
@@ -95,4 +98,20 @@ trait ElvisOperator {
 
 object ElvisOperator extends ElvisOperator
 
+trait ExtraParams {
 
+  implicit def addStripBackets(s:String)=new StripBracketsToString(s)
+
+  def parseExtraItems(resultMap: Map[Symbol,String], requiredKeys: List[Symbol]): Option[Map[String,String]] = {
+    val extraItems = resultMap -- requiredKeys
+    Option(extraItems.map(kvp => (kvp._1.name -> kvp._2)))
+  }
+
+}
+
+
+class StripBracketsToString(underlying:String){
+  def stripBrackets() = {
+    underlying.replaceAll("<|>","")
+  }
+}
