@@ -23,6 +23,7 @@ object JettyLauncher {
     context.setResourceBase(webDir)
     context.addServlet(classOf[DefaultServlet], "/")
 
+    server.setSendServerVersion(false)
     server.setHandler(context)
     server.setThreadPool(threadPool)
 
