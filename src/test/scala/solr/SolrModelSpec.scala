@@ -78,9 +78,10 @@ class SolrModelSpec extends Specification with Tags {
       doc1.addField("json",testPersonJson)
       doc1.addField("group","DUKEU")
       widgetSolr.add(doc1)
-      widgetSolr.commit()
+      widgetSolr.commit(true,true)
 
-      val p = Person.find("http://vivo.duke.edu/person1",widgetSolr).get
+      val po = Person.find("http://vivo.duke.edu/person1",widgetSolr)
+      val p = po.get
       p.uri  must_== "http://vivo.duke.edu/person1"
       p.name must_== "Smith J"
       p.publications(0).title must_== "Programming Tips"
