@@ -17,8 +17,9 @@ case class Grant(uri:String,
 
 object Grant extends ExtraParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
-    val grantData = vivo.selectFromTemplate("sparql/grants.ssp", uriContext, useCache)
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
+              useCache: Boolean = false, templatePath: String="sparql/grants.ssp") = {
+    val grantData = vivo.selectFromTemplate(templatePath, uriContext, useCache)
     grantData.map(build(_)).asInstanceOf[List[Grant]]
 
   }

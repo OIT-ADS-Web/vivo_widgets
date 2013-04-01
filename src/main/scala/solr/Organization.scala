@@ -3,12 +3,22 @@ package edu.duke.oit.vw.solr
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
-object Organization extends SolrModel {
+object Organization extends SolrModel with ExtraParams {
+
   def find(uri: String, solr: SolrServer): Option[Organization] = {
     getDocumentById(uri,solr) match {
       case Some(sd) => Option(OrganizationExtraction(sd.get("json").toString))
       case _ => None
     }
+  }
+
+  def build(uri:String, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
+    new Organization(uri,
+                     vivoType    = orgData('type).stripBrackets(),
+                     name        = orgData('name),
+                     people      = people,
+                     grants      = grants,
+                     extraItems  = parseExtraItems(orgData,List('type,'name)))
   }
 
 }

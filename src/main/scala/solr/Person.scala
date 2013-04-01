@@ -4,6 +4,7 @@ import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
 object Person extends SolrModel with ExtraParams {
+
   def find(uri: String, solr: SolrServer): Option[Person] = {
     getDocumentById(uri,solr) match {
       case Some(sd) => Option(PersonExtraction(sd.get("json").toString))
@@ -13,7 +14,7 @@ object Person extends SolrModel with ExtraParams {
 
   def build(uri:String, personData:Map[Symbol,String], pubs:List[Publication], grants:List[Grant], courses:List[Course]): Person = {
     new Person(uri,
-               vivoType = personData('type).replaceAll("<|>",""),
+               vivoType = personData('type).stripBrackets(),
                name     = personData('name),
                title    = personData('title),
                publications = pubs,

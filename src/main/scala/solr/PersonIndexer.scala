@@ -26,8 +26,8 @@ object PersonIndexer extends SimpleConversion
         val grants = Grant.fromUri(vivo, uriContext, useCache)
         val courses = Course.fromUri(vivo, uriContext, useCache)
 
-        val p = Person.build(uri, personData(0), pubs, grants, courses)
-        timer("add solr doc") {
+        val p = Person.build(uri, personData.head, pubs, grants, courses)
+        timer("add person to solr") {
           val solrDoc = new SolrInputDocument()
           solrDoc.addField("id",p.uri)
           solrDoc.addField("group","people")
