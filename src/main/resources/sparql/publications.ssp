@@ -24,3 +24,4 @@ where {
     ?publication core:dateTimeValue ?datetime . ?datetime core:dateTime ?year .
   }
 }
+order by desc(?datetime)

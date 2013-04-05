@@ -9,3 +9,4 @@ where {
   ?course vitro:mostSpecificType ?type .
   ?course rdfs:label ?courseName .
 }
+order by ?courseName

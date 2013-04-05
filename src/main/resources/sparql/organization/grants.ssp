@@ -16,3 +16,4 @@ UNION
   ?agreement rdfs:label ?grantName .
   ?agreement vitro:mostSpecificType ?type .
 }}
+order by ?grantName
