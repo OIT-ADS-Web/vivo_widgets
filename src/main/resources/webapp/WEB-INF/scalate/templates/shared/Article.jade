@@ -7,7 +7,7 @@
 = authors.mkString("; ")
 - if(!empty(year)) 
   | (#{year}).
-| "#{title}." #{getOrElse("publishedIn","")}.
+! "#{title}." #{getOrElse("publishedIn","")}.
 | #{get("volume") ?: ""}
 - if(!empty(get("issue"))) 
   | (#{get("issue")})
