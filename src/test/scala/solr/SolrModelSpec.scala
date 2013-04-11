@@ -60,7 +60,7 @@ class SolrModelSpec extends Specification with Tags {
               "vivoType": "http://purl.org/ontology/bibo/Article",
               "title": "Programming Tips",
               "authors": ["Lawrence GL","Smith J"],
-              "extraItems": {
+              "attributes": {
                 "issue": "13",
                 "year": "2005",
                 "other_uri": "http://vivo.duke.edu/test2323423"
@@ -138,7 +138,7 @@ class SolrExtractionSpec extends Specification {
           "vivoType": "http://purl.org/ontology/bibo/Article",
           "title": "Programming Tips",
           "authors": ["Lawrence GL","Smith J"],
-          "extraItems": {
+          "attributes": {
             "issue": "13",
             "year": "2005"
           }
@@ -153,14 +153,14 @@ class SolrJsonProducingSpec extends Specification {
   import edu.duke.oit.vw.solr._
   import edu.duke.oit.vw.utils.Json
 
-  "Produce json for extraItems" in {
-    val ei = new ExtraItems(Option(Map("a" -> "b", "c" -> "d")))
-    ei.toJson must_== """{"extraItems":{"a":"b","c":"d"}}"""
+  "Produce json for attributes" in {
+    val ei = new VivoAttributes("uri", "type", "label", Option(Map("a" -> "b", "c" -> "d")))
+    ei.toJson must_== """{"attributes":{"a":"b","c":"d"}}"""
   }
 
   "Produce json from the Json object" in {
-    val ei = new ExtraItems(Option(Map("a" -> "b", "c" -> "d")))
-    Json.toJson(ei) must_== """{"extraItems":{"a":"b","c":"d"}}"""
+    val ei = new VivoAttributes("uri", "type", "label", Option(Map("a" -> "b", "c" -> "d")))
+    Json.toJson(ei) must_== """{"attributes":{"a":"b","c":"d"}}"""
   }
 
   "Produce publication json" in {
@@ -168,6 +168,6 @@ class SolrJsonProducingSpec extends Specification {
                           "http://purl.org/ontology/bibo/Article",
                           "Programming Tips",
                           Option(Map("issue" -> "13","year"->"2005")))
-    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","title":"Programming Tips","extraItems":{"issue":"13","year":"2005"}}"""
+    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","title":"Programming Tips","attributes":{"issue":"13","year":"2005"}}"""
   }
 }

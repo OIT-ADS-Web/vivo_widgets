@@ -5,8 +5,8 @@ import edu.duke.oit.vw.utils._
 case class Grant(uri:String,
                  vivoType: String,
                  name: String,
-                 extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson 
+                 attributes:Option[Map[String, String]])
+     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson 
 {
 
   override def uris():List[String] = {
@@ -15,7 +15,7 @@ case class Grant(uri:String,
 
 }
 
-object Grant extends ExtraParams {
+object Grant extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
               useCache: Boolean = false, templatePath: String="sparql/grants.ssp") = {
@@ -28,7 +28,7 @@ object Grant extends ExtraParams {
     new Grant(uri         = grant('agreement).stripBrackets(),
               vivoType    = grant('type).stripBrackets(),
               name        = grant('grantName),
-              extraItems  = parseExtraItems(grant, List('agreement,'type,'grantName)))
+              attributes  = parseAttributes(grant, List('agreement,'type,'grantName)))
   }
 
 }

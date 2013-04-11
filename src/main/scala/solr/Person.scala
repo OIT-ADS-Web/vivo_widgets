@@ -3,7 +3,7 @@ package edu.duke.oit.vw.solr
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
-object Person extends SolrModel with ExtraParams {
+object Person extends SolrModel with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Person] = {
     getDocumentById(uri,solr) match {
@@ -20,7 +20,7 @@ object Person extends SolrModel with ExtraParams {
                publications = pubs,
                grants = grants,
                courses = courses,
-               extraItems = parseExtraItems(personData, List('type,'name,'title)))
+               attributes = parseAttributes(personData, List('type,'name,'title)))
   }
 }
 
@@ -31,8 +31,8 @@ case class Person(uri:String,
                   publications:List[Publication],
                   grants:List[Grant],
                   courses:List[Course],
-                  extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson
+                  attributes:Option[Map[String, String]])
+     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
 {
 
   override def uris() = {

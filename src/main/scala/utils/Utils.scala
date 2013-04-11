@@ -106,11 +106,11 @@ trait ElvisOperator {
 
 object ElvisOperator extends ElvisOperator
 
-trait ExtraParams {
+trait AttributeParams {
 
   implicit def addStripBackets(s:String)=new StripBracketsToString(s)
 
-  def parseExtraItems(resultMap: Map[Symbol,String], requiredKeys: List[Symbol]): Option[Map[String,String]] = {
+  def parseAttributes(resultMap: Map[Symbol,String], requiredKeys: List[Symbol]): Option[Map[String,String]] = {
     val extraItems = resultMap -- requiredKeys
     Option(extraItems.map(kvp => (kvp._1.name -> kvp._2)))
   }
