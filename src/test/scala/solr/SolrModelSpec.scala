@@ -117,7 +117,6 @@ class SolrExtractionSpec extends Specification {
     person.publications mustEqual List(Publication( "http://vivo.duke.edu/test1",
                                               "http://purl.org/ontology/bibo/Article",
                                               "Programming Tips",
-                                              List("Lawrence GL", "Smith J"),
                                               Some(Map("issue" -> "13","year" -> "2005"))) )
   }
 
@@ -168,8 +167,7 @@ class SolrJsonProducingSpec extends Specification {
     val pub = Publication("http://vivo.duke.edu/test1",
                           "http://purl.org/ontology/bibo/Article",
                           "Programming Tips",
-                          List("Smith J"),
                           Option(Map("issue" -> "13","year"->"2005")))
-    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","title":"Programming Tips","authors":["Smith J"],"extraItems":{"issue":"13","year":"2005"}}"""
+    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","title":"Programming Tips","extraItems":{"issue":"13","year":"2005"}}"""
   }
 }

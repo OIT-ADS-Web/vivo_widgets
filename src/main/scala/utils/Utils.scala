@@ -76,6 +76,14 @@ object Json {
     Printer.compact(JsonAST.render(Extraction.decompose(item)))
   }
 
+  def toJson[T](collectionName:String, item:T) = {
+    val wrappedItem = Map(collectionName -> item)
+    import net.liftweb.json.{JsonAST,Printer,Extraction,Merge}
+    implicit val formats = net.liftweb.json.DefaultFormats
+    Printer.compact(JsonAST.render(Extraction.decompose(wrappedItem)))
+    
+  }
+
 }
 
 trait AddToJson {
