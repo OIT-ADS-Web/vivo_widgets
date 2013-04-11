@@ -14,12 +14,9 @@ class PublicationSpec extends Specification with Tags with Mockito {
                            'title -> "Study of Something")
 
     val vivo = mock[Vivo]
-    def authors(pubURI: String, vivo: Vivo,useCache:Boolean = false): List[String] = {
-      List()
-    }
 
     "contain the title in the publication" in {
-      val pub = Publication.build(vivo, publicationMap, false, authors)
+      val pub = Publication.build(vivo, publicationMap, false)
       pub.title mustEqual "Study of Something"
     }
 
