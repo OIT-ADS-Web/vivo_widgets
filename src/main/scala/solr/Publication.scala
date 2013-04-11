@@ -5,8 +5,8 @@ import edu.duke.oit.vw.utils._
 case class Publication(uri:String,
                        vivoType:String,
                        title:String,
-                       extraItems:Option[Map[String, String]]) 
-     extends ExtraItems(extraItems) with AddToJson
+                       attributes:Option[Map[String, String]]) 
+     extends VivoAttributes(uri, vivoType, title, attributes) with AddToJson
 {
 
   override def uris() = {
@@ -22,7 +22,7 @@ case class Publication(uri:String,
   }
 }
 
-object Publication extends ExtraParams {
+object Publication extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
     val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext, useCache)
@@ -30,10 +30,10 @@ object Publication extends ExtraParams {
   }
 
   def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean=false) = {
-    new Publication(uri      = pub('publication).stripBrackets(),
-                    vivoType = pub('type).stripBrackets(),
-                    title    = pub('title),
-                    extraItems = parseExtraItems(pub,List('publication,'type,'title)))
+    new Publication(uri        = pub('publication).stripBrackets(),
+                    vivoType   = pub('type).stripBrackets(),
+                    title      = pub('title),
+                    attributes = parseAttributes(pub,List('publication,'type,'title)))
   }
 
 }
