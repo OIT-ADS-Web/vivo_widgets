@@ -57,7 +57,7 @@ html(lang="en")
       div(id="form")
         input(id="uri" type="hidden" value="#{organization.uri}")
         h1 
-          a(href="#{fixURL(organization.uri)}") #{organization.name}&#x27;s
+          a(href="#{fixURL(organization.uri)}") #{organization.label}&#x27;s
           | Widgets
         ul
           li

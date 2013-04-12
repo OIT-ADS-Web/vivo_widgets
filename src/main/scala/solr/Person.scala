@@ -14,25 +14,25 @@ object Person extends SolrModel with AttributeParams {
 
   def build(uri:String, personData:Map[Symbol,String], pubs:List[Publication], grants:List[Grant], courses:List[Course]): Person = {
     new Person(uri,
-               vivoType = personData('type).stripBrackets(),
-               name     = personData('name),
-               title    = personData('title),
-               publications = pubs,
-               grants = grants,
-               courses = courses,
-               attributes = parseAttributes(personData, List('type,'name,'title)))
+               vivoType      = personData('type).stripBrackets(),
+               label         = personData('name),
+               title         = personData('title),
+               publications  = pubs,
+               grants        = grants,
+               courses       = courses,
+               attributes    = parseAttributes(personData, List('type,'name,'title)))
   }
 }
 
 case class Person(uri:String,
                   vivoType:String,
-                  name:String,
+                  label:String,
                   title:String,
                   publications:List[Publication],
                   grants:List[Grant],
                   courses:List[Course],
                   attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris() = {

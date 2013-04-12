@@ -16,7 +16,7 @@
 ul(style=ulStyle)
   - for (course <- courses)
     li(style=liStyle) 
-      | #{course.name}
+      | #{course.label}
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 
