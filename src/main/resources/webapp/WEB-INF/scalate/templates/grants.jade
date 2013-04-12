@@ -19,7 +19,7 @@ ul(style=ulStyle)
     - val roleName = grant.getOrElse("roleName","")
     - val roleText = if(roleName != "") "(#{grant.getRoleName})" else ""
     li(style=liStyle) 
-      | #{grant.name} #{roleText}
+      | #{grant.label} #{roleText}
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 

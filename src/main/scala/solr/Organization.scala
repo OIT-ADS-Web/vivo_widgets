@@ -15,7 +15,7 @@ object Organization extends SolrModel with AttributeParams {
   def build(uri:String, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
     new Organization(uri,
                      vivoType    = orgData('type).stripBrackets(),
-                     name        = orgData('name),
+                     label       = orgData('name),
                      people      = people,
                      grants      = grants,
                      attributes  = parseAttributes(orgData,List('type,'name)))
@@ -25,11 +25,11 @@ object Organization extends SolrModel with AttributeParams {
 
 case class Organization(uri:String,
                         vivoType:String,
-                        name:String,
+                        label:String,
                         people:List[PersonReference],
                         grants:List[Grant],
                         attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris() = {

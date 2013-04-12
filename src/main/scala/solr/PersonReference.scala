@@ -4,10 +4,10 @@ import edu.duke.oit.vw.utils._
 
 case class PersonReference(uri:String,
                            vivoType:String,
-                           name:String,
+                           label:String,
                            title:String,
                            attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris():List[String] = {
@@ -28,7 +28,7 @@ object PersonReference extends AttributeParams {
   def build(person:Map[Symbol,String]) = {
     new PersonReference(uri         = person('person).stripBrackets(),
                         vivoType    = person('type).stripBrackets(),
-                        name        = person('name),
+                        label       = person('name),
                         title       = person('title),
                         attributes  = parseAttributes(person, List('person, 'type, 'name, 'title)))
   }
