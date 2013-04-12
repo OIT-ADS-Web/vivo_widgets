@@ -79,10 +79,13 @@
     ko.applyBindings(viewModel);
 
     viewModel.url = ko.dependentObservable( function() {
+      var apiVersion = $('body').attr('data-api-version');
+      var baseUri = "api/" + apiVersion + "/" + $('#group').attr('value');
+      var latestUrl = window.location.toString().replace(/builder(.*)/,baseUri) + 
+        "/" + this.chosenCollection().collectionName.toLowerCase() + "/" + this.chosenLimit().label;
+      var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat() + 
+        '&style=' + this.chosenStyle();
 
-      latestUrl = window.location.toString().replace(/builder(.*)/,$('#group').attr('value')) + "/" + this.chosenCollection().collectionName.toLowerCase() + "/" + this.chosenLimit().label;
-      latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat()
-      + '&style=' + this.chosenStyle();
       // Refresh Display
       fetchPreview({url: latestUrl, parameters: latestParams});
       renderSettings();
