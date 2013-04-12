@@ -5,9 +5,11 @@
 -@ import var it: edu.duke.oit.vw.solr.Publication
 
 // = authors.mkString("; ")
+- if (!empty(get("authorList")))
+  | #{get("authorList")}
 - if(!empty(year)) 
   | (#{year}).
-! "#{title}." #{getOrElse("publishedIn","")}.
+! "#{label}." #{getOrElse("publishedIn","")}.
 | #{get("volume") ?: ""}
 - if(!empty(get("issue"))) 
   | (#{get("issue")})

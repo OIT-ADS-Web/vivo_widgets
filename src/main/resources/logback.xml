@@ -19,22 +19,22 @@
     </rollingPolicy>
 
     <encoder>
-      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
     </encoder>
   </appender> 
 
-  <logger name="widget.timer" level="debug">
+  <logger name="widget.timer" level="info">
     <appender-ref ref="FILE"/>
   </logger>
-  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="debug">
+  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="info">
     <appender-ref ref="FILE"/>
   </logger>
-  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="debug">
+  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="info">
     <appender-ref ref="FILE"/>
   </logger>
 
   <root level="info">
-    <appender-ref ref="STDOUT" />
+    <!-- <appender-ref ref="STDOUT" /> -->
     <appender-ref ref="FILE"/>
   </root>
 

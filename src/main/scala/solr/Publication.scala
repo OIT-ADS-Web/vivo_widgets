@@ -4,9 +4,9 @@ import edu.duke.oit.vw.utils._
 
 case class Publication(uri:String,
                        vivoType:String,
-                       title:String,
+                       label:String,
                        attributes:Option[Map[String, String]]) 
-     extends VivoAttributes(uri, vivoType, title, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris() = {
@@ -32,7 +32,7 @@ object Publication extends AttributeParams {
   def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean=false) = {
     new Publication(uri        = pub('publication).stripBrackets(),
                     vivoType   = pub('type).stripBrackets(),
-                    title      = pub('title),
+                    label      = pub('title),
                     attributes = parseAttributes(pub,List('publication,'type,'title)))
   }
 

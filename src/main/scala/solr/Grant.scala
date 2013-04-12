@@ -4,9 +4,9 @@ import edu.duke.oit.vw.utils._
 
 case class Grant(uri:String,
                  vivoType: String,
-                 name: String,
+                 label: String,
                  attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson 
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson 
 {
 
   override def uris():List[String] = {
@@ -27,7 +27,7 @@ object Grant extends AttributeParams {
   def build(grant:Map[Symbol,String]) = {
     new Grant(uri         = grant('agreement).stripBrackets(),
               vivoType    = grant('type).stripBrackets(),
-              name        = grant('grantName),
+              label       = grant('grantName),
               attributes  = parseAttributes(grant, List('agreement,'type,'grantName)))
   }
 

@@ -4,9 +4,9 @@ import edu.duke.oit.vw.utils._
 
 case class Course(uri:String,
                   vivoType: String,
-                  name: String,
+                  label: String,
                   attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris():List[String] = {
@@ -25,7 +25,7 @@ object Course extends AttributeParams {
   def build(course:Map[Symbol,String]) = {
     new Course(uri        = course('course).stripBrackets(),
                vivoType   = course('type).stripBrackets(),
-               name       = course('courseName),
+               label      = course('courseName),
                attributes = parseAttributes(course,List('course,'type,'courseName)))
   }
 
