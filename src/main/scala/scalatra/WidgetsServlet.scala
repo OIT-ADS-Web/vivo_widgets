@@ -21,7 +21,45 @@ class WidgetsFilter extends ScalatraFilter
   with Timer {
 
   // GET /people/{collectionName}/5.jsonp?uri={uri}
-  get("/people/:collectionName/:count.:format") {
+  get("/api/v0.9/people/:collectionName/:count.:format") {
+    renderPeople
+  }
+
+  // GET /organizations/{collectionName}/5.jsonp?uri={uri}
+  get("/api/v0.9/organizations/:collectionName/:count.:format") {
+    renderOrganizations
+  }
+
+  // GET /search.json?query=theory*
+  get("/search.:format") {
+    requestSetup
+    val result = VivoSearcher.search(params.getOrElse("query",""), WidgetsConfig.vivoServer)
+    format(FormatJSONP) match {
+      case FormatJSON => result.toJson
+      case FormatHTML => "Not available: html" 
+      case FormatJSONP => "vivoSearchResult("+result.toJson+")" //.toJson
+      case _ => "NoContent"
+    }
+  }
+
+  get("/builder") {
+    WidgetsConfig.prepareCore
+    SolrEntity.getByUri(params("uri")) match {
+      case Some(p:Person) => {
+        val d = uriParams ++ Map("person" -> p)
+        contentType = "text/html"
+        templateEngine.layout(TemplateHelpers.tpath("builder/person.jade"), d)
+      }
+      case Some(o:Organization) => {
+        val d = uriParams ++ Map("organization" -> o)
+        contentType = "text/html"
+        templateEngine.layout(TemplateHelpers.tpath("builder/organization.jade"), d)
+      }
+      case _ => "NoContent"
+    }
+  }
+
+  protected def renderPeople = {
     WidgetsConfig.prepareCore
     requestSetup
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
@@ -37,8 +75,7 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
 
-  // GET /organizations/{collectionName}/5.jsonp?uri={uri}
-  get("/organizations/:collectionName/:count.:format") {
+  protected def renderOrganizations = {
     WidgetsConfig.prepareCore
     requestSetup
     Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
@@ -50,50 +87,6 @@ class WidgetsFilter extends ScalatraFilter
         }
       }
       case _ => "Not Found"
-    }
-  }
-
-  // GET /search.json?query=theory*
-  get("/search.:format") {
-    requestSetup
-    val result = VivoSearcher.search(params.getOrElse("query",""), WidgetsConfig.vivoServer)
-    format(FormatJSONP) match {
-      case FormatJSON => result.toJson
-      case FormatHTML => "TODO: html" // Template('query -> query, 'result -> result)
-      case FormatJSONP => "vivoSearchResult("+result.toJson+")" //.toJson
-      case _ => "NoContent"
-    }
-  }
-
-  get("/builder") {
-    WidgetsConfig.prepareCore
-    import edu.duke.oit.vw.utils.ElvisOperator._
-    SolrEntity.getDocumentById(params("uri"), WidgetsConfig.widgetServer) match {
-      case Some(solrDocument) => {
-        solrDocument.getFieldValue("group").asInstanceOf[String] match {
-          case "people" => {
-            val d = Map(
-              "uriPrefix" -> uriPrefix(),
-              "contextUri" -> (request.getContextPath() ?: ""),
-              "person" -> PersonExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
-              "theme" -> WidgetsConfig.theme
-              )
-            contentType = "text/html"
-            templateEngine.layout(TemplateHelpers.tpath("builder/person.jade"), d)
-          }
-          case "organizations" => {
-            val d = Map(
-              "uriPrefix" -> uriPrefix(),
-              "contextUri" -> (request.getContextPath() ?: ""),
-              "organization" -> OrganizationExtraction(solrDocument.getFieldValue("json").asInstanceOf[String]),
-              "theme" -> WidgetsConfig.theme
-              )
-            contentType = "text/html"
-            templateEngine.layout(TemplateHelpers.tpath("builder/organization.jade"), d)
-          }
-        }
-      }
-      case _ => "NoContent"
     }
   }
 
@@ -166,6 +159,18 @@ class WidgetsFilter extends ScalatraFilter
       case _ => defaultType
     }
   }
+
+  protected def uriParams = {
+    import edu.duke.oit.vw.utils.ElvisOperator._
+    Map(
+      "uriPrefix" -> uriPrefix(),
+      "contextUri" -> (request.getContextPath() ?: ""),
+      "theme" -> WidgetsConfig.theme,
+      "version" -> defaultVersion
+    )
+  }
+
+  protected def defaultVersion = "v0.9"
   
   protected def uri(s:String) = {
     uriPrefix + s

@@ -5,8 +5,8 @@ import edu.duke.oit.vw.utils._
 case class Course(uri:String,
                   vivoType: String,
                   name: String,
-                  extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson
+                  attributes:Option[Map[String, String]])
+     extends VivoAttributes(uri, vivoType, name, attributes) with AddToJson
 {
 
   override def uris():List[String] = {
@@ -15,7 +15,7 @@ case class Course(uri:String,
 
 }
 
-object Course extends ExtraParams {
+object Course extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
     val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext, useCache)
@@ -23,10 +23,10 @@ object Course extends ExtraParams {
   }
 
   def build(course:Map[Symbol,String]) = {
-    new Course(uri      = course('course).stripBrackets(),
-               vivoType = course('type).stripBrackets(),
-               name     = course('courseName),
-               extraItems = parseExtraItems(course,List('course,'type,'courseName)))
+    new Course(uri        = course('course).stripBrackets(),
+               vivoType   = course('type).stripBrackets(),
+               name       = course('courseName),
+               attributes = parseAttributes(course,List('course,'type,'courseName)))
   }
 
 }
