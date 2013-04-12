@@ -4,6 +4,7 @@
 -@ val vivoId: String = ""
 -@ val contextUri: String = ""
 -@ val theme: String = ""
+-@ val version: String = ""
 -@ import val organization: edu.duke.oit.vw.solr.Organization
 
 !!! 5
@@ -42,7 +43,7 @@ html(lang="en")
         latestUrl: ''
       };
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/app.js")
-  body(class="display")
+  body(class="display" data-context-uri="#{contextUri}" data-api-version="#{version}")
     input(id="group" type="hidden" value="organizations")
     div(id="wrapper-main")
       div(id="branding")
