@@ -10,9 +10,9 @@
 - formatting match 
   - case "abbreviated" =>
     span
-      ! #{title} 
+      ! #{label} 
       - if (!empty(year))
         | (#{year})
   - case _ =>
     = render(tpath("shared/" + subType + ".jade"), Map("it" -> it, "year" -> year))
-    -# span #{title} (#{year}) #{vivoType} - #{subType}
+    -# span #{label} (#{year}) #{vivoType} - #{subType}
