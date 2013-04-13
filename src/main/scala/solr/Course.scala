@@ -25,8 +25,8 @@ object Course extends AttributeParams {
   def build(course:Map[Symbol,String]) = {
     new Course(uri        = course('course).stripBrackets(),
                vivoType   = course('type).stripBrackets(),
-               label      = course('courseName),
-               attributes = parseAttributes(course,List('course,'type,'courseName)))
+               label      = course('label),
+               attributes = parseAttributes(course,List('course,'type,'label)))
   }
 
 }

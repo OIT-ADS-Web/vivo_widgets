@@ -32,8 +32,8 @@ object Publication extends AttributeParams {
   def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean=false) = {
     new Publication(uri        = pub('publication).stripBrackets(),
                     vivoType   = pub('type).stripBrackets(),
-                    label      = pub('title),
-                    attributes = parseAttributes(pub,List('publication,'type,'title)))
+                    label      = pub('label),
+                    attributes = parseAttributes(pub,List('publication,'type,'label)))
   }
 
 }

@@ -15,12 +15,12 @@ object Person extends SolrModel with AttributeParams {
   def build(uri:String, personData:Map[Symbol,String], pubs:List[Publication], grants:List[Grant], courses:List[Course]): Person = {
     new Person(uri,
                vivoType      = personData('type).stripBrackets(),
-               label         = personData('name),
+               label         = personData('label),
                title         = personData('title),
                publications  = pubs,
                grants        = grants,
                courses       = courses,
-               attributes    = parseAttributes(personData, List('type,'name,'title)))
+               attributes    = parseAttributes(personData, List('type,'label,'title)))
   }
 }
 
