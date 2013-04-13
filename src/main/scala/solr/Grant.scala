@@ -27,8 +27,8 @@ object Grant extends AttributeParams {
   def build(grant:Map[Symbol,String]) = {
     new Grant(uri         = grant('agreement).stripBrackets(),
               vivoType    = grant('type).stripBrackets(),
-              label       = grant('grantName),
-              attributes  = parseAttributes(grant, List('agreement,'type,'grantName)))
+              label       = grant('label),
+              attributes  = parseAttributes(grant, List('agreement,'type,'label)))
   }
 
 }
