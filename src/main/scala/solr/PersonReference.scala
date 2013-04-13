@@ -28,9 +28,9 @@ object PersonReference extends AttributeParams {
   def build(person:Map[Symbol,String]) = {
     new PersonReference(uri         = person('person).stripBrackets(),
                         vivoType    = person('type).stripBrackets(),
-                        label       = person('name),
+                        label       = person('label),
                         title       = person('title),
-                        attributes  = parseAttributes(person, List('person, 'type, 'name, 'title)))
+                        attributes  = parseAttributes(person, List('person, 'type, 'label, 'title)))
   }
 
 }

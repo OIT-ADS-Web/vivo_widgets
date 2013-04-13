@@ -4,5 +4,5 @@ ${include("sparql/prefixes.ssp")}
 SELECT *
 WHERE {
       <${ uri }> vitro:mostSpecificType ?type .
-      <${ uri }> rdfs:label ?name .
+      <${ uri }> rdfs:label ?label .
 }
