@@ -15,7 +15,7 @@ object Organization extends SolrModel with AttributeParams {
   def build(uri:String, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
     new Organization(uri,
                      vivoType    = orgData('type).stripBrackets(),
-                     label       = orgData('name),
+                     label       = orgData('label),
                      people      = people,
                      grants      = grants,
                      attributes  = parseAttributes(orgData,List('type,'name)))

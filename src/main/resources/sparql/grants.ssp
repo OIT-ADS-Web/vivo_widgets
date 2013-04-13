@@ -7,6 +7,6 @@ where {
   ?role rdfs:label ?roleName .
   ?role core:roleContributesTo ?agreement .
   ?agreement vitro:mostSpecificType ?type .
-  ?agreement rdfs:label ?grantName .
+  ?agreement rdfs:label ?label .
 }
-order by ?grantName
+order by ?label
