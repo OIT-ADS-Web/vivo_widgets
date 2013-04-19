@@ -7,6 +7,6 @@ where {
   ?role rdfs:label ?roleName .
   ?role core:roleRealizedIn ?course .
   ?course vitro:mostSpecificType ?type .
-  ?course rdfs:label ?courseName .
+  ?course rdfs:label ?label .
 }
-order by ?courseName
+order by ?label

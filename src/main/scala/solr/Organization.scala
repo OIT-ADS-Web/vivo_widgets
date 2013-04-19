@@ -3,7 +3,7 @@ package edu.duke.oit.vw.solr
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
-object Organization extends SolrModel with ExtraParams {
+object Organization extends SolrModel with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Organization] = {
     getDocumentById(uri,solr) match {
@@ -15,21 +15,21 @@ object Organization extends SolrModel with ExtraParams {
   def build(uri:String, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
     new Organization(uri,
                      vivoType    = orgData('type).stripBrackets(),
-                     name        = orgData('name),
+                     label       = orgData('label),
                      people      = people,
                      grants      = grants,
-                     extraItems  = parseExtraItems(orgData,List('type,'name)))
+                     attributes  = parseAttributes(orgData,List('type,'name)))
   }
 
 }
 
 case class Organization(uri:String,
-                  vivoType:String,
-                  name:String,
-                  people:List[PersonReference],
-                  grants:List[Grant],
-                  extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson
+                        vivoType:String,
+                        label:String,
+                        people:List[PersonReference],
+                        grants:List[Grant],
+                        attributes:Option[Map[String, String]])
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris() = {

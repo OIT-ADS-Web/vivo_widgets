@@ -9,15 +9,15 @@ class GrantSpec extends Specification with Tags {
 
     val grantMap = Map('agreement -> "http://duke.edu/grant/xyz123",
                        'type -> "<http://duke.edu/type/abc123>",
-                       'grantName -> "Grant for This")
+                       'label -> "Grant for This")
     
     "know its vivo type" in {
       val grant = Grant.build(grantMap)
       grant.vivoType mustEqual "http://duke.edu/type/abc123"
     }
 
-    "must have required types of agreement, vivoType, grantName" in {
-      List('agreement, 'type, 'grantName).foreach { item =>
+    "must have required types of agreement, vivoType, label" in {
+      List('agreement, 'type, 'label).foreach { item =>
         Grant.build(grantMap - item) must throwA[NoSuchElementException] 
       }
     }

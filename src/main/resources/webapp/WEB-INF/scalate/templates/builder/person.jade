@@ -4,6 +4,7 @@
 -@ val vivoId: String = ""
 -@ val contextUri: String = ""
 -@ val theme: String = ""
+-@ val version: String = ""
 -@ import val person: edu.duke.oit.vw.solr.Person
 
 !!! 5
@@ -44,7 +45,7 @@ html(lang="en")
       };
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/app.js")
 
-  body(class="display")
+  body(class="display" data-context-uri="#{contextUri}" data-api-version="#{version}")
     input(id="group" type="hidden" value="people")
     div(id="wrapper-main")
       div(id="branding")
@@ -58,7 +59,7 @@ html(lang="en")
       div(id="form")
         input(id="uri" type="hidden" value="#{person.uri}")
         h1
-          a(href="#{fixURL(person.uri)}") #{person.name}&#x27;s 
+          a(href="#{fixURL(person.uri)}") #{person.label}&#x27;s 
           | Widgets
 
         ul

@@ -16,7 +16,7 @@
 ul(style=ulStyle)
   - for (person <- people)
     li(style=liStyle) 
-      | #{person.name} (#{person.title}) 
+      | #{person.label} (#{person.title}) 
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 

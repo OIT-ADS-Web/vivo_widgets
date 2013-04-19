@@ -5,5 +5,5 @@ SELECT *
 WHERE {
       <${ uri }> core:preferredTitle ?title .
       <${ uri }> rdf:type ?type .
-      <${ uri }> rdfs:label ?name .
+      <${ uri }> rdfs:label ?label .
 }

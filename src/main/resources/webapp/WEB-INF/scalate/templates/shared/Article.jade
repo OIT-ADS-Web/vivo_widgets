@@ -4,10 +4,12 @@
 -# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
 -@ import var it: edu.duke.oit.vw.solr.Publication
 
-= authors.mkString("; ")
+// = authors.mkString("; ")
+- if (!empty(get("authorList")))
+  | #{get("authorList")}
 - if(!empty(year)) 
   | (#{year}).
-! "#{title}." #{getOrElse("publishedIn","")}.
+! "#{label}." #{getOrElse("publishedIn","")}.
 | #{get("volume") ?: ""}
 - if(!empty(get("issue"))) 
   | (#{get("issue")})

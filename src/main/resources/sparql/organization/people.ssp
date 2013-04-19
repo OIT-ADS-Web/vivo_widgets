@@ -7,7 +7,7 @@ WHERE {{
       <${uri}> rdfs:label ?organizationName .
       ?position core:positionInOrganization ?organization .
       ?position core:positionForPerson ?person .
-      ?person rdfs:label ?name .
+      ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
 }
@@ -17,8 +17,8 @@ UNION
       ?organization core:organizationForPosition ?position .
       ?organization rdfs:label ?organizationName .
       ?position core:positionForPerson ?person .
-      ?person rdfs:label ?name .
+      ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
 }}
-ORDER BY ?name
+ORDER BY ?label

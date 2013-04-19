@@ -3,11 +3,11 @@ package edu.duke.oit.vw.solr
 import edu.duke.oit.vw.utils._
 
 case class PersonReference(uri:String,
-                  vivoType:String,
-                  name:String,
-                  title:String,
-                  extraItems:Option[Map[String, String]])
-     extends ExtraItems(extraItems) with AddToJson
+                           vivoType:String,
+                           label:String,
+                           title:String,
+                           attributes:Option[Map[String, String]])
+     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
 
   override def uris():List[String] = {
@@ -16,7 +16,7 @@ case class PersonReference(uri:String,
 
 }
 
-object PersonReference extends ExtraParams {
+object PersonReference extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
               useCache: Boolean = false, templatePath: String="sparql/organization/people.ssp") = {
@@ -28,9 +28,9 @@ object PersonReference extends ExtraParams {
   def build(person:Map[Symbol,String]) = {
     new PersonReference(uri         = person('person).stripBrackets(),
                         vivoType    = person('type).stripBrackets(),
-                        name        = person('name),
+                        label       = person('label),
                         title       = person('title),
-                        extraItems  = parseExtraItems(person, List('person, 'type, 'name, 'title)))
+                        attributes  = parseAttributes(person, List('person, 'type, 'label, 'title)))
   }
 
 }

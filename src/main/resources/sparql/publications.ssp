@@ -5,7 +5,7 @@ select *
 where {
   <${uri}> core:authorInAuthorship ?authorship .
   ?publication core:informationResourceInAuthorship ?authorship .
-  ?publication rdfs:label ?title .
+  ?publication rdfs:label ?label .
   ?publication vitro:mostSpecificType ?type .
   OPTIONAL { ?publication bibo:numPages ?numPages . }
   OPTIONAL { ?publication bibo:edition ?edition . }
@@ -15,6 +15,7 @@ where {
     ?publication core:hasPublicationVenue ?publicationVenue . 
     ?publicationVenue rdfs:label ?publishedIn .
   }
+  OPTIONAL { ?publication duke:authorList ?authorList }
   OPTIONAL { 
     ?publication core:publisher ?publisher. ?publisher rdfs:label ?publishedBy .
   }

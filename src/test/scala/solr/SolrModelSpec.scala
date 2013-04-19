@@ -51,19 +51,19 @@ class SolrModelSpec extends Specification with Tags {
     val testPersonJson = """
         {
           "uri": "http://vivo.duke.edu/person1",
-          "name" : "Smith J",
+          "label" : "Smith J",
           "vivoType" : "http://xmlns.com/foaf/0.1/Person",
           "title" : "Professor of Testology",
           "publications": [
             {
               "uri": "http://vivo.duke.edu/test1",
               "vivoType": "http://purl.org/ontology/bibo/Article",
-              "title": "Programming Tips",
-              "authors": ["Lawrence GL","Smith J"],
-              "extraItems": {
+              "label": "Programming Tips",
+              "attributes": {
                 "issue": "13",
                 "year": "2005",
                 "other_uri": "http://vivo.duke.edu/test2323423"
+                "authorList": "Lawrence GL, Smith J"
               }
             }
           ]
@@ -83,8 +83,8 @@ class SolrModelSpec extends Specification with Tags {
       val po = Person.find("http://vivo.duke.edu/person1",widgetSolr)
       val p = po.get
       p.uri  must_== "http://vivo.duke.edu/person1"
-      p.name must_== "Smith J"
-      p.publications(0).title must_== "Programming Tips"
+      p.label must_== "Smith J"
+      p.publications(0).label must_== "Programming Tips"
     }
 
     "not find a non-indexed person and return None" in {
@@ -109,16 +109,15 @@ class SolrExtractionSpec extends Specification {
 
   "Extract person name" in {
     val person = PersonExtraction(testPersonJson)
-    person.name must_== "Smith J"
+    person.label must_== "Smith J"
   }
 
   "Extract publications" in {
     val person = PersonExtraction(testPersonJson)
     person.publications mustEqual List(Publication( "http://vivo.duke.edu/test1",
-                                              "http://purl.org/ontology/bibo/Article",
-                                              "Programming Tips",
-                                              List("Lawrence GL", "Smith J"),
-                                              Some(Map("issue" -> "13","year" -> "2005"))) )
+                                                   "http://purl.org/ontology/bibo/Article",
+                                                   "Programming Tips",
+                                                   Some(Map("issue" -> "13","year" -> "2005"))) )
   }
 
   "Extract value from publications " in {
@@ -130,16 +129,15 @@ class SolrExtractionSpec extends Specification {
   val testPersonJson = """
     {
       "uri": "http://vivo.duke.edu/person1",
-      "name" : "Smith J",
+      "label" : "Smith J",
       "vivoType" : "http://xmlns.com/foaf/0.1/Person",
       "title" : "Professor of Testology",
       "publications": [
         {
           "uri": "http://vivo.duke.edu/test1",
           "vivoType": "http://purl.org/ontology/bibo/Article",
-          "title": "Programming Tips",
-          "authors": ["Lawrence GL","Smith J"],
-          "extraItems": {
+          "label": "Programming Tips",
+          "attributes": {
             "issue": "13",
             "year": "2005"
           }
@@ -154,22 +152,21 @@ class SolrJsonProducingSpec extends Specification {
   import edu.duke.oit.vw.solr._
   import edu.duke.oit.vw.utils.Json
 
-  "Produce json for extraItems" in {
-    val ei = new ExtraItems(Option(Map("a" -> "b", "c" -> "d")))
-    ei.toJson must_== """{"extraItems":{"a":"b","c":"d"}}"""
+  "Produce json for attributes" in {
+    val ei = new VivoAttributes("uri", "type", "label", Option(Map("a" -> "b", "c" -> "d")))
+    ei.toJson must_== """{"attributes":{"a":"b","c":"d"}}"""
   }
 
   "Produce json from the Json object" in {
-    val ei = new ExtraItems(Option(Map("a" -> "b", "c" -> "d")))
-    Json.toJson(ei) must_== """{"extraItems":{"a":"b","c":"d"}}"""
+    val ei = new VivoAttributes("uri", "type", "label", Option(Map("a" -> "b", "c" -> "d")))
+    Json.toJson(ei) must_== """{"attributes":{"a":"b","c":"d"}}"""
   }
 
   "Produce publication json" in {
     val pub = Publication("http://vivo.duke.edu/test1",
                           "http://purl.org/ontology/bibo/Article",
                           "Programming Tips",
-                          List("Smith J"),
                           Option(Map("issue" -> "13","year"->"2005")))
-    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","title":"Programming Tips","authors":["Smith J"],"extraItems":{"issue":"13","year":"2005"}}"""
+    pub.toJson must_== """{"uri":"http://vivo.duke.edu/test1","vivoType":"http://purl.org/ontology/bibo/Article","label":"Programming Tips","attributes":{"issue":"13","year":"2005"}}"""
   }
 }

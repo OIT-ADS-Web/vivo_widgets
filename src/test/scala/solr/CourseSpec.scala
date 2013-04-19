@@ -9,15 +9,15 @@ class CourseSpec extends Specification with Tags {
 
     val courseMap = Map('course -> "http://duke.edu/course/xyzc123",
                         'type -> "<http://duke.edu/type/abcc123>",
-                        'courseName -> "123 Park")
+                        'label -> "123 Park")
     
     "know its vivo type" in {
       val course = Course.build(courseMap)
       course.vivoType mustEqual "http://duke.edu/type/abcc123"
     }
 
-    "must have required types of course, vivoType, courseName" in {
-      List('course, 'type, 'courseName).foreach { item =>
+    "must have required types of course, vivoType, label" in {
+      List('course, 'type, 'label).foreach { item =>
         Course.build(courseMap - item) must throwA[NoSuchElementException] 
       }
     }
