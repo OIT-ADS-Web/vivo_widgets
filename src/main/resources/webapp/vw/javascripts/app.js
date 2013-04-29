@@ -94,6 +94,7 @@
       $('#embed').val(script);
       // Update other feeds
       $("#rss").attr("href", latestUrl + ".rss" + latestParams);
+      $("#json").attr("href", latestUrl +".json" + latestParams);
       $("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
       $("#html").attr("href", latestUrl +".html" + latestParams);
       $("#js").attr("href", latestUrl + ".js" + latestParams);
