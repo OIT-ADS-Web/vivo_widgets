@@ -19,6 +19,7 @@ VIVO Widgets is made of up the following parts.
   1. Clone the VIVO Widgets project.
 
   2. Copy or symlink your VIVO deploy.properties into src/main/resources/ and add:
+
       WidgetsSolr.directory=<path to the solr directory in the vivo_widgets project>
 
   3. Change into the project directory and launch [sbt](http://code.google.com/p/simple-build-tool).
@@ -62,18 +63,18 @@ Since VIVO has a separate SOLR index which needs to be kept up to date when chan
 
 # Adding "Add to my web site" links to VIVO
 
+
   1. Copy contents of productMods into your VIVO productMods directory
 
   2. Add the following to the bottom of your VIVO productMods/templates/freemarker/body/individual/individual--foaf-person.ftl file:
 
-```
-      <#-- Widget Links -->
-      <#include "individual--widget-links.ftl">
-```
+    <#-- Widget Links -->
+    <#include "individual--widget-links.ftl">
 
   The individual--widget-links.ftl template will use javascript to decorate the page with links to the widget application.
 
   3. To customize link formatting and locations modify the WidgetConfig javascript object in individual--widget-links.ftl using any combination of javascript, freemarker or text:
+
 
   * urlBase: points to url where the widget app is deployed
   * builderLink: url of the full builder for the given URI
