@@ -56,10 +56,7 @@ Since VIVO has a separate SOLR index which needs to be kept up to date when chan
   
   3. Update <your vivo src directory>/productMods/WEB-INF/resources/startup\_listeners.txt to include a new listener (add just after the edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup):
 
-```
-         edu.duke.oit.vw.vivo.http.WidgetUpdateSetup
-```
-```
+    edu.duke.oit.vw.vivo.http.WidgetUpdateSetup
 
 # Adding "Add to my web site" links to VIVO
 
