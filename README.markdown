@@ -1,79 +1,97 @@
 # VIVO Widgets
 
-A project build to work with an instance of [VIVO](http://vivoweb.org/).  You can also find documentation on the [VIVO Wiki](http://sourceforge.net/apps/mediawiki/vivo/index.php?title=VIVO_Widgets)
+This project is built to work with an instance of
+[VIVO](http://vivoweb.org/).  Vivo widgets provides a method for
+easily embeding a script tag into your site that includes things like
+publications, grants and courses.  It can provide data for both
+individuals in VIVO and on organizations in VIVO.  A few examples of VIVO instances:
+
+  * [VIVO Cornell](http://vivo.cornell.edu/)
+  * [Scholars@Duke](https://scholars.duke.edu/)
+  * [VIVO Florida](http://vivo.ufl.edu/)
 
 # Background
 
 VIVO Widgets is made of up the following parts.
 
-  1. The web service which used indexed data from VIVO pulled via SPARQL.
-  1. Web page widget builder for creating the JavaScript snippets to be included in other sites.
-  1. Template changes VIVO that allow for the "Add to my web site".
-  1. Web Page Widgets: Embeddable JavaScript that allows content to be easily added to other website from VIVO.
-  1. OpenSocial Widget: OpenSocial application that allows a user to search content in VIVO from their OpenSocial container.
-  1. JSR 286 Portlet: provide an portlet that can be deployed to JSR compliant portal (like [Liferay](http://www.liferay.com/)).
+  1. The web service which used indexed data from VIVO pulled via
+  SPARQL.
+
+  1. Web page widget builder for creating the JavaScript snippets to
+  be included in other sites.
+
+  1. Web Page Widgets: Embeddable JavaScript that allows content to be
+  easily added to other website from VIVO.
 
 
-# Building from Source
+# Building
 
   1. Clone the VIVO Widgets project.
 
-  2. Copy or symlink your VIVO deploy.properties into src/main/resources/ and add:
+  2. Change into the project directory and launch
+  [sbt](http://www.scala-sbt.org/) and tell it to create an executable
+  jar.
 
-      WidgetsSolr.directory=<path to the solr directory in the vivo_widgets project>
+      $ ./sbt assembly
 
-  3. Change into the project directory and launch [sbt](http://code.google.com/p/simple-build-tool).
+  This will create an excecuble jar located at ``target/vivo-widgets.jar``
 
-      $ ./sbt
+  3. To start Jetty, run the following command:
 
-  4. Fetch the dependencies.
+      $ PORT=8888 java -jar -Xmx500m \
+          -Dproperties.location=/path/to/deploy.properties \
+          -Dwidget.logging.dir=/var/log/vivo_widgets/ \
+          target/vivo-widgets.jar
 
-      > update
+  4. Browse to http://localhost:8888/.
 
-  5. Start Jetty, enabling continuous compilation and reloading.
+# Solr Index
 
-      > jetty-run
+Vivo widgets are powered by a Solr index.  You will need to copy the
+``solr`` directory located here into a directory on the server where
+you have solr running.  From there, you will need to set the
+WidgetsSolr.directory in the ``deploy.properties`` (see section
+below).
 
-  6. Browse to http://localhost:8081/.
+When you first start widgets and setup your database and solr
+location, you will need to reindex.  To reindex, run:
+
+    $ curl -s -u username:password -X POST  http://127.0.0.1:8888/widgets/updates/rebuild/index
+
+For the username and password, these are set in the
+``deploy.properties`` as WidgetUpdateSetup.username and
+WidgetUpdateSetup.password.
+
+# Configuration
+
+Widgets uses a very similar ``deploy.properties`` file that is used by
+VIVO.  It actually reuses some of the same database connection
+informaiton, but it also adds a few properties.
+
+*WidgetsSolr.directory*
+
+Path to solr configuration files on your solr server.
+
+*Widgets.theme*
+
+Name of the theme to use.
+
+*Widgets.topLevelOrg*
+
+The URI for your top level organization
+
+*WidgetUpdateSetup.username*
+
+Username for updating or rebuilding the index
+
+*WidgetUpdateSetup.password*
+
+Password for updating or rebuilding the index
+
+See ``deploy.properties.example`` in the docs directory.
   
-# Pushing Updates to VIVO Widgets
+# Known Issues
 
-Since VIVO has a separate SOLR index which needs to be kept up to date when changes occur in VIVO.  To accomplish this, we need to a couple of Java files to your VIVO src before you build/deploy it.
-
-  1. Copy the src files to your VIVO src directory:
-  
-    > cp -R listener/src/ <your vivo src directory>/src/
-      
-  2. Add the following lines with correct information to your deploy.properties for VIVO:
-  
-    <pre>
-    WidgetUpdateSetup.endpointUri=http://127.0.0.1:8080/widgets/updates/person/uri
-    WidgetUpdateSetup.username=username for update request
-    WidgetUpdateSetup.password=password for update request
-    </pre>
-      
-  Update the username and password with the values you want to use for your application.  The endpointUri is the location of VIVO widgets.
-  
-  3. Update <your vivo src directory>/productMods/WEB-INF/resources/startup\_listeners.txt to include a new listener (add just after the edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup):
-
-    edu.duke.oit.vw.vivo.http.WidgetUpdateSetup
-
-# Adding "Add to my web site" links to VIVO
-
-
-  1. Copy contents of productMods into your VIVO productMods directory
-
-  2. Add the following to the bottom of your VIVO productMods/templates/freemarker/body/individual/individual--foaf-person.ftl file:
-
-    <#-- Widget Links -->
-    <#include "individual--widget-links.ftl">
-
-  The individual--widget-links.ftl template will use javascript to decorate the page with links to the widget application.
-
-  3. To customize link formatting and locations modify the WidgetConfig javascript object in individual--widget-links.ftl using any combination of javascript, freemarker or text:
-
-
-  * urlBase: points to url where the widget app is deployed
-  * builderLink: url of the full builder for the given URI
-  * collectionLink: function returning the HTML the will link to the default embed code for a given collections, takes the collection name as an argument
-  * collectionLinkMap: maps CSS selector -> collection name, a collection link for the mapped collection will be inserted after any HTML element matching the specified CSS selector
+* There is an old version of a Jena listener in ``listener/src`` that
+  will no longer work with this version of vivo widgets.  It needs to
+  be updated to support a new format of the json to update widgets.
