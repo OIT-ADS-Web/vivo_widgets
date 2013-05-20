@@ -4,6 +4,7 @@ import org.apache.solr.client.solrj.SolrServer
 import org.apache.solr.common.SolrInputDocument
 
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.models._
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import com.hp.hpl.jena.rdf.model.ModelFactory

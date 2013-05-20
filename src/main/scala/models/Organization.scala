@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._

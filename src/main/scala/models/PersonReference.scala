@@ -1,6 +1,7 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.solr.Vivo
 
 case class PersonReference(uri:String,
                            vivoType:String,

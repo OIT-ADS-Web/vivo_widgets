@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import scala.collection.JavaConversions._
 

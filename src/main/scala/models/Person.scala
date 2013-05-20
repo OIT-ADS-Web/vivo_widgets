@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
@@ -12,7 +12,10 @@ object Person extends SolrModel with AttributeParams {
     }
   }
 
-  def build(uri:String, personData:Map[Symbol,String], pubs:List[Publication], grants:List[Grant], courses:List[Course]): Person = {
+  def build(uri:String, personData:Map[Symbol,String],
+            pubs:List[Publication],
+            grants:List[Grant],
+            courses:List[Course]): Person = {
     new Person(uri,
                vivoType      = personData('type).stripBrackets(),
                label         = personData('label),
@@ -36,7 +39,7 @@ case class Person(uri:String,
 {
 
   override def uris() = {
-    (uri :: super.uris) ++ 
+    (uri :: super.uris) ++
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris}
@@ -51,7 +54,7 @@ object PersonExtraction {
   def apply(json:String) = {
     import net.liftweb.json._
     // Brings in default date formats etc.
-    implicit val formats = DefaultFormats 
+    implicit val formats = DefaultFormats
 
     val j = JsonParser.parse(json)
     j.extract[Person]
