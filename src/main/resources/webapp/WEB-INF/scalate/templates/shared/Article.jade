@@ -9,7 +9,7 @@
   | #{get("authorList")}
 - if(!empty(year)) 
   | (#{year}).
-! "#{label}." #{getOrElse("publishedIn","")}.
+! "#{label}" #{getOrElse("publishedIn","")}.
 | #{get("volume") ?: ""}
 - if(!empty(get("issue"))) 
   | (#{get("issue")})
