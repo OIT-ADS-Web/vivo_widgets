@@ -3,8 +3,11 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT *
 WHERE {
-      <${ uri }> core:preferredTitle ?title .
-      <${ uri }> rdf:type ?type .
-      <${ uri }> rdfs:label ?label .
-      <${ uri }> core:overview ?overview .
+      <${ uri }> core:preferredTitle ?title ;
+        rdf:type ?type ;
+        rdfs:label ?label ;
+        core:overview ?overview ;
+        foaf:firstName ?firstName ;
+        foaf:lastName ?lastName ;
+        core:middleName ?middleName ;
 }
