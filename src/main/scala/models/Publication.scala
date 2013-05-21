@@ -25,12 +25,12 @@ case class Publication(uri:String,
 
 object Publication extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
-    val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext, useCache)
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any]) = {
+    val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext)
     publicationData.map(build(vivo, _)).asInstanceOf[List[Publication]]
   }
 
-  def build(vivo: Vivo, pub:Map[Symbol,String], useCache: Boolean=false) = {
+  def build(vivo: Vivo, pub:Map[Symbol,String]) = {
     new Publication(uri        = pub('publication).stripBrackets(),
                     vivoType   = pub('type).stripBrackets(),
                     label      = pub('label),

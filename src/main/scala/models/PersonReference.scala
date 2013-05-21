@@ -20,8 +20,8 @@ case class PersonReference(uri:String,
 object PersonReference extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              useCache: Boolean = false, templatePath: String="sparql/organization/people.ssp") = {
-    val personReferenceData = vivo.selectFromTemplate(templatePath, uriContext, useCache)
+              templatePath: String="sparql/organization/people.ssp") = {
+    val personReferenceData = vivo.selectFromTemplate(templatePath, uriContext)
     personReferenceData.map(build(_)).asInstanceOf[List[PersonReference]]
 
   }

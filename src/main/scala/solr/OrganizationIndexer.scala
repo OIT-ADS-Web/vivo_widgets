@@ -15,13 +15,13 @@ object OrganizationIndexer extends SimpleConversion
   with ScalateTemplateStringify 
   with WidgetLogging {
 
-  def index(uri: String,vivo: Vivo,solr: SolrServer,useCache: Boolean = false) = {
+  def index(uri: String,vivo: Vivo,solr: SolrServer) = {
     val uriContext = Map("uri" -> uri)
 
-    val organizationData = vivo.selectFromTemplate("sparql/organizationData.ssp", uriContext, useCache)
+    val organizationData = vivo.selectFromTemplate("sparql/organizationData.ssp", uriContext)
     if (organizationData.size > 0) {
-      val grants = Grant.fromUri(vivo, uriContext, useCache, "sparql/organization/grants.ssp")
-      val people = PersonReference.fromUri(vivo, uriContext, useCache)
+      val grants = Grant.fromUri(vivo, uriContext, "sparql/organization/grants.ssp")
+      val people = PersonReference.fromUri(vivo, uriContext)
 
       val o = Organization.build(uri, organizationData.head, people, grants)
       timer("add org to solr") {

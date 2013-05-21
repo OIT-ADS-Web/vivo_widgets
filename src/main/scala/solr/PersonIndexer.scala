@@ -16,16 +16,17 @@ object PersonIndexer extends SimpleConversion
   with WidgetLogging 
 {
 
-  def index(uri: String,vivo: Vivo, solr: SolrServer, useCache: Boolean = false) = {
+  def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     try {
       val uriContext = Map("uri" -> uri)
 
-      val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext, useCache)
+      val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
       if (personData.size > 0) {
 
-        val pubs = Publication.fromUri(vivo, uriContext, useCache)
-        val grants = Grant.fromUri(vivo, uriContext, useCache)
-        val courses = Course.fromUri(vivo, uriContext, useCache)
+        val pubs = Publication.fromUri(vivo, uriContext)
+        val grants = Grant.fromUri(vivo, uriContext)
+        val courses = Course.fromUri(vivo, uriContext)
+        val positions = Position.fromUri(vivo, uriContext)
 
         val p = Person.build(uri, personData.head, pubs, grants, courses)
         timer("add person to solr") {

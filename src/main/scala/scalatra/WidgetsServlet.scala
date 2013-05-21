@@ -2,6 +2,7 @@ package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,Timer}
 import edu.duke.oit.vw.solr._
+import edu.duke.oit.vw.models._
 import java.net.URL
 import org.scalatra._
 import scalate.ScalateSupport

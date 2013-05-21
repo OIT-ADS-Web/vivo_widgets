@@ -7,6 +7,7 @@ import org.apache.solr.common.SolrDocumentList
 import edu.duke.oit.vw.jena._
 import edu.duke.oit.vw.utils._
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
+import edu.duke.oit.vw.models.{Person,Organization}
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -19,13 +20,13 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   with Timer
   with ScalateTemplateStringify {
 
-  def indexPeople(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
+  def indexPeople(clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/facultyMember.ssp")
     log.debug("sparql>>>> " + sparql)
-    val peopleUris = vivo.select(sparql,useCache).map(_('person))
+    val peopleUris = vivo.select(sparql).map(_('person))
     for (p <- peopleUris) {
-      PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr,useCache)
+      PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr)
     }
     solr.commit()
     if (clearCacheOnFinish) {
@@ -33,14 +34,14 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     }
   }
 
-  def indexOrganizations(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
+  def indexOrganizations(clearCacheOnFinish: Boolean = true) = {
 
     val sparql = renderFromClassPath("sparql/organization.ssp", Map("root_organization_uri" -> WidgetsConfig.topLevelOrg))
     log.debug("sparql>>>> " + sparql)
-    val organizationUris = vivo.select(sparql,useCache).map(_('organization))
+    val organizationUris = vivo.select(sparql).map(_('organization))
     for (o <- organizationUris) {
       log.debug("org>>>>> " + o)
-      OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr,useCache)
+      OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr)
     }
     solr.commit()
     if (clearCacheOnFinish) {
@@ -48,12 +49,17 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     }
   }
 
-  def indexAll(useCache: Boolean = true,clearCacheOnFinish: Boolean = true) = {
-    indexPeople(useCache,false);
-    indexOrganizations(useCache,false);
+  def indexAll(clearCacheOnFinish: Boolean = true) = {
+    indexPeople(false);
+    indexOrganizations(false);
     if (clearCacheOnFinish) {
       JenaCache.clear
     }
+  }
+
+  def indexPerson(uri:String) = {
+    PersonIndexer.index(uri.replaceAll("<|>",""), vivo, solr)
+    solr.commit()
   }
 
   def reindexUri(uri: String) = {
@@ -72,18 +78,18 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     }
   }
 
-  def reindexPerson(uri: String,useCache:Boolean=false) = {
+  def reindexPerson(uri: String) = {
     // logger.debug("reindex person: " + uri)
     timer("index person") {
-      PersonIndexer.index(uri, vivo, solr, useCache)
+      PersonIndexer.index(uri, vivo, solr)
     }
     solr.commit
   }
 
-  def reindexOrganization(uri: String,useCache:Boolean=false) = {
+  def reindexOrganization(uri: String) = {
     // logger.debug("reindex organization: " + uri)
     timer("index organization") {
-      OrganizationIndexer.index(uri, vivo, solr, useCache)
+      OrganizationIndexer.index(uri, vivo, solr)
     }
     solr.commit
   }

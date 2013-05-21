@@ -1,0 +1,17 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT * 
+WHERE
+{
+  <${uri}> core:personInPosition ?appointment_url .
+  ?appointment_url vitro:mostSpecificType ?type .
+  ?appointment_url rdfs:label ?label .
+  ?appointment_url core:dateTimeInterval ?date_url .
+  ?date_url core:start ?start_datetime_url . ?start_datetime_url core:dateTime ?start_year .
+  OPTIONAL {
+    ?date_url core:end ?end_datetime_url . ?end_datetime_url core:dateTime ?end_year .
+  }
+  ?appointment_url core:rank ?rank .
+
+}

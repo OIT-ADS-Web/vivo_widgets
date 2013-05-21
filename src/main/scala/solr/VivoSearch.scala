@@ -1,6 +1,7 @@
 package edu.duke.oit.vw.solr
 
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.models.SolrModel
 
 object VivoSearcher extends SolrModel
 

@@ -18,8 +18,8 @@ case class Course(uri:String,
 
 object Course extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
-    val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext, useCache)
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any]) = {
+    val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext)
     courseData.map(build(_)).asInstanceOf[List[Course]]
   }
 
