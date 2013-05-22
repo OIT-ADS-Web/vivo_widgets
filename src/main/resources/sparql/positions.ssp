@@ -4,16 +4,19 @@ ${include("sparql/prefixes.ssp")}
 SELECT * 
 WHERE
 {
-  <${uri}> core:personInPosition ?appointmentUrl .
-  ?appointmentUrl vitro:mostSpecificType ?type ;
+  <${uri}> core:personInPosition ?appointmentUri .
+  ?appointmentUri vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
-    core:dateTimeInterval ?dateUrl .
-  ?dateUrl core:start ?startDatetimeUrl . 
-  ?startDatetimeUrl core:dateTime ?startYear .
+    core:dateTimeInterval ?dateUri ;
+    core:positionInOrganization ?organizationUri .
+  ?dateUri core:start ?startDatetimeUri . 
+  ?startDatetimeUri core:dateTime ?startYear .
+
+  ?organizationUri rdfs:label ?organizationLabel .
   OPTIONAL {
-    ?dateUrl core:end ?endDatetimeUrl . 
-    ?endDatetimeUrl core:dateTime ?endYear .
+    ?dateUri core:end ?endDatetimeUri . 
+    ?endDatetimeUri core:dateTime ?endYear .
   }
-  ?appointmentUrl core:rank ?rank .
+  ?appointmentUri core:rank ?rank .
 }
 order by ?rank

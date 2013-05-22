@@ -6,8 +6,10 @@ WHERE {
       <${ uri }> core:preferredTitle ?title ;
         rdf:type ?type ;
         rdfs:label ?label ;
-        core:overview ?overview ;
+      OPTIONAL {
+      <${ uri }> core:overview ?overview ;
         foaf:firstName ?firstName ;
         foaf:lastName ?lastName ;
         core:middleName ?middleName ;
+     }
 }

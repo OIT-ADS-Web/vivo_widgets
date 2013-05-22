@@ -26,10 +26,10 @@ object Position extends AttributeParams {
   }
 
   def build(position:Map[Symbol,String]) = {
-    new Position(uri         = position('appointmentUrl).stripBrackets(),
+    new Position(uri         = position('appointmentUri).stripBrackets(),
                  vivoType    = position('type).stripBrackets(),
                  label       = position('label),
-                 attributes  = parseAttributes(position, List('appointmentUrl,'type,'label)))
+                 attributes  = parseAttributes(position, List('appointmentUri,'type,'label)))
   }
 
 }
