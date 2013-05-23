@@ -3,7 +3,6 @@
 
     $('#host').hide("blind", {  }, 150, function() {
       $('#loading').show("blind", { }, 150);
-      //  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
       $.ajax({
         url: url.url + '.html' + url.parameters,
         success: function(data) {
@@ -46,7 +45,7 @@
       style='unstyled'
     };
     $('#settings').html(viewModel.chosenLimit().label
-    + ' ' + viewModel.chosenCollection().collectionName + ' in '
+    + ' ' + viewModel.chosenCollection() + ' in '
     + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
 
   }
@@ -82,7 +81,7 @@
       var apiVersion = $('body').attr('data-api-version');
       var baseUri = "api/" + apiVersion + "/" + $('#group').attr('value');
       var latestUrl = window.location.toString().replace(/builder(.*)/,baseUri) + 
-        "/" + this.chosenCollection().collectionName.toLowerCase() + "/" + this.chosenLimit().label;
+        "/" + this.chosenCollection().toLowerCase() + "/" + this.chosenLimit().label;
       var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat() + 
         '&style=' + this.chosenStyle();
 
