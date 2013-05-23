@@ -1,0 +1,16 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT * 
+WHERE
+{
+  <${uri}> core:mailingAddress ?uri .
+  ?uri vitro:mostSpecificType ?type ;
+    rdfs:label ?label ;
+    core:address1 ?address1 ;
+    core:addressCity ?city ;
+    core:addressState  ?state ;
+    core:addressPostalCode ?postalCode ;
+  OPTIONAL { ?mailingUrl core:addressCountry ?country ; }
+}
+order by ?label
