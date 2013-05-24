@@ -1,7 +1,8 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT * 
+SELECT ?uri ?type ?label ?address1 ?city ?state ?postalCode ?country
+  ("${uri}" AS ?personUri)
 WHERE
 {
   <${uri}> core:mailingAddress ?uri .
@@ -11,6 +12,6 @@ WHERE
     core:addressCity ?city ;
     core:addressState  ?state ;
     core:addressPostalCode ?postalCode ;
-  OPTIONAL { ?mailingUrl core:addressCountry ?country ; }
+  OPTIONAL { ?uri core:addressCountry ?country ; }
 }
 order by ?label

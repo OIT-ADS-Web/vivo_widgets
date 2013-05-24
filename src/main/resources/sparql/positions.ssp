@@ -1,11 +1,15 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT * 
+SELECT ?uri ?type ?label ?rank ?dateUri 
+  ?startDatetimeUri ?startYear 
+  ?organizationUri ?organizationLabel
+  ?endDatetimeUri ?endYear
+  ("${uri}" AS ?personUri)
 WHERE
 {
-  <${uri}> core:personInPosition ?appointmentUri .
-  ?appointmentUri vitro:mostSpecificType ?type ;
+  <${uri}> core:personInPosition ?uri .
+  ?uri vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
     core:dateTimeInterval ?dateUri ;
     core:positionInOrganization ?organizationUri .
@@ -17,6 +21,6 @@ WHERE
     ?dateUri core:end ?endDatetimeUri . 
     ?endDatetimeUri core:dateTime ?endYear .
   }
-  ?appointmentUri core:rank ?rank .
+  ?uri core:rank ?rank .
 }
 order by ?rank
