@@ -66,12 +66,12 @@ class WidgetsFilter extends ScalatraFilter
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
-          case "complete"      => Json.toJson(person)
-          case "publications"  => renderCollectionData(person.publications)
-          case "grants"        => renderCollectionData(person.grants)
-          case "courses"       => renderCollectionData(person.courses)
-          case "positions"     => renderCollectionData(person.positions)
-          case "addresses"     => renderCollectionData(person.addresses)
+          case "complete"      => render(person)
+          case "publications"  => renderCollection(person.publications)
+          case "grants"        => renderCollection(person.grants)
+          case "courses"       => renderCollection(person.courses)
+          case "positions"     => renderCollection(person.positions)
+          case "addresses"     => renderCollection(person.addresses)
           case x               => "Collection not found: " + x
         }
       }
@@ -85,8 +85,8 @@ class WidgetsFilter extends ScalatraFilter
     Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(organization) => {
         params.getOrElse('collectionName, "") match {
-          case "people" => renderCollectionData(organization.people)
-          case "grants" => renderCollectionData(organization.grants)
+          case "people" => renderCollection(organization.people)
+          case "grants" => renderCollection(organization.grants)
           case x => "Collection not found: " + x
         }
       }
@@ -102,7 +102,6 @@ class WidgetsFilter extends ScalatraFilter
     }
     modelData.put("style", style)
     modelData.put("formatting", formatting)
-    modelData.put("searchURI", uri("/search.html"))
     modelData.put("layout", "")
 
     val template = TemplateHelpers.tpath(collectionName + ".jade")
@@ -112,12 +111,12 @@ class WidgetsFilter extends ScalatraFilter
     }.asInstanceOf[String]
   }
 
-  protected def renderCollectionData(collection: List[AnyRef]) = {
+  protected def renderCollection(collection: List[AnyRef]) = {
     request("format") match {
       case FormatJSON => Json.toJson(collection)
       case FormatJSONP => jsonpCallback + "(" + Json.toJson(collection) + ");"
       case FormatHTML => {
-        timer("WidgetsServlet.renderCollectionData") {
+        timer("WidgetsServlet.renderCollection") {
           formatCollection(FormatHTML, params("collectionName"),
                            collection,
                            Int(params.getOrElse("count", "all")),
@@ -138,6 +137,15 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "not content"
     }
   }
+
+  protected def render(person: Person) = {
+    request("format") match {
+      case FormatJSON => Json.toJson(person)
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(person) + ");"
+      case _ => redirect(person.uri)
+    }
+  }
+
 
   protected def requestSetup = {
     request.put("format", format())
