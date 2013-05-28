@@ -1,7 +1,7 @@
 package edu.duke.oit.solr.test
 
 import org.specs2.mutable._
-import edu.duke.oit.vw.solr.Course
+import edu.duke.oit.vw.models.Course
 
 class CourseSpec extends Specification with Tags {
 

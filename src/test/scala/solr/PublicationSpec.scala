@@ -3,7 +3,7 @@ package edu.duke.oit.solr.test
 import org.specs2.mutable._
 import org.specs2.mock._
 import edu.duke.oit.vw.solr.Vivo
-import edu.duke.oit.vw.solr.Publication
+import edu.duke.oit.vw.models.Publication
 
 class PublicationSpec extends Specification with Tags with Mockito {
 
@@ -16,7 +16,7 @@ class PublicationSpec extends Specification with Tags with Mockito {
     val vivo = mock[Vivo]
 
     "contain the label in the publication" in {
-      val pub = Publication.build(vivo, publicationMap, false)
+      val pub = Publication.build(vivo, publicationMap)
       pub.label mustEqual "Study of Something"
     }
 

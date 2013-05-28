@@ -48,8 +48,8 @@ case class Person(uri:String,
     (uri :: super.uris) ++
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
-    courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris}
-    positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris}
+    courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
+    positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris}
   }
 

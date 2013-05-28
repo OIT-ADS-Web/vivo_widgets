@@ -1,7 +1,7 @@
 package edu.duke.oit.solr.test
 
 import org.specs2.mutable._
-import edu.duke.oit.vw.solr.Grant
+import edu.duke.oit.vw.models.Grant
 
 class GrantSpec extends Specification with Tags {
 

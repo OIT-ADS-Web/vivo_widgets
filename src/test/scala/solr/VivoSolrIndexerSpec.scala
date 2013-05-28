@@ -5,6 +5,7 @@ import org.apache.solr.client.solrj.SolrQuery
 import org.apache.solr.common.SolrDocumentList
 
 import edu.duke.oit.vw.solr._
+import edu.duke.oit.vw.models._
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 import edu.duke.oit.test.helpers.{TestServers,SampleLoader}
 
