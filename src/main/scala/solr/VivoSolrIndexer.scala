@@ -15,6 +15,12 @@ import org.slf4j.LoggerFactory
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
+import scala.concurrent._
+import scala.concurrent.util._
+import scala.concurrent.duration._
+import java.util.concurrent.Executors
+
+
 class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) 
   extends WidgetLogging 
   with Timer
@@ -44,8 +50,22 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   }
 
   def indexAll() = {
-    indexPeople();
-    indexOrganizations();
+    // import ExecutionContext.Implicits.global
+    implicit val executorService = Executors.newFixedThreadPool(4)
+    implicit val executorContext = ExecutionContext.fromExecutorService(executorService)
+    val futureList = List(
+      Future(indexPeople()),
+      Future(indexOrganizations())
+    )
+    val future = Future.sequence(futureList)
+    future onSuccess {
+      case results => {
+        log.info("done indexing people and organizations.")
+      }
+    }
+
+    Await.ready(future, Duration(22, HOURS))
+
   }
 
   def indexPerson(uri:String) = {
