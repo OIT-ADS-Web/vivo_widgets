@@ -53,6 +53,13 @@ case class Person(uri:String,
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris}
   }
 
+  def personAttributes() = {
+    this.attributes match {
+      case Some(attributes) => attributes ++ Map("uri" -> this.uri)
+      case _ => Map("uri" -> this.uri)
+    }
+  }
+
 }
 
 /**

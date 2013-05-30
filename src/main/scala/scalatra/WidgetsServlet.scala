@@ -72,13 +72,8 @@ class WidgetsFilter extends ScalatraFilter
           case "courses"       => renderCollection(person.courses)
           case "positions"     => renderCollection(person.positions)
           case "addresses"     => renderCollection(person.addresses)
-          case "overview"      => {
-            val personAttributes = person.attributes match {
-              case Some(attributes) => attributes ++ Map("uri" -> person.uri)
-              case _ => Map("uri" -> person.uri)
-            }
-           renderCollection(List(personAttributes))
-          }
+          case "overview"      => renderCollection(List(person.personAttributes()))
+          case "contact"       => renderCollection(List(person.personAttributes()))
           case x               => "Collection not found: " + x
         }
       }

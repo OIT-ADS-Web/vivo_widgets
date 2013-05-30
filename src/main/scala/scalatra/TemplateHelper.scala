@@ -9,6 +9,12 @@ object TemplateHelpers extends ElvisOperator {
   val templateDir = "/WEB-INF/scalate/templates/"
   def tpath(template:String) = templateDir + template
   def empty(value: String) = if ((value ?: "") == "") true else false
+  def empty(valueOption: Option[String]) = {
+    valueOption match {
+      case Some(value) => if ((value ?: "") == "") true else false
+      case _ => false
+    }
+  }
   def notEmpty(value: String)(body: => Unit) = {
     if ((value ?: "") != "") {
       capture(body)

@@ -1,0 +1,18 @@
+-# include template helpesr
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+
+- import edu.duke.oit.vw.models.Person
+-@ var contact: List[Map[String, String]]
+-@ var style: String
+
+
+// The contact object is really a list of person objects.
+- for (personAttributes <- contact)
+  - if (!empty(personAttributes.get("primaryEmail")))
+    - val email = personAttributes.get("primaryEmail")
+    p.email 
+      a(href="mailto:#{email}") #{email}
+  - if (!empty(personAttributes.get("phoneNumber")))
+    p.phone #{personAttributes.get("phoneNumber")}
+  a(href={fixURL(personAttributes.getOrElse("uri", ""))} class="moreInfo") More info
+
