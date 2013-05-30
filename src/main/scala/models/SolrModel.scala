@@ -16,6 +16,23 @@ trait SolrModel {
 
   def getDocumentById(id: String,solr: SolrServer): Option[SolrDocument] = {
     val query = new SolrQuery().setQuery("id:\"" + id + "\"")
+    getBySolrQuery(query, solr)
+  }
+
+  def getDocumentByAlternateId(alternateId: String,solr: SolrServer): Option[SolrDocument] = {
+    val query = new SolrQuery().setQuery("alternateId:\"" + alternateId + "\"")
+    getBySolrQuery(query, solr)
+  }
+
+  def getDocumentByIdOrAlternateId(idOrAlternateId: String, solr: SolrServer): Option[SolrDocument] = {
+    val doc = getDocumentById(idOrAlternateId, solr)
+    doc.isEmpty match {
+      case true => getDocumentByAlternateId(idOrAlternateId, solr)
+      case _ => doc
+    }
+  }
+
+  protected def getBySolrQuery(query: SolrQuery, solr: SolrServer): Option[SolrDocument] = {
     val docList = solr.query(query).getResults()
     if (docList.getNumFound() > 0) {
       Option(docList.head)
@@ -23,6 +40,7 @@ trait SolrModel {
       None
     }
   }
+
 
   def search(queryString: String, solr: SolrServer): VivoSearchResult = {
     val query = new SolrQuery().setQuery(queryString).addFacetField("classgroup").setFacetMinCount(1).setRows(1000)
