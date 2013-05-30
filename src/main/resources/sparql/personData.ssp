@@ -10,4 +10,9 @@ WHERE {
   OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
   OPTIONAL { <${ uri }> foaf:lastName ?lastName . }
   OPTIONAL { <${ uri }> core:middleName ?middleName . }
+  OPTIONAL { <${ uri }> core:primaryEmail ?primaryEmail . }
+  OPTIONAL { <${ uri }> core:phoneNumber ?phoneNumber . }
+  OPTIONAL { <${ uri }> duke:scopedNetid ?scopedNetid . }
+  OPTIONAL { <${ uri }> bibo:suffixName ?suffixName . }
+  OPTIONAL { <${ uri }> bibo:prefixName ?prefixName . }
 }
