@@ -1,3 +1,4 @@
+<%-- -*- sparql -*- --%>
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
@@ -12,7 +13,6 @@ WHERE {
   OPTIONAL { <${ uri }> core:middleName ?middleName . }
   OPTIONAL { <${ uri }> core:primaryEmail ?primaryEmail . }
   OPTIONAL { <${ uri }> core:phoneNumber ?phoneNumber . }
-  OPTIONAL { <${ uri }> duke:scopedNetid ?scopedNetid . }
   OPTIONAL { <${ uri }> bibo:suffixName ?suffixName . }
   OPTIONAL { <${ uri }> bibo:prefixName ?prefixName . }
 }
