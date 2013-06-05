@@ -3,7 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 select  *
 where {
-  <${uri}> core:hasPrincipalInvestigatorRole ?role .
+  <${uri}> core:hasInvestigatorRole ?role .
   ?role rdfs:label ?roleName .
   ?role core:roleContributesTo ?agreement .
   ?agreement vitro:mostSpecificType ?type .
