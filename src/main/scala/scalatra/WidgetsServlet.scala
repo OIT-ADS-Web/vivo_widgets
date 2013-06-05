@@ -2,6 +2,7 @@ package edu.duke.oit.vw.scalatra
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,Timer}
 import edu.duke.oit.vw.solr._
+import edu.duke.oit.vw.models._
 import java.net.URL
 import org.scalatra._
 import scalate.ScalateSupport
@@ -16,8 +17,8 @@ object FormatJSON extends FormatType
 object FormatJSONP extends FormatType
 
 class WidgetsFilter extends ScalatraFilter
-  with ScalateSupport 
-  with ScalateTemplateStringify 
+  with ScalateSupport
+  with ScalateTemplateStringify
   with Timer {
 
   // GET /people/{collectionName}/5.jsonp?uri={uri}
@@ -36,8 +37,8 @@ class WidgetsFilter extends ScalatraFilter
     val result = VivoSearcher.search(params.getOrElse("query",""), WidgetsConfig.vivoServer)
     format(FormatJSONP) match {
       case FormatJSON => result.toJson
-      case FormatHTML => "Not available: html" 
-      case FormatJSONP => "vivoSearchResult("+result.toJson+")" //.toJson
+      case FormatHTML => "Not available: html"
+      case FormatJSONP => jsonpCallback() + "("+result.toJson+")"
       case _ => "NoContent"
     }
   }
@@ -63,12 +64,17 @@ class WidgetsFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     requestSetup
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
-      case Some(person) => { 
+      case Some(person) => {
         params.getOrElse('collectionName, "") match {
-          case "publications" => renderCollectionData(person.publications)
-          case "grants" => renderCollectionData(person.grants)
-          case "courses" => renderCollectionData(person.courses)
-          case x => "Collection not found: " + x
+          case "complete"      => render(person)
+          case "publications"  => renderCollection(person.publications)
+          case "grants"        => renderCollection(person.grants)
+          case "courses"       => renderCollection(person.courses)
+          case "positions"     => renderCollection(person.positions)
+          case "addresses"     => renderCollection(person.addresses)
+          case "overview"      => renderCollection(List(person.personAttributes()))
+          case "contact"       => renderCollection(List(person.personAttributes()))
+          case x               => "Collection not found: " + x
         }
       }
       case _ => "Not Found"
@@ -81,8 +87,8 @@ class WidgetsFilter extends ScalatraFilter
     Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(organization) => {
         params.getOrElse('collectionName, "") match {
-          case "people" => renderCollectionData(organization.people)
-          case "grants" => renderCollectionData(organization.grants)
+          case "people" => renderCollection(organization.people)
+          case "grants" => renderCollection(organization.grants)
           case x => "Collection not found: " + x
         }
       }
@@ -98,7 +104,6 @@ class WidgetsFilter extends ScalatraFilter
     }
     modelData.put("style", style)
     modelData.put("formatting", formatting)
-    modelData.put("searchURI", uri("/search.html"))
     modelData.put("layout", "")
 
     val template = TemplateHelpers.tpath(collectionName + ".jade")
@@ -107,13 +112,13 @@ class WidgetsFilter extends ScalatraFilter
       renderTemplateString(servletContext, template, modelData.toMap)
     }.asInstanceOf[String]
   }
-  
-  protected def renderCollectionData(collection: List[AnyRef]) = {
+
+  protected def renderCollection(collection: List[AnyRef]) = {
     request("format") match {
       case FormatJSON => Json.toJson(collection)
-      case FormatJSONP => "vivoWidgetResult(" + Json.toJson(collection) + ");"
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(collection) + ");"
       case FormatHTML => {
-        timer("WidgetsServlet.renderCollectionData") {
+        timer("WidgetsServlet.renderCollection") {
           formatCollection(FormatHTML, params("collectionName"),
                            collection,
                            Int(params.getOrElse("count", "all")),
@@ -134,12 +139,21 @@ class WidgetsFilter extends ScalatraFilter
       case _ => "not content"
     }
   }
-  
+
+  protected def render(person: Person) = {
+    request("format") match {
+      case FormatJSON => Json.toJson(person)
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(person) + ");"
+      case _ => redirect(person.uri)
+    }
+  }
+
+
   protected def requestSetup = {
     request.put("format", format())
     setContentType(request("format").asInstanceOf[FormatType])
   }
-  
+
   protected def setContentType(formatType:FormatType) = {
     formatType match {
       case FormatJSON => contentType = "application/json"
@@ -171,18 +185,20 @@ class WidgetsFilter extends ScalatraFilter
   }
 
   protected def defaultVersion = "v0.9"
-  
+
   protected def uri(s:String) = {
     uriPrefix + s
   }
-  
+
   protected def uriPrefix() = {
     import edu.duke.oit.vw.utils.ElvisOperator._
     (request.getContextPath() ?: "") + (request.getServletPath() ?: "")
   }
 
+  protected def jsonpCallback() = params.getOrElse("callback", "vivoWidgetResult")
+
   notFound {
     filterChain.doFilter(request, response)
   }
-  
+
 }

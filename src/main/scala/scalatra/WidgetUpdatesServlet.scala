@@ -5,7 +5,8 @@ import akka.actor.{Actor,ActorSystem,Props}
 
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,WidgetLogging,Timer}
 import edu.duke.oit.vw.solr.VivoSolrIndexer
-import edu.duke.oit.vw.solr.{Person,VivoSearcher}
+import edu.duke.oit.vw.solr.VivoSearcher
+import edu.duke.oit.vw.models.Person
 import edu.duke.oit.vw.jena.JenaCache
 import java.net.URL
 import org.scalatra._
@@ -23,8 +24,24 @@ class WidgetUpdatesFilter extends ScalatraFilter
     log.info("rebuilding the index...")
     WidgetsConfig.prepareCore
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
-    vsi.indexAll(false)
+    vsi.indexAll()
     Json.toJson(Map("complete" -> true))
+  }
+
+ post("/updates/rebuild/person") {
+    basicAuth
+    log.info("rebuilding the person index...")
+    params.get("uri") match {
+      case Some(uri:String) => {
+        log.info("rebuilding for: " + uri)
+        WidgetsConfig.prepareCore
+        val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+        vsi.indexPerson(uri)
+        Json.toJson(Map("complete" -> true))
+      }
+      case _ => "Not a valid request"
+    }
+
   }
 
   post("/updates/uri") {

@@ -3,6 +3,7 @@ package edu.duke.oit.vw.solr
 import org.apache.solr.client.solrj.SolrServer
 import org.apache.solr.common.SolrInputDocument
 
+import edu.duke.oit.vw.models._
 import edu.duke.oit.vw.utils._
 
 import com.hp.hpl.jena.rdf.model.ModelFactory
@@ -15,18 +16,20 @@ object PersonIndexer extends SimpleConversion
   with WidgetLogging 
 {
 
-  def index(uri: String,vivo: Vivo, solr: SolrServer, useCache: Boolean = false) = {
+  def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     try {
       val uriContext = Map("uri" -> uri)
 
-      val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext, useCache)
+      val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
       if (personData.size > 0) {
 
-        val pubs = Publication.fromUri(vivo, uriContext, useCache)
-        val grants = Grant.fromUri(vivo, uriContext, useCache)
-        val courses = Course.fromUri(vivo, uriContext, useCache)
+        val pubs = Publication.fromUri(vivo, uriContext)
+        val grants = Grant.fromUri(vivo, uriContext)
+        val courses = Course.fromUri(vivo, uriContext)
+        val positions = Position.fromUri(vivo, uriContext)
+        val addresses = Address.fromUri(vivo, uriContext)
 
-        val p = Person.build(uri, personData.head, pubs, grants, courses)
+        val p = Person.build(uri, personData.head, pubs, grants, courses, positions, addresses)
         timer("add person to solr") {
           val solrDoc = new SolrInputDocument()
           solrDoc.addField("id",p.uri)

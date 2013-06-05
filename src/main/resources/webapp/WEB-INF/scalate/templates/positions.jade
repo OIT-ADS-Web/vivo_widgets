@@ -1,23 +1,23 @@
 -# include template helpers
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 
-- import edu.duke.oit.vw.models.PersonReference
--@ var people: List[PersonReference]
+- import edu.duke.oit.vw.models.Position
+-@ var positions: List[Position]
 -@ var style: String
 
 -# for debugging
--# - for(person <- people)
--#   = person
+-# - for(position <- positions)
+-#   = position
 
 -# if we are styling, set a couple of variables
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
 ul(style=ulStyle)
-  - for (person <- people)
+  - for (position <- positions)
     li(style=liStyle) 
-      | #{person.label} (#{person.title}) 
+      | #{position.label}
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 
-        href="#{fixURL(person.uri)}") More info
+        href={fixURL(position.get("personUri"))} ) More info

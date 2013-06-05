@@ -1,4 +1,4 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import org.apache.solr.client.solrj.{SolrServer,SolrQuery}
 import org.apache.solr.client.solrj.response.FacetField
@@ -6,6 +6,7 @@ import org.apache.solr.common.{SolrInputDocument,SolrDocumentList,SolrDocument}
 import java.util.ArrayList
 import scala.collection.JavaConversions._
 
+import edu.duke.oit.vw.solr._
 import edu.duke.oit.vw.utils._
 
 // use scala collections with java iterators

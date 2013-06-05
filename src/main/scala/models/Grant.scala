@@ -1,6 +1,7 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.solr.Vivo
 
 case class Grant(uri:String,
                  vivoType: String,
@@ -18,8 +19,8 @@ case class Grant(uri:String,
 object Grant extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              useCache: Boolean = false, templatePath: String="sparql/grants.ssp") = {
-    val grantData = vivo.selectFromTemplate(templatePath, uriContext, useCache)
+              templatePath: String="sparql/grants.ssp") = {
+    val grantData = vivo.selectFromTemplate(templatePath, uriContext)
     grantData.map(build(_)).asInstanceOf[List[Grant]]
 
   }

@@ -1,6 +1,7 @@
-package edu.duke.oit.vw.solr
+package edu.duke.oit.vw.models
 
 import edu.duke.oit.vw.utils._
+import edu.duke.oit.vw.solr.Vivo
 
 case class Course(uri:String,
                   vivoType: String,
@@ -17,8 +18,8 @@ case class Course(uri:String,
 
 object Course extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], useCache: Boolean = false) = {
-    val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext, useCache)
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any]) = {
+    val courseData  = vivo.selectFromTemplate("sparql/courses.ssp", uriContext)
     courseData.map(build(_)).asInstanceOf[List[Course]]
   }
 

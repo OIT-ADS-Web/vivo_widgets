@@ -3,7 +3,6 @@
 
     $('#host').hide("blind", {  }, 150, function() {
       $('#loading').show("blind", { }, 150);
-      //  $.getJSON(url.url + '.jsonp' + url.parameters + "&callback=?");
       $.ajax({
         url: url.url + '.html' + url.parameters,
         success: function(data) {
@@ -46,7 +45,7 @@
       style='unstyled'
     };
     $('#settings').html(viewModel.chosenLimit().label
-    + ' ' + viewModel.chosenCollection().collectionName + ' in '
+    + ' ' + viewModel.chosenCollection() + ' in '
     + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
 
   }
@@ -81,8 +80,8 @@
     viewModel.url = ko.dependentObservable( function() {
       var apiVersion = $('body').attr('data-api-version');
       var baseUri = "api/" + apiVersion + "/" + $('#group').attr('value');
-      var latestUrl = window.location.toString().replace(/builder(.*)/,baseUri) + 
-        "/" + this.chosenCollection().collectionName.toLowerCase() + "/" + this.chosenLimit().label;
+      var groupUrl = window.location.toString().replace(/builder(.*)/,baseUri);
+      var latestUrl = groupUrl + "/" + this.chosenCollection().toLowerCase() + "/" + this.chosenLimit().label;
       var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat() + 
         '&style=' + this.chosenStyle();
 
@@ -98,6 +97,11 @@
       $("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
       $("#html").attr("href", latestUrl +".html" + latestParams);
       $("#js").attr("href", latestUrl + ".js" + latestParams);
+
+      var fullUrl = groupUrl + "/complete/all";
+      var fullParams = '?uri=' + $("#uri").attr("value");
+      $("#fullJson").attr("href", fullUrl + ".json" + fullParams);
+      $("#fullJsonp").attr("href", fullUrl + ".jsonp" + fullParams);
 
       return {url: latestUrl, parameters: latestParams};
     }, viewModel);

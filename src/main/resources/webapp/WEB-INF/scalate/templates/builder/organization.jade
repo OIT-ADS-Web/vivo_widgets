@@ -5,7 +5,7 @@
 -@ val contextUri: String = ""
 -@ val theme: String = ""
 -@ val version: String = ""
--@ import val organization: edu.duke.oit.vw.solr.Organization
+-@ import val organization: edu.duke.oit.vw.models.Organization
 
 !!! 5
 
@@ -24,8 +24,8 @@ html(lang="en")
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/ZeroClipboard.js")
     :javascript
       var collections = [
-      { collectionName: 'People', description: 'People in this organization', collectionValue: 0 },
-      { collectionName: 'Grants', description: 'Grants administered by this organization', collectionValue: 1 }
+      { collectionName: 'People', description: 'People in this organization', collectionValue: 'people' },
+      { collectionName: 'Grants', description: 'Grants administered by this organization', collectionValue: 'grants' }
       ];
       var noItems = [ {label: '5', value: 5}, {label: '10', value: 10}, {label: '15', value: 15}, {label: 'all', value: 'all'}];
       var help = {
