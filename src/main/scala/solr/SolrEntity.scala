@@ -8,7 +8,7 @@ import edu.duke.oit.vw.models.OrganizationExtraction
 object SolrEntity extends SolrModel {
   
   def getByUri(uri:String): Option[Any] = {
-    this.getDocumentById(uri, WidgetsConfig.widgetServer) match {
+    this.getDocumentByIdOrAlternateId(uri, WidgetsConfig.widgetServer) match {
       case Some(solrDocument) => {
         solrDocument.getFieldValue("group").asInstanceOf[String] match {
           case "people" => {

@@ -7,6 +7,7 @@ WHERE {
   <${ uri }> core:preferredTitle ?title ;
     vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
+    duke:duid ?alternateId ;
   OPTIONAL { <${ uri }> core:overview ?overview . }
   OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
   OPTIONAL { <${ uri }> foaf:lastName ?lastName . }

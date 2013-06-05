@@ -6,7 +6,7 @@ import edu.duke.oit.vw.utils._
 object Person extends SolrModel with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Person] = {
-    getDocumentById(uri,solr) match {
+    getDocumentByIdOrAlternateId(uri,solr) match {
       case Some(sd) => Option(PersonExtraction(sd.get("json").toString))
       case _ => None
     }

@@ -33,6 +33,7 @@ object PersonIndexer extends SimpleConversion
         timer("add person to solr") {
           val solrDoc = new SolrInputDocument()
           solrDoc.addField("id",p.uri)
+          solrDoc.addField("alternateId", personData.head('alternateId))
           solrDoc.addField("group","people")
           solrDoc.addField("json",p.toJson)
           p.uris.map {uri => solrDoc.addField("uris",uri)}
