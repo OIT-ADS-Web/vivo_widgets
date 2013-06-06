@@ -64,7 +64,7 @@ html(lang="en")
             | Collection to Display:
             a(href="#" class="help" id="collectionsHelp") ?
             span
-              select(data-bind="options: collections, optionsText: 'collectionName', value:chosenCollection")
+              select(data-bind="options: collections, optionsText: 'collectionName', value:chosenCollection, optionsValue: 'collectionName'")
           li
             | Number of items to return:
             a(href="#" class="help" id="itemsHelp") ?
