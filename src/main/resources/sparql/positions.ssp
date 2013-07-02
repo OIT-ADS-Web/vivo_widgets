@@ -1,3 +1,4 @@
+<%--  -*- sparql -*- --%>
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
