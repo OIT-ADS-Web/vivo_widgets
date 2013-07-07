@@ -12,12 +12,14 @@ object Person extends SolrModel with AttributeParams {
     }
   }
 
-  def build(uri:String, personData:Map[Symbol,String],
+  def build(uri:String,
+            personData:Map[Symbol,String],
             pubs:List[Publication],
             grants:List[Grant],
             courses:List[Course],
             positions:List[Position],
-            addresses:List[Address]): Person = {
+            addresses:List[Address],
+            educations:List[Education]): Person = {
     new Person(uri,
                vivoType      = personData('type).stripBrackets(),
                label         = personData('label),
@@ -27,6 +29,7 @@ object Person extends SolrModel with AttributeParams {
                courses       = courses,
                positions     = positions,
                addresses     = addresses,
+               educations    = educations,
                attributes    = parseAttributes(personData, List('type,'label,'title)))
   }
 }
@@ -40,6 +43,7 @@ case class Person(uri:String,
                   courses:List[Course],
                   positions:List[Position],
                   addresses:List[Address],
+                  educations:List[Education],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
@@ -50,7 +54,8 @@ case class Person(uri:String,
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
-    addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris}
+    addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris} ++
+    educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris}
   }
 
   def personAttributes() = {
