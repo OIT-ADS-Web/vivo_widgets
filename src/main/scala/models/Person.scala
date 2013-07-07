@@ -19,7 +19,8 @@ object Person extends SolrModel with AttributeParams {
             courses:List[Course],
             positions:List[Position],
             addresses:List[Address],
-            educations:List[Education]): Person = {
+            educations:List[Education],
+            researchAreas:List[ResearchArea]): Person = {
     new Person(uri,
                vivoType      = personData('type).stripBrackets(),
                label         = personData('label),
@@ -30,6 +31,7 @@ object Person extends SolrModel with AttributeParams {
                positions     = positions,
                addresses     = addresses,
                educations    = educations,
+               researchAreas = researchAreas,
                attributes    = parseAttributes(personData, List('type,'label,'title)))
   }
 }
@@ -44,6 +46,7 @@ case class Person(uri:String,
                   positions:List[Position],
                   addresses:List[Address],
                   educations:List[Education],
+                  researchAreas:List[ResearchArea],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
@@ -56,6 +59,7 @@ case class Person(uri:String,
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris} ++
     educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris}
+    researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris}
   }
 
   def personAttributes() = {
