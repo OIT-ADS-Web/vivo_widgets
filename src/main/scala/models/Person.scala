@@ -58,7 +58,7 @@ case class Person(uri:String,
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris} ++
-    educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris}
+    educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris} ++
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris}
   }
 
