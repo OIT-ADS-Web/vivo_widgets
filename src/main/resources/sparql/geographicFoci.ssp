@@ -7,8 +7,9 @@ SELECT ?uri ?label
   ("${uri}" AS ?personUri)
 WHERE {
  
-  # mostSpecificType is has an equivalent class
-  # so some places return 2 results.
+  # mostSpecificType has an equivalent class
+  # so some places return 2 results.  the following
+  # did not work.
   # <${uri}> core:geographicFocus ?uri .
   # ?uri vitro:mostSpecificType ?type .
   # ?uri rdfs:label ?label .
