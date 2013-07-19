@@ -22,21 +22,21 @@ object Person extends SolrModel with AttributeParams {
             educations:List[Education],
             researchAreas:List[ResearchArea],
             webpages:List[Webpage],
-            geoFocus:List[GeographicFocus]): Person = {
+            geographicalFocus:List[GeographicFocus]): Person = {
     new Person(uri,
-               vivoType      = personData('type).stripBrackets(),
-               label         = personData('label),
-               title         = personData('title),
-               publications  = pubs,
-               grants        = grants,
-               courses       = courses,
-               positions     = positions,
-               addresses     = addresses,
-               educations    = educations,
-               researchAreas = researchAreas,
-               webpages      = webpages,
-               geoFocus      = geoFocus,
-               attributes    = parseAttributes(personData, List('type,'label,'title)))
+               vivoType           = personData('type).stripBrackets(),
+               label              = personData('label),
+               title              = personData('title),
+               publications       = pubs,
+               grants             = grants,
+               courses            = courses,
+               positions          = positions,
+               addresses          = addresses,
+               educations         = educations,
+               researchAreas      = researchAreas,
+               webpages           = webpages,
+               geographicalFocus  = geographicalFocus,
+               attributes         = parseAttributes(personData, List('type,'label,'title)))
   }
 }
 
@@ -52,7 +52,7 @@ case class Person(uri:String,
                   educations:List[Education],
                   researchAreas:List[ResearchArea],
                   webpages:List[Webpage],
-                  geoFocus:List[GeographicFocus],
+                  geographicalFocus:List[GeographicFocus],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
@@ -67,7 +67,7 @@ case class Person(uri:String,
     educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris} ++
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
-    geoFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} 
+    geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} 
   }
 
   def personAttributes() = {
