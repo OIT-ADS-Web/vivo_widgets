@@ -8,6 +8,7 @@ WHERE {
     vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
     duke:duid ?alternateId ;
+    core:preferredTitle ?preferredTitle ;
   OPTIONAL { <${ uri }> core:overview ?overview . }
   OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
   OPTIONAL { <${ uri }> foaf:lastName ?lastName . }
@@ -16,4 +17,11 @@ WHERE {
   OPTIONAL { <${ uri }> core:phoneNumber ?phoneNumber . }
   OPTIONAL { <${ uri }> bibo:suffixName ?suffixName . }
   OPTIONAL { <${ uri }> bibo:prefixName ?prefixName . }
+  OPTIONAL {
+    <${ uri }> vitro-public:mainImage ?imageUri .
+    ?imageUri  vitro-public:downloadLocation ?imageDownload .
+    ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
+    ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+  }
 }
+

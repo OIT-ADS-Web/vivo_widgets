@@ -1,3 +1,4 @@
+<%--  -*- sparql -*- --%>
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
@@ -24,5 +25,8 @@ where {
   OPTIONAL { 
     ?publication core:dateTimeValue ?datetime . ?datetime core:dateTime ?year .
   }
+  OPTIONAL {?authorship duke:isFavoritedAuthorship ?isFavorite .}
+  OPTIONAL {?publication bibo:doi ?doi .}
+  OPTIONAL {?publication bibo:abstract ?abstract .}
 }
 order by desc(?datetime)

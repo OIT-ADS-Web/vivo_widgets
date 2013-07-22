@@ -94,9 +94,6 @@ class SolrModelSpec extends Specification with Tags {
 
     "know all of its URIs" in {
       val person = PersonExtraction(testPersonJson)
-println("----------------------------")
-println(person.uris)
-println("----------------------------")
       person.uris must_== List("http://vivo.duke.edu/person1",
                                "http://vivo.duke.edu/test1",
                                "http://vivo.duke.edu/test2323423")
