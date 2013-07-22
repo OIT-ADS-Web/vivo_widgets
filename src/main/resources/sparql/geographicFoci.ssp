@@ -1,0 +1,23 @@
+<%--  -*- sparql -*- --%>
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?uri ?label 
+  ("GeographicRegion" as ?type)
+  ("${uri}" AS ?personUri)
+WHERE {
+ 
+  # mostSpecificType has an equivalent class
+  # so some places return 2 results.  the following
+  # did not work.
+  # <${uri}> core:geographicFocus ?uri .
+  # ?uri vitro:mostSpecificType ?type .
+  # ?uri rdfs:label ?label .
+
+
+  <${uri}> core:geographicFocus ?uri .
+  ?uri rdf:type core:GeographicRegion .
+  ?uri rdfs:label ?label .
+
+}
+order by ?label
