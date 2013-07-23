@@ -44,6 +44,22 @@ class WidgetUpdatesFilter extends ScalatraFilter
 
   }
 
+ post("/updates/rebuild/organization") {
+    basicAuth
+    log.info("rebuilding the organization index...")
+    params.get("uri") match {
+      case Some(uri:String) => {
+        log.info("rebuilding for: " + uri)
+        WidgetsConfig.prepareCore
+        val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+        vsi.reindexOrganization(uri)
+        Json.toJson(Map("complete" -> true))
+      }
+      case _ => "Not a valid request"
+    }
+
+  }
+
   post("/updates/uri") {
     basicAuth
     WidgetsConfig.prepareCore
