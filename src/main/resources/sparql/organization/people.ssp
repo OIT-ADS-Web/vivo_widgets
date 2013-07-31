@@ -9,7 +9,7 @@ WHERE {{
       ?position core:positionInOrganization ?organization .
       ?position core:positionForPerson ?person .
       ?position vitro:mostSpecificType ?positionType .
-      ?position core:rank ?displayOrder .
+      # ?position core:rank ?displayOrder .
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
@@ -21,7 +21,7 @@ UNION
       ?organization rdfs:label ?organizationName .
       ?position vitro:mostSpecificType ?positionType .
       ?position core:positionForPerson ?person .
-      ?position core:rank ?displayOrder .
+      # ?position core:rank ?displayOrder .
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
