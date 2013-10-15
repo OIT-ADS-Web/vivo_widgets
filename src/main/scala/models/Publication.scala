@@ -16,11 +16,21 @@ case class Publication(uri:String,
 
   def subType = {
     val regex = "(.*)/([a-zA-Z0-9.\\-]+)(#)?([a-zA-Z0-9.\\-]+)?".r
-    vivoType match {
+    val tmpType = vivoType match {
       case regex(_,subType1,_,subType2) => if(subType2 == null) subType1 else subType2
       case _ => this.getClass.getName
     }
+    validType(tmpType)
   }
+
+  protected def validType(subType:String) = {
+    // There needs to be matching jade templates for each of these.
+    Set("AcademicArticle", "Article", "Book", "Chapter", "ConferencePaper").contains(subType) match {
+      case true => subType
+      case _ => "Article"
+    }
+  }
+
 }
 
 object Publication extends AttributeParams {
