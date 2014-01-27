@@ -16,7 +16,7 @@ where {
     ?publication core:hasPublicationVenue ?publicationVenue . 
     ?publicationVenue rdfs:label ?publishedIn .
   }
-  OPTIONAL { ?publication duke:publicationVenue ?publicationVenue }
+  OPTIONAL { ?publication duke:publicationVenue ?publishedIn }
   OPTIONAL { ?publication duke:authorList ?authorList }
   OPTIONAL { 
     ?publication core:publisher ?publisher. ?publisher rdfs:label ?publishedBy .
