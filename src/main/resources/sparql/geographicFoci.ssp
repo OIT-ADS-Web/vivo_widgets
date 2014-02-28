@@ -5,6 +5,8 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?uri ?label 
   ("GeographicRegion" as ?type)
   ("${uri}" AS ?personUri)
+  ?focusType
+  ?focusTypeLabel
 WHERE {
  
   # mostSpecificType has an equivalent class
@@ -15,9 +17,11 @@ WHERE {
   # ?uri rdfs:label ?label .
 
 
-  <${uri}> core:geographicFocus ?uri .
-  ?uri rdf:type core:GeographicRegion .
+  <${uri}> duke-geo:geographicallyRelatesTo ?geoRelationUri .
+  ?geoRelationUri core:geographicFocus ?uri .
   ?uri rdfs:label ?label .
+  ?geoRelationUri vitro:mostSpecificType ?focusType .
+  ?focusType rdfs:label ?focusTypeLabel .
 
 }
 order by ?label

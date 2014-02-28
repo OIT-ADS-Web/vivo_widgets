@@ -18,3 +18,4 @@
     PREFIX core: <http://vivoweb.org/ontology/core#>
     PREFIX vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#>
     PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
+    PREFIX duke-geo: <http://vivo.duke.edu/vivo/ontology/duke-geo-extension#>
