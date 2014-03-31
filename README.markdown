@@ -44,6 +44,35 @@ VIVO Widgets is made of up the following parts.
 
 4. Browse to http://localhost:8888/.
 
+## Developing Locally
+
+1. Clone the project.
+
+2. Put a copy of the deploy.properties with your local config into the following directory:
+
+    ```
+    src/main/resourses/
+    ```
+
+3. To start the application follow the commands based on
+   [Scalatra First Project](http://www.scalatra.org/2.2/getting-started/first-project.html):
+
+    ```shell
+    $ ./sbt
+    > container:start 
+    ```
+
+If you want automatic code reloading, do the following:
+
+    ```shell
+    $ ./sbt
+    > container:start
+    > ~ ;copy-resources;aux-compile
+    ```
+
+4. Browse to http://localhost:8080/.
+
+
 ## Solr Index
 
 Vivo widgets are powered by a Solr index.  You will need to copy the ``solr`` directory located here
