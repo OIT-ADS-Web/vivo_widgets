@@ -26,7 +26,7 @@ object VivowidgetsBuild extends Build {
         <exclude org="com.sun.jmx"/>
         <exclude org="javax.jms"/>
       </dependency>,
-      resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
+      resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
