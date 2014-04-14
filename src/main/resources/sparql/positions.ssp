@@ -2,7 +2,7 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri ?type ?label ?rank ?dateUri 
+SELECT DISTINCT ?uri ?type ?label ?rank ?dateUri 
   ?startDatetimeUri ?startYear 
   ?organizationUri ?organizationLabel
   ?endDatetimeUri ?endYear
