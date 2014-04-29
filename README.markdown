@@ -26,7 +26,7 @@ VIVO Widgets is made of up the following parts.
 1. Clone the VIVO Widgets project.
 
 2. Change into the project directory and launch [sbt](http://www.scala-sbt.org/) and tell it to
-  create an executable jar. This will create an excecuble jar located at
+  create an executable jar. This will create an executable jar located at
   ``target/vivo-widgets.jar``
 
     ```
@@ -51,7 +51,7 @@ VIVO Widgets is made of up the following parts.
 2. Put a copy of the deploy.properties with your local config into the following directory:
 
     ```
-    src/main/resourses/
+    src/main/resources/
     ```
 
 3. To start the application follow the commands based on
@@ -70,17 +70,26 @@ If you want automatic code reloading, do the following:
     > ~ ;copy-resources;aux-compile
     ```
 
-4. Browse to http://localhost:8080/.
+4. Browse to http://localhost:8080/builder?uri=<some-uri>.
 
+### Run the tests
+
+    $ ./sbt
+    > test
+
+or to run only a few tests:
+
+    > test-only edu.duke.oit.solr.test.GrantSpec edu.duke.oit.solr.test.CourseSpec
 
 ## Solr Index
 
-Vivo widgets are powered by a Solr index.  You will need to copy the ``solr`` directory located here
-into a directory on the server where you have solr running.  From there, you will need to set the
-WidgetsSolr.directory in the ``deploy.properties`` (see section below).
+Vivo widgets are powered by a Solr index.  You will need to copy the ``solr``
+directory located here into a directory on the server where you have solr
+running.  From there, you will need to set the WidgetsSolr.directory in the
+``deploy.properties`` (see section below).
 
-When you first start widgets and setup your database and solr location, you will need to reindex.
-To reindex, run:
+When you first start widgets and setup your database and solr location, you
+will need to reindex.  To reindex, run:
 
     ```
     $ curl -s -u username:password -X POST  \
@@ -92,8 +101,9 @@ WidgetUpdateSetup.username and WidgetUpdateSetup.password.
 
 ## Configuration
 
-Widgets uses a very similar ``deploy.properties`` file that is used by VIVO.  It actually reuses
-some of the same database connection informaiton, but it also adds a few properties.
+Widgets uses a very similar ``deploy.properties`` file that is used by VIVO.
+It actually reuses some of the same database connection information, but it
+also adds a few properties.
 
 *WidgetsSolr.directory*
 
@@ -119,6 +129,6 @@ See ``deploy.properties.example`` in the docs directory.
   
 ## Known Issues
 
-* There is an old version of a Jena listener in ``listener/src`` that will no longer work with this
-  version of vivo widgets.  It needs to be updated to support a new format of the json to update
-  widgets.
+* There is an old version of a Jena listener in ``listener/src`` that will no
+  longer work with this version of vivo widgets.  It needs to be updated to
+support a new format of the json to update widgets.
