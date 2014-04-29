@@ -66,15 +66,16 @@ class WidgetsFilter extends ScalatraFilter
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
-          case "complete"      => render(person)
-          case "publications"  => renderCollection(person.publications)
-          case "grants"        => renderCollection(person.grants)
-          case "courses"       => renderCollection(person.courses)
-          case "positions"     => renderCollection(person.positions)
-          case "addresses"     => renderCollection(person.addresses)
-          case "overview"      => renderCollection(List(person.personAttributes()))
-          case "contact"       => renderCollection(List(person.personAttributes()))
-          case x               => "Collection not found: " + x
+          case "complete"       => render(person)
+          case "publications"   => renderCollection(person.publications)
+          case "artistic_works"  => renderCollection(person.artisticWorks)
+          case "grants"         => renderCollection(person.grants)
+          case "courses"        => renderCollection(person.courses)
+          case "positions"      => renderCollection(person.positions)
+          case "addresses"      => renderCollection(person.addresses)
+          case "overview"       => renderCollection(List(person.personAttributes()))
+          case "contact"        => renderCollection(List(person.personAttributes()))
+          case x                => "Collection not found: " + x
         }
       }
       case _ => "Not Found"

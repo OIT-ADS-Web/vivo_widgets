@@ -15,6 +15,7 @@ object Person extends SolrModel with AttributeParams {
   def build(uri:String,
             personData:Map[Symbol,String],
             pubs:List[Publication],
+            artisticWorks:List[ArtisticWork],
             grants:List[Grant],
             courses:List[Course],
             positions:List[Position],
@@ -28,6 +29,7 @@ object Person extends SolrModel with AttributeParams {
                label              = personData('label),
                title              = personData('title),
                publications       = pubs,
+               artisticWorks      = artisticWorks,
                grants             = grants,
                courses            = courses,
                positions          = positions,
@@ -45,6 +47,7 @@ case class Person(uri:String,
                   label:String,
                   title:String,
                   publications:List[Publication],
+                  artisticWorks:List[ArtisticWork],
                   grants:List[Grant],
                   courses:List[Course],
                   positions:List[Position],
@@ -60,6 +63,7 @@ case class Person(uri:String,
   override def uris() = {
     (uri :: super.uris) ++
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
+    artisticWorks.foldLeft(List[String]()) {(u,artisticWork) => u ++ artisticWork.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++

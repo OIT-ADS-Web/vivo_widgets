@@ -1,0 +1,32 @@
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+- import edu.duke.oit.vw.models.ArtisticWork
+-@ var artistic_works: List[ArtisticWork]
+-@ var style: String
+-@ val searchURI: String = ""
+
+-# for debugging
+-# - for(artistic_work <- artistic_works)
+-#   = artistic_work.label
+
+-# if we are styling, set a couple of variables
+- val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
+- val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
+
+ul(style=ulStyle)
+  - for(artistic_work <- artistic_works)
+    - val rawWorkDate = artistic_work.get("work_date")
+    - val workDateParts = rawWorkDate.split("-")
+    - val workDate = artistic_work.get("work_date_precision").split("#")(1) match 
+      - case "yearPrecision" => workDateParts(0)
+      - case "yearMonthPrecision" =>
+        - workDateParts(1) + "/" + workDateParts(0)
+      - case "yearMonthDayPrecision" =>
+        - workDateParts(1) + "/" + workDateParts(2).split("T")(0) + "/" + workDateParts(0)
+    li(style=liStyle)
+      | #{artistic_work.label}. #{artistic_work.get("role")}. #{artistic_work.get("type_description")}. #{workDate}.
+      a(onmouseout="this.style.textDecoration ='underline';"
+        onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
+        style="color:#2485AE;text-decoration:underline"
+        href="#{fixURL(artistic_work.uri)}") More info
+
+

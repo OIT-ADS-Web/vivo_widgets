@@ -23,17 +23,18 @@ object PersonIndexer extends SimpleConversion
       val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
       if (personData.size > 0) {
 
-        val pubs        = Publication.fromUri(vivo, uriContext)
-        val grants      = Grant.fromUri(vivo, uriContext)
-        val courses     = Course.fromUri(vivo, uriContext)
-        val positions   = Position.fromUri(vivo, uriContext)
-        val addresses   = Address.fromUri(vivo, uriContext)
-        val educations  = Education.fromUri(vivo, uriContext)
-        val rAreas      = ResearchArea.fromUri(vivo, uriContext)
-        val webpages    = Webpage.fromUri(vivo, uriContext)
-        val geoFocus    = GeographicFocus.fromUri(vivo, uriContext)
+        val pubs          = Publication.fromUri(vivo, uriContext)
+        val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
+        val grants        = Grant.fromUri(vivo, uriContext)
+        val courses       = Course.fromUri(vivo, uriContext)
+        val positions     = Position.fromUri(vivo, uriContext)
+        val addresses     = Address.fromUri(vivo, uriContext)
+        val educations    = Education.fromUri(vivo, uriContext)
+        val rAreas        = ResearchArea.fromUri(vivo, uriContext)
+        val webpages      = Webpage.fromUri(vivo, uriContext)
+        val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
 
-        val p = Person.build(uri, personData.head, pubs, grants, 
+        val p = Person.build(uri, personData.head, pubs, artisticWorks, grants, 
                              courses, positions, addresses,
                              educations, rAreas, webpages,
                              geoFocus)

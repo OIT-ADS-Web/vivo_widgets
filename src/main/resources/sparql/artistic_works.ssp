@@ -1,0 +1,45 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?work ?label ?type ?type_description ?role ?role_description
+       ?work_date ?work_date_precision ?collaborators
+       ?link_url ?link_label
+       (GROUP_CONCAT(?event; separator = ",") as ?events)
+       (GROUP_CONCAT(?related_work; separator = ",") as ?related_works)
+WHERE {
+  <${uri}> dukeart:relatedBy ?relationship. 
+  ?relationship rdf:type dukeart:ArtisticRelationship.
+  ?relationship dukeart:relates ?work.
+  ?relationship dukeart:roles ?role.
+  OPTIONAL {?relationship core:description ?role_description.}
+  ?work rdf:type dukeart:ArtisticWork.
+  ?work rdfs:label ?label.
+  ?work vitro:mostSpecificType ?type.
+  ?work dukeart:workType ?type_description.
+  ?work dukeart:collaboratorList ?collaborators. 
+  ?work core:dateTimeValue ?work_date_uri.
+  ?work_date_uri core:dateTime ?work_date.
+  ?work_date_uri core:dateTimePrecision ?work_date_precision.
+  OPTIONAL {
+    ?work core:webpage ?link.
+    ?link core:linkURI ?link_url.
+    ?link core:linkAnchorText ?link_label.
+  }
+  OPTIONAL {
+    ?work core:outcomeOf ?event .
+    ?event rdfs:label ?event_title .
+    ?event dukeart:venue ?event_venue.
+    ?event core:description ?event_desc.
+    OPTIONAL {
+      ?event core:start ?event_start_date_uri.
+        ?event_start_date_uri core:dateTime ?event_start_date.
+    }
+    OPTIONAL {
+      ?event core:end ?event_end_date_uri.
+        ?event_end_date_uri core:dateTime ?event_end_date.
+    }
+  }
+  OPTIONAL {?work dcterms:relation ?related_work .}
+}
+GROUP BY ?work ?type ?label ?role ?type_description ?work_date ?work_date_precision
+order by desc(?work_date)
