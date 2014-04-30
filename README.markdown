@@ -99,6 +99,15 @@ will need to reindex.  To reindex, run:
 For the username and password, these are set in the ``deploy.properties`` as
 WidgetUpdateSetup.username and WidgetUpdateSetup.password.
 
+You can also reindex a specific person or organization. To reindex person, run:
+
+    ```
+    $ curl -s -u username:password -X POST \
+      http://127.0.0.1:8888/widgets/updates/rebuild/person?uri=https://scholars.duke.edu/individual/per123456
+    ```
+
+substituting in the person's uri.
+
 ## Configuration
 
 Widgets uses a very similar ``deploy.properties`` file that is used by VIVO.
