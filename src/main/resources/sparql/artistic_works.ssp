@@ -26,7 +26,7 @@ WHERE {
     ?link core:linkURI ?link_url.
     ?link core:linkAnchorText ?link_label.
   }
-  {
+  OPTIONAL {
     SELECT ?work (GROUP_CONCAT(?related_work; separator = ",") as ?related_works)
     WHERE {
       ?work dcterms:relation ?related_work .
