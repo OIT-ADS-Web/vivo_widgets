@@ -3,8 +3,8 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT ?work ?label ?type ?type_description ?role ?role_description
        ?work_date ?work_date_precision ?collaborators
-       ?link_url ?link_label
-       (GROUP_CONCAT(?related_work; separator = ",") as ?related_works)
+       ?abstract ?commissioning_body ?link_url ?link_label
+       ?related_works ?duke_collaborators
 WHERE {
   <${uri}> dukeart:relatedBy ?relationship. 
   ?relationship rdf:type dukeart:ArtisticRelationship.
@@ -19,12 +19,29 @@ WHERE {
   ?work core:dateTimeValue ?work_date_uri.
   ?work_date_uri core:dateTime ?work_date.
   ?work_date_uri core:dateTimePrecision ?work_date_precision.
+  OPTIONAL {?work bibo:abstract ?abstract.}
+  OPTIONAL {?work dukeart:commissioningBody ?commissioning_body.}
   OPTIONAL {
     ?work core:webpage ?link.
     ?link core:linkURI ?link_url.
     ?link core:linkAnchorText ?link_label.
   }
-  OPTIONAL {?work dcterms:relation ?related_work .}
+  {
+    SELECT ?work (GROUP_CONCAT(?related_work; separator = ",") as ?related_works)
+    WHERE {
+      ?work dcterms:relation ?related_work .
+    }
+    GROUP BY ?work
+  }
+  {
+    SELECT ?work (GROUP_CONCAT(?duke_collaborator; separator = ",") as ?duke_collaborators)
+    WHERE {
+      ?some_relationship dukeart:relates ?work.
+      ?some_relationship rdf:type dukeart:ArtisticRelationship .
+      ?duke_collaborator dukeart:relatedBy ?some_relationship .
+      ?duke_collaborator rdf:type foaf:Person .
+    }
+    GROUP BY ?work
+  }
 }
-GROUP BY ?work ?type ?label ?role ?type_description ?work_date ?work_date_precision
 order by desc(?work_date)
