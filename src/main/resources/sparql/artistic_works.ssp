@@ -4,7 +4,6 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?work ?label ?type ?type_description ?role ?role_description
        ?work_date ?work_date_precision ?collaborators
        ?abstract ?commissioning_body ?link_url ?link_label
-       ?related_works ?duke_collaborators
 WHERE {
   <${uri}> dukeart:relatedBy ?relationship. 
   ?relationship rdf:type dukeart:ArtisticRelationship.
@@ -25,23 +24,6 @@ WHERE {
     ?work core:webpage ?link.
     ?link core:linkURI ?link_url.
     ?link core:linkAnchorText ?link_label.
-  }
-  OPTIONAL {
-    SELECT ?work (GROUP_CONCAT(?related_work; separator = ",") as ?related_works)
-    WHERE {
-      ?work dcterms:relation ?related_work .
-    }
-    GROUP BY ?work
-  }
-  {
-    SELECT ?work (GROUP_CONCAT(?duke_collaborator; separator = ",") as ?duke_collaborators)
-    WHERE {
-      ?some_relationship dukeart:relates ?work.
-      ?some_relationship rdf:type dukeart:ArtisticRelationship .
-      ?duke_collaborator dukeart:relatedBy ?some_relationship .
-      ?duke_collaborator rdf:type foaf:Person .
-    }
-    GROUP BY ?work
   }
 }
 order by desc(?work_date)
