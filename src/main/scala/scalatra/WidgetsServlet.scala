@@ -97,7 +97,7 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
 
-  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String):String  = {
+  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     items match {
       case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
@@ -124,7 +124,9 @@ class WidgetsFilter extends ScalatraFilter
                            collection,
                            Int(params.getOrElse("count", "all")),
                            params.getOrElse("formatting", "detailed"),
-                           params.getOrElse("style", "yes"))
+                           params.getOrElse("style", "yes"),
+                           params.getOrElse("start", ""),
+                           params.getOrElse("end", ""))
         }
       }
       case FormatJS => {
@@ -132,7 +134,9 @@ class WidgetsFilter extends ScalatraFilter
                                       collection,
                                       Int(params.getOrElse("count", "all")),
                                       params.getOrElse("formatting", "detailed"),
-                                      params.getOrElse("style", "yes"))
+                                      params.getOrElse("style", "yes"),
+                                      params.getOrElse("start", ""),
+                                      params.getOrElse("end", ""))
         val lines = output.split('\n').toList
         val documentWrites = lines.map { "document.write('"+_.replaceAll("'","\\\\'")+"');" }
         documentWrites.mkString("\n")
