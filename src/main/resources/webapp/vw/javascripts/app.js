@@ -45,9 +45,9 @@
       style='unstyled'
     };
     $('#settings').html(viewModel.chosenLimit().label
-    + ' ' + viewModel.chosenCollection() + ' in '
-    + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
-
+    + ' ' + viewModel.chosenCollection() + ', before ' +
+    viewModel.chosenStartDate() + ', after ' + viewModel.chosenEndDate() +
+    ', in ' + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
   }
 
   /* Clipboard from http://code.google.com/p/zeroclipboard/ */
@@ -82,8 +82,9 @@
       var baseUri = "api/" + apiVersion + "/" + $('#group').attr('value');
       var groupUrl = window.location.toString().replace(/builder(.*)/,baseUri);
       var latestUrl = groupUrl + "/" + this.chosenCollection().toLowerCase() + "/" + this.chosenLimit().label;
-      var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat() + 
-        '&style=' + this.chosenStyle();
+      var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' +
+        this.chosenFormat() + '&style=' + this.chosenStyle() + '&start=' +
+        this.chosenStartDate() + '&end=' + this.chosenEndDate();
 
       // Refresh Display
       fetchPreview({url: latestUrl, parameters: latestParams});
