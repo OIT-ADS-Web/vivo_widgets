@@ -8,9 +8,9 @@ import ScalateKeys._
 object VivowidgetsBuild extends Build {
   val Organization = "duke"
   val Name = "VivoWidgets"
-  val Version = "0.2.0"
+  val Version = "0.3.0"
   val ScalaVersion = "2.10.1"
-  val ScalatraVersion = "2.2.0"
+  val ScalatraVersion = "2.2.2"
 
   lazy val project = Project (
     "vivowidgets",
