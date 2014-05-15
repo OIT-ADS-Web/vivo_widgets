@@ -16,10 +16,10 @@ class GrantSpec extends Specification with Tags {
       grant.vivoType mustEqual "http://duke.edu/type/abc123"
     }
 
-    "must have required types of agreement, vivoType, label" in {
-      List('agreement, 'type, 'label).foreach { item =>
+    "must have required types of agreement, vivoType, label" >> {
+      examplesBlock { List('agreement, 'type, 'label).foreach { item =>
         Grant.build(grantMap - item) must throwA[NoSuchElementException] 
-      }
+      }}
     }
 
   }

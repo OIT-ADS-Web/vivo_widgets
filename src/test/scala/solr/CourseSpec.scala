@@ -16,10 +16,10 @@ class CourseSpec extends Specification with Tags {
       course.vivoType mustEqual "http://duke.edu/type/abcc123"
     }
 
-    "must have required types of course, vivoType, label" in {
-      List('course, 'type, 'label).foreach { item =>
+    "must have required types of course, vivoType, label" >> {
+      examplesBlock { List('course, 'type, 'label).foreach { item =>
         Course.build(courseMap - item) must throwA[NoSuchElementException] 
-      }
+      }}
     }
 
   }

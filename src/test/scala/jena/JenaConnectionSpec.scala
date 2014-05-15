@@ -69,6 +69,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
       println("sleeping...")
       Thread.sleep(10000)
       QueryRunner.run(tModel)
+      success
     }
 
     "use Jena cache" in {
@@ -91,6 +92,7 @@ object JenaConnectionSpec extends Specification with Timer with SimpleConversion
           println("r4: " + results2.size)
         }
       }
+      success
      
     }
 

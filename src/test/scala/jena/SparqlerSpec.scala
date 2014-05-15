@@ -16,6 +16,7 @@ class SparqlerSpec extends Specification {
         Sparqler.simpleResults(resultSet)
       }
       println(simpleList)
+      success
     }
 
   }

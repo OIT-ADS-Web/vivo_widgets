@@ -20,10 +20,10 @@ class PublicationSpec extends Specification with Tags with Mockito {
       pub.label mustEqual "Study of Something"
     }
 
-    "must have required types of publication, vivoType, label" in {
-      List('publication, 'type, 'label).foreach { item =>
+    "must have required types of publication, vivoType, label" >> {
+      examplesBlock { List('publication, 'type, 'label).foreach { item =>
         Publication.build(vivo, publicationMap - item) must throwA[NoSuchElementException] 
-      }
+      }}
     }
 
   }

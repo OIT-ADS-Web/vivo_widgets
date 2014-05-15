@@ -16,10 +16,10 @@ class ArtisticWorkSpec extends Specification with Tags {
       artisticWork.vivoType mustEqual "http://duke.edu/type/abc123"
     }
 
-    "must have required types of work, vivoType, label" in {
-      List('work, 'type, 'label).foreach { item =>
+    "must have required types of work, vivoType, label" >> {
+      examplesBlock { List('work, 'type, 'label).foreach { item =>
         ArtisticWork.build(artisticWorkMap - item) must throwA[NoSuchElementException] 
-      }
+      }}
     }
   }
 }
