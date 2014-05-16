@@ -14,9 +14,9 @@
 
 ul(style=ulStyle)
   - for(artistic_work <- artistic_works)
-    - val rawWorkDate = artistic_work.get("work_date")
+    - val rawWorkDate = artistic_work.get("date")
     - val workDateParts = rawWorkDate.split("-")
-    - val workDate = artistic_work.get("work_date_precision").split("#")(1) match 
+    - val workDate = artistic_work.get("date_precision").split("#")(1) match 
       - case "yearPrecision" => workDateParts(0)
       - case "yearMonthPrecision" =>
         - workDateParts(1) + "/" + workDateParts(0)

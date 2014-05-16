@@ -14,6 +14,10 @@ case class Publication(uri:String,
     uri :: super.uris
   }
 
+  override def officialDateKey = {
+    "year"
+  }
+
   def subType = {
     val regex = "(.*)/([a-zA-Z0-9.\\-]+)(#)?([a-zA-Z0-9.\\-]+)?".r
     val tmpType = vivoType match {
