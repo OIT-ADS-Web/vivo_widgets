@@ -44,10 +44,22 @@
     } else {
       style='unstyled'
     };
-    $('#settings').html(viewModel.chosenLimit().label
-    + ' ' + viewModel.chosenCollection() + ', before ' +
-    viewModel.chosenStartDate() + ', after ' + viewModel.chosenEndDate() +
-    ', in ' + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
+
+    if(viewModel.chosenStartDate() != '') {
+      start = ", after " + viewModel.chosenStartDate()
+    } else {
+      start = ""
+    };
+
+    if(viewModel.chosenEndDate() != '') {
+      end = ", before " + viewModel.chosenEndDate()
+    } else {
+      end = ""
+    };
+
+    $('#settings').html(viewModel.chosenLimit().label + ' ' +
+        viewModel.chosenCollection() + start + end + ', in ' +
+        viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
   }
 
   /* Clipboard from http://code.google.com/p/zeroclipboard/ */
