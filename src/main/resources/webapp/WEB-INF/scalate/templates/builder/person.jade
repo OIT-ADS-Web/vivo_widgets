@@ -16,6 +16,7 @@ html(lang="en")
     title Widget Builder
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/reset.css")/
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/#{theme}/stylesheets/main.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/default/stylesheets/jquery.ui.datepicker.css")/
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/smoothness/jquery-ui-1.8.9.custom.css")/
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery-1.4.4.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript")
@@ -87,12 +88,12 @@ html(lang="en")
             | Start Date:
             a(href="#" class="help" id="startDateHelp") ?
             span
-              input(type="text" data-bind="value: chosenStartDate")
+              input(type="text" class="datepicker" data-bind="value: chosenStartDate" id="start-date")
           li
             | End Date:
             a(href="#" class="help" id="endDateHelp") ?
             span
-              input(type="text" data-bind="value: chosenEndDate")
+              input(type="text" class="datepicker" data-bind="value: chosenEndDate" id="end-date")
           li
             | Display Format:
             a(href="#" class="help" id="formatHelp") ?

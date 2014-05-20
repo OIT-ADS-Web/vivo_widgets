@@ -143,4 +143,30 @@
     initializeClipboard();
 
   });
+
+  $(document).ready(function(){
+
+    $.datepicker.setDefaults({
+      dateFormat: "yy-mm-dd",
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "c-70:c+70",
+      maxDate: "+5y"
+    });
+
+    $('#start-date').datepicker({
+      onSelect: function(selected) {
+        $('#end-date').datepicker("option", "minDate", selected);
+      }
+    });
+
+    $('#end-date').datepicker({
+      onSelect: function(selected) {
+        $('#start-date').datepicker("option", "maxDate", selected);
+      }
+    });
+
+
+  });
+
 })();
