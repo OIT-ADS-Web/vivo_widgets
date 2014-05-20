@@ -87,6 +87,48 @@
   // Initialization
 
   $( function() {
+    ko.bindingHandlers.datepicker = {
+      init: function(element, valueAccessor, allBindingsAccessor) {
+        var defaultOptions = {
+          dateFormat: "yy-mm-dd",
+          changeYear: true,
+          changeMonth: true,
+          yearRange: "c-70:c+70",
+          maxDate: "+5y"
+        }
+        var options = allBindingsAccessor().datepickerOptions || {};
+        for (var option in defaultOptions) {
+          if (option in options) { continue; }
+          options[option] = defaultOptions[option];
+        }
+        $(element).datepicker(options);
+
+        $(element).change(function() {
+          var observable = valueAccessor();
+          observable($(element).val());
+        });
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+          $(element).datepicker("destroy");
+        });
+      },
+
+      update: function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+
+         //handle date data coming via json from Microsoft IE
+        //if (String(value).indexOf('/Date(') == 0) {
+          //value = new Date(parseInt(value.replace(/\/Date\((.*?)\)\//gi, "$1")));
+        //}
+
+        var current = $(element).val();
+
+        if (value - current !== 0) {
+          $(element).datepicker("setDate", value)
+        }
+      }
+    }
+
     ko.applyBindings(viewModel);
 
     viewModel.url = ko.dependentObservable( function() {
@@ -144,29 +186,5 @@
 
   });
 
-  $(document).ready(function(){
-
-    $.datepicker.setDefaults({
-      dateFormat: "yy-mm-dd",
-      changeYear: true,
-      changeMonth: true,
-      yearRange: "c-70:c+70",
-      maxDate: "+5y"
-    });
-
-    $('#start-date').datepicker({
-      onSelect: function(selected) {
-        $('#end-date').datepicker("option", "minDate", selected);
-      }
-    });
-
-    $('#end-date').datepicker({
-      onSelect: function(selected) {
-        $('#start-date').datepicker("option", "maxDate", selected);
-      }
-    });
-
-
-  });
 
 })();
