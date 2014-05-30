@@ -100,6 +100,26 @@ class WidgetsFilter extends ScalatraFilter
 
   protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
+
+    items match {
+      case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
+      case _ => modelData.put(collectionName, collection)
+    }
+
+    modelData.put("style", style)
+    modelData.put("formatting", formatting)
+    modelData.put("layout", "")
+
+    val template = TemplateHelpers.tpath(collectionName + ".jade")
+
+    timer("WidgetsServlet.formatCollection") {
+      renderTemplateString(servletContext, template, modelData.toMap)
+    }.asInstanceOf[String]
+  }
+
+  protected def renderCollection(collection: List[AnyRef]) = {
+    val start = params.getOrElse("start", "")
+    val end = params.getOrElse("end", "")
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
     val startDate =
       if(!start.isEmpty()) {
@@ -122,30 +142,13 @@ class WidgetsFilter extends ScalatraFilter
       }
     })
 
-    items match {
-      case Some(x:Int) => modelData.put(collectionName, dateFilteredCollection.slice(0, x))
-      case _ => modelData.put(collectionName, dateFilteredCollection)
-    }
-
-    modelData.put("style", style)
-    modelData.put("formatting", formatting)
-    modelData.put("layout", "")
-
-    val template = TemplateHelpers.tpath(collectionName + ".jade")
-
-    timer("WidgetsServlet.formatCollection") {
-      renderTemplateString(servletContext, template, modelData.toMap)
-    }.asInstanceOf[String]
-  }
-
-  protected def renderCollection(collection: List[AnyRef]) = {
     request("format") match {
-      case FormatJSON => Json.toJson(collection)
-      case FormatJSONP => jsonpCallback + "(" + Json.toJson(collection) + ");"
+      case FormatJSON => Json.toJson(dateFilteredCollection)
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
       case FormatHTML => {
         timer("WidgetsServlet.renderCollection") {
           formatCollection(FormatHTML, params("collectionName"),
-                           collection,
+                           dateFilteredCollection,
                            Int(params.getOrElse("count", "all")),
                            params.getOrElse("formatting", "detailed"),
                            params.getOrElse("style", "yes"),
@@ -155,7 +158,7 @@ class WidgetsFilter extends ScalatraFilter
       }
       case FormatJS => {
         val output = formatCollection(FormatJS, params("collectionName"),
-                                      collection,
+                                      dateFilteredCollection,
                                       Int(params.getOrElse("count", "all")),
                                       params.getOrElse("formatting", "detailed"),
                                       params.getOrElse("style", "yes"),
