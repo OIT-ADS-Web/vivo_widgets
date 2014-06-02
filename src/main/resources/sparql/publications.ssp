@@ -27,6 +27,7 @@ where {
     ?publication core:dateTimeValue ?datetime . ?datetime core:dateTime ?year .
   }
   OPTIONAL {?authorship duke:isFavoritedAuthorship ?isFavorite .}
+  OPTIONAL {?publication duke:parentBookTitle ?parentBookTitle .}
   OPTIONAL {?publication bibo:doi ?doi .}
   OPTIONAL {?publication bibo:abstract ?abstract .}
   OPTIONAL {?publication bibo:pmid ?pmid .}
