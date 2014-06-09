@@ -15,6 +15,6 @@ where {
   ?dateUri core:end ?endDateUri.
   ?endDateUri core:dateTime ?endDate.
   ?uri core:grantAwardedBy ?sourceUri.
-  ?sourceUri rdfs:label ?source  }
+  ?sourceUri rdfs:label ?source .
 }
 order by desc(?endDate) desc(?startDate)

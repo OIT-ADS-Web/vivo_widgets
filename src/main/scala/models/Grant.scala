@@ -24,8 +24,13 @@ case class Grant(uri:String,
   def inTimePeriod(dateAttribute: String, start: Date, end: Date): Boolean = {
     val dateString = get(dateAttribute)
     val date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
-    (date.after(start) || date.equals(start)) &&
-    (date.before(end) || date.equals(end))
+
+    if (get(officialDateKey) == null) {
+      true
+    } else {
+      (date.after(start) || date.equals(start)) &&
+      (date.before(end) || date.equals(end))
+    }
   }
 
 }
