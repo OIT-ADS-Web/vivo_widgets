@@ -2,6 +2,8 @@ package edu.duke.oit.vw.models
 
 import edu.duke.oit.vw.utils._
 import edu.duke.oit.vw.solr.Vivo
+import java.util.Date
+import java.text.SimpleDateFormat
 
 case class Grant(uri:String,
                  vivoType: String,
@@ -12,6 +14,18 @@ case class Grant(uri:String,
 
   override def uris():List[String] = {
     uri :: super.uris
+  }
+
+  override def withinTimePeriod(start: Date, end: Date): Boolean = {
+    inTimePeriod("startDate", start, end) ||
+    inTimePeriod("endDate", start, end)
+  }
+
+  def inTimePeriod(dateAttribute: String, start: Date, end: Date): Boolean = {
+    val dateString = get(dateAttribute)
+    val date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
+    (date.after(start) || date.equals(start)) &&
+    (date.before(end) || date.equals(end))
   }
 
 }
