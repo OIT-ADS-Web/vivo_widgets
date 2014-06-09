@@ -9,8 +9,7 @@ WHERE {
   ?role core:roleContributesTo ?agreement .
   ?agreement vitro:mostSpecificType ?type .
   ?agreement rdfs:label ?label .
-
-  ?uri core:dateTimeInterval ?dateUri.
+  ?agreement core:dateTimeInterval ?dateUri.
   ?dateUri core:start ?startDateUri.
   ?startDateUri core:dateTime ?startDate.
   ?dateUri core:end ?endDateUri.
