@@ -81,6 +81,11 @@ or to run only a few tests:
 
     > test-only edu.duke.oit.solr.test.GrantSpec edu.duke.oit.solr.test.CourseSpec
 
+The acceptance tests will throw errors unless they have a Solr server to talk
+to. (TODO: automate this) To start one, in a separate terminal run:
+
+    ./bin/solr_dev.sh
+
 ## Solr Index
 
 Vivo widgets are powered by a Solr index.  You will need to copy the ``solr``

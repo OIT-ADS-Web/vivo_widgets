@@ -8,7 +8,7 @@ import ScalateKeys._
 object VivowidgetsBuild extends Build {
   val Organization = "duke"
   val Name = "VivoWidgets"
-  val Version = "0.2.0"
+  val Version = "0.3.0"
   val ScalaVersion = "2.10.1"
   val ScalatraVersion = "2.2.0"
 
@@ -52,7 +52,7 @@ object VivowidgetsBuild extends Build {
         // "org.apache.solr" % "solr-core" % "3.6.2",
         // "org.apache.solr" % "solr-solrj" % "3.6.2",
 
-        "org.specs2" %% "specs2" % "1.14" % "test->default",
+        "org.specs2" %% "specs2" % "2.3.12" % "test->default",
         // "org.scalatest" %% "scalatest" % "1.9.1" % "test->default",
 
 

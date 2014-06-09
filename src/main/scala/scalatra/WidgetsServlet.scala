@@ -4,6 +4,7 @@ import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,Timer}
 import edu.duke.oit.vw.solr._
 import edu.duke.oit.vw.models._
 import java.net.URL
+import java.text.SimpleDateFormat
 import org.scalatra._
 import scalate.ScalateSupport
 
@@ -68,7 +69,7 @@ class WidgetsFilter extends ScalatraFilter
         params.getOrElse('collectionName, "") match {
           case "complete"       => render(person)
           case "publications"   => renderCollection(person.publications)
-          case "artistic_works"  => renderCollection(person.artisticWorks)
+          case "artistic_works" => renderCollection(person.artisticWorks)
           case "grants"         => renderCollection(person.grants)
           case "courses"        => renderCollection(person.courses)
           case "positions"      => renderCollection(person.positions)
@@ -97,12 +98,14 @@ class WidgetsFilter extends ScalatraFilter
     }
   }
 
-  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String):String  = {
+  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
+
     items match {
       case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
       case _ => modelData.put(collectionName, collection)
     }
+
     modelData.put("style", style)
     modelData.put("formatting", formatting)
     modelData.put("layout", "")
@@ -115,24 +118,52 @@ class WidgetsFilter extends ScalatraFilter
   }
 
   protected def renderCollection(collection: List[AnyRef]) = {
+    val start = params.getOrElse("start", "")
+    val end = params.getOrElse("end", "")
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    val startDate =
+      if(!start.isEmpty()) {
+        dateFormat.parse(start) }
+      else {
+        dateFormat.parse("1000-01-01")
+      }
+    val endDate =
+      if(!end.isEmpty()) {
+        dateFormat.parse(end)}
+      else {
+        dateFormat.parse("9999-12-31")
+      }
+    val dateFilteredCollection = collection.filter(x => {
+      if (x.isInstanceOf[VivoAttributes]) {
+        val attributeItem = x.asInstanceOf[VivoAttributes]
+        attributeItem.withinTimePeriod(startDate, endDate)
+      } else {
+        true
+      }
+    })
+
     request("format") match {
-      case FormatJSON => Json.toJson(collection)
-      case FormatJSONP => jsonpCallback + "(" + Json.toJson(collection) + ");"
+      case FormatJSON => Json.toJson(dateFilteredCollection)
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
       case FormatHTML => {
         timer("WidgetsServlet.renderCollection") {
           formatCollection(FormatHTML, params("collectionName"),
-                           collection,
+                           dateFilteredCollection,
                            Int(params.getOrElse("count", "all")),
                            params.getOrElse("formatting", "detailed"),
-                           params.getOrElse("style", "yes"))
+                           params.getOrElse("style", "yes"),
+                           params.getOrElse("start", ""),
+                           params.getOrElse("end", ""))
         }
       }
       case FormatJS => {
         val output = formatCollection(FormatJS, params("collectionName"),
-                                      collection,
+                                      dateFilteredCollection,
                                       Int(params.getOrElse("count", "all")),
                                       params.getOrElse("formatting", "detailed"),
-                                      params.getOrElse("style", "yes"))
+                                      params.getOrElse("style", "yes"),
+                                      params.getOrElse("start", ""),
+                                      params.getOrElse("end", ""))
         val lines = output.split('\n').toList
         val documentWrites = lines.map { "document.write('"+_.replaceAll("'","\\\\'")+"');" }
         documentWrites.mkString("\n")

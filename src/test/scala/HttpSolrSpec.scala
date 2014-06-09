@@ -18,6 +18,7 @@ class HttpSolrSpec extends Specification {
       //val response = vivoSolr.query(query)
       //println(response)
       println(TestModel.search("professor",vivoSolr))
+      true must beEqualTo(true)
     }
 
   }

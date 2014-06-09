@@ -16,11 +16,12 @@ html(lang="en")
     title Widget Builder
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/reset.css")/
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/#{theme}/stylesheets/main.css")/
+    link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/themes/default/stylesheets/jquery.ui.datepicker.css")/
     link(rel="stylesheet" type="text/css" href="#{contextUri}/vw/stylesheets/smoothness/jquery-ui-1.8.9.custom.css")/
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery-1.4.4.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript")
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/jquery.tmpl.js")
-    script(type="text/javascript" src="#{contextUri}/vw/javascripts/knockout-1.1.2.js")
+    script(type="text/javascript" src="#{contextUri}/vw/javascripts/knockout-1.2.1.js")
     script(type="text/javascript" src="#{contextUri}/vw/javascripts/ZeroClipboard.js")
     :javascript
       var collections = [
@@ -37,6 +38,8 @@ html(lang="en")
       var help = {
          collectionsHelp: {title: "Collections Help", details: "You can set up a feed to display publications, courses or grants from your VIVO profile on your personal web page.  From the drop-down list on the right, select Publications, Courses, or Grants. When new publications, courses or grants are added to your VIVO page, they will also appear on the web page. The Preview panel on the right shows how the list will look based on the current selections."},
          itemsHelp: {title: "Items Help", details: "Select the number of publications, grants or courses from the drop-down list. You can display the five, 10, 15 most recent items, or all items. The Preview panel displays the list based on the current selections."},
+         startDateHelp: {title: "Start Date Help", details: "If you wish to include only items after a certain date, choose that date here. Fields lacking dates, such as overviews, will ignore this setting. The Preview panel on the right displays the results based on the current selections."},
+         endDateHelp: {title: "End Date Help", details: "If you wish to include only items before a certain date, choose that date here. Fields lacking dates, such as overviews, will ignore this setting. The Preview panel on the right displays the results based on the current selections."},
          formatHelp: {title: "Display Format Help", details: "Select Abbreviated to display a shorter version of your publication on your web page. Select Detailed to display the full publication.  The Preview panel shows how the items will look in either display format.  This option is currently only available for publications."},
          styleHelp: {title: "Styling Help", details: "Choose Styled to use embedded styles, or choose Unstyled to use the styles on your web page. The Unstyled selection displays items in a bulleted list. The Preview panel displays both options."},
          embedHelp: {title: "Embed Help", details: "To create a feed of publications, courses or grants from your VIVO profile on your personal web page, click the Copy button to copy this embed code to your clipboard. In the source code for your web page, paste the embed code where you'd like to display the list. When new publications, courses or grants are added to your VIVO page, they will also appear on your web page, depending on the selections you chose to create the feed."}
@@ -44,6 +47,8 @@ html(lang="en")
       var viewModel = {
         chosenCollection: ko.observable(collections),
         chosenLimit: ko.observable(noItems),
+        chosenStartDate: ko.observable(''),
+        chosenEndDate: ko.observable(''),
         chosenFormat: ko.observable('detailed'),
         chosenStyle: ko.observable('yes'),
         latestUrl: ''
@@ -79,6 +84,16 @@ html(lang="en")
             a(href="#" class="help" id="itemsHelp") ?
             span
               select(data-bind="options: noItems, optionsText: 'label', value:chosenLimit")
+          li
+            | Start Date:
+            a(href="#" class="help" id="startDateHelp") ?
+            span
+              input(type="text" data-bind="datepicker: chosenStartDate, datepickerOptions: { onSelect: function(selected) { $('#end-date').datepicker('option', 'minDate', selected); $(this).change(); } }" id="start-date")
+          li
+            | End Date:
+            a(href="#" class="help" id="endDateHelp") ?
+            span
+              input(type="text" data-bind="datepicker: chosenEndDate, datepickerOptions: { onSelect: function(selected) { $('#start-date').datepicker('option', 'maxDate', selected); $(this).change(); } }" id="end-date")
           li
             | Display Format:
             a(href="#" class="help" id="formatHelp") ?

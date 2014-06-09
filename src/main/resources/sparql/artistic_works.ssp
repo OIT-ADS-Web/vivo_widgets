@@ -2,7 +2,7 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT ?work ?label ?type ?type_description ?role ?role_description
-       ?work_date ?work_date_precision ?collaborators
+       ?date ?date_precision ?collaborators
        ?abstract ?commissioning_body ?link_url ?link_label
 WHERE {
   <${uri}> dukeart:relatedBy ?relationship. 
@@ -15,9 +15,9 @@ WHERE {
   ?work vitro:mostSpecificType ?type.
   ?work dukeart:workType ?type_description.
   ?work dukeart:collaboratorList ?collaborators. 
-  ?work core:dateTimeValue ?work_date_uri.
-  ?work_date_uri core:dateTime ?work_date.
-  ?work_date_uri core:dateTimePrecision ?work_date_precision.
+  ?work core:dateTimeValue ?date_uri.
+  ?date_uri core:dateTime ?date.
+  ?date_uri core:dateTimePrecision ?date_precision.
   OPTIONAL {?work bibo:abstract ?abstract.}
   OPTIONAL {?work dukeart:commissioningBody ?commissioning_body.}
   OPTIONAL {
@@ -26,4 +26,4 @@ WHERE {
     ?link core:linkAnchorText ?link_label.
   }
 }
-order by desc(?work_date)
+order by desc(?date)

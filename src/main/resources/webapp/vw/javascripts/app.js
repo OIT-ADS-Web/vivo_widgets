@@ -44,10 +44,22 @@
     } else {
       style='unstyled'
     };
-    $('#settings').html(viewModel.chosenLimit().label
-    + ' ' + viewModel.chosenCollection() + ' in '
-    + viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
 
+    if(viewModel.chosenStartDate() != '') {
+      start = ", after " + viewModel.chosenStartDate()
+    } else {
+      start = ""
+    };
+
+    if(viewModel.chosenEndDate() != '') {
+      end = ", before " + viewModel.chosenEndDate()
+    } else {
+      end = ""
+    };
+
+    $('#settings').html(viewModel.chosenLimit().label + ' ' +
+        viewModel.chosenCollection() + start + end + ', in ' +
+        viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
   }
 
   /* Clipboard from http://code.google.com/p/zeroclipboard/ */
@@ -75,6 +87,48 @@
   // Initialization
 
   $( function() {
+    ko.bindingHandlers.datepicker = {
+      init: function(element, valueAccessor, allBindingsAccessor) {
+        var defaultOptions = {
+          dateFormat: "yy-mm-dd",
+          changeYear: true,
+          changeMonth: true,
+          yearRange: "c-70:c+70",
+          maxDate: "+5y"
+        }
+        var options = allBindingsAccessor().datepickerOptions || {};
+        for (var option in defaultOptions) {
+          if (option in options) { continue; }
+          options[option] = defaultOptions[option];
+        }
+        $(element).datepicker(options);
+
+        $(element).change(function() {
+          var observable = valueAccessor();
+          observable($(element).val());
+        });
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+          $(element).datepicker("destroy");
+        });
+      },
+
+      update: function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+
+         //handle date data coming via json from Microsoft IE
+        //if (String(value).indexOf('/Date(') == 0) {
+          //value = new Date(parseInt(value.replace(/\/Date\((.*?)\)\//gi, "$1")));
+        //}
+
+        var current = $(element).val();
+
+        if (value - current !== 0) {
+          $(element).datepicker("setDate", value)
+        }
+      }
+    }
+
     ko.applyBindings(viewModel);
 
     viewModel.url = ko.dependentObservable( function() {
@@ -82,8 +136,9 @@
       var baseUri = "api/" + apiVersion + "/" + $('#group').attr('value');
       var groupUrl = window.location.toString().replace(/builder(.*)/,baseUri);
       var latestUrl = groupUrl + "/" + this.chosenCollection().toLowerCase() + "/" + this.chosenLimit().label;
-      var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' + this.chosenFormat() + 
-        '&style=' + this.chosenStyle();
+      var latestParams = '?uri=' + $("#uri").attr("value") + '&formatting=' +
+        this.chosenFormat() + '&style=' + this.chosenStyle() + '&start=' +
+        this.chosenStartDate() + '&end=' + this.chosenEndDate();
 
       // Refresh Display
       fetchPreview({url: latestUrl, parameters: latestParams});
@@ -130,4 +185,6 @@
     initializeClipboard();
 
   });
+
+
 })();

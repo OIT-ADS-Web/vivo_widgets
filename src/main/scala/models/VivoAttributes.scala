@@ -3,6 +3,8 @@ package edu.duke.oit.vw.models
 import scala.collection.JavaConversions._
 
 import edu.duke.oit.vw.utils._
+import java.util.Date
+import java.text.SimpleDateFormat
 
 
 /**
@@ -41,6 +43,22 @@ class VivoAttributes(uri:String,
     \(key) match {
       case null => default
       case m:String => m
+    }
+  }
+
+  def officialDateKey: String = "date"
+
+  def officialDate: Date = {
+    val date = get(officialDateKey)
+    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(date)
+  }
+
+  def withinTimePeriod(start: Date, end: Date): Boolean = {
+    if (get(officialDateKey) == null) {
+      true
+    } else {
+      (officialDate.after(start) || officialDate.equals(start)) &&
+      (officialDate.before(end) || officialDate.equals(end))
     }
   }
 
