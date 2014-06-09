@@ -9,12 +9,12 @@ where {
   ?agreement vitro:mostSpecificType ?type .
   ?agreement rdfs:label ?label .
 
-  ?uri vivo:dateTimeInterval ?dateUri.
-  ?dateUri vivo:start ?startDateUri.
-  ?startDateUri vivo:dateTime ?startDate.
-  ?dateUri vivo:end ?endDateUri.
-  ?endDateUri vivo:dateTime ?endDate.
-  ?uri vivo:grantAwardedBy ?sourceUri.
+  ?uri core:dateTimeInterval ?dateUri.
+  ?dateUri core:start ?startDateUri.
+  ?startDateUri core:dateTime ?startDate.
+  ?dateUri core:end ?endDateUri.
+  ?endDateUri core:dateTime ?endDate.
+  ?uri core:grantAwardedBy ?sourceUri.
   ?sourceUri rdfs:label ?source  }
 }
 order by desc(?endDate) desc(?startDate)
