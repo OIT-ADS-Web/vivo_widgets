@@ -15,11 +15,11 @@ WHERE {
   ?dateUri core:end ?endDateUri.
   ?endDateUri core:dateTime ?endDate.
   OPTIONAL {
-    ?uri core:grantAwardedBy ?awardedByUri.
+    ?agreement core:grantAwardedBy ?awardedByUri.
     ?awardedByUri rdfs:label ?awardedBy .
   }
   OPTIONAL {
-    ?uri core:administeredBy ?administeredByUri.
+    ?agreement core:administeredBy ?administeredByUri.
     ?administeredByUri rdfs:label ?administeredBy .
   }
 }
