@@ -17,19 +17,26 @@ case class Grant(uri:String,
   }
 
   override def withinTimePeriod(start: Date, end: Date): Boolean = {
-    inTimePeriod("startDate", start, end) ||
-    inTimePeriod("endDate", start, end)
+    startBeforeEndOfGrant(start) && endAfterStartOfGrant(end)
   }
 
-  def inTimePeriod(dateAttribute: String, start: Date, end: Date): Boolean = {
-    val dateString = get(dateAttribute)
-
-    if (dateString == null) {
-      false
+  def startBeforeEndOfGrant(start: Date) = {
+    val endDateString = get("endDate")
+    if (endDateString == null) {
+      true
     } else {
-      val date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
-      (date.after(start) || date.equals(start)) &&
-      (date.before(end) || date.equals(end))
+      val endDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(endDateString)
+      (start.before(endDate) || start.equals(endDate))
+    }
+  }
+
+  def endAfterStartOfGrant(end: Date) = {
+    val startDateString = get("startDate")
+    if (startDateString == null) {
+      true
+    } else {
+      val startDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(startDateString)
+      (end.after(startDate) || end.equals(startDate))
     }
   }
 
