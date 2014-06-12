@@ -32,5 +32,6 @@ where {
   OPTIONAL {?publication bibo:pmid ?pmid .}
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
+  OPTIONAL {?publication duke:subtypes ?subtypes}
 } 
 order by desc(?datetime)
