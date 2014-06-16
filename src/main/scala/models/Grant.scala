@@ -47,7 +47,8 @@ object Grant extends AttributeParams {
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
               templatePath: String="sparql/grants.ssp") = {
     val grantData = vivo.selectFromTemplate(templatePath, uriContext)
-    grantData.map(build(_)).asInstanceOf[List[Grant]]
+    val existingGrantData = grantData.filter(grant => !grant.isEmpty)
+    existingGrantData.map(build(_)).asInstanceOf[List[Grant]]
 
   }
 
