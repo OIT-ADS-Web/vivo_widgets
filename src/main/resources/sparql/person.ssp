@@ -1,4 +1,4 @@
 ${include("sparql/prefixes.ssp")}
 select ?person where { 
-  ?person rdf:type core:FacultyMember .
+  ?person rdf:type foaf:Person .
 }

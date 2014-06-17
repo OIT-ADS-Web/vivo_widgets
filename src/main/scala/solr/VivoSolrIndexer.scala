@@ -28,7 +28,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
 
   def indexPeople() = {
 
-    val sparql = renderFromClassPath("sparql/facultyMember.ssp")
+    val sparql = renderFromClassPath("sparql/person.ssp")
     log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql).map(_('person))
     for (p <- peopleUris) {
