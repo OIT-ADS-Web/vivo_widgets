@@ -22,10 +22,10 @@ ul(style=ulStyle)
     - val startYear = grant.getOrElse("startDate","").split("-")(0)
     - val endYear = grant.getOrElse("endDate","").split("-")(0)
 
-    - val awardText = if(awardedBy != "") ", awarded by #{awardedBy}"
-    - val administrationText = if(administrator != "") ", administered by #{administrator}"
+    - val awardText = if(awardedBy != "") (", awarded by " + awardedBy)
+    - val administrationText = if(administrator != "") (", administered by " + administrator)
     - val roleText = if(roleName != "") " (%s)".format(roleName)
-    - val dateText = if(startYear != "" || endYear != "") ", #{startYear}-#{endYear}"
+    - val dateText = if(startYear != "" || endYear != "") ", " + startYear + "-" + endYear
 
     li(style=liStyle) 
       | #{grant.label}#{roleText}#{awardText}#{administrationText}#{dateText}
