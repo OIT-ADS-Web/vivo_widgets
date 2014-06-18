@@ -17,9 +17,18 @@
 ul(style=ulStyle)
   - for (grant <- grants)
     - val roleName = grant.getOrElse("roleName","")
-    - val roleText = if(roleName != "") "(%s)".format(roleName) else ""
+    - val awardedBy = grant.getOrElse("awardedBy", "")
+    - val administrator = grant.getOrElse("administeredBy", "")
+    - val startYear = grant.getOrElse("startDate","").split("-")(0)
+    - val endYear = grant.getOrElse("endDate","").split("-")(0)
+
+    - val awardText = if(awardedBy != "") (", awarded by " + awardedBy)
+    - val administrationText = if(administrator != "") (", administered by " + administrator)
+    - val roleText = if(roleName != "") " (%s)".format(roleName)
+    - val dateText = if(startYear != "" || endYear != "") ", " + startYear + "-" + endYear
+
     li(style=liStyle) 
-      | #{grant.label} #{roleText}
+      | #{grant.label}#{roleText}#{awardText}#{administrationText}#{dateText}
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 
