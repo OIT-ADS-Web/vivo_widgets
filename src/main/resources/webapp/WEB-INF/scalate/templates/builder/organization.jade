@@ -38,6 +38,8 @@ html(lang="en")
       var viewModel = {
         chosenCollection: ko.observable(collections),
         chosenLimit: ko.observable(noItems),
+        chosenStartDate: ko.observable(''),
+        chosenEndDate: ko.observable(''),
         chosenFormat: ko.observable('detailed'),
         chosenStyle: ko.observable('yes'),
         latestUrl: ''
