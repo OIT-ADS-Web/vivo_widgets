@@ -34,6 +34,6 @@ where {
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
-  OPTIONAL {?publication duke:chicagoCitation ?chicago_citation.}
+  OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}
 } 
 order by desc(?datetime)
