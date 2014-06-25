@@ -35,5 +35,8 @@ where {
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}
+  OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
+  OPTIONAL {?publication duke:apaCitation ?apaCitation.}
+  OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
 } 
 order by desc(?datetime)
