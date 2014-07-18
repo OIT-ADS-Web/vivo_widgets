@@ -12,6 +12,8 @@ where {
   OPTIONAL { ?publication bibo:edition ?edition . }
   OPTIONAL { ?publication bibo:volume ?volume . }
   OPTIONAL { ?publication bibo:issue ?issue . }
+  OPTIONAL { ?publication bibo:isbn10 ?isbn10 . }
+  OPTIONAL { ?publication bibo:isbn13 ?isbn13 . }
   OPTIONAL { 
     ?publication core:hasPublicationVenue ?publicationVenue . 
     ?publicationVenue rdfs:label ?publishedIn .
