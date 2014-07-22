@@ -35,7 +35,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
       log.debug("index uri: " + p)
       PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr)
     }
-    log.debug("finished indexing people")
+    log.info("finished indexing people")
     solr.commit()
   }
 
@@ -48,7 +48,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
       log.debug("org>>>>> " + o)
       OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr)
     }
-    log.debug("finished indexing organizations")
+    log.info("finished indexing organizations")
     solr.commit()
   }
 
