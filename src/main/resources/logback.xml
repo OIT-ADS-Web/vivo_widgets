@@ -1,8 +1,7 @@
 <configuration>
 
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <!-- encoders are assigned the type
-         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
     </encoder>
@@ -12,7 +11,7 @@
     <file>${widget.logging.dir:-}widgets.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <fileNamePattern>${widget.logging.dir:-}widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
 
       <!-- keep 20 days' worth of history -->
       <maxHistory>20</maxHistory>
@@ -23,15 +22,12 @@
     </encoder>
   </appender> 
 
-  <logger name="widget.timer" level="info">
-    <appender-ref ref="FILE"/>
-  </logger>
-  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="info">
-    <appender-ref ref="FILE"/>
-  </logger>
-  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="info">
-    <appender-ref ref="FILE"/>
-  </logger>
+  <logger name="widget.timer" level="info" />
+  <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="info" />
+  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="info" />
+
+  <logger name="edu.duke.oit.vw.solr.PersonIndexer" level="debug" />
+  <logger name="edu.duke.oit.vw.solr.VivoSolrIndexer" level="debug" />
 
   <root level="info">
     <!-- <appender-ref ref="STDOUT" /> -->

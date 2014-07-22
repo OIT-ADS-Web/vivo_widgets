@@ -17,6 +17,7 @@ object PersonIndexer extends SimpleConversion
 {
 
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
+    log.debug("pull uri: " + uri)
     try {
       val uriContext = Map("uri" -> uri)
 
@@ -38,7 +39,7 @@ object PersonIndexer extends SimpleConversion
                              courses, positions, addresses,
                              educations, rAreas, webpages,
                              geoFocus)
-        timer("add person to solr") {
+        timer("add person to solr [" + uri + "]") {
           val solrDoc = new SolrInputDocument()
           solrDoc.addField("id",p.uri)
           solrDoc.addField("alternateId", personData.head('alternateId))
@@ -51,10 +52,15 @@ object PersonIndexer extends SimpleConversion
       
     } catch {
       case e:NoSuchElementException => {
-        Console.err.println("PersonIndexer error: " + e.toString)
+        log.error("PersonIndexer error: " + e.toString)
+        e.printStackTrace()
+      }
+      case e => {
+        log.error("PersonIndexer error: " + e.toString)
         e.printStackTrace()
       }
     }
+    log.debug("done with uri: " + uri)
   }
 
 }

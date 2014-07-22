@@ -32,8 +32,10 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql).map(_('person))
     for (p <- peopleUris) {
+      log.debug("index uri: " + p)
       PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr)
     }
+    log.debug("finished indexing people")
     solr.commit()
   }
 
@@ -46,12 +48,13 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
       log.debug("org>>>>> " + o)
       OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr)
     }
+    log.debug("finished indexing organizations")
     solr.commit()
   }
 
   def indexAll() = {
     // import ExecutionContext.Implicits.global
-    implicit val executorService = Executors.newFixedThreadPool(4)
+    implicit val executorService = Executors.newFixedThreadPool(2)
     implicit val executorContext = ExecutionContext.fromExecutorService(executorService)
     val futureList = List(
       Future(indexPeople()),
@@ -66,6 +69,12 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
 
     Await.ready(future, Duration(22, HOURS))
 
+  }
+
+  def indexAllSerially() = {
+    indexPeople()
+    indexOrganizations()
+    log.info("done serially indexing people and organizations.")
   }
 
   def indexPerson(uri:String) = {
@@ -90,7 +99,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   }
 
   def reindexPerson(uri: String) = {
-    // logger.debug("reindex person: " + uri)
     timer("index person") {
       PersonIndexer.index(uri, vivo, solr)
     }
@@ -98,7 +106,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   }
 
   def reindexOrganization(uri: String) = {
-    // logger.debug("reindex organization: " + uri)
     timer("index organization") {
       OrganizationIndexer.index(uri, vivo, solr)
     }

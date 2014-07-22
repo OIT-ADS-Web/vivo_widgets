@@ -60,7 +60,7 @@ object WidgetsConfig {
     log.debug("getting from: " + properties("WidgetsSolr.directory"))
     Solr.addCore(vivoServer, "vivowidgetcore",properties("WidgetsSolr.directory"))
 
-    log.info("Connecting Widgets Core")
+    log.debug("Connecting Widgets Core")
     widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/vivowidgetcore")
   }
   
