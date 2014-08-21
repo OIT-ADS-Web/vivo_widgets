@@ -17,6 +17,7 @@ WHERE {
   OPTIONAL { <${ uri }> core:phoneNumber ?phoneNumber . }
   OPTIONAL { <${ uri }> bibo:suffixName ?suffixName . }
   OPTIONAL { <${ uri }> bibo:prefixName ?prefixName . }
+  OPTIONAL { <${ uri }> duke:preferredCitationFormat ?preferredCitationFormat . }
   OPTIONAL {
     <${ uri }> vitro-public:mainImage ?imageUri .
     ?imageUri  vitro-public:downloadLocation ?imageDownload .
