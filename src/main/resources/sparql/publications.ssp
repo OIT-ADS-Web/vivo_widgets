@@ -20,6 +20,8 @@ where {
   }
   OPTIONAL { ?publication duke:publicationVenue ?publishedIn }
   OPTIONAL { ?publication duke:authorList ?authorList }
+  OPTIONAL { ?publication duke:editorList ?editorList }
+  OPTIONAL { ?publication duke:translatorList ?translatorList }
   OPTIONAL { 
     ?publication core:publisher ?publisher. ?publisher rdfs:label ?publishedBy .
   }
