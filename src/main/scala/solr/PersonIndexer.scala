@@ -25,6 +25,7 @@ object PersonIndexer extends SimpleConversion
       if (personData.size > 0) {
 
         val pubs          = Publication.fromUri(vivo, uriContext)
+        val awards        = Award.fromUri(vivo, uriContext)
         val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
         val grants        = Grant.fromUri(vivo, uriContext)
         val courses       = Course.fromUri(vivo, uriContext)
@@ -35,7 +36,8 @@ object PersonIndexer extends SimpleConversion
         val webpages      = Webpage.fromUri(vivo, uriContext)
         val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
 
-        val p = Person.build(uri, personData.head, pubs, artisticWorks, grants, 
+        val p = Person.build(uri, personData.head, pubs, awards,
+                             artisticWorks, grants, 
                              courses, positions, addresses,
                              educations, rAreas, webpages,
                              geoFocus)
@@ -55,7 +57,7 @@ object PersonIndexer extends SimpleConversion
         log.error("PersonIndexer error: " + e.toString)
         e.printStackTrace()
       }
-      case e => {
+      case e:Throwable => {
         log.error("PersonIndexer error: " + e.toString)
         e.printStackTrace()
       }
