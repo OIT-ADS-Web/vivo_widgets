@@ -16,17 +16,15 @@ ul(style=ulStyle)
   - for(award <- awards)
     - val rawAwardDate = award.get("date")
     - val awardDateParts = rawAwardDate.split("-")
-    - val awardDate = award.get("date_precision").split("#")(1) match 
+    - val awardDate = award.get("datePrecision").split("#")(1) match 
       - case "yearPrecision" => awardDateParts(0)
       - case "yearMonthPrecision" =>
         - awardDateParts(1) + "/" + awardDateParts(0)
       - case "yearMonthDayPrecision" =>
         - awardDateParts(1) + "/" + awardDateParts(2).split("T")(0) + "/" + awardDateParts(0)
     li(style=liStyle)
-      | #{award.label}. #{awardDate}.
+      | #{award.label} #{awardDate}.
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
         href="#{fixURL(award.uri)}") More info
-
-

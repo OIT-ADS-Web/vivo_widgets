@@ -1,0 +1,43 @@
+- import edu.duke.oit.vw.scalatra.TemplateHelpers._
+- import edu.duke.oit.vw.models.Presentation
+-@ var presentations: List[Presentation]
+-@ var style: String
+-@ val searchURI: String = ""
+
+-# for debugging
+-# - for(presentation <- presentations)
+-#   = presentation.label
+
+-# if we are styling, set a couple of variables
+- val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
+- val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
+
+ul(style=ulStyle)
+  - for(presentation <- presentations)
+
+    - val rawStartDate = presentation.get("startDate")
+    - val startDateParts = rawStartDate.split("-")
+    - val startDate = presentation.get("startDatePrecision").split("#")(1) match 
+      - case "yearPrecision" => startDateParts(0)
+      - case "yearMonthPrecision" =>
+        - startDateParts(1) + "/" + startDateParts(0)
+      - case "yearMonthDayPrecision" =>
+        - startDateParts(1) + "/" + startDateParts(2).split("T")(0) + "/" + startDateParts(0)
+
+    - val rawEndDate = presentation.get("endDate")
+    - val endDateParts = rawEndDate.split("-")
+    - val endDate = presentation.get("endDatePrecision").split("#")(1) match 
+      - case "yearPrecision" => endDateParts(0)
+      - case "yearMonthPrecision" =>
+        - endDateParts(1) + "/" + endDateParts(0)
+      - case "yearMonthDayPrecision" =>
+        - endDateParts(1) + "/" + endDateParts(2).split("T")(0) + "/" + endDateParts(0)
+
+    - val dateText = if(startDate != "" || endDate != "") startDate + "-" + endDate
+
+    li(style=liStyle)
+      | #{presentation.label} #{dateText}.
+      a(onmouseout="this.style.textDecoration ='underline';"
+        onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
+        style="color:#2485AE;text-decoration:underline"
+        href="#{fixURL(presentation.uri)}") More info

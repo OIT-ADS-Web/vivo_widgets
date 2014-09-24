@@ -19,6 +19,7 @@ object Person extends SolrModel with AttributeParams {
             artisticWorks:List[ArtisticWork],
             grants:List[Grant],
             courses:List[Course],
+            presentations:List[Presentation],
             positions:List[Position],
             addresses:List[Address],
             educations:List[Education],
@@ -34,6 +35,7 @@ object Person extends SolrModel with AttributeParams {
                artisticWorks      = artisticWorks,
                grants             = grants,
                courses            = courses,
+               presentations      = presentations,
                positions          = positions,
                addresses          = addresses,
                educations         = educations,
@@ -53,6 +55,7 @@ case class Person(uri:String,
                   artisticWorks:List[ArtisticWork],
                   grants:List[Grant],
                   courses:List[Course],
+                  presentations:List[Presentation],
                   positions:List[Position],
                   addresses:List[Address],
                   educations:List[Education],
@@ -70,6 +73,7 @@ case class Person(uri:String,
     artisticWorks.foldLeft(List[String]()) {(u,artisticWork) => u ++ artisticWork.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
+    presentations.foldLeft(List[String]()) {(u,presentation) => u ++ presentation.uris} ++
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris} ++
     educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris} ++
