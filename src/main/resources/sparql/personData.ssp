@@ -11,6 +11,12 @@ WHERE {
     core:preferredTitle ?preferredTitle ;
   OPTIONAL { <${ uri }> core:overview ?overview . }
   OPTIONAL { <${ uri }> dukeact:mentorshipOverview ?mentorshipOverview . }
+  {
+    SELECT (group_concat(?availability; separator=", ") AS ?mentorshipAvailabilities)
+    WHERE {
+      <${uri}> dukeact:mentorshipAvailability ?availability.
+    }
+  }
   OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
   OPTIONAL { <${ uri }> foaf:lastName ?lastName . }
   OPTIONAL { <${ uri }> core:middleName ?middleName . }
