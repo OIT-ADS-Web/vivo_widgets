@@ -10,6 +10,7 @@ WHERE {
     duke:duid ?alternateId ;
     core:preferredTitle ?preferredTitle ;
   OPTIONAL { <${ uri }> core:overview ?overview . }
+  OPTIONAL { <${ uri }> dukeact:mentorshipOverview ?mentorshipOverview . }
   OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
   OPTIONAL { <${ uri }> foaf:lastName ?lastName . }
   OPTIONAL { <${ uri }> core:middleName ?middleName . }
