@@ -17,10 +17,10 @@ case class Grant(uri:String,
   }
 
   override def withinTimePeriod(start: Date, end: Date): Boolean = {
-    startBeforeEndOfGrant(start) && endAfterStartOfGrant(end)
+    startBeforeEndOfItem(start) && endAfterStartOfItem(end)
   }
 
-  def startBeforeEndOfGrant(start: Date) = {
+  def startBeforeEndOfItem(start: Date) = {
     val endDateString = get("endDate")
     if (endDateString == null) {
       true
@@ -30,7 +30,7 @@ case class Grant(uri:String,
     }
   }
 
-  def endAfterStartOfGrant(end: Date) = {
+  def endAfterStartOfItem(end: Date) = {
     val startDateString = get("startDate")
     if (startDateString == null) {
       true
