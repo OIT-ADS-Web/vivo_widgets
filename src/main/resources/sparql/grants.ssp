@@ -4,6 +4,7 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?agreement (MIN(?type) as ?type) (MIN(?label) AS ?label)
        (MIN(?roleName) AS ?roleName) (MIN(?startDate) AS ?startDate)
        (MIN(?endDate) AS ?endDate)(MIN( ?awardedBy) AS ?awardedBy)
+       (MIN(?awardedByUri) AS ?awardedByUri)
        (MIN(?administeredBy) AS ?administeredBy)
        (MIN( ?administeredByUri) AS ?administeredByUr)
 WHERE {

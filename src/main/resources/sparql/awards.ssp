@@ -1,7 +1,7 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?label ?name ?serviceType ?awardingInstitution ?awardingInstitutionUri
+SELECT ?label ?name ?serviceType ?awardedBy ?awardedByUri
        ?date ?datePrecision ?type ?award ?description
 WHERE {
   <${uri}> core:awardOrHonor ?awardReceipt.
@@ -13,8 +13,8 @@ WHERE {
   OPTIONAL {?awardReceipt core:description ?description.}
 
   OPTIONAL {
-    ?award core:awardConferredBy ?awardingInstitutionUri.
-    ?awardingInstitutionUri rdfs:label ?awardingInstitution.
+    ?award core:awardConferredBy ?awardedByUri.
+    ?awardingInstitutionUri rdfs:label ?awardedBy.
   }
 
   ?awardReceipt core:dateTimeValue ?dateUri.
