@@ -14,7 +14,7 @@ WHERE {
 
   OPTIONAL {
     ?award core:awardConferredBy ?awardedByUri.
-    ?awardingInstitutionUri rdfs:label ?awardedBy.
+    ?awardedByUri rdfs:label ?awardedBy.
   }
 
   ?awardReceipt core:dateTimeValue ?dateUri.
