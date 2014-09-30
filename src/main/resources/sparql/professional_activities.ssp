@@ -3,7 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT ?type ?date ?activity ?date ?label ?serviceType ?role
        ?serviceOrEventName ?hostOrganization ?locationOrVenue
-       ?description ?committeeType ?committeeName
+       ?description ?committeeType ?committeeName ?nameOfTalk
        ?startDate ?startDatePrecision ?endDate ?endDatePrecision
 WHERE {
   <${uri}> dukeact:performs ?activity.
@@ -11,6 +11,7 @@ WHERE {
   ?activity rdfs:label ?label.
   ?activity vitro:mostSpecificType ?type.
   OPTIONAL {?activity dukeact:serviceType ?serviceType.}
+  OPTIONAL {?activity dukeact:nameOfTalk ?nameOfTalk.}
   OPTIONAL {?activity dukeact:role ?role.}
   OPTIONAL {?activity dukeact:serviceOrEventName ?serviceOrEventName.}
   OPTIONAL {?activity dukeact:hostOrganization ?hostOrganization.}
@@ -33,5 +34,4 @@ WHERE {
     ?endDateUri core:dateTime ?endDate.
     ?endDateUri core:dateTimePrecision ?endDatePrecision.
   }
-  FILTER(?type != dukeact:Presentation)
 } order by desc(?startDate) desc(?endDate)

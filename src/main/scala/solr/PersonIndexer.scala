@@ -30,7 +30,6 @@ object PersonIndexer extends SimpleConversion
         val grants        = Grant.fromUri(vivo, uriContext)
         val courses       = Course.fromUri(vivo, uriContext)
         val professionalActivities = ProfessionalActivity.fromUri(vivo, uriContext)
-        val presentations = Presentation.fromUri(vivo, uriContext)
         val positions     = Position.fromUri(vivo, uriContext)
         val addresses     = Address.fromUri(vivo, uriContext)
         val educations    = Education.fromUri(vivo, uriContext)
@@ -40,7 +39,7 @@ object PersonIndexer extends SimpleConversion
 
         val p = Person.build(uri, personData.head, pubs, awards,
                              artisticWorks, grants, courses,
-                             professionalActivities, presentations, positions,
+                             professionalActivities, positions,
                              addresses, educations, rAreas, webpages,
                              geoFocus)
         timer("add person to solr [" + uri + "]") {

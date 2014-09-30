@@ -74,7 +74,6 @@ class WidgetsFilter extends ScalatraFilter
           case "grants"         => renderCollection(person.grants)
           case "courses"        => renderCollection(person.courses)
           case "professional_activities"  => renderCollection(person.professionalActivities)
-          case "presentations"  => renderCollection(person.presentations)
           case "positions"      => renderCollection(person.positions)
           case "addresses"      => renderCollection(person.addresses)
           case "overview"       => renderCollection(List(person.personAttributes()))
