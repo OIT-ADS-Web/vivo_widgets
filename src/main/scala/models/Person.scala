@@ -15,9 +15,11 @@ object Person extends SolrModel with AttributeParams {
   def build(uri:String,
             personData:Map[Symbol,String],
             pubs:List[Publication],
+            awards:List[Award],
             artisticWorks:List[ArtisticWork],
             grants:List[Grant],
             courses:List[Course],
+            professionalActivities:List[ProfessionalActivity],
             positions:List[Position],
             addresses:List[Address],
             educations:List[Education],
@@ -29,9 +31,11 @@ object Person extends SolrModel with AttributeParams {
                label              = personData('label),
                title              = personData('title),
                publications       = pubs,
+               awards             = awards,
                artisticWorks      = artisticWorks,
                grants             = grants,
                courses            = courses,
+               professionalActivities = professionalActivities,
                positions          = positions,
                addresses          = addresses,
                educations         = educations,
@@ -47,9 +51,11 @@ case class Person(uri:String,
                   label:String,
                   title:String,
                   publications:List[Publication],
+                  awards:List[Award],
                   artisticWorks:List[ArtisticWork],
                   grants:List[Grant],
                   courses:List[Course],
+                  professionalActivities:List[ProfessionalActivity],
                   positions:List[Position],
                   addresses:List[Address],
                   educations:List[Education],
@@ -63,9 +69,11 @@ case class Person(uri:String,
   override def uris() = {
     (uri :: super.uris) ++
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
+    awards.foldLeft(List[String]()) {(u,award) => u ++ award.uris} ++
     artisticWorks.foldLeft(List[String]()) {(u,artisticWork) => u ++ artisticWork.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
+    professionalActivities.foldLeft(List[String]()) {(u,professionalActivity) => u ++ professionalActivity.uris} ++
     positions.foldLeft(List[String]()) {(u,position) => u ++ position.uris} ++
     addresses.foldLeft(List[String]()) {(u,address) => u ++ address.uris} ++
     educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris} ++

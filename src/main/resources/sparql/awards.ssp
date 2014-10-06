@@ -1,0 +1,24 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?label ?name ?serviceType ?awardedBy ?awardedByUri
+       ?date ?datePrecision ?type ?award ?description
+WHERE {
+  <${uri}> core:awardOrHonor ?awardReceipt.
+  ?awardReceipt rdfs:label ?label.
+  ?awardReceipt core:receiptOf ?award.
+  ?award dukeact:awardName ?name.
+  ?award vitro:mostSpecificType ?type.
+  OPTIONAL {?award dukeact:serviceType ?serviceType.}
+  OPTIONAL {?awardReceipt core:description ?description.}
+
+  OPTIONAL {
+    ?award core:awardConferredBy ?awardedByUri.
+    ?awardedByUri rdfs:label ?awardedBy.
+  }
+
+  ?awardReceipt core:dateTimeValue ?dateUri.
+  ?dateUri core:dateTime ?date.
+  ?dateUri core:dateTimePrecision ?datePrecision.
+}
+order by desc(?date)

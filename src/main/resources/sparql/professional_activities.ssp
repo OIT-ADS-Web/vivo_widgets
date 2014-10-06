@@ -1,0 +1,37 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?type ?date ?activity ?date ?label ?serviceType ?role
+       ?serviceOrEventName ?hostOrganization ?locationOrVenue
+       ?description ?committeeType ?committeeName ?nameOfTalk
+       ?startDate ?startDatePrecision ?endDate ?endDatePrecision
+WHERE {
+  <${uri}> dukeact:performs ?activity.
+  ?activity rdf:type dukeact:ProfessionalActivity.
+  ?activity rdfs:label ?label.
+  ?activity vitro:mostSpecificType ?type.
+  OPTIONAL {?activity dukeact:serviceType ?serviceType.}
+  OPTIONAL {?activity dukeact:nameOfTalk ?nameOfTalk.}
+  OPTIONAL {?activity dukeact:role ?role.}
+  OPTIONAL {?activity dukeact:serviceOrEventName ?serviceOrEventName.}
+  OPTIONAL {?activity dukeact:hostOrganization ?hostOrganization.}
+  OPTIONAL {?activity dukeact:locationOrVenue ?locationOrVenue.}
+  OPTIONAL {?activity dukeact:description ?description.}
+  OPTIONAL {?activity dukeact:committeeType ?committeeType.}
+  OPTIONAL {?activity dukeact:committeeName ?committeeName.}
+  OPTIONAL {
+    ?activity core:geographicFocus ?geoFocusUri.
+    ?geoFocusUri rdfs:label ?geoFocus.
+}
+  ?activity core:dateTimeInterval ?dateUri.
+  OPTIONAL {
+    ?dateUri core:start ?startDateUri.
+    ?startDateUri core:dateTime ?startDate.
+    ?startDateUri core:dateTimePrecision ?startDatePrecision.
+  }
+  OPTIONAL {
+    ?dateUri core:end ?endDateUri.
+    ?endDateUri core:dateTime ?endDate.
+    ?endDateUri core:dateTimePrecision ?endDatePrecision.
+  }
+} order by desc(?startDate) desc(?endDate)

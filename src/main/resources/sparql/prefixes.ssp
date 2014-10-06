@@ -20,3 +20,4 @@
     PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
     PREFIX duke-geo: <http://vivo.duke.edu/vivo/ontology/duke-geo-extension#>
     PREFIX dukeart: <http://vivo.duke.edu/vivo/ontology/duke-art-extension#>
+    PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>

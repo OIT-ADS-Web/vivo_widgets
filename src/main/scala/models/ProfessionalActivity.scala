@@ -5,9 +5,9 @@ import edu.duke.oit.vw.solr.Vivo
 import java.util.Date
 import java.text.SimpleDateFormat
 
-case class Grant(uri:String,
+case class ProfessionalActivity(uri:String,
                  vivoType: String,
-                 label: String,
+                 label:  String,
                  attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson 
 {
@@ -42,21 +42,20 @@ case class Grant(uri:String,
 
 }
 
-object Grant extends AttributeParams {
+object ProfessionalActivity extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              templatePath: String="sparql/grants.ssp") = {
-    val grantData = vivo.selectFromTemplate(templatePath, uriContext)
-    val existingGrantData = grantData.filter(grant => !grant.isEmpty)
-    existingGrantData.map(build(_)).asInstanceOf[List[Grant]]
+              templatePath: String="sparql/professional_activities.ssp") = {
+    val professionalActivityData = vivo.selectFromTemplate(templatePath, uriContext)
+    professionalActivityData.map(build(_)).asInstanceOf[List[ProfessionalActivity]]
 
   }
 
-  def build(grant:Map[Symbol,String]) = {
-    new Grant(uri         = grant('agreement).stripBrackets(),
-              vivoType    = grant('type).stripBrackets(),
-              label       = grant('label),
-              attributes  = parseAttributes(grant, List('agreement,'type,'label)))
+  def build(professionalActivity:Map[Symbol,String]) = {
+    new ProfessionalActivity(uri  = professionalActivity('activity).stripBrackets(),
+              vivoType    = professionalActivity('type).stripBrackets(),
+              label       = professionalActivity('label),
+              attributes  = parseAttributes(professionalActivity, List('activity,'type,'label)))
   }
 
 }
