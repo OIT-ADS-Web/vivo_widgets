@@ -28,7 +28,7 @@ class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
       vivo.numPeople() must be_> (0)
     }
     
-    "create a document in the index for each person in vivo with their uri as the id and a json serialization in the 'json' field" in {
+    "create a retrievable person" in {
       vsi.indexPeople()
       val people = vivo.select(renderFromClassPath("sparql/person.ssp"))
       for (p <- people) {

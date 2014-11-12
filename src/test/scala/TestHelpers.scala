@@ -30,8 +30,7 @@ object TestServers {
     import java.io.InputStream
 
     print("loading sample data...")
-    val sampleInstanceFile = currentDirectory+"/src/test/resources/kb2.rdf"
-    val sampleOntologyFile = currentDirectory+"/src/test/resources/vivo_core_ontology.rdf"
+    val sampleInstanceFile = currentDirectory+"/src/test/resources/minimal_person.rdf"
 
     Class.forName("org.h2.Driver")
     val cInfo = new JenaConnectionInfo(url,user,password,dbType)
@@ -41,10 +40,6 @@ object TestServers {
       val in = FileManager.get.open(sampleInstanceFile)
                                                                                  dbModel.read(in, null);
                                                                                }
-    Jena.sdbModel(cInfo, "http://vitro.mannlib.cornell.edu/filegraph/tbox/vivo-core-1.2.owl") { dbModel =>
-      val in = FileManager.get.open(sampleOntologyFile)
-                                                                                               dbModel.read(in, null);
-                                                                                             }
     println("[DONE]")
 
   }
