@@ -9,8 +9,9 @@ import com.hp.hpl.jena.rdf.model.{Model => JModel,ModelFactory}
 
 object TestServers {
   val currentDirectory = new java.io.File(".").getCanonicalPath
-  val widgetSolrCfg = new SolrConfig(currentDirectory+"/solr/solr.xml",currentDirectory+"/solr","vivowidgetcore")
+  val widgetSolrCfg = new SolrConfig(currentDirectory+"/solr/solrtest.xml",currentDirectory+"/solr","vivowidgetcoretest")
   val widgetSolr = Solr.solrServer(widgetSolrCfg)
+  Solr.addCore(widgetSolr, "vivowidgetcoretest", currentDirectory+"/solr")
   val vivoSolr = Solr.solrServer("http://localhost:8983/solr")
 
   // in memory database - need the DB_CLOSE_DELAY in order for the db to perist across connections
