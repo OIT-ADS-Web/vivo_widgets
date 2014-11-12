@@ -27,3 +27,7 @@ publishArtifact in Test := false
 test in assembly := {}
 
 jarName in assembly := "vivo-widgets.jar"
+
+libraryDependencies ++= Seq(
+  "com.h2database" % "h2" % "[1.3,)"
+  )

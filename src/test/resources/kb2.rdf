@@ -21,6 +21,7 @@
     xmlns:scires="http://vivoweb.org/ontology/scientific-research#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:duke="http://vivo.duke.edu/vivo/ontology/duke-extension#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#pmcid">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
@@ -4972,6 +4973,10 @@ This class allows for linking an author to a publication while indicating inform
   <rdf:Description rdf:about="http://localhost/individual/n503">
     <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-04-25T22:34:06</vitro:modTime>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
+    <vitro:mostSpecificType rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
+    <core:preferredTitle xml:lang="en-US">Programming CIO</core:preferredTitle>
+    <duke:duid xml:lang="en-US">0123456</duke:duid>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value0Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
     <core:authorInAuthorship rdf:resource="http://localhost/individual/n6097"/>
