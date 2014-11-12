@@ -23,14 +23,14 @@ object TestServers {
   val vivo = new Vivo(url,user,password,dbType,"org.h2.Driver")
 
 
-  def loadSampleData = {
+  def loadSampleData(filePath: String) = {
     import edu.duke.oit.vw.jena._
     import com.hp.hpl.jena.rdf.model._
     import com.hp.hpl.jena.util.FileManager
     import java.io.InputStream
 
     print("loading sample data...")
-    val sampleInstanceFile = currentDirectory+"/src/test/resources/minimal_person.rdf"
+    val sampleInstanceFile = currentDirectory + filePath
 
     Class.forName("org.h2.Driver")
     val cInfo = new JenaConnectionInfo(url,user,password,dbType)
@@ -53,16 +53,4 @@ object TestModels {
   val sampleInstanceFile = currentDirectory+"/src/test/resources/kb2.rdf"
 
   val sampleInstanceModel: JModel = ModelFactory.createDefaultModel().read(FileManager.get.open(sampleInstanceFile),null)
-}
-
-/**
- * Extend your specificiation with this trait to have the sample RDF model loaded.
- */
-trait SampleLoader extends Scope {
-
-  // load sample data from a base vivo instance
-  def before {
-    TestServers.loadSampleData
-  }
-
 }

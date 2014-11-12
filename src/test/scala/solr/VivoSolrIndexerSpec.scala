@@ -8,13 +8,13 @@ import edu.duke.oit.vw.jena._
 import edu.duke.oit.vw.solr._
 import edu.duke.oit.vw.models._
 import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
-import edu.duke.oit.test.helpers.{TestServers,SampleLoader}
+import edu.duke.oit.test.helpers.TestServers
 
 class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
   
   val vivo = TestServers.vivo
   vivo.setupConnectionPool()
-  TestServers.loadSampleData
+  TestServers.loadSampleData("/src/test/resources/minimal_person.rdf")
 
   val solrSrv = TestServers.widgetSolr
 
@@ -33,7 +33,7 @@ class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
       val people = vivo.select(renderFromClassPath("sparql/person.ssp"))
       for (p <- people) {
         val uri = p('person).toString.replaceAll("<|>","")
-        val person_object = Person.find("http://localhost/individual/n503", solrSrv)
+        val person_object = Person.find(uri, solrSrv)
         val person = person_object.get
         person.uri must_== uri
       }
