@@ -28,15 +28,14 @@
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
     <vitro:mostSpecificType rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
     <core:preferredTitle xml:lang="en-US">Programming CIO</core:preferredTitle>
+    <core:primaryEmail xml:lang="en-US">rsmith@example.com</core:primaryEmail>
     <duke:duid xml:lang="en-US">0123456</duke:duid>
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value0Thing"/>
-    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
     <core:authorInAuthorship rdf:resource="http://localhost/individual/n6097"/>
     <core:authorInAuthorship rdf:resource="http://localhost/individual/n1881"/>
-    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Programming CIO</vitro:moniker>
     <core:personInPosition rdf:resource="http://localhost/individual/n3498"/>
     <foaf:firstName>Richard</foaf:firstName>
+    <core:middleName>Big</core:middleName>
     <foaf:lastName>Smith</foaf:lastName>
     <rdfs:label xml:lang="en-US">Smith, Richard</rdfs:label>
   </rdf:Description>
