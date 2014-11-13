@@ -50,12 +50,12 @@ class WidgetsFilter extends ScalatraFilter
       case Some(p:Person) => {
         val d = uriParams ++ Map("person" -> p)
         contentType = "text/html"
-        templateEngine.layout(TemplateHelpers.tpath("builder/person.jade"), d)
+        layoutTemplate(TemplateHelpers.tpath("builder/person.jade"), d.toSeq: _*)
       }
       case Some(o:Organization) => {
         val d = uriParams ++ Map("organization" -> o)
         contentType = "text/html"
-        templateEngine.layout(TemplateHelpers.tpath("builder/organization.jade"), d)
+        layoutTemplate(TemplateHelpers.tpath("builder/person.jade"), d.toSeq: _*)
       }
       case _ => "NoContent"
     }

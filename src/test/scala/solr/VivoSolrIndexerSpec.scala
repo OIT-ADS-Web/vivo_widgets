@@ -1,8 +1,6 @@
 package edu.duke.oit.vw.solr.test
 
 import org.specs2.mutable._
-import org.apache.solr.client.solrj.SolrQuery
-import org.apache.solr.common.SolrDocumentList
 
 import edu.duke.oit.vw.jena._
 import edu.duke.oit.vw.solr._
