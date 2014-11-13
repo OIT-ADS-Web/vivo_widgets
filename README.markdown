@@ -84,7 +84,11 @@ or to run only a few tests:
 The acceptance tests will throw errors unless they have a Solr server to talk
 to. (TODO: automate this) To start one, in a separate terminal run:
 
-    ./bin/solr_dev.sh
+    ./bin/solr_dev.sh start
+
+And when you are done, remember to run:
+
+    ./bin/solr_dev.sh stop
 
 ## Solr Index
 
