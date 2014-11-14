@@ -17,10 +17,14 @@ object FormatJS extends FormatType
 object FormatJSON extends FormatType
 object FormatJSONP extends FormatType
 
-class WidgetsFilter extends ScalatraFilter
+class WidgetsFilter(val coreName: String, val coreDirectory: String) extends ScalatraFilter
   with ScalateSupport
   with ScalateTemplateStringify
   with Timer {
+
+  def this() {
+    this("vivowidgetcore", WidgetsConfig.loadProperties()("WidgetsSolr.directory"))
+  }
 
   // GET /people/{collectionName}/5.jsonp?uri={uri}
   get("/api/v0.9/people/:collectionName/:count.:format") {
@@ -62,7 +66,7 @@ class WidgetsFilter extends ScalatraFilter
   }
 
   protected def renderPeople = {
-    WidgetsConfig.prepareCore
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {

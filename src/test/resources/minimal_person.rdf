@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF
     xmlns="http://vitro.mannlib.cornell.edu/ns/vitro/public#"
+    xmlns:vitro-public="http://vitro.mannlib.cornell.edu/ns/vitro/public#"
     xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
@@ -30,16 +31,28 @@
     <vitro:mostSpecificType rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
     <core:preferredTitle xml:lang="en-US">Programming CIO</core:preferredTitle>
     <core:primaryEmail xml:lang="en-US">rsmith@example.com</core:primaryEmail>
+    <core:phoneNumber xml:lang="en-US">919-555-5555</core:phoneNumber>
     <core:overview xml:lang="en-US">This is an overview.</core:overview>
     <dukeact:mentorshipOverview xml:lang="en-US">A mentor overview.</dukeact:mentorshipOverview>
     <duke:duid xml:lang="en-US">0123456</duke:duid>
+    <duke:preferredCitationFormat rdf:resource="http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation"/>
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <core:authorInAuthorship rdf:resource="http://localhost/individual/n6097"/>
     <core:authorInAuthorship rdf:resource="http://localhost/individual/n1881"/>
     <core:personInPosition rdf:resource="http://localhost/individual/n3498"/>
+    <bibo:prefixName>Miss</bibo:prefixName>
     <foaf:firstName>Richard</foaf:firstName>
     <core:middleName>Big</core:middleName>
     <foaf:lastName>Smith</foaf:lastName>
+    <bibo:suffixName>Jr.</bibo:suffixName>
     <rdfs:label xml:lang="en-US">Smith, Richard</rdfs:label>
+    <vitro-public:mainImage rdf:resource="https://scholars.duke.edu/individual/file_i2977242"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://scholars.duke.edu/individual/file_i2977242">
+    <vitro-public:downloadLocation rdf:resource="https://scholars.duke.edu/individual/i2977242"/>
+    <vitro-public:thumbnailImage rdf:resource="https://scholars.duke.edu/individual/file_t2977242"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://scholars.duke.edu/individual/file_t2977242">
+    <vitro-public:downloadLocation rdf:resource="https://scholars.duke.edu/individual/t2977242"/>
   </rdf:Description>
 </rdf:RDF>
