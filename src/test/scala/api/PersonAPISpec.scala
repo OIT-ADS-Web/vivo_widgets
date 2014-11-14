@@ -11,17 +11,19 @@ import edu.duke.oit.test.helpers.TestServers
 import org.specs2.specification.Step
 
 class PersonApiSpec extends ScalatraSpec { def is = s2"""
-  The Person API should return   ${ Step(getJson)}
-    uri                        $e1
-    vivoType                   $e2
-    label                      $e3
-    title                      $e4
-    attributes(lastName)       $e5
-    attributes(firstName)      $e6
-    attributes(preferredTitle) $e7
-    attributes(alternateId)    $e8
-    attributes(middleName)     $e9
-    attributes(primaryEmail)   $e10
+  The Person API should return     ${ Step(getJson)}
+    uri                            $e1
+    vivoType                       $e2
+    label                          $e3
+    title                          $e4
+    attributes(lastName)           $e5
+    attributes(firstName)          $e6
+    attributes(preferredTitle)     $e7
+    attributes(alternateId)        $e8
+    attributes(middleName)         $e9
+    attributes(primaryEmail)       $e10
+    attributes(overview)           $e11
+    attributes(mentorshipOverview) $e12
   """
 
   var json:Map[String, Any] = _
@@ -53,5 +55,6 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   def e8 = { attributes("alternateId") must_== "0123456" }
   def e9 = { attributes("middleName") must_== "Big" }
   def e10 = { attributes("primaryEmail") must_== "rsmith@example.com" }
-  //def e11 = { attributes("overview") must_== "This is an overview." }
+  def e11 = { attributes("overview") must_== "This is an overview." }
+  def e12 = { attributes("mentorshipOverview") must_== "A mentor overview." }
   }
