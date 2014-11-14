@@ -27,6 +27,7 @@ object VivowidgetsBuild extends Build {
         <exclude org="javax.jms"/>
       </dependency>,
       resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
+      resolvers += "Restlet" at "http://maven.restlet.com/",
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
@@ -47,10 +48,8 @@ object VivowidgetsBuild extends Build {
         "com.hp.hpl.jena" % "sdb"  % "1.3.3" excludeAll(ExclusionRule(organization = "org.slf4j")),
 
         // solr
-        "org.apache.solr" % "solr-core" % "3.2.0",
-        "org.apache.solr" % "solr-solrj" % "3.2.0",
-        // "org.apache.solr" % "solr-core" % "3.6.2",
-        // "org.apache.solr" % "solr-solrj" % "3.6.2",
+        "org.apache.solr" % "solr-core" % "4.7.2",
+        "org.apache.solr" % "solr-solrj" % "4.7.2",
 
         "org.specs2" %% "specs2" % "2.3.12" % "test->default",
         // "org.scalatest" %% "scalatest" % "1.9.1" % "test->default",

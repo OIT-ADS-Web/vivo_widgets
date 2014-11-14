@@ -20,7 +20,9 @@ object TestServers {
   val password = ""
   val dbType = "H2"
 
-  val vivo = new Vivo(url,user,password,dbType,"org.h2.Driver")
+  def vivo : Vivo = {
+    new Vivo(url,user,password,dbType,"org.h2.Driver")
+  }
 
 
   def loadSampleData(filePath: String) = {

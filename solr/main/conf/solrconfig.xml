@@ -42,7 +42,7 @@
 
 
 
-  <indexDefaults>
+  <indexConfig>
    <!-- Values here affect all index writers and act as a default unless overridden. -->
     <useCompoundFile>false</useCompoundFile>
 
@@ -97,26 +97,9 @@
       ('simple' is the default for backwards compatibility with Solr 1.2)
     -->
     <lockType>single</lockType>
-  </indexDefaults>
+  </indexConfig>
 
-  <mainIndex>
-    <!-- options specific to the main on-disk lucene index -->
-    <useCompoundFile>false</useCompoundFile>
-    <ramBufferSizeMB>32</ramBufferSizeMB>
-    <mergeFactor>10</mergeFactor>
-    <!-- Deprecated -->
-    <!--<maxBufferedDocs>1000</maxBufferedDocs>-->
-    <maxMergeDocs>2147483647</maxMergeDocs>
-    <maxFieldLength>10000</maxFieldLength>
-
-    <!-- If true, unlock any held write or commit locks on startup. 
-         This defeats the locking mechanism that allows multiple
-         processes to safely access a lucene index, and should be
-         used with care.
-         This is not needed if lock type is 'none' or 'single'
-     -->
-    <unlockOnStartup>false</unlockOnStartup>
-  </mainIndex>
+  <luceneMatchVersion>LUCENE_CURRENT</luceneMatchVersion>
 
 
 </config>

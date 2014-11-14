@@ -72,6 +72,8 @@ jrebel.lic
 solr/vivowidgetcore/data*
 solr/vivocore/data*
 solr/data
+solr/main/data
+solr/test/data
 
 src/main/resources/*deploy.properties
 .project
