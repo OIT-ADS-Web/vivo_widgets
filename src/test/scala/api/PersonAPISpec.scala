@@ -13,6 +13,8 @@ import org.specs2.specification.Step
 import org.apache.solr.client.solrj.SolrRequest
 import org.apache.solr.client.solrj.request.CoreAdminRequest
 
+import sys.process._
+
 class PersonApiSpec extends ScalatraSpec { def is = s2"""
   The Person API should return          ${ Step(getJson)}
     uri                                 $e1
@@ -40,26 +42,23 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var json:Map[String, Any] = _
   var attributes:Map[String, Any] = _
 
+  addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
+
   def getJson = {
     val vivo = TestServers.vivo
     vivo.setupConnectionPool()
     TestServers.loadSampleData("/src/test/resources/minimal_person.rdf")
     val solrServer = TestServers.widgetSolr
+    solrServer.deleteByQuery("*:*")
     val indexer = new VivoSolrIndexer(vivo, solrServer)
 
     indexer.indexPeople()
-    //val adminRequest = new CoreAdminRequest
-    //CoreAdminRequest.reloadCore("vivowidgetcoretest", solrServer)
-    //CoreAdminResponse adminResponse = adminRequest.process(solrServer)
 
     get("/api/v0.9/people/complete/all.json?uri=http://localhost/individual/n503") {
-      println("body: " + body)
       json = JsonParser.parse(body).values.asInstanceOf[Map[String, Any]]
       attributes = json("attributes").asInstanceOf[Map[String, Any]]
     }
   }
-
-  addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
   def e1 = { json("uri") must_== "http://localhost/individual/n503" }
   def e2 = { json("vivoType") must_== "http://vivoweb.org/ontology/core#FacultyMember" } 

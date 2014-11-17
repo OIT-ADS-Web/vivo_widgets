@@ -2,7 +2,11 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT *
+SELECT ?title ?type ?label ?alternateId ?preferredTitle ?overview
+       ?mentorshipOverview ?mentorshipAvailability ?firstName ?lastName
+       ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
+       ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
+       ?imageThumbnailDownload
 WHERE {
   <${ uri }> core:preferredTitle ?title ;
     vitro:mostSpecificType ?type ;
