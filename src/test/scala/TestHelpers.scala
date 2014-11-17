@@ -40,7 +40,7 @@ object TestServers {
     Jena.truncateAndCreateStore(cInfo)
     Jena.sdbModel(cInfo, "http://vitro.mannlib.cornell.edu/default/vitro-kb-2") { dbModel =>
       val in = FileManager.get.open(sampleInstanceFile)
-                                                                                 dbModel.read(in, null);
+                                                                                 dbModel.read(in, null, "N3");
                                                                                }
     println("[DONE]")
 

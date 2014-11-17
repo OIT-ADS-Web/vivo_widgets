@@ -27,7 +27,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   def getJson = {
     val vivo = TestServers.vivo
     vivo.setupConnectionPool()
-    TestServers.loadSampleData("/src/test/resources/minimal_person.rdf")
+    TestServers.loadSampleData("/src/test/resources/minimal_person.n3")
     val solrServer = TestServers.widgetSolr
     solrServer.deleteByQuery("*:*")
     val indexer = new VivoSolrIndexer(vivo, solrServer)
@@ -53,7 +53,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     "preferredTitle" -> "Programming CIO",
     "alternateId" -> "0123456",
     "middleName" -> "Big",
-    "primaryEmail" -> "rsmith@example.com",
+    "primaryEmail" -> "rsmith@example.org",
     "overview" -> "This is an overview.",
     "mentorshipOverview" -> "A mentor overview.",
     "mentorshipAvailabilities" -> "Faculty, Provosts, Deans",
@@ -61,10 +61,8 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     "preferredCitationFormat" -> "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation",
     "suffixName" -> "Jr.",
     "prefixName" -> "Miss",
-    "imageUri" -> "https://scholars.duke.edu/individual/file_i2977242",
-    "imageDownload" -> "https://scholars.duke.edu/individual/i2977242",
-    "imageThumbnailUri" -> "https://scholars.duke.edu/individual/file_t2977242"
+    "imageUri" -> "http://localhost/individual/file_i503",
+    "imageDownload" -> "http://localhost/individual/i503",
+    "imageThumbnailUri" -> "http://localhost/individual/file_t503"
   ) }
-  def p20 = { attributes("imageThumbnailDownload") must_== "https://scholars.duke.edu/individual/t2977242" }
-  def p21 = { attributes("mentorshipAvailabilities") must_== "" }
-  }
+}

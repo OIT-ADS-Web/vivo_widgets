@@ -13,6 +13,7 @@
     PREFIX geo: <http://aims.fao.org/aos/geopolitical.owl#>
     PREFIX pvs: <http://vivoweb.org/ontology/provenance-support#>
     PREFIX ero: <http://purl.obolibrary.org/obo/>
+    PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX scires: <http://vivoweb.org/ontology/scientific-research#>
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX core: <http://vivoweb.org/ontology/core#>
@@ -21,3 +22,4 @@
     PREFIX duke-geo: <http://vivo.duke.edu/vivo/ontology/duke-geo-extension#>
     PREFIX dukeart: <http://vivo.duke.edu/vivo/ontology/duke-art-extension#>
     PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
+    PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>

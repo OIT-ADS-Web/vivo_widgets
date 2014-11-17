@@ -1,0 +1,111 @@
+@prefix ocresd: <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix geo:   <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix scires: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix cito:  <http://purl.org/spar/cito/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix ocrer: <http://purl.org/net/OCRe/research.owl#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix c4o:   <http://purl.org/spar/c4o/> .
+@prefix vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix vivo:  <http://vivoweb.org/ontology/core#> .
+@prefix duke:  <http://vivo.duke.edu/vivo/ontology/duke-extension#> .
+
+<http://localhost/individual/per_vcard503>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , obo:ARG_2000379 , vcard:Kind , owl:Thing , vcard:Individual ;
+        obo:ARG_2000029         <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  vcard:Individual ;
+        vcard:hasEmail          <http://localhost/individual/per_email503> ;
+        vcard:hasName           <http://localhost/individual/per_name503> ;
+        vcard:hasTelephone      <http://localhost/individual/phone_addr503> ;
+        vcard:hasTitle          <http://localhost/individual/per_title503> .
+
+<http://localhost/individual/n503>
+        a                       vivo:FacultyMember , obo:BFO_0000002 , obo:BFO_0000004 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , foaf:Person , obo:BFO_0000001 , foaf:Agent ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Smith, Richard" ;
+        vivo:overview           "This is an overview." ;
+        duke:preferredCitationFormat duke:apaCitation ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipOverview>
+                "A mentor overview." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Faculty" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Deans" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Provosts" ;
+        obo:ARG_2000028         <http://localhost/individual/per_vcard503> ;
+        vitro:mostSpecificType  vivo:FacultyMember ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#duid>
+                "0123456" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#profileLabel>
+                "Richard Smith" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#scopedNetid>
+                "rsmith" .
+
+<http://localhost/individual/per_title503>
+        a                       vcard:Title , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Organizational ;
+        vitro:mostSpecificType  vcard:Title ;
+        vcard:title             "Programming CIO" .
+
+<http://localhost/individual/per_email503>
+        a                       "http://www.w3.org/2006/vcard/ns#Work" ;
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Email ;
+        vitro:mostSpecificType  vcard:Email ;
+        vcard:email             "rsmith@example.org" .
+
+<http://localhost/individual/phone_addr503>
+        a                       "http://www.w3.org/2006/vcard/ns#Work" ;
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Voice, vcard:Telephone ;
+        vitro:mostSpecificType  vcard:Telephone ;
+        vcard:telephone         "919-555-5555" .
+
+<http://localhost/individual/per_name503>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Identification , vcard:Name ;
+        vitro:mostSpecificType  vcard:Name ;
+        vivo:middleName         "Big" ;
+        vcard:familyName        "Smith" ;
+        vcard:givenName         "Richard" ;
+        vcard:honorificSuffix   "Jr." ;
+        vcard:honorificPrefix   "Miss" .
+
+<http://localhost/individual/file_t503>
+        a                              <http://www.w3.org/2000/01/rdf-schema#Resource> , vitro-public:File , owl:Thing ;
+        vitro:modTime                  "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType         vitro-public:File ;
+        vitro-public:downloadLocation  <http://localhost/individual/t503> ;
+        vitro-public:filename          "thumb_image_503.jpg" ;
+        vitro-public:mimeType          "image/jpeg" .
+
+<http://localhost/individual/file_i503>
+        a                              <http://www.w3.org/2000/01/rdf-schema#Resource> , vitro-public:File , owl:Thing ;
+        vitro:modTime                  "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType         vitro-public:File ;
+        vitro-public:downloadLocation  <http://localhost/individual/i503> ;
+        vitro-public:filename          "image_503.jpg" ;
+        vitro-public:mimeType          "image/jpeg" ;
+        vitro-public:thumbnailImage    <http://localhost/individual/file_t503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#imageOf>
+                <http://localhost/individual/n503> .
+
+<http://localhost/individual/i503>
+        a                               <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vitro-public:FileByteStream ;
+        vitro:modTime                   "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType          vitro-public:FileByteStream ;
+        vitro-public:directDownloadUrl  "/file/i503/image_503.jpg" .
+
+<http://localhost/individual/t503>
+        a                               <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vitro-public:FileByteStream ;
+        vitro:modTime                   "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType          vitro-public:FileByteStream ;
+        vitro-public:directDownloadUrl  "/file/t503/thumb_image_503.jpg" .
+
+<http://localhost/individual/n503>
+        vitro-public:mainImage  <http://localhost/individual/file_i503> .

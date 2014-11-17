@@ -2,17 +2,18 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?title ?type ?label ?alternateId ?preferredTitle ?overview
+SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?mentorshipOverview ?mentorshipAvailabilities ?firstName ?lastName
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
        ?imageThumbnailDownload
 WHERE {
-  <${ uri }> core:preferredTitle ?title ;
+  <${ uri }> obo:ARG_2000028 ?individualVcard ;
     vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
-    duke:duid ?alternateId ;
-    core:preferredTitle ?preferredTitle ;
+    duke:duid ?alternateId .
+  ?individualVcard vcard:hasTitle ?titleVcard .
+  ?titleVcard vcard:title ?title .
   OPTIONAL { <${ uri }> core:overview ?overview . }
   OPTIONAL { <${ uri }> dukeact:mentorshipOverview ?mentorshipOverview . }
   {
@@ -21,13 +22,22 @@ WHERE {
       <${uri}> dukeact:mentorshipAvailability ?availability.
     }
   }
-  OPTIONAL { <${ uri }> foaf:firstName ?firstName . }
-  OPTIONAL { <${ uri }> foaf:lastName ?lastName . }
-  OPTIONAL { <${ uri }> core:middleName ?middleName . }
-  OPTIONAL { <${ uri }> core:primaryEmail ?primaryEmail . }
-  OPTIONAL { <${ uri }> core:phoneNumber ?phoneNumber . }
-  OPTIONAL { <${ uri }> bibo:suffixName ?suffixName . }
-  OPTIONAL { <${ uri }> bibo:prefixName ?prefixName . }
+  OPTIONAL {
+    ?individualVcard vcard:hasName ?nameVcard .
+    OPTIONAL { ?nameVcard vcard:givenName ?firstName . }
+    OPTIONAL { ?nameVcard vcard:familyName ?lastName . }
+    OPTIONAL { ?nameVcard core:middleName ?middleName . }
+    OPTIONAL { ?nameVcard vcard:honorificSuffix ?suffixName . }
+    OPTIONAL { ?nameVcard vcard:honorificPrefix ?prefixName . }
+  }
+  OPTIONAL {
+    ?individualVcard vcard:hasEmail ?emailVcard .
+    ?emailVcard vcard:email ?primaryEmail .
+  }
+  OPTIONAL {
+    ?individualVcard vcard:hasTelephone ?phoneVcard .
+    ?phoneVcard vcard:telephone ?phoneNumber .
+  }
   OPTIONAL { <${ uri }> duke:preferredCitationFormat ?preferredCitationFormat . }
   OPTIONAL {
     <${ uri }> vitro-public:mainImage ?imageUri .
