@@ -74,6 +74,8 @@ solr/vivocore/data*
 solr/data
 solr/main/data
 solr/test/data
+solr/logs
+solr/solr-webapp
 
 src/main/resources/*deploy.properties
 .project

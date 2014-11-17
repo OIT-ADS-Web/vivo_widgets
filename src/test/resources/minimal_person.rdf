@@ -34,6 +34,9 @@
     <core:phoneNumber xml:lang="en-US">919-555-5555</core:phoneNumber>
     <core:overview xml:lang="en-US">This is an overview.</core:overview>
     <dukeact:mentorshipOverview xml:lang="en-US">A mentor overview.</dukeact:mentorshipOverview>
+    <dukeact:mentorshipAvailability xml:lang="en-US">Faculty</dukeact:mentorshipAvailability>
+    <dukeact:mentorshipAvailability xml:lang="en-US">Deans</dukeact:mentorshipAvailability>
+    <dukeact:mentorshipAvailability xml:lang="en-US">Provosts</dukeact:mentorshipAvailability>
     <duke:duid xml:lang="en-US">0123456</duke:duid>
     <duke:preferredCitationFormat rdf:resource="http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation"/>
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>

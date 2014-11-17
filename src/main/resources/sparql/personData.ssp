@@ -3,7 +3,7 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT ?title ?type ?label ?alternateId ?preferredTitle ?overview
-       ?mentorshipOverview ?mentorshipAvailability ?firstName ?lastName
+       ?mentorshipOverview ?mentorshipAvailabilities ?firstName ?lastName
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
        ?imageThumbnailDownload
