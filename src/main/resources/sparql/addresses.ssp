@@ -6,13 +6,18 @@ SELECT ?uri ?type ?label ?address1 ?city ?state ?postalCode ?country
   ("${uri}" AS ?personUri)
 WHERE
 {
-  <${uri}> core:mailingAddress ?uri .
+  <${ uri }> obo:ARG_2000028 ?individualVcard .
+  ?individualVcard vcard:hasAddress ?uri .
   ?uri vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
-    core:address1 ?address1 ;
-    core:addressCity ?city ;
-    core:addressState  ?state ;
-    core:addressPostalCode ?postalCode ;
-  OPTIONAL { ?uri core:addressCountry ?country ; }
+    vcard:streetAddress ?address1 ;
+    vcard:locality ?city ;
+    vcard:region ?state ;
+    vcard:postalCode ?postalCode .
+  OPTIONAL { ?uri vcard:country ?country . }
+  OPTIONAL {
+    ?uri rdf:type ?type .
+    FILTER(?type = vcard:Location)
+  }
 }
 order by ?label
