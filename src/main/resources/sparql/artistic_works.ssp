@@ -21,9 +21,9 @@ WHERE {
   OPTIONAL {?work bibo:abstract ?abstract.}
   OPTIONAL {?work dukeart:commissioningBody ?commissioning_body.}
   OPTIONAL {
-    ?work core:webpage ?link.
-    ?link core:linkURI ?link_url.
-    ?link core:linkAnchorText ?link_label.
+    ?work vcard:hasURL ?link.
+    ?link vcard:url ?link_url.
+    ?link rdfs:label ?link_label.
   }
 }
 order by desc(?date)

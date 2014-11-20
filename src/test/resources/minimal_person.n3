@@ -135,3 +135,137 @@
 <http://localhost/individual/per_vcard503>
         vcard:hasAddress    <http://localhost/individual/per_addr503_work_location> , <http://localhost/individual/per_addr503_work_mailing> ;
         vcard:hasTelephone  <http://localhost/individual/phone_addr503_work_location> .
+
+<http://localhost/individual/art24520>
+        a                       "http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film" ;
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Title of the acting work" ;
+        <http://purl.obolibrary.org/obo/RO_0002233>
+                <http://localhost/individual/event_51360> ;
+        <http://purl.org/dc/terms/relation>
+                <http://localhost/individual/art24521> ;
+        <http://purl.org/ontology/bibo/abstract>
+                "This is the abstract of the acting work." ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#collaboratorList>
+                "Jocelyn Harrison Olcott; Laurent Dubois; Non-Duke Collaborator" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#commissioningBody>
+                "Motion Picture Commissioners" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
+                true ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+                <http://localhost/individual/art503_24520> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
+                "Film" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue201406> ;
+        <http://www.w3.org/2006/vcard/ns#hasURL>
+                <http://localhost/individual/urllinkartwork24520http://www.example.com/acting> .
+
+<http://localhost/individual/art24521>
+        a                       "http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition" ;
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Musical Work" ;
+        <http://purl.org/dc/terms/relation>
+                <http://localhost/individual/art24520> ;
+        <http://purl.org/ontology/bibo/abstract>
+                "Abstract of a musical work." ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#collaboratorList>
+                "Jocelyn Harrison Olcott" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#commissioningBody>
+                "" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
+                false ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+                <http://localhost/individual/art503_24521> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
+                "Musical Composition" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue2018> ;
+        <http://www.w3.org/2006/vcard/ns#hasURL>
+                <http://localhost/individual/urllinkartwork24521http://www.example.com/music> .
+
+<http://localhost/individual/event_51360>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.org/NET/c4dm/event.owl#Event> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Event for Acting Work" ;
+        vitro:mostSpecificType  <http://purl.org/NET/c4dm/event.owl#Event> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#venue>
+                "Venue for Acting Event" ;
+        <http://vivoweb.org/ontology/core#description>
+                "Description of acting work event." ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20181030> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2018> .
+
+<http://localhost/individual/art503_24521>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> , <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Jocelyn Harrison Olcott, Musical Work" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relates>
+                <http://localhost/individual/art24521> , <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
+                "Composer" ;
+        <http://vivoweb.org/ontology/core#description>
+                "Description of composer role." .
+
+<http://localhost/individual/art503_24520>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> , <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Jocelyn Harrison Olcott, Title of the acting work" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relates>
+                <http://localhost/individual/n503> , <http://localhost/individual/art24520> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
+                "Actor" ;
+        <http://vivoweb.org/ontology/core#description>
+                "A description of the acting role." .
+
+<http://localhost/individual/dateValue2018>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue201406>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-06-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/urllinkartwork24521http://www.example.com/music>
+        a                       <http://www.w3.org/2006/vcard/ns#Explanatory> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Music Link Label" ;
+        vitro:mostSpecificType  <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2006/vcard/ns#url>
+                "http://www.example.com/music" .
+
+<http://localhost/individual/urllinkartwork24520http://www.example.com/acting>
+        a                       <http://www.w3.org/2006/vcard/ns#Explanatory> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Acting Link Label" ;
+        vitro:mostSpecificType  <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2006/vcard/ns#url>
+                "http://www.example.com/acting" .
+
+<http://localhost/individual/n503>
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+                <http://localhost/individual/art503_24521> , <http://localhost/individual/art503_24520> .

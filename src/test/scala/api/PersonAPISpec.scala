@@ -22,6 +22,11 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     correct first address attributes     $firstAddressAttributes
     correct second address               $secondAddress
     correct second address attributes    $secondAddressAttributes
+    two art works                        $artWorksSize
+    correct first art work               $firstArtWork
+    correct first art work attrs         $firstArtWorkAttributes
+    correct second art work              $secondArtWork
+    correct second art work attrs        $secondArtWorkAttributes
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -29,6 +34,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var json:Map[String, Any] = _
   var attributes:Map[String, Any] = _
   var addresses:List[Map[String, Any]] = _
+  var artisticWorks:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -46,6 +52,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       json = JsonParser.parse(body).values.asInstanceOf[Map[String, Any]]
       attributes = json("attributes").asInstanceOf[Map[String, Any]]
       addresses = json("addresses").asInstanceOf[List[Map[String, Any]]]
+      artisticWorks = json("artisticWorks").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -114,6 +121,57 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "state" -> "NC",
       "postalCode" -> "27710",
       "personUri" -> personUri
+      )
+  }
+
+  def artWorksSize = { artisticWorks must have size(2) }
+
+  def firstArtWork = {
+    val firstArtWork = artisticWorks.head
+    firstArtWork must havePairs(
+      "uri" -> "http://localhost/individual/art24521",
+      "label" -> "Musical Work",
+      "vivoType" -> "http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition" 
+      )
+  }
+
+  def firstArtWorkAttributes = {
+    val firstArtWorkAttributes = artisticWorks.head("attributes").asInstanceOf[Map[String, Any]]
+    firstArtWorkAttributes must havePairs(
+      "role" -> "Composer",
+      "role_description" -> "Description of composer role.",
+      "abstract" -> "Abstract of a musical work.",
+      "link_url" -> "http://www.example.com/music",
+      "link_label" -> "Music Link Label",
+      "date" -> "2018-01-01T00:00:00",
+      "date_precision" -> "http://vivoweb.org/ontology/core#yearPrecision",
+      "type_description" -> "Musical Composition",
+      "collaborators" -> "Jocelyn Harrison Olcott"
+      )
+  }
+
+  def secondArtWork = {
+    val secondArtWork = artisticWorks.last
+    secondArtWork must havePairs(
+      "uri" -> "http://localhost/individual/art24520",
+      "label" -> "Title of the acting work",
+      "vivoType" -> "http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film" 
+      )
+  }
+
+  def secondArtWorkAttributes = {
+    val secondArtWorkAttributes = artisticWorks.last("attributes").asInstanceOf[Map[String, Any]]
+    secondArtWorkAttributes must havePairs(
+      "role" -> "Actor",
+      "role_description" -> "A description of the acting role.",
+      "abstract" -> "This is the abstract of the acting work.",
+      "link_url" -> "http://www.example.com/acting",
+      "link_label" -> "Acting Link Label",
+      "date" -> "2014-06-01T00:00:00",
+      "date_precision" -> "http://vivoweb.org/ontology/core#yearMonthPrecision",
+      "type_description" -> "Film",
+      "commissioning_body" -> "Motion Picture Commissioners",
+      "collaborators" -> "Jocelyn Harrison Olcott; Laurent Dubois; Non-Duke Collaborator"
       )
   }
 }
