@@ -269,3 +269,213 @@
 <http://localhost/individual/n503>
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
                 <http://localhost/individual/art503_24521> , <http://localhost/individual/art503_24520> .
+
+# Authorship
+
+<http://localhost/individual/author932901-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#Authorship> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Koo, Denise Tze-wen" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Authorship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
+                false ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/pub932901> , <http://localhost/individual/n503> .
+
+<http://localhost/individual/pub932901>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/author932901-503> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/author932901-503> .
+
+# Publication
+
+<http://localhost/individual/pub932901>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000031> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.org/ontology/bibo/AcademicArticle> , <http://purl.obolibrary.org/obo/IAO_0000030> , <http://purl.org/ontology/bibo/Document> , <http://purl.org/ontology/bibo/Article> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Teaching population health: a competency map approach to education." ;
+        <http://purl.org/ontology/bibo/abstract>
+                "This is a publication abstract." ;
+        <http://purl.org/ontology/bibo/doi>
+                "10.1097/ACM.0b013e31828acf27" ;
+        <http://purl.org/ontology/bibo/eissn>
+                "1938-808X" ;
+        <http://purl.org/ontology/bibo/issue>
+                "5" ;
+        <http://purl.org/ontology/bibo/pageEnd>
+                "637" ;
+        <http://purl.org/ontology/bibo/pageStart>
+                "626" ;
+        <http://purl.org/ontology/bibo/numPages>
+                "9" ;
+        <http://purl.org/ontology/bibo/pmid>
+                "23524919" ;
+        <http://purl.org/ontology/bibo/volume>
+                "88" ;
+        <http://purl.org/ontology/bibo/edition>
+                "10" ;
+        <http://purl.org/ontology/bibo/isbn10>
+                "isbn10" ;
+        <http://purl.org/ontology/bibo/isbn13>
+                "isbn13" ;
+        vitro:mostSpecificType  <http://purl.org/ontology/bibo/AcademicArticle> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation>
+                "Kaprielian, VS, Silberberg, M. (2013, May). <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> <em>Acad Med</em>, <em>88</em>(5), 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#authorList>
+                "Kaprielian, VS; Silberberg, M" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#editorList>
+                "Editor, SM" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#translatorList>
+                "Translator, SM" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation>
+                "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88, no. 5 (May 2013): 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation>
+                "Kaprielian VS, Silberberg M. <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> Acad Med. 2013 May;88(5):626-637. PubMed PMID: 23524919." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#language>
+                "eng" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#linkToItem>
+                "http://www.ncbi.nlm.nih.gov/pubmed/23524919" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation>
+                "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88.5 (May 2013): 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#source>
+                "pubmed" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue201305> ;
+        <http://vivoweb.org/ontology/core#hasPublicationVenue>
+                <http://localhost/individual/jou1938-808X> ;
+        <http://vivoweb.org/ontology/core#hasSubjectArea>
+                <http://localhost/individual/meshD005194> , <http://localhost/individual/lcshsh96002203> , <http://localhost/individual/meshD006293> , <http://localhost/individual/meshD004504> , <http://localhost/individual/meshD007396> , <http://localhost/individual/meshD016730> , <http://localhost/individual/meshD015397> , <http://localhost/individual/meshD003256> , <http://localhost/individual/meshD010823> , <http://localhost/individual/lcshsh2010014788> , <http://localhost/individual/meshD005180> , <http://localhost/individual/lcshsh90000072> , <http://localhost/individual/meshD003154> , <http://localhost/individual/meshD011634> , <http://localhost/individual/meshD003479> .
+
+<http://localhost/individual/meshD015397>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Program Evaluation" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD005194>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Family Practice" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh96002203>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Humans" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD006293>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Health Promotion" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/jou1938-808X>
+        <http://vivoweb.org/ontology/core#publicationVenueFor>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD004504>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Education, Medical, Undergraduate" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD007396>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Internship and Residency" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD016730>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Program Development" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003256>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Consumer Participation" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD010823>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Physician Assistants" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh2010014788>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "North Carolina" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD005180>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Faculty, Medical" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh90000072>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Clinical Competence" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003154>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Community Medicine" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD011634>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Public Health" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003479>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Curriculum" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/dateValue201305>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-05-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .

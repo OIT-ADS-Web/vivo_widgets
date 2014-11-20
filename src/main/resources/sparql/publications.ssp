@@ -2,10 +2,17 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-select *
-where {
-  <${uri}> core:authorInAuthorship ?authorship .
-  ?publication core:informationResourceInAuthorship ?authorship .
+SELECT ?authorship ?publication ?label ?type ?numPages ?edition ?volume ?issue
+       ?isbn10 ?isbn13 ?publicationVenue ?publishedIn ?authorList ?editorList
+       ?translatorList ?publishedBy ?startPage ?endPage ?datetime ?year
+       ?isFavorite ?parentBookTitle ?doi ?abstract ?pmid ?pmcid
+       ?publicationSource ?subtypes ?chicagoCitation ?mlaCitation ?apaCitation
+       ?icmjeCitation
+WHERE {
+  <${uri}> core:relatedBy ?authorship .
+  ?authorship a core:Authorship.
+  ?authorship core:relates ?publication .
+  ?publication a obo:IAO_0000030 .
   ?publication rdfs:label ?label .
   ?publication vitro:mostSpecificType ?type .
   OPTIONAL { ?publication bibo:numPages ?numPages . }
@@ -43,4 +50,4 @@ where {
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
 } 
-order by desc(?datetime)
+ORDER BY desc(?datetime)

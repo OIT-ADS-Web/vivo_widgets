@@ -27,6 +27,9 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     correct first art work attrs         $firstArtWorkAttributes
     correct second art work              $secondArtWork
     correct second art work attrs        $secondArtWorkAttributes
+    one publication                      $publicationsSize
+    correct publication                  $authoredPublication
+    correct pub attrs                    $authoredPubAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -35,6 +38,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var attributes:Map[String, Any] = _
   var addresses:List[Map[String, Any]] = _
   var artisticWorks:List[Map[String, Any]] = _
+  var publications:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -53,6 +57,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       attributes = json("attributes").asInstanceOf[Map[String, Any]]
       addresses = json("addresses").asInstanceOf[List[Map[String, Any]]]
       artisticWorks = json("artisticWorks").asInstanceOf[List[Map[String, Any]]]
+      publications = json("publications").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -174,4 +179,52 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "collaborators" -> "Jocelyn Harrison Olcott; Laurent Dubois; Non-Duke Collaborator"
       )
   }
+
+  def publicationsSize = { publications must have size(1) }
+
+  def authoredPublication = {
+    val pub = publications.head
+    pub must havePairs(
+      "uri" -> "http://localhost/individual/pub932901",
+      "label" -> "Teaching population health: a competency map approach to education.",
+      "vivoType" -> "http://purl.org/ontology/bibo/AcademicArticle"
+      )
+  }
+
+  def authoredPubAttrs = {
+    val pubAttrs = publications.head("attributes").asInstanceOf[Map[String, Any]]
+    pubAttrs must havePairs(
+      "authorship" -> "http://localhost/individual/author932901-503",
+      "numPages" -> "9",
+      "edition" -> "10",
+      "volume" -> "88",
+      "issue" -> "5",
+      "isbn10" -> "isbn10",
+      "isbn13" -> "isbn13",
+      // SHOULD TEST THESE
+      //NEED TO ADD JOURNAL "publishedIn" -> "",
+      //"publicationVenue" -> "http://localhost/individual/jou1938-808X",
+      //"publishedBy" -> "",
+      //"isFavorite" -> "false",
+      //"parentBookTitle" -> "",
+      //"pmcid" -> "",
+      //"subtypes" -> "",
+      "authorList" -> "Kaprielian, VS; Silberberg, M",
+      "editorList" -> "Editor, SM",
+      "translatorList" -> "Translator, SM",
+      "startPage" -> "626",
+      "endPage" -> "637",
+      "datetime" -> "http://localhost/individual/dateValue201305",
+      "year" -> "2013-05-01T00:00:00",
+      "doi" -> "10.1097/ACM.0b013e31828acf27",
+      "abstract" -> "This is a publication abstract.",
+      "pmid" -> "23524919",
+      "publicationSource" -> "pubmed",
+      "chicagoCitation" -> "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88, no. 5 (May 2013): 626-637.",
+      "mlaCitation" -> "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88.5 (May 2013): 626-637.",
+      "apaCitation" -> "Kaprielian, VS, Silberberg, M. (2013, May). <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> <em>Acad Med</em>, <em>88</em>(5), 626-637.",
+      "icmjeCitation" -> "Kaprielian VS, Silberberg M. <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> Acad Med. 2013 May;88(5):626-637. PubMed PMID: 23524919."
+      )
+  }
+
 }
