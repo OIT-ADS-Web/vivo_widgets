@@ -30,8 +30,6 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     two publications                  $publicationsSize
     correct authored publication      $authoredPublication
     correct authored pub attrs        $authoredPubAttrs
-    correct translated pub            $translatedPub
-    correct translate pub attrs       $translatedPubAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -182,7 +180,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       )
   }
 
-  def publicationsSize = { publications must have size(2) }
+  def publicationsSize = { publications must have size(3) }
 
   def authoredPublication = {
     val pub = publications.head
@@ -230,7 +228,4 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       )
   }
 
-  def translatedPub = {todo}
-
-  def translatedPubAttrs = {todo}
 }
