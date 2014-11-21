@@ -7,7 +7,7 @@ SELECT ?authorship ?publication ?label ?type ?numPages ?edition ?volume ?issue
        ?translatorList ?publishedBy ?startPage ?endPage ?datetime ?year
        ?isFavorite ?parentBookTitle ?doi ?abstract ?pmid ?pmcid
        ?publicationSource ?subtypes ?chicagoCitation ?mlaCitation ?apaCitation
-       ?icmjeCitation
+       ?icmjeCitation ?authorshipType
 WHERE {
   <${uri}> core:relatedBy ?authorship .
   {?authorship a core:Authorship.}
@@ -15,6 +15,7 @@ WHERE {
   {?authorship a core:Translatorship.}
   UNION
   {?authorship a core:Editorship.}
+  ?authorship vitro:mostSpecificType ?authorshipType .
   ?authorship core:relates ?publication .
   ?publication a obo:IAO_0000030 .
   ?publication rdfs:label ?label .

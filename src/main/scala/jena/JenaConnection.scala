@@ -1,6 +1,5 @@
 package edu.duke.oit.vw.jena
 
-import com.hp.hpl.jena.db.DBConnection
 import com.hp.hpl.jena.ontology.OntModel
 
 import com.hp.hpl.jena.sdb.SDBFactory
@@ -46,18 +45,6 @@ object Jena {
     cpds.setMaxPoolSize(20)
     cpds.setMaxConnectionAge(3600)
     cpds.setMaxIdleTime(1800)
-  }
-
-  // RDB
-
-  def connection(cInfo: JenaConnectionInfo)(mFactory: (ModelMaker) => Unit) = {
-    val dbConn = new DBConnection(cInfo.url, cInfo.user, cInfo.password, cInfo.dbType);
-    val mf: ModelMaker = ModelFactory.createModelRDBMaker(dbConn)
-    try {
-      mFactory(mf)
-    } finally {
-      mf.close
-    }
   }
 
   // SDB methods
