@@ -30,6 +30,8 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     two publications                  $publicationsSize
     correct authored publication      $authoredPublication
     correct authored pub attrs        $authoredPubAttrs
+    correct number courses            $courseSize
+    correct course fields             $courseFields
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -39,6 +41,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var addresses:List[Map[String, Any]] = _
   var artisticWorks:List[Map[String, Any]] = _
   var publications:List[Map[String, Any]] = _
+  var courses:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -58,6 +61,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       addresses = json("addresses").asInstanceOf[List[Map[String, Any]]]
       artisticWorks = json("artisticWorks").asInstanceOf[List[Map[String, Any]]]
       publications = json("publications").asInstanceOf[List[Map[String, Any]]]
+      courses = json("courses").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -183,7 +187,10 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   def publicationsSize = { publications must have size(3) }
 
   def authoredPublication = {
-    val pub = publications.head
+    val pubSome = publications.find({pub => pub("uri") == "http://localhost/individual/pub932901"})
+    val pub = pubSome match {
+      case Some(pub) => pub.asInstanceOf[Map[String, Any]]
+    }
     pub must havePairs(
       "uri" -> "http://localhost/individual/pub932901",
       "label" -> "Teaching population health: a competency map approach to education.",
@@ -192,7 +199,10 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   }
 
   def authoredPubAttrs = {
-    val pubAttrs = publications.head("attributes").asInstanceOf[Map[String, Any]]
+    val pubSome = publications.find({pub => pub("uri") == "http://localhost/individual/pub932901"})
+    val pubAttrs = pubSome match {
+      case Some(pub) => pub("attributes").asInstanceOf[Map[String, Any]]
+    }
     pubAttrs must havePairs(
       "authorship" -> "http://localhost/individual/author932901-503",
       "authorshipType" -> "http://vivoweb.org/ontology/core#Authorship",
@@ -228,4 +238,15 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       )
   }
 
+  def courseSize = { courses must have size(10) }
+
+  def courseFields = {
+    val course = courses.head
+    course must haveKeys("uri", "vivoType", "label")
+  }
+
+  def courseAttrFields = {
+    val courseAttrs = courses.head("attributes").asInstanceOf[Map[String, Any]]
+    courseAttrs must haveKeys("roleName", "role")
+  }
 }

@@ -563,3 +563,265 @@
                 "manual" ;
         <http://vivoweb.org/ontology/core#dateTimeValue>
                 <http://localhost/individual/dateValue2014> .
+
+# Courses
+
+<http://localhost/individual/teacherRoleHISTORY364D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY364D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleECON222D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseECON222D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY790S-07-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY790S-07> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRolePOLSCI340D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/coursePOLSCI340D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY365D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY365D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY393-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY393> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY791-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY791> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY792-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY792> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleENVIRON365D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseENVIRON365D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRolePUBPOL219D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/coursePUBPOL219D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/dateInterval-s20120101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2012> .
+
+<http://localhost/individual/dateValue2012>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2012-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateInterval-s20150101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2015> .
+
+<http://localhost/individual/dateInterval-s20140101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2014> .
+
+<http://localhost/individual/dateValue2015>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2015-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateInterval-s20130101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2013> .
+
+<http://localhost/individual/dateValue2014>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue2013>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/courseHISTORY365D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  365D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY365D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseENVIRON365D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ENVIRON  365D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleENVIRON365D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY790S-07>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  790S-07: Topics in Politics, Public Life, The State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY790S-07-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/courseECON222D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ECON  222D: American Business History" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleECON222D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> .
+
+<http://localhost/individual/coursePUBPOL219D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "PUBPOL  219D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRolePUBPOL219D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY364D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  364D: American Business History" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY364D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> .
+
+<http://localhost/individual/courseHISTORY791>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  791: Reading Topics: Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY791-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> , <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/coursePOLSCI340D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "POLSCI  340D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRolePOLSCI340D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY792>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  792: Reading Topics-Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY792-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY393>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  393: Research Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY393-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/n503>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/teacherRoleHISTORY364D-503> , <http://localhost/individual/teacherRoleECON222D-503> , <http://localhost/individual/teacherRoleHISTORY790S-07-503> , <http://localhost/individual/teacherRolePOLSCI340D-503> , <http://localhost/individual/teacherRoleHISTORY365D-503> , <http://localhost/individual/teacherRoleHISTORY393-503> , <http://localhost/individual/teacherRoleHISTORY791-503> , <http://localhost/individual/teacherRoleHISTORY792-503> , <http://localhost/individual/teacherRoleENVIRON365D-503> , <http://localhost/individual/teacherRolePUBPOL219D-503> .

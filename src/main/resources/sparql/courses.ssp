@@ -1,12 +1,14 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-select  *
+select ?role ?roleName ?course ?type ?label
 where {
-  <${uri}> core:hasTeacherRole ?role .
+  <${uri}> obo:RO_0000053 ?role .
+  ?role a core:TeacherRole .
   ?role rdfs:label ?roleName .
-  ?role core:roleRealizedIn ?course .
+  ?role obo:BFO_0000054 ?course .
   ?course vitro:mostSpecificType ?type .
+  ?course a core:Course .
   ?course rdfs:label ?label .
 }
 order by ?label
