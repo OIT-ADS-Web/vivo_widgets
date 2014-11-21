@@ -14,22 +14,24 @@ import org.apache.solr.client.solrj.SolrRequest
 import org.apache.solr.client.solrj.request.CoreAdminRequest
 
 class PersonApiSpec extends ScalatraSpec { def is = s2"""
-  The Person API should return           ${ Step(getJson)}
-    top-level person data                $topPersonData
-    attributes data                      $attributesData
-    two addresses                        $addressesSize
-    correct first address                $firstAddress
-    correct first address attributes     $firstAddressAttributes
-    correct second address               $secondAddress
-    correct second address attributes    $secondAddressAttributes
-    two art works                        $artWorksSize
-    correct first art work               $firstArtWork
-    correct first art work attrs         $firstArtWorkAttributes
-    correct second art work              $secondArtWork
-    correct second art work attrs        $secondArtWorkAttributes
-    one publication                      $publicationsSize
-    correct publication                  $authoredPublication
-    correct pub attrs                    $authoredPubAttrs
+  The Person API should return        ${ Step(getJson)}
+    top-level person data             $topPersonData
+    attributes data                   $attributesData
+    two addresses                     $addressesSize
+    correct first address             $firstAddress
+    correct first address attributes  $firstAddressAttributes
+    correct second address            $secondAddress
+    correct second address attributes $secondAddressAttributes
+    two art works                     $artWorksSize
+    correct first art work            $firstArtWork
+    correct first art work attrs      $firstArtWorkAttributes
+    correct second art work           $secondArtWork
+    correct second art work attrs     $secondArtWorkAttributes
+    two publications                  $publicationsSize
+    correct authored publication      $authoredPublication
+    correct authored pub attrs        $authoredPubAttrs
+    correct translated pub            $translatedPub
+    correct translate pub attrs       $translatedPubAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -180,7 +182,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       )
   }
 
-  def publicationsSize = { publications must have size(1) }
+  def publicationsSize = { publications must have size(2) }
 
   def authoredPublication = {
     val pub = publications.head
@@ -227,4 +229,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       )
   }
 
+  def translatedPub = {todo}
+
+  def translatedPubAttrs = {todo}
 }

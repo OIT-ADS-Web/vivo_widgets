@@ -10,7 +10,11 @@ SELECT ?authorship ?publication ?label ?type ?numPages ?edition ?volume ?issue
        ?icmjeCitation
 WHERE {
   <${uri}> core:relatedBy ?authorship .
-  ?authorship a core:Authorship.
+  {?authorship a core:Authorship.}
+  UNION
+  {?authorship a core:Translatorship.}
+  UNION
+  {?authorship a core:Editorship.}
   ?authorship core:relates ?publication .
   ?publication a obo:IAO_0000030 .
   ?publication rdfs:label ?label .

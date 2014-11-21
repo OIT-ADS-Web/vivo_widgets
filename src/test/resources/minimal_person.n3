@@ -479,3 +479,45 @@
                 "2013-05-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
         <http://vivoweb.org/ontology/core#dateTimePrecision>
                 <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+# Translatorship
+
+<http://localhost/individual/translator1029903-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Translatorship> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Balleisen, Edward J." ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Translatorship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
+                false ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/n503> , <http://localhost/individual/pub1029903> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/translator1029903-503> .
+
+<http://localhost/individual/pub1029903>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/translator1029903-503> .
+
+# Translated Pub
+
+<http://localhost/individual/pub1029903>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.org/ontology/bibo/Book> , <http://purl.obolibrary.org/obo/BFO_0000031> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/IAO_0000030> , <http://purl.org/ontology/bibo/Document> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Book 2" ;
+        vitro:mostSpecificType  <http://purl.org/ontology/bibo/Book> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation>
+                "Balleisen, EJ. (2014). <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a>" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#authorList>
+                "Balleisen, EJ" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation>
+                "Balleisen EJ. <a href=\"http://localhost:8080/individual/pub1029903\">Test Book 2.</a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#source>
+                "manual" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue2014> .
