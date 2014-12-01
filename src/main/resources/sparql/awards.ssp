@@ -18,7 +18,7 @@ WHERE {
   }
 
   ?awardReceipt core:dateTimeValue ?dateUri.
-  ?dateUri core:dateTime ?date.
+  {SELECT MIN(?date) WHERE {?dateUri core:dateTime ?date.} GROUP BY ?dateUri}
   ?dateUri core:dateTimePrecision ?datePrecision.
 }
 order by desc(?date)
