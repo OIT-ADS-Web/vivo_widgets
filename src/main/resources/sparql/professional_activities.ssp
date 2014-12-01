@@ -26,12 +26,12 @@ WHERE {
   ?activity core:dateTimeInterval ?dateUri.
   OPTIONAL {
     ?dateUri core:start ?startDateUri.
-    {SELECT MIN(?startDate) WHERE {?startDateUri core:dateTime ?startDate.} GROUP BY ?startDateUri}
+    ?startDateUri core:dateTime ?startDate.
     ?startDateUri core:dateTimePrecision ?startDatePrecision.
   }
   OPTIONAL {
     ?dateUri core:end ?endDateUri.
-    {SELECT MIN(?endDate) WHERE {?endDateUri core:dateTime ?endDate.} GROUP BY ?endDateUri}
+    ?endDateUri core:dateTime ?endDate.
     ?endDateUri core:dateTimePrecision ?endDatePrecision.
   }
 } GROUP BY ?activity order by desc(?startDate) desc(?endDate)
