@@ -46,9 +46,9 @@ object ProfessionalActivity extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
               templatePath: String="sparql/professional_activities.ssp") = {
-    val professionalActivityData = vivo.selectFromTemplate(templatePath, uriContext)
-    professionalActivityData.map(build(_)).asInstanceOf[List[ProfessionalActivity]]
-
+    val data = vivo.selectFromTemplate(templatePath, uriContext)
+    val existingData = data.filter(datum => !datum.isEmpty)
+    existingData.map(build(_)).asInstanceOf[List[ProfessionalActivity]]
   }
 
   def build(professionalActivity:Map[Symbol,String]) = {

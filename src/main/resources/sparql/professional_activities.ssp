@@ -1,7 +1,7 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT (MIN(?type) AS ?type) ?activity (MIN(?label) AS ?label) (MIN(?serviceType) AS ?serviceType) (MIN(?role) AS ?role)
+SELECT ?activity (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?serviceType) AS ?serviceType) (MIN(?role) AS ?role)
        (MIN(?serviceOrEventName) AS ?serviceOrEventName) (MIN(?hostOrganization) AS ?hostOrganization) (MIN(?locationOrVenue) AS ?locationOrVenue)
        (MIN(?description) AS ?description) (MIN(?committeeType) AS ?committeeType) (MIN(?committeeName) AS ?committeeName) (MIN(?nameOfTalk) AS ?nameOfTalk)
        (MIN(?startDate) AS ?startDate) (MIN(?startDatePrecision) AS ?startDatePrecision) (MIN(?endDate) AS ?endDate) (MIN(?endDatePrecision) AS ?endDatePrecision)
@@ -34,4 +34,5 @@ WHERE {
     ?endDateUri core:dateTime ?endDate.
     ?endDateUri core:dateTimePrecision ?endDatePrecision.
   }
-} GROUP BY ?activity order by desc(?startDate) desc(?endDate)
+} GROUP BY ?activity
+ORDER BY desc(?startDate) desc(?endDate)
