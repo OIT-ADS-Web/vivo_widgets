@@ -41,9 +41,11 @@ object Publication extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any]) = {
     val data  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext)
-    data.map(build(_))
-    println("data: " + data)
-    data.groupBy{_('publication)}.map{_._2.head}.asInstanceOf[List[Publication]]
+    val items = data.map(build(_)).asInstanceOf[List[Publication]]
+    println("items: " + items)
+    val result = items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Publication]]
+    println("result: " + result)
+    result
   }
 
   def build(pub:Map[Symbol,String]) = {
