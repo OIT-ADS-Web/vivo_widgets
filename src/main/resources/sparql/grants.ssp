@@ -1,12 +1,8 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?agreement (MIN(?type) as ?type) (MIN(?label) AS ?label)
-       (MIN(?roleName) AS ?roleName) (MIN(?startDate) AS ?startDate)
-       (MIN(?endDate) AS ?endDate)(MIN( ?awardedBy) AS ?awardedBy)
-       (MIN(?awardedByUri) AS ?awardedByUri)
-       (MIN(?administeredBy) AS ?administeredBy)
-       (MIN( ?administeredByUri) AS ?administeredByUri)
+SELECT ?agreement ?type ?label ?roleName ?startDate ?endDate ?awardedBy 
+       ?awardedByUri ?administeredBy ?administeredByUri 
 WHERE {
   <${uri}> core:hasInvestigatorRole ?role .
   ?role rdfs:label ?roleName .
@@ -30,5 +26,4 @@ WHERE {
     ?agreement core:administeredBy ?administeredByUri.
     ?administeredByUri rdfs:label ?administeredBy .
   }
-} GROUP BY ?agreement
-ORDER BY desc(?endDate) desc(?startDate)
+} ORDER BY desc(?endDate) desc(?startDate)

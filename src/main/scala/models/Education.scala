@@ -19,9 +19,11 @@ case class Education(uri:String,
 object Education extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/educations.ssp") = {
-    val educationData = vivo.selectFromTemplate(templatePath, uriContext)
-    educationData.map(build(_)).asInstanceOf[List[Education]]
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Education]]
   }
+
 
   def build(education:Map[Symbol,String]) = {
     new Education(uri         = education('uri).stripBrackets(),

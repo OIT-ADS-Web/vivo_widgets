@@ -44,11 +44,10 @@ case class ProfessionalActivity(uri:String,
 
 object ProfessionalActivity extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              templatePath: String="sparql/professional_activities.ssp") = {
-    val data = vivo.selectFromTemplate(templatePath, uriContext)
-    val existingData = data.filter(datum => !datum.isEmpty)
-    existingData.map(build(_)).asInstanceOf[List[ProfessionalActivity]]
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/professional_activities.ssp") = {
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[ProfessionalActivity]]
   }
 
   def build(professionalActivity:Map[Symbol,String]) = {

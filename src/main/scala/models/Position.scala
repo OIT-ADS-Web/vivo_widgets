@@ -18,11 +18,10 @@ case class Position(uri:String,
 
 object Position extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              templatePath: String="sparql/positions.ssp") = {
-    val positionData = vivo.selectFromTemplate(templatePath, uriContext)
-    positionData.map(build(_)).asInstanceOf[List[Position]]
-
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/positions.ssp") = {
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Position]]
   }
 
   def build(position:Map[Symbol,String]) = {

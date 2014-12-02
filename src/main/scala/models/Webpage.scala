@@ -19,9 +19,11 @@ case class Webpage(uri:String,
 object Webpage extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/webpages.ssp") = {
-    val webpageData = vivo.selectFromTemplate(templatePath, uriContext)
-    webpageData.map(build(_)).asInstanceOf[List[Webpage]]
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Webpage]]
   }
+
 
   def build(webpage:Map[Symbol,String]) = {
     new Webpage(uri         = webpage('uri).stripBrackets(),

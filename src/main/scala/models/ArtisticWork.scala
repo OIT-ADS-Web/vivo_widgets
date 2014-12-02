@@ -18,12 +18,12 @@ case class ArtisticWork(uri:String,
 
 object ArtisticWork extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              templatePath: String="sparql/artistic_works.ssp") = {
-    val artisticWorkData = vivo.selectFromTemplate(templatePath, uriContext)
-    artisticWorkData.map(build(_)).asInstanceOf[List[ArtisticWork]]
-
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/artistic_works.ssp") = {
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[ArtisticWork]]
   }
+
 
   def build(artisticWork:Map[Symbol,String]) = {
     new ArtisticWork(uri  = artisticWork('work).stripBrackets(),

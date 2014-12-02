@@ -44,13 +44,12 @@ case class Grant(uri:String,
 
 object Grant extends AttributeParams {
 
-  def fromUri(vivo: Vivo, uriContext:Map[String, Any], 
-              templatePath: String="sparql/grants.ssp") = {
-    val grantData = vivo.selectFromTemplate(templatePath, uriContext)
-    val existingGrantData = grantData.filter(grant => !grant.isEmpty)
-    existingGrantData.map(build(_)).asInstanceOf[List[Grant]]
-
+  def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/grants.ssp") = {
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val items = data.map(build(_))
+    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Grant]]
   }
+
 
   def build(grant:Map[Symbol,String]) = {
     new Grant(uri         = grant('agreement).stripBrackets(),
