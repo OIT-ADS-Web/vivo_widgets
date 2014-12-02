@@ -16,13 +16,13 @@ class PublicationSpec extends Specification with Tags with Mockito {
     val vivo = mock[Vivo]
 
     "contain the label in the publication" in {
-      val pub = Publication.build(vivo, publicationMap)
+      val pub = Publication.build(publicationMap)
       pub.label mustEqual "Study of Something"
     }
 
     "must have required types of publication, vivoType, label" >> {
       examplesBlock { List('publication, 'type, 'label).foreach { item =>
-        Publication.build(vivo, publicationMap - item) must throwA[NoSuchElementException] 
+        Publication.build(publicationMap - item) must throwA[NoSuchElementException] 
       }}
     }
 
