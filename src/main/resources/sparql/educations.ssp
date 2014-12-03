@@ -10,12 +10,14 @@ SELECT
   ("${uri}" AS ?personUri)
 WHERE
 {
-  <${uri}> core:educationalTraining ?uri .
-  ?uri vitro:mostSpecificType ?type ;
+  <${uri}> obo:RO_0000056 ?uri .
+  ?uri a core:EducationalProcess ;
+    vitro:mostSpecificType ?type ;
     rdfs:label ?label .
   OPTIONAL {
-    ?uri core:trainingAtOrganization ?organizationUri .
-    ?organizationUri rdfs:label ?institution . 
+    ?uri obo:RO_0000057 ?organizationUri .
+    ?organizationUri rdfs:label ?institution ; 
+      a foaf:Organization.
   }
   OPTIONAL {
     ?uri core:dateTimeInterval ?dateTimeUri .
@@ -27,8 +29,10 @@ WHERE
     ?startUri core:dateTime ?startDate . 
   }
   OPTIONAL {
-    ?uri core:degreeEarned ?degreeUri .
-    ?degreeUri core:abbreviation ?degree . 
+    ?uri obo:RO_0002234 ?awardedDegree .
+    ?awardedDegree core:relates ?degreeUri .
+    ?degreeUri a core:AcademicDegree ;
+      core:abbreviation ?degree . 
   }
 }
 order by ?startDate ?endDate

@@ -32,6 +32,11 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     correct authored pub attrs        $authoredPubAttrs
     correct number courses            $courseSize
     correct course fields             $courseFields
+    an education and prof experience  $educationsSize
+    correct education                 $education
+    correct education attrs           $educationAttrs
+    correct prof experience           $profExperience
+    correct prof experience attrs     $profExperienceAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -42,6 +47,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var artisticWorks:List[Map[String, Any]] = _
   var publications:List[Map[String, Any]] = _
   var courses:List[Map[String, Any]] = _
+  var educations:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -62,6 +68,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       artisticWorks = json("artisticWorks").asInstanceOf[List[Map[String, Any]]]
       publications = json("publications").asInstanceOf[List[Map[String, Any]]]
       courses = json("courses").asInstanceOf[List[Map[String, Any]]]
+      educations = json("educations").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -248,5 +255,59 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   def courseAttrFields = {
     val courseAttrs = courses.head("attributes").asInstanceOf[Map[String, Any]]
     courseAttrs must haveKeys("roleName", "role")
+  }
+
+  def educationsSize = {educations must have size(2)}
+
+  def education = {
+    val education = educations.find(
+      {education => education("label") == "M.D. 1990"}).
+      getOrElse(throw new RuntimeException("Education not found."))
+    education must havePairs(
+      "uri" -> "http://localhost/individual/edu5031990academicDegree77",
+      "vivoType" -> "http://vivoweb.org/ontology/core#EducationalProcess")
+  }
+
+  def educationAttrs = {
+    val education = educations.find(
+      {education => education("label") == "M.D. 1990"}).
+      getOrElse(throw new RuntimeException("Education not found."))
+    val educationAttrs = education("attributes").asInstanceOf[Map[String, Any]]
+    educationAttrs must havePairs(
+      "degreeUri" -> "http://vivoweb.org/ontology/degree/academicDegree77",
+      "endDate" -> "1990-01-01T00:00:00",
+      "degree" -> "M.D.",
+      "organizationUri" -> "http://localhost/individual/insbrownuniversity",
+      "institution" -> "Brown University",
+      "dateTimeUri" -> "http://localhost/individual/dateInterval-e19900101",
+      "personUri" -> "http://localhost/individual/n503",
+      "endUri" -> "http://localhost/individual/dateValue1990"
+      )
+  }
+
+  def profExperience = {
+    val experience = educations.find(
+      {experience => experience("label") == "Fellowship In Cornea And External Disease, Refractive Surgery, Ophthalmology"}).
+      getOrElse(throw new RuntimeException("Prof experience not found."))
+    experience must havePairs(
+      "uri" -> "http://localhost/individual/exp200749",
+      "vivoType" -> "http://vivoweb.org/ontology/core#EducationalProcess")
+  }
+
+  def profExperienceAttrs = {
+    val experience = educations.find(
+      {experience => experience("label") == "Fellowship In Cornea And External Disease, Refractive Surgery, Ophthalmology"}).
+      getOrElse(throw new RuntimeException("Prof experience not found."))
+    val experienceAttrs = experience("attributes").asInstanceOf[Map[String, Any]]
+    experienceAttrs must havePairs(
+      "endDate" -> "1995-07-01T00:00:00",
+      "organizationUri" -> "http://localhost/individual/insdukeuniversity",
+      "institution" -> "Duke University",
+      "dateTimeUri" -> "http://localhost/individual/dateInterval-s19940701-e19950701",
+      "personUri" -> "http://localhost/individual/n503",
+      "endUri" -> "http://localhost/individual/dateValue19950701",
+      "startUri" -> "http://localhost/individual/dateValue19940701",
+      "startDate" -> "1994-07-01T00:00:00"
+      )
   }
 }
