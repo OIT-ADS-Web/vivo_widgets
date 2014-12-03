@@ -942,3 +942,99 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "M.D. Doctor of Medicine"@en-US ;
         vivo:abbreviation  "M.D." .
+
+# Grant
+
+<http://localhost/individual/gra199341>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#Grant> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Development of a Neuroblastoma Clinical Research Program" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101-e20141231> ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> , <http://localhost/individual/org50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/investigatorRole199341-503> , <http://localhost/individual/insstbaldricksfoundation> .
+
+<http://localhost/individual/investigatorRole199341-503>
+        a                       <http://vivoweb.org/ontology/core#InvestigatorRole> , owl:Thing , <http://vivoweb.org/ontology/core#ResearcherRole> , <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Principal Investigator" ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101-e20141231> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/org50000886>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/administratorRole202391-50000886> , <http://localhost/individual/administratorRole204058-50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/administratorRole204463-50000886> , <http://localhost/individual/administratorRole200020-50000886> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra202391> , <http://localhost/individual/gra204463> , <http://localhost/individual/gra199341> , <http://localhost/individual/gra200020> , <http://localhost/individual/gra204058> .
+
+<http://localhost/individual/n503>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/investigatorRole199341-503> .
+
+<http://localhost/individual/fundingRole199341-stbaldricksfoundation>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> , <http://purl.obolibrary.org/obo/ERO_0000224> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/insstbaldricksfoundation> ;
+        vitro:mostSpecificType  <http://purl.obolibrary.org/obo/ERO_0000224> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/administratorRole199341-50000886>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#AdministratorRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/org50000886> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AdministratorRole> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/insstbaldricksfoundation>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000004> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#FundingOrganization> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "St. Baldrick's Foundation" ;
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#FundingOrganization> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/dateInterval-s20140101-e20141231>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20141231> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20140101> .
+
+<http://localhost/individual/dateValue20141231>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-12-31T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue20140101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+# Administering Organization for Grant
+
+<http://localhost/individual/org50000886>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://vivoweb.org/ontology/core#AcademicDepartment> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#Department> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Pediatrics, Hematology-Oncology" ;
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+                <http://localhost/individual/org50000870> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
+                "50000886"^^<http://www.w3.org/2001/XMLSchema#decimal> .

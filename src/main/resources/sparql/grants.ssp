@@ -8,12 +8,13 @@ SELECT ?agreement (MIN(?type) as ?type) (MIN(?label) AS ?label)
        (MIN(?administeredBy) AS ?administeredBy)
        (MIN( ?administeredByUri) AS ?administeredByUri)
 WHERE {
-  <${uri}> core:hasInvestigatorRole ?role .
-  ?role rdfs:label ?roleName .
-  ?role core:roleContributesTo ?agreement .
-  ?agreement vitro:mostSpecificType ?type .
-  ?agreement rdfs:label ?label .
-  ?agreement core:dateTimeInterval ?dateUri.
+  <${uri}> obo:RO_0000053 ?role .
+  ?role a core:InvestigatorRole ;
+    rdfs:label ?roleName ;
+    core:relatedBy ?agreement .
+  ?agreement vitro:mostSpecificType ?type ;
+    rdfs:label ?label ;
+    core:dateTimeInterval ?dateUri.
   OPTIONAL {
     ?dateUri core:start ?startDateUri.
     ?startDateUri core:dateTime ?startDate.
@@ -23,11 +24,15 @@ WHERE {
     ?endDateUri core:dateTime ?endDate.
   }
   OPTIONAL {
-    ?agreement core:grantAwardedBy ?awardedByUri.
+    ?agreement core:relates ?fundingRole .
+    ?fundingRole a obo:ERO_0000224 ;
+      obo:RO_0000052 ?awardedByUri.
     ?awardedByUri rdfs:label ?awardedBy .
   }
   OPTIONAL {
-    ?agreement core:administeredBy ?administeredByUri.
+    ?agreement core:relates ?administratorRole .
+    ?administratorRole a core:AdministratorRole;
+      obo:RO_0000052 ?administeredByUri.
     ?administeredByUri rdfs:label ?administeredBy .
   }
 } GROUP BY ?agreement

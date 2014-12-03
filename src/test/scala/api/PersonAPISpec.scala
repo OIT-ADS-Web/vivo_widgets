@@ -17,26 +17,35 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   The Person API should return        ${ Step(getJson)}
     top-level person data             $topPersonData
     attributes data                   $attributesData
+
     two addresses                     $addressesSize
     correct first address             $firstAddress
     correct first address attributes  $firstAddressAttributes
     correct second address            $secondAddress
     correct second address attributes $secondAddressAttributes
+
     two art works                     $artWorksSize
     correct first art work            $firstArtWork
     correct first art work attrs      $firstArtWorkAttributes
     correct second art work           $secondArtWork
     correct second art work attrs     $secondArtWorkAttributes
+
     two publications                  $publicationsSize
     correct authored publication      $authoredPublication
     correct authored pub attrs        $authoredPubAttrs
+
     correct number courses            $courseSize
     correct course fields             $courseFields
+
     an education and prof experience  $educationsSize
     correct education                 $education
     correct education attrs           $educationAttrs
     correct prof experience           $profExperience
     correct prof experience attrs     $profExperienceAttrs
+
+    a grant                           $grantSize
+    correct grant                     $grant
+    correct grant attrs               $grantAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -48,6 +57,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var publications:List[Map[String, Any]] = _
   var courses:List[Map[String, Any]] = _
   var educations:List[Map[String, Any]] = _
+  var grants:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -69,6 +79,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       publications = json("publications").asInstanceOf[List[Map[String, Any]]]
       courses = json("courses").asInstanceOf[List[Map[String, Any]]]
       educations = json("educations").asInstanceOf[List[Map[String, Any]]]
+      grants = json("grants").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -308,6 +319,30 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "endUri" -> "http://localhost/individual/dateValue19950701",
       "startUri" -> "http://localhost/individual/dateValue19940701",
       "startDate" -> "1994-07-01T00:00:00"
+      )
+  }
+
+  def grantSize = {grants must haveSize(1)}
+
+  def grant = {
+    val grant = grants.head
+    grant must havePairs(
+      "uri" -> "http://localhost/individual/gra199341",
+      "vivoType" -> "http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant",
+      "label" -> "Development of a Neuroblastoma Clinical Research Program"
+      )
+  }
+
+  def grantAttrs = {
+    val grantAttrs = grants.head("attributes").asInstanceOf[Map[String, Any]]
+    grantAttrs must havePairs(
+      "endDate" -> "2014-12-31T00:00:00",
+      "roleName" -> "Principal Investigator",
+      "awardedBy" -> "St. Baldrick's Foundation",
+      "awardedByUri" -> "http://localhost/individual/insstbaldricksfoundation",
+      "administeredBy" -> "Pediatrics, Hematology-Oncology",
+      "administeredByUri" -> "http://localhost/individual/org50000886",
+      "startDate" -> "2014-01-01T00:00:00"
       )
   }
 }
