@@ -46,6 +46,10 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     a grant                           $grantSize
     correct grant                     $grant
     correct grant attrs               $grantAttrs
+
+    a position                        $positionSize
+    correct position                  $position
+    correct position attrs            $positionAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -58,6 +62,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var courses:List[Map[String, Any]] = _
   var educations:List[Map[String, Any]] = _
   var grants:List[Map[String, Any]] = _
+  var positions:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -80,6 +85,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       courses = json("courses").asInstanceOf[List[Map[String, Any]]]
       educations = json("educations").asInstanceOf[List[Map[String, Any]]]
       grants = json("grants").asInstanceOf[List[Map[String, Any]]]
+      positions = json("positions").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -343,6 +349,30 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "administeredBy" -> "Pediatrics, Hematology-Oncology",
       "administeredByUri" -> "http://localhost/individual/org50000886",
       "startDate" -> "2014-01-01T00:00:00"
+      )
+  }
+
+  def positionSize = {positions must haveSize(1)}
+
+  def position = {
+    val position = positions.head
+    position must havePairs(
+      "uri" -> "http://localhost/individual/apt3786572",
+      "vivoType" -> "http://vivoweb.org/ontology/core#PrimaryPosition",
+      "label" -> "Professor of Earth and Ocean Sciences"
+      )
+  }
+
+  def positionAttrs = {
+    val positionAttrs = positions.head("attributes").asInstanceOf[Map[String, Any]]
+    positionAttrs must havePairs(
+      "startDatetimeUri" -> "http://localhost/individual/dateValue20090101",
+      "organizationLabel" -> "Nicholas School of the Environment",
+      "organizationUri" -> "http://localhost/individual/org50000478",
+      "rank" -> "1",
+      "startYear" -> "2009-01-01T00:00:00",
+      "dateUri" -> "http://localhost/individual/dateInterval-s20090101",
+      "personUri" -> "http://localhost/individual/n503"
       )
   }
 }

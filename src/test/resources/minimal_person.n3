@@ -1038,3 +1038,53 @@
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
         <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
                 "50000886"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+
+# Position
+
+<http://localhost/individual/apt3786572>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivoweb.org/ontology/core#Position> , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#PrimaryPosition> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Professor of Earth and Ocean Sciences" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#PrimaryPosition> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20090101> ;
+        <http://vivoweb.org/ontology/core#hrJobTitle>
+                "Professor of Earth and Ocean Sciences" ;
+        <http://vivoweb.org/ontology/core#rank>
+                "1" ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/org50000478> , <http://localhost/individual/n503> .
+
+<http://localhost/individual/dateInterval-s20090101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20090101> .
+
+<http://localhost/individual/dateValue20090101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2009-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/org50000478>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/apt3786572> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/apt3786572> .
+
+# Org for position
+
+<http://localhost/individual/org50000478>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://vivoweb.org/ontology/core#AcademicDepartment> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#Department> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Nicholas School of the Environment" ;
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+                <http://localhost/individual/org50000021> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
+                "50000478"^^<http://www.w3.org/2001/XMLSchema#decimal> .
