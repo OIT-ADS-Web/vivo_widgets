@@ -6,7 +6,7 @@ SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?rank) AS ?rank) 
   (MIN(?startDatetimeUri) AS ?startDatetimeUri) (MIN(?startYear) AS ?startYear) 
   (MIN(?organizationUri) AS ?organizationUri) (MIN(?organizationLabel) AS ?organizationLabel)
   (MIN(?endDatetimeUri) AS ?endDatetimeUri) (MIN(?endYear) AS ?endYear)
-  ("${uri}" AS ?personUri)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${uri}> core:personInPosition ?uri .
@@ -25,5 +25,6 @@ WHERE
     ?e core:dateTime ?endYear .
   }
   ?uri core:rank ?rank .
+  BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?rank

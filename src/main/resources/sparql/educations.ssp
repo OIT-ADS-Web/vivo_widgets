@@ -7,7 +7,7 @@ SELECT
   (MIN(?dateTimeUri) AS ?dateTimeUri) (MIN(?endUri) AS ?endUri) (MIN(?endDate) AS ?endDate)
   (MIN(?startUri) AS ?startUri) (MIN(?startDate) AS ?startDate)
   (MIN(?degreeUri) AS ?degreeUri) (MIN(?degree) AS ?degree)
-  ("${uri}" AS ?personUri)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${uri}> core:educationalTraining ?uri .
@@ -30,5 +30,6 @@ WHERE
     ?uri core:degreeEarned ?degreeUri .
     ?degreeUri core:abbreviation ?degree . 
   }
+  BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?startDate ?endDate

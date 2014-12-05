@@ -3,7 +3,7 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?address1) AS ?address1) (MIN(?city) AS ?city) (MIN(?state) AS ?state) (MIN(?postalCode) AS ?postalCode) (MIN(?country) AS ?country)
-  ("${uri}" AS ?personUri)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${uri}> core:mailingAddress ?uri .
@@ -13,6 +13,7 @@ WHERE
     core:addressCity ?city ;
     core:addressState  ?state ;
     core:addressPostalCode ?postalCode ;
-  OPTIONAL { ?uri core:addressCountry ?country ; }
+  OPTIONAL { ?uri core:addressCountry ?country . }
+  BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?label
