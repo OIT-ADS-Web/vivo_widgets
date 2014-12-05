@@ -3,7 +3,7 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT 
-  ?uri(MIN())) AS ?) ?) type (MIN(?label) AS ?label) (MIN(?organizationUri) AS ?organizationUri) (MIN(?institution) AS ?institution) 
+  ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?organizationUri) AS ?organizationUri) (MIN(?institution) AS ?institution) 
   (MIN(?dateTimeUri) AS ?dateTimeUri) (MIN(?endUri) AS ?endUri) (MIN(?endDate) AS ?endDate)
   (MIN(?startUri) AS ?startUri) (MIN(?startDate) AS ?startDate)
   (MIN(?degreeUri) AS ?degreeUri) (MIN(?degree) AS ?degree)
