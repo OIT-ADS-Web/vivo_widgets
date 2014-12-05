@@ -20,8 +20,8 @@ object Address extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/addresses.ssp") = {
     val data  = vivo.selectFromTemplate(templatePath, uriContext)
-    val items = data.map(build(_))
-    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Address]]
+    val existingData = data.filter(datum => !datum.isEmpty)
+    existingData.map(build(_)).asInstanceOf[List[Address]]
   }
 
 

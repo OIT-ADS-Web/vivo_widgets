@@ -2,7 +2,7 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri ?type ?label ?linkText ?linkURI
+SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?linkText) AS ?linkText) (MIN(?linkURI) AS ?linkURI)
   ("${uri}" AS ?personUri)
 WHERE {
   <${uri}> core:webpage ?uri .
@@ -11,5 +11,5 @@ WHERE {
     core:linkAnchorText ?linkAnchorText ;
     core:linkURI ?linkURI ;
     core:linkAnchorText ?label
-}
+} GROUP BY ?uri
 order by ?label

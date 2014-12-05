@@ -1,12 +1,12 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-select  *
+select ?course (MIN(?role) AS ?role) (MIN(?roleName) AS ?roleName) (MIN(?type) AS ?type) (MIN(?label) AS ?label)
 where {
   <${uri}> core:hasTeacherRole ?role .
   ?role rdfs:label ?roleName .
   ?role core:roleRealizedIn ?course .
   ?course vitro:mostSpecificType ?type .
   ?course rdfs:label ?label .
-}
+} GROUP BY ?course
 order by ?label

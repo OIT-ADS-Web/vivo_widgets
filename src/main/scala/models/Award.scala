@@ -20,8 +20,8 @@ object Award extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/awards.ssp") = {
     val data  = vivo.selectFromTemplate(templatePath, uriContext)
-    val items = data.map(build(_))
-    items.groupBy{_.uri}.map{_._2.head}.asInstanceOf[List[Award]]
+    val existingData = data.filter(datum => !datum.isEmpty)
+    existingData.map(build(_)).asInstanceOf[List[Award]]
   }
 
 
