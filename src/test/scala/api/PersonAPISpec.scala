@@ -50,6 +50,10 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     a position                        $positionSize
     correct position                  $position
     correct position attrs            $positionAttrs
+
+    a webpage                         $webpageSize
+    correct webpage                   $webpage
+    correct webpage attrs             $webpageAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -63,6 +67,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var educations:List[Map[String, Any]] = _
   var grants:List[Map[String, Any]] = _
   var positions:List[Map[String, Any]] = _
+  var webpages:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -86,6 +91,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       educations = json("educations").asInstanceOf[List[Map[String, Any]]]
       grants = json("grants").asInstanceOf[List[Map[String, Any]]]
       positions = json("positions").asInstanceOf[List[Map[String, Any]]]
+      webpages = json("webpages").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -373,6 +379,25 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "startYear" -> "2009-01-01T00:00:00",
       "dateUri" -> "http://localhost/individual/dateInterval-s20090101",
       "personUri" -> "http://localhost/individual/n503"
+      )
+  }
+
+  def webpageSize = {webpages must haveSize(1)}
+
+  def webpage = {
+    val webpage = webpages.head
+    webpage must havePairs(
+      "uri" -> "http://localhost/individual/urllink503http://example.com",
+      "vivoType" -> "http://www.w3.org/2006/vcard/ns#URL",
+      "label" -> "An Example URL"
+      )
+  }
+
+  def webpageAttrs = {
+    val webpageAttrs = webpages.head("attributes").asInstanceOf[Map[String, Any]]
+    webpageAttrs must havePairs(
+      "personUri" -> "http://localhost/individual/n503",
+      "linkURI" -> "http://example.com"
       )
   }
 }

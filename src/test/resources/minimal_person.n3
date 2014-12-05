@@ -1088,3 +1088,19 @@
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
         <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
                 "50000478"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+
+# Weblink
+
+<http://localhost/individual/urllink503http://example.com>
+        a                       vcard:Explanatory , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:URL ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "An Example URL" ;
+        vitro:mostSpecificType  vcard:URL ;
+        vcard:url               "http://example.com" .
+
+<http://localhost/individual/per_vcard503>
+        obo:ARG_2000029  <http://localhost/individual/n503> ;
+        vcard:hasURL     <http://localhost/individual/urllink503http://example.com> .
+
+<http://localhost/individual/n503>
+        obo:ARG_2000028  <http://localhost/individual/per_vcard503> .

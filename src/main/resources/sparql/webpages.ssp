@@ -5,11 +5,10 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?uri ?type ?label ?linkText ?linkURI
   ("${uri}" AS ?personUri)
 WHERE {
-  <${uri}> core:webpage ?uri .
+  <${uri}> obo:ARG_2000028 ?individualVcard.
+  ?individualVcard vcard:hasURL ?uri .
   ?uri vitro:mostSpecificType ?type ;
-    rdf:type core:URLLink ;
-    core:linkAnchorText ?linkAnchorText ;
-    core:linkURI ?linkURI ;
-    core:linkAnchorText ?label
+    rdfs:label ?label ;
+    vcard:url ?linkURI .
 }
 order by ?label
