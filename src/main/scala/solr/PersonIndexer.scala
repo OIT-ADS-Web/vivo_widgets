@@ -67,12 +67,10 @@ object PersonIndexer extends SimpleConversion
       
     } catch {
       case e:NoSuchElementException => {
-        log.error("PersonIndexer error: " + e.toString)
-        e.printStackTrace()
+        log.error("PersonIndexer error: ", e)
       }
       case e:Throwable => {
-        log.error("PersonIndexer error: " + e.toString)
-        e.printStackTrace()
+        log.error("PersonIndexer error: ", e)
       }
     }
     log.debug("done with uri: " + uri)
