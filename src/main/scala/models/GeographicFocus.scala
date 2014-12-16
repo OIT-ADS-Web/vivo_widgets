@@ -19,9 +19,10 @@ case class GeographicFocus(uri:String,
 object GeographicFocus extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/geographicFoci.ssp") = {
-    val geographicFocusData = vivo.selectFromTemplate(templatePath, uriContext)
-    geographicFocusData.map(build(_)).asInstanceOf[List[GeographicFocus]]
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    data.map(build(_)).asInstanceOf[List[GeographicFocus]]
   }
+
 
   def build(geographicFocus:Map[Symbol,String]) = {
     new GeographicFocus(uri         = geographicFocus('uri).stripBrackets(),

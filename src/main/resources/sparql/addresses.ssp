@@ -2,8 +2,8 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri ?type ?label ?address1 ?city ?state ?postalCode ?country
-  ("${uri}" AS ?personUri)
+SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?address1) AS ?address1) (MIN(?city) AS ?city) (MIN(?state) AS ?state) (MIN(?postalCode) AS ?postalCode) (MIN(?country) AS ?country)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${ uri }> obo:ARG_2000028 ?individualVcard .
@@ -19,5 +19,6 @@ WHERE
     ?uri rdf:type ?type .
     FILTER(?type = vcard:Location)
   }
-}
+  BIND(<${uri}> AS ?personUri)
+} GROUP BY ?uri
 order by ?label

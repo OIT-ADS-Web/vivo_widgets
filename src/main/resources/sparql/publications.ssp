@@ -2,12 +2,20 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?authorship ?publication ?label ?type ?numPages ?edition ?volume ?issue
-       ?isbn10 ?isbn13 ?publicationVenue ?publishedIn ?authorList ?editorList
-       ?translatorList ?publishedBy ?startPage ?endPage ?datetime ?year
-       ?isFavorite ?parentBookTitle ?doi ?abstract ?pmid ?pmcid
-       ?publicationSource ?subtypes ?chicagoCitation ?mlaCitation ?apaCitation
-       ?icmjeCitation ?authorshipType
+SELECT (MIN(?authorship) AS ?authorship) ?publication (MIN(?label) AS ?label)
+ (MIN(?type) AS ?type) (MIN(?numPages) AS ?numPages) (MIN(?edition) AS ?edition)
+ (MIN(?volume) AS ?volume) (MIN(?issue) AS ?issue) (MIN(?isbn10) AS ?isbn10)
+ (MIN(?isbn13) AS ?isbn13) (MIN(?publicationVenue) AS ?publicationVenue)
+ (MIN(?publishedIn) AS ?publishedIn) (MIN(?authorList) AS ?authorList)
+ (MIN(?editorList) AS ?editorList) (MIN(?translatorList) AS ?translatorList)
+ (MIN(?publishedBy) AS ?publishedBy) (MIN(?startPage) AS ?startPage)
+ (MIN(?endPage) AS ?endPage) (MIN(?datetime) AS ?datetime) (MIN(?year) AS ?year)
+ (MIN(?isFavorite) AS ?isFavorite) (MIN(?parentBookTitle) AS ?parentBookTitle)
+ (MIN(?doi) AS ?doi) (MIN(?abstract) AS ?abstract) (MIN(?pmid) AS ?pmid)
+ (MIN(?pmcid) AS ?pmcid) (MIN(?publicationSource) AS ?publicationSource)
+ (MIN(?subtypes) AS ?subtypes) (MIN(?chicagoCitation) AS ?chicagoCitation)
+ (MIN(?mlaCitation) AS ?mlaCitation) (MIN(?apaCitation) AS ?apaCitation)
+ (MIN(?icmjeCitation) AS ?icmjeCitation) (MIN(?authorshipType) AS ?authorshipType)
 WHERE {
   <${uri}> core:relatedBy ?authorship .
   {?authorship a core:Authorship.}
@@ -54,5 +62,5 @@ WHERE {
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
-} 
+} GROUP BY ?publication
 ORDER BY desc(?datetime)

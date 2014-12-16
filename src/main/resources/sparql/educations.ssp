@@ -3,11 +3,11 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT 
-  ?uri ?type ?label ?organizationUri ?institution 
-  ?dateTimeUri ?endUri ?endDate
-  ?startUri ?startDate
-  ?degreeUri ?degree
-  ("${uri}" AS ?personUri)
+  ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?organizationUri) AS ?organizationUri) (MIN(?institution) AS ?institution) 
+  (MIN(?dateTimeUri) AS ?dateTimeUri) (MIN(?endUri) AS ?endUri) (MIN(?endDate) AS ?endDate)
+  (MIN(?startUri) AS ?startUri) (MIN(?startDate) AS ?startDate)
+  (MIN(?degreeUri) AS ?degreeUri) (MIN(?degree) AS ?degree)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${uri}> obo:RO_0000056 ?uri .
@@ -34,5 +34,6 @@ WHERE
     ?degreeUri a core:AcademicDegree ;
       core:abbreviation ?degree . 
   }
-}
+  BIND(<${uri}> AS ?personUri)
+} GROUP BY ?uri
 order by ?startDate ?endDate

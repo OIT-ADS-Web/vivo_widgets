@@ -40,11 +40,12 @@ case class Publication(uri:String,
 object Publication extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any]) = {
-    val publicationData  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext)
-    publicationData.map(build(vivo, _)).asInstanceOf[List[Publication]]
+    val data  = vivo.selectFromTemplate("sparql/publications.ssp", uriContext)
+    val existingData = data.filter(datum => !datum.isEmpty)
+    existingData.map(build(_)).asInstanceOf[List[Publication]]
   }
 
-  def build(vivo: Vivo, pub:Map[Symbol,String]) = {
+  def build(pub:Map[Symbol,String]) = {
     new Publication(uri        = pub('publication).stripBrackets(),
                     vivoType   = pub('type).stripBrackets(),
                     label      = pub('label),

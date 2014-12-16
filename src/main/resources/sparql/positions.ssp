@@ -2,11 +2,11 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri ?type ?label ?rank ?dateUri 
-  ?startDatetimeUri ?startYear 
-  ?organizationUri ?organizationLabel
-  ?endDatetimeUri ?endYear
-  ("${uri}" AS ?personUri)
+SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?rank) AS ?rank) (MIN(?dateUri) AS ?dateUri) 
+  (MIN(?startDatetimeUri) AS ?startDatetimeUri) (MIN(?startYear) AS ?startYear) 
+  (MIN(?organizationUri) AS ?organizationUri) (MIN(?organizationLabel) AS ?organizationLabel)
+  (MIN(?endDatetimeUri) AS ?endDatetimeUri) (MIN(?endYear) AS ?endYear)
+  (MIN(?personUri) AS ?personUri)
 WHERE
 {
   <${uri}> core:relatedBy ?uri .
@@ -25,5 +25,6 @@ WHERE
     ?endDatetimeUri core:dateTime ?endYear .
   }
   ?uri core:rank ?rank .
-}
+  BIND(<${uri}> AS ?personUri)
+} GROUP BY ?uri
 order by ?rank

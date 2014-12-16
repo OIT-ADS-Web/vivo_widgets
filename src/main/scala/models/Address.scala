@@ -19,9 +19,11 @@ case class Address(uri:String,
 object Address extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/addresses.ssp") = {
-    val addressData = vivo.selectFromTemplate(templatePath, uriContext)
-    addressData.map(build(_)).asInstanceOf[List[Address]]
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    val existingData = data.filter(datum => !datum.isEmpty)
+    existingData.map(build(_)).asInstanceOf[List[Address]]
   }
+
 
   def build(address:Map[Symbol,String]) = {
     new Address(uri         = address('uri).stripBrackets(),

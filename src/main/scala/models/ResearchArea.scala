@@ -19,9 +19,10 @@ case class ResearchArea(uri:String,
 object ResearchArea extends AttributeParams {
 
   def fromUri(vivo: Vivo, uriContext:Map[String, Any], templatePath: String="sparql/researchAreas.ssp") = {
-    val researchAreaData = vivo.selectFromTemplate(templatePath, uriContext)
-    researchAreaData.map(build(_)).asInstanceOf[List[ResearchArea]]
+    val data  = vivo.selectFromTemplate(templatePath, uriContext)
+    data.map(build(_)).asInstanceOf[List[ResearchArea]]
   }
+
 
   def build(researchArea:Map[Symbol,String]) = {
     new ResearchArea(uri         = researchArea('uri).stripBrackets(),

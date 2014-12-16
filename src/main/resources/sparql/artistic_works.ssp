@@ -1,9 +1,9 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?work ?label ?type ?type_description ?role ?role_description
-       ?date ?date_precision ?collaborators
-       ?abstract ?commissioning_body ?link_url ?link_label
+SELECT ?work (MIN(?label) AS ?label) (MIN(?type) AS ?type) (MIN(?type_description) AS ?type_description) (MIN(?role) AS ?role) (MIN(?role_description) AS ?role_description)
+       (MIN(?date) AS ?date) (MIN(?date_precision) AS ?date_precision) (MIN(?collaborators) AS ?collaborators)
+       (MIN(?abstract) AS ?abstract) (MIN(?commissioning_body) AS ?commissioning_body) (MIN(?link_url) AS ?link_url) (MIN(?link_label) AS ?link_label)
 WHERE {
   <${uri}> dukeart:relatedBy ?relationship. 
   ?relationship rdf:type dukeart:ArtisticRelationship.
@@ -25,5 +25,5 @@ WHERE {
     ?link vcard:url ?link_url.
     ?link rdfs:label ?link_label.
   }
-}
+} GROUP BY ?work
 order by desc(?date)
