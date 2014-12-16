@@ -4,16 +4,18 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?award (MIN(?label) AS ?label) (MIN(?name) AS ?name) (MIN(?serviceType) AS ?serviceType) (MIN(?awardedBy) AS ?awardedBy) (MIN(?awardedByUri) AS ?awardedByUri) 
        (MIN(?date) AS ?date) (MIN(?datePrecision) AS ?datePrecision) (MIN(?type) AS ?type) (MIN(?description) AS ?description) 
 WHERE {
-  <${uri}> core:awardOrHonor ?awardReceipt.
+  <${uri}> core:relatedBy ?awardReceipt.
+  ?awardReceipt a core:AwardReceipt.
   ?awardReceipt rdfs:label ?label.
-  ?awardReceipt core:receiptOf ?award.
+  ?awardReceipt core:relates ?award.
+  ?award a core:Award.
   ?award dukeact:awardName ?name.
   ?award vitro:mostSpecificType ?type.
   OPTIONAL {?award dukeact:serviceType ?serviceType.}
   OPTIONAL {?awardReceipt core:description ?description.}
 
   OPTIONAL {
-    ?award core:awardConferredBy ?awardedByUri.
+    ?award_receipt core:assignedBy ?awardedByUri.
     ?awardedByUri rdfs:label ?awardedBy.
   }
 

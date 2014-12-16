@@ -54,6 +54,10 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     a webpage                         $webpageSize
     correct webpage                   $webpage
     correct webpage attrs             $webpageAttrs
+
+    an award                          $awardSize
+    correct award                     $award
+    correct award attrs               $awardAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -68,6 +72,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var grants:List[Map[String, Any]] = _
   var positions:List[Map[String, Any]] = _
   var webpages:List[Map[String, Any]] = _
+  var awards:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -92,6 +97,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       grants = json("grants").asInstanceOf[List[Map[String, Any]]]
       positions = json("positions").asInstanceOf[List[Map[String, Any]]]
       webpages = json("webpages").asInstanceOf[List[Map[String, Any]]]
+      awards = json("awards").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -398,6 +404,28 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     webpageAttrs must havePairs(
       "personUri" -> "http://localhost/individual/n503",
       "linkURI" -> "http://example.com"
+      )
+  }
+
+  def awardSize = {awards must haveSize(1)}
+
+  def award = {
+    val award = awards.head
+    award must havePairs(
+      "uri" -> "http://localhost/individual/awd41181",
+      "vivoType" -> "http://vivoweb.org/ontology/core#Award",
+      "label" -> "Test Date Precision. Association of Public Policy and Management.")
+  }
+
+  def awardAttrs = {
+    val awardAttrs = awards.head("attributes").asInstanceOf[Map[String, Any]]
+    awardAttrs must havePairs(
+      "name" -> "Test Date Precision",
+      "serviceType" -> "School",
+      "date" -> "2018-10-30T00:00:00",
+      "datePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+      "awardedBy" -> "Association of Public Policy and Management",
+      "awardedByUri" -> "http://localhost/individual/insassociationofpublicpolicyandmanagement"
       )
   }
 }

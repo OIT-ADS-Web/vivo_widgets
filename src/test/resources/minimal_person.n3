@@ -1104,3 +1104,42 @@
 
 <http://localhost/individual/n503>
         obo:ARG_2000028  <http://localhost/individual/per_vcard503> .
+
+# Award
+
+<http://localhost/individual/awd41181>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vivo:Award ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Date Precision. Association of Public Policy and Management." ;
+        vitro:mostSpecificType  vivo:Award ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#awardName>
+                "Test Date Precision" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "School" ;
+        vivo:description        "An award description." ;
+        vivo:relatedBy          <http://localhost/individual/awdrec41181> .
+
+<http://localhost/individual/insassociationofpublicpolicyandmanagement>
+        a                       obo:BFO_0000002 , obo:BFO_0000004 , foaf:Organization , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , foaf:Agent ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Association of Public Policy and Management" ;
+        vitro:mostSpecificType  foaf:Organization ;
+        vivo:assigns            <http://localhost/individual/awdrec41181> .
+
+<http://localhost/individual/awdrec41181>
+        a                       obo:BFO_0000002 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000020 , vivo:AwardReceipt , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> , vivo:Relationship ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Date Precision. Association of Public Policy and Management." ;
+        vitro:mostSpecificType  vivo:AwardReceipt ;
+        vivo:assignedBy         <http://localhost/individual/insassociationofpublicpolicyandmanagement> ;
+        vivo:dateTimeValue      <http://localhost/individual/dateValue20181030> ;
+        vivo:relates            <http://localhost/individual/n503> , <http://localhost/individual/awd41181> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       obo:BFO_0000008 , vivo:DateTimeValue , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000148 , obo:BFO_0000003 ;
+        vitro:mostSpecificType  vivo:DateTimeValue ;
+        vivo:dateTime           "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vivo:dateTimePrecision  vivo:yearMonthDayPrecision .
+
+<http://localhost/individual/n503>
+        vivo:relatedBy  <http://localhost/individual/awdrec41181> .
