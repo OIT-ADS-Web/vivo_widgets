@@ -1143,3 +1143,205 @@
 
 <http://localhost/individual/n503>
         vivo:relatedBy  <http://localhost/individual/awdrec41181> .
+
+# Professional Activities
+
+<http://localhost/individual/dateValue2020>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2020-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/n503>
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performs>
+                <http://localhost/individual/presentation15485> , <http://localhost/individual/outreach11230> , <http://localhost/individual/serviceto_univ24820> , <http://localhost/individual/servicetoprof24520> .
+
+<http://localhost/individual/dateInterval-s20130513-e20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20181030> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20130513> .
+
+<http://localhost/individual/dateInterval-s2019-e2020>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue2020> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2019> .
+
+<http://localhost/individual/dateInterval-s20110301-e2011>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue2011> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20110301> .
+
+<http://localhost/individual/presentation15485>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”. Presentation Event Name. Presentation Host Organization. December 2, 2011 - October 2018" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Invited Lectures ; Jocelyn Olcott" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Presentation Host Organization" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Yale University" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#nameOfTalk>
+                "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "Presentation Event Name" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Lecture" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20111202-e201810> .
+
+<http://localhost/individual/dateInterval-s20111202-e201810>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue201810> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20111202> .
+
+<http://localhost/individual/dateValue20130513>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-05-13T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue20110301>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-03-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://aims.fao.org/aos/geopolitical.owl#Azerbaijan>
+        <http://vivoweb.org/ontology/core#geographicFocusOf>
+                <http://localhost/individual/outreach11230> .
+
+<http://localhost/individual/dateValue2019>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2019-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/outreach11230>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "National Endowment for the Humanities. Reviewer, documentary film proposals. Outreach Host Organization. Azerbaijan. March 1, 2011 - 2011" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Service to the Community" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Outreach Host Organization" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Washington, DC" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#role>
+                "Reviewer, documentary film proposals" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "National Endowment for the Humanities" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Other" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20110301-e2011> ;
+        <http://vivoweb.org/ontology/core#geographicFocus>
+                <http://aims.fao.org/aos/geopolitical.owl#Azerbaijan> .
+
+<http://localhost/individual/serviceto_univ24820>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Committee Service. Duke University. The Big Committee. May 13, 2013 - October 30, 2018" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#committeeName>
+                "The Big Committee" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#committeeType>
+                "School" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Description of committee service at Duke." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Duke University" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Duke Campus" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Committee Service" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20130513-e20181030> .
+
+<http://localhost/individual/dateValue201810>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+<http://localhost/individual/servicetoprof24520>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Event/Organization Administration. Server to the Profession. Name of Service to Prof. Organization for Serving Profession. 2019 - 2020" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Describing service to profession." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Organization for Serving Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Venue to Serve the Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#role>
+                "Server to the Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "Name of Service to Prof" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Event/Organization Administration" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s2019-e2020> .
+
+<http://localhost/individual/dateValue20111202>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-12-02T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue2011>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+# Geo focus for outreach
+
+<http://aims.fao.org/aos/geopolitical.owl#Azerbaijan>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Azerbaijan"^^<http://www.w3.org/2001/XMLSchema#string> .

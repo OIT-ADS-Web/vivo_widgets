@@ -58,6 +58,16 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     an award                          $awardSize
     correct award                     $award
     correct award attrs               $awardAttrs
+
+    four prof activities              $profActivitiesSize
+    outreach                          $outreach
+    outreachAttrs                     $outreachAttrs
+    presentation                      $presentation
+    presentationAttrs                 $presentationAttrs
+    serviceToProf                     $serviceToProf
+    serviceToProfAttrs                $serviceToProfAttrs
+    serviceToUniv                     $serviceToUniv
+    serviceToUnivAttrs                $serviceToUnivAttrs
   """
 
   val personUri = "http://localhost/individual/n503"
@@ -73,6 +83,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var positions:List[Map[String, Any]] = _
   var webpages:List[Map[String, Any]] = _
   var awards:List[Map[String, Any]] = _
+  var professionalActivities:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -98,6 +109,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       positions = json("positions").asInstanceOf[List[Map[String, Any]]]
       webpages = json("webpages").asInstanceOf[List[Map[String, Any]]]
       awards = json("awards").asInstanceOf[List[Map[String, Any]]]
+      professionalActivities = json("professionalActivities").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
@@ -426,6 +438,133 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       "datePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
       "awardedBy" -> "Association of Public Policy and Management",
       "awardedByUri" -> "http://localhost/individual/insassociationofpublicpolicyandmanagement"
+      )
+  }
+
+  def profActivitiesSize = {professionalActivities must haveSize(4)}
+
+  def outreach = {
+    val outreach = professionalActivities.find(
+      {outreach => outreach("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach"}).
+      getOrElse(throw new RuntimeException("Outreach not found."))
+    outreach must havePairs(
+      "uri" -> "http://localhost/individual/outreach11230",
+      "label" -> "National Endowment for the Humanities. Reviewer, documentary film proposals. Outreach Host Organization. Azerbaijan. March 1, 2011 - 2011"
+      )
+  }
+
+  def outreachAttrs = {
+    val outreach = professionalActivities.find(
+      {outreach => outreach("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach"}).
+      getOrElse(throw new RuntimeException("Outreach not found."))
+    val outreachAttrs = outreach("attributes").asInstanceOf[Map[String, Any]]
+    outreachAttrs must havePairs(
+      "startDatePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+      "serviceOrEventName" -> "National Endowment for the Humanities",
+      "serviceType" -> "Other",
+      "endDate" -> "2011-01-01T00:00:00",
+      "role" -> "Reviewer, documentary film proposals",
+      "description" -> "Service to the Community",
+      "hostOrganization" -> "Outreach Host Organization",
+      "endDatePrecision" -> "http://vivoweb.org/ontology/core#yearPrecision",
+      "locationOrVenue" -> "Washington, DC",
+      "startDate" -> "2011-03-01T00:00:00",
+      "geoFocus" -> "Azerbaijan"
+      )
+  }
+
+  def presentation = {
+    val presentation = professionalActivities.find(
+      {presentation => presentation("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation"}).
+      getOrElse(throw new RuntimeException("Presentation not found."))
+    presentation must havePairs(
+      "uri" -> "http://localhost/individual/presentation15485",
+      "label" -> "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”. Presentation Event Name. Presentation Host Organization. December 2, 2011 - October 2018"
+      )
+  }
+
+  def presentationAttrs = {
+    val presentation = professionalActivities.find(
+      {presentation => presentation("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation"}).
+      getOrElse(throw new RuntimeException("Presentation not found."))
+    val presentationAttrs = presentation("attributes").asInstanceOf[Map[String, Any]]
+    presentationAttrs must havePairs(
+      "startDatePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+      "serviceOrEventName" -> "Presentation Event Name",
+      "serviceType" -> "Lecture",
+      "endDate" -> "2018-10-01T00:00:00",
+      "nameOfTalk" -> "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”",
+      "description" -> "Invited Lectures ; Jocelyn Olcott",
+      "hostOrganization" -> "Presentation Host Organization",
+      "endDatePrecision" -> "http://vivoweb.org/ontology/core#yearMonthPrecision",
+      "locationOrVenue" -> "Yale University",
+      "startDate" -> "2011-12-02T00:00:00"
+      )
+  }
+
+  def serviceToProf = {
+    val serviceToProf = professionalActivities.find(
+      {serviceToProf => serviceToProf("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession"}).
+      getOrElse(throw new RuntimeException("ServiceToProf not found."))
+    serviceToProf must havePairs(
+      "uri" -> "http://localhost/individual/servicetoprof24520",
+      "label" -> "Event/Organization Administration. Server to the Profession. Name of Service to Prof. Organization for Serving Profession. 2019 - 2020"
+      )
+  }
+
+  def serviceToProfAttrs = {
+    val serviceToProf = professionalActivities.find(
+      {serviceToProf => serviceToProf("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession"}).
+      getOrElse(throw new RuntimeException("ServiceToProf not found."))
+    val serviceToProfAttrs = serviceToProf("attributes").asInstanceOf[Map[String, Any]]
+    serviceToProfAttrs must havePairs(
+      "startDatePrecision" -> "http://vivoweb.org/ontology/core#yearPrecision",
+      "serviceOrEventName" -> "Name of Service to Prof",
+      "serviceType" -> "Event/Organization Administration",
+      "endDate" -> "2020-01-01T00:00:00",
+      "role" -> "Server to the Profession",
+      "description" -> "Describing service to profession.",
+      "hostOrganization" -> "Organization for Serving Profession",
+      "endDatePrecision" -> "http://vivoweb.org/ontology/core#yearPrecision",
+      "locationOrVenue" -> "Venue to Serve the Profession",
+      "startDate" -> "2019-01-01T00:00:00"
+      )
+  }
+
+  def serviceToUniv = {
+    val serviceToUniv = professionalActivities.find(
+      {serviceToUniv => serviceToUniv("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity"}).
+      getOrElse(throw new RuntimeException("ServiceToUniv not found."))
+    serviceToUniv must havePairs(
+      "uri" -> "http://localhost/individual/serviceto_univ24820",
+      "label" -> "Committee Service. Duke University. The Big Committee. May 13, 2013 - October 30, 2018"
+      )
+  }
+
+  def serviceToUnivAttrs = {
+    val serviceToUniv = professionalActivities.find(
+      {serviceToUniv => serviceToUniv("vivoType") ==
+          "http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity"}).
+      getOrElse(throw new RuntimeException("ServiceToUniv not found."))
+    val serviceToUnivAttrs = serviceToUniv("attributes").asInstanceOf[Map[String, Any]]
+    serviceToUnivAttrs must havePairs(
+      "serviceType" -> "Committee Service",
+      "startDatePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+      "committeeType" -> "School",
+      "endDate" -> "2018-10-30T00:00:00",
+      "description" -> "Description of committee service at Duke.",
+      "hostOrganization" -> "Duke University",
+      "endDatePrecision" -> "http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+      "locationOrVenue" -> "Duke Campus",
+      "committeeName" -> "The Big Committee",
+      "startDate" -> "2013-05-13T00:00:00"
       )
   }
 }
