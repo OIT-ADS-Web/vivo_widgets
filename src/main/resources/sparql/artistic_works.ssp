@@ -5,9 +5,9 @@ SELECT ?work (MIN(?label) AS ?label) (MIN(?type) AS ?type) (MIN(?type_descriptio
        (MIN(?date) AS ?date) (MIN(?date_precision) AS ?date_precision) (MIN(?collaborators) AS ?collaborators)
        (MIN(?abstract) AS ?abstract) (MIN(?commissioning_body) AS ?commissioning_body) (MIN(?link_url) AS ?link_url) (MIN(?link_label) AS ?link_label)
 WHERE {
-  <${uri}> dukeart:relatedBy ?relationship. 
+  <${uri}> core:relatedBy ?relationship. 
   ?relationship rdf:type dukeart:ArtisticRelationship.
-  ?relationship dukeart:relates ?work.
+  ?relationship core:relates ?work.
   ?relationship dukeart:roles ?role.
   OPTIONAL {?relationship core:description ?role_description.}
   ?work rdf:type dukeart:ArtisticWork.

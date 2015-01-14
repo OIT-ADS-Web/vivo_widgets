@@ -207,7 +207,7 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Jocelyn Harrison Olcott, Musical Work" ;
         vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
-        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relates>
+        <http://vivoweb.org/ontology/core#relates>
                 <http://localhost/individual/art24521> , <http://localhost/individual/n503> ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
                 "Composer" ;
@@ -219,7 +219,7 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Jocelyn Harrison Olcott, Title of the acting work" ;
         vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
-        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relates>
+        <http://vivoweb.org/ontology/core#relates>
                 <http://localhost/individual/n503> , <http://localhost/individual/art24520> ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
                 "Actor" ;
