@@ -4,26 +4,29 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT *
 WHERE {{
-      <${uri}> core:organizationForPosition ?position .
+      <${uri}> core:relatedBy ?position .
+      ?position a core:Position .
       <${uri}> rdfs:label ?organizationName .
-      ?position core:positionInOrganization ?organization .
-      ?position core:positionForPerson ?person .
+      ?position core:relates ?person .
+      ?person a foaf:Person .
       ?position vitro:mostSpecificType ?positionType .
       # ?position core:rank ?displayOrder .
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
-}
-UNION
- {
-      <${uri}> core:hasSubOrganization+ ?organization .
-      ?organization core:organizationForPosition ?position .
+      BIND(<${uri}> AS ?organization)
+      }
+      UNION
+      {
+      <${uri}> obo:BFO_0000051+ ?organization .
+      ?organization core:relatedBy ?position .
+      ?position a core:Position .
       ?organization rdfs:label ?organizationName .
       ?position vitro:mostSpecificType ?positionType .
-      ?position core:positionForPerson ?person .
+      ?position core:relates ?person .
+      ?person a foaf:Person .
       # ?position core:rank ?displayOrder .
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
-}}
-ORDER BY ?label ?displayOrder
+      }} ORDER BY ?label ?displayOrder
