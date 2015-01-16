@@ -92,7 +92,7 @@ And when you are done, remember to run:
 
 ## Solr Index
 
-Vivo widgets are powered by a Solr index.  You will need to copy the ``solr``
+Vivo widgets are powered by a Solr index.  You will need to copy the ``solr/main``
 directory located here into a directory on the server where you have solr
 running.  From there, you will need to set the WidgetsSolr.directory in the
 ``deploy.properties`` (see section below).
