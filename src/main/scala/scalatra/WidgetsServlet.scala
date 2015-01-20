@@ -59,7 +59,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
       case Some(o:Organization) => {
         val d = uriParams ++ Map("organization" -> o)
         contentType = "text/html"
-        layoutTemplate(TemplateHelpers.tpath("builder/person.jade"), d.toSeq: _*)
+        layoutTemplate(TemplateHelpers.tpath("builder/organization.jade"), d.toSeq: _*)
       }
       case _ => "NoContent"
     }
