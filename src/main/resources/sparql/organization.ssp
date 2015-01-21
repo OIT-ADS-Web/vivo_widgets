@@ -3,5 +3,5 @@ ${include("sparql/prefixes.ssp")}
 
 select *
 where {
-  <${root_organization_uri}> obo:BFO_0000051 ?organization
+  <${root_organization_uri}> obo:BFO_0000051+ ?organization
 }
