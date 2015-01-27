@@ -10,9 +10,6 @@ import edu.duke.oit.vw.models._
 import edu.duke.oit.test.helpers.TestServers
 import org.specs2.specification.Step
 
-import org.apache.solr.client.solrj.SolrRequest
-import org.apache.solr.client.solrj.request.CoreAdminRequest
-
 class PersonApiSpec extends ScalatraSpec { def is = s2"""
   The Person API should return        ${ Step(getJson)}
     top-level person data             $topPersonData

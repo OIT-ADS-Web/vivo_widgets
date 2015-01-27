@@ -154,7 +154,7 @@
                 "Motion Picture Commissioners" ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
                 true ;
-        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+        <http://vivoweb.org/ontology/core#relatedBy>
                 <http://localhost/individual/art503_24520> ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
                 "Film" ;
@@ -179,7 +179,7 @@
                 "" ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
                 false ;
-        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+        <http://vivoweb.org/ontology/core#relatedBy>
                 <http://localhost/individual/art503_24521> ;
         <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
                 "Musical Composition" ;
@@ -267,7 +267,7 @@
                 "http://www.example.com/acting" .
 
 <http://localhost/individual/n503>
-        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#relatedBy>
+        <http://vivoweb.org/ontology/core#relatedBy>
                 <http://localhost/individual/art503_24521> , <http://localhost/individual/art503_24520> .
 
 # Authorship
