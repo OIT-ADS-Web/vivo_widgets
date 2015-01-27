@@ -7,7 +7,7 @@ WHERE {{
   <${uri}> obo:administers ?administratorRole .
   ?administratorRole a core:AdministratorRole .
   ?administratorRole core:relatedBy ?agreement .
-  ?agreement a vivo:Grant .
+  ?agreement a core:Grant .
   ?agreement rdfs:label ?label .
   ?agreement vitro:mostSpecificType ?type .
   BIND(<${uri}> AS ?organization)
@@ -19,7 +19,7 @@ WHERE {{
   <${uri}> obo:administers ?administratorRole .
   ?administratorRole a core:AdministratorRole .
   ?administratorRole core:relatedBy ?agreement .
-  ?agreement a vivo:Grant .
+  ?agreement a core:Grant .
   ?agreement rdfs:label ?label .
   ?agreement vitro:mostSpecificType ?type .
 }}
