@@ -49,7 +49,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   }
 
   get("/builder") {
-    WidgetsConfig.prepareCore
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
     SolrEntity.getByUri(params("uri")) match {
       case Some(p:Person) => {
         val d = uriParams ++ Map("person" -> p)
@@ -90,7 +90,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   }
 
   protected def renderOrganizations = {
-    WidgetsConfig.prepareCore
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
     Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(organization) => {

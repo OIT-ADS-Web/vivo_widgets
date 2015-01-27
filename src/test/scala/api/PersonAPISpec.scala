@@ -2,13 +2,12 @@ package edu.duke.oit.api.test
 
 import org.scalatra.test.specs2._
 
-import edu.duke.oit.vw._
 import net.liftweb.json._
-import edu.duke.oit.vw.scalatra._
-import edu.duke.oit.vw.solr._
-import edu.duke.oit.vw.models._
 import edu.duke.oit.test.helpers.TestServers
 import org.specs2.specification.Step
+
+import edu.duke.oit.vw.scalatra._
+import edu.duke.oit.vw.solr._
 
 class PersonApiSpec extends ScalatraSpec { def is = s2"""
   The Person API should return        ${ Step(getJson)}

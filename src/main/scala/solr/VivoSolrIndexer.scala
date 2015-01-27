@@ -41,7 +41,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
 
   def indexOrganizations() = {
 
-    val sparql = renderFromClassPath("sparql/organization.ssp", Map("root_organization_uri" -> WidgetsConfig.topLevelOrg))
+    val sparql = renderFromClassPath("sparql/organization.ssp")
     log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql).map(_('organization))
     for (o <- organizationUris) {
