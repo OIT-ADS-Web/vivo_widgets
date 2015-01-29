@@ -17,6 +17,9 @@ object WidgetsConfig {
   val log =  LoggerFactory.getLogger(getClass)
 
   // TODO: put somewhere else - temporary 
+  // WARNING!! This will overwrite your properties whenever WidgetsConfig
+  // is called - which could cause problems for alternative configurations
+  // (for example, in tests) ENDWARNING!!!!
   WidgetsConfig.setProperties
 
   def setProperties() = {
