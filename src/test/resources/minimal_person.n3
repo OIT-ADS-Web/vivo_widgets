@@ -952,8 +952,9 @@
         vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant> ;
         <http://vivoweb.org/ontology/core#dateTimeInterval>
                 <http://localhost/individual/dateInterval-s20140101-e20141231> ;
+        vivo:assignedBy         <http://localhost/individual/insstbaldricksfoundation> ;
         <http://vivoweb.org/ontology/core#relates>
-                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> , <http://localhost/individual/org50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/investigatorRole199341-503> , <http://localhost/individual/insstbaldricksfoundation> .
+                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> , <http://localhost/individual/org50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/investigatorRole199341-503>  .
 
 <http://localhost/individual/investigatorRole199341-503>
         a                       <http://vivoweb.org/ontology/core#InvestigatorRole> , owl:Thing , <http://vivoweb.org/ontology/core#ResearcherRole> , <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
@@ -1000,7 +1001,7 @@
         <http://purl.obolibrary.org/obo/RO_0000053>
                 <http://localhost/individual/fundingRole199341-stbaldricksfoundation> ;
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#FundingOrganization> ;
-        <http://vivoweb.org/ontology/core#relatedBy>
+        <http://vivoweb.org/ontology/core#assigns>
                 <http://localhost/individual/gra199341> .
 
 <http://localhost/individual/dateInterval-s20140101-e20141231>

@@ -30,7 +30,6 @@ class OrganizationPeopleApiSpec extends ScalatraSpec { def is = s2"""
     indexer.indexOrganizations()
 
     get("/api/v0.9/organizations/people/all.json?uri=" + orgUri) {
-      println("body: " + body)
       json = JsonParser.parse(body).values.asInstanceOf[List[Map[String, Any]]]
     }
   }

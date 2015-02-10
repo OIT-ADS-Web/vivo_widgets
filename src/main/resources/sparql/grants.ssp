@@ -20,9 +20,7 @@ WHERE {
     ?endDateUri core:dateTime ?endDate.
   }
   OPTIONAL {
-    ?agreement core:relates ?fundingRole .
-    ?fundingRole a obo:ERO_0000224 ;
-      obo:RO_0000052 ?awardedByUri.
+    ?agreement core:assignedBy ?awardedByUri.
     ?awardedByUri rdfs:label ?awardedBy .
   }
   OPTIONAL {

@@ -48,3 +48,51 @@
         obo:BFO_0000050         <https://scholars.duke.edu/individual/our_org> ;
         vitro:mostSpecificType  vivo:AcademicDepartment ;
         duke:orgUnit            "50000393"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+
+# grant - <https://scholars.duke.edu/individual/gra195634>
+# could move to separate file
+
+<https://scholars.duke.edu/individual/gra195634>
+        a                       obo:BFO_0000002 , vivo:Grant , <http://www.w3.org/2000/01/rdf-schema#Resource> , duke:ResearchGrant , owl:Thing , obo:BFO_0000001 , obo:BFO_0000020 , vivo:Relationship ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Center for Public Genomics 2.0" ;
+        vitro:mostSpecificType  duke:ResearchGrant ;
+        vivo:assignedBy         <https://scholars.duke.edu/individual/insnationalinstitutesofhealth> ;
+        vivo:dateTimeInterval   <https://scholars.duke.edu/individual/dateInterval-s20040901-e20150331> ;
+        vivo:relates            <https://scholars.duke.edu/individual/fundingRole195634-nationalinstitutesofhealth> , <https://scholars.duke.edu/individual/our_org> , <https://scholars.duke.edu/individual/administratorRole195634-our_org> , <https://scholars.duke.edu/individual/investigatorRole195634-2051062> .
+
+<https://scholars.duke.edu/individual/fundingRole195634-nationalinstitutesofhealth>
+        a                       obo:BFO_0000002 , obo:BFO_0000017 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000020 , obo:BFO_0000023 , obo:ERO_0000224 ;
+        obo:RO_0000052          <https://scholars.duke.edu/individual/insnationalinstitutesofhealth> ;
+        vitro:mostSpecificType  obo:ERO_0000224 ;
+        vivo:relatedBy          <https://scholars.duke.edu/individual/gra195634> .
+
+<https://scholars.duke.edu/individual/administratorRole195634-our_org>
+        a                       obo:BFO_0000002 , vivo:AdministratorRole , obo:BFO_0000017 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000020 , obo:BFO_0000023 ;
+        obo:RO_0000052          <https://scholars.duke.edu/individual/our_org> ;
+        vitro:mostSpecificType  vivo:AdministratorRole ;
+        vivo:relatedBy          <https://scholars.duke.edu/individual/gra195634> .
+
+<https://scholars.duke.edu/individual/investigatorRole195634-2051062>
+        a                       vivo:InvestigatorRole , owl:Thing , vivo:ResearcherRole , vivo:PrincipalInvestigatorRole ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Principal Investigator" ;
+        obo:RO_0000052          <https://scholars.duke.edu/individual/per2051062> ;
+        vitro:mostSpecificType  vivo:PrincipalInvestigatorRole ;
+        vivo:dateTimeInterval   <https://scholars.duke.edu/individual/dateInterval-s20040901-e20150331> ;
+        vivo:relatedBy          <https://scholars.duke.edu/individual/gra195634> .
+
+<https://scholars.duke.edu/individual/our_org>
+        obo:RO_0000053  <https://scholars.duke.edu/individual/administratorRole195634-our_org> ;
+        vivo:relatedBy  <https://scholars.duke.edu/individual/gra195634> . 
+
+<https://scholars.duke.edu/individual/per2051062>
+        obo:RO_0000053  <https://scholars.duke.edu/individual/investigatorRole156035-2051062> , <https://scholars.duke.edu/individual/investigatorRole195634-2051062> .
+
+<https://scholars.duke.edu/individual/insnationalinstitutesofhealth>
+        a                       obo:BFO_0000002 , obo:BFO_0000004 , foaf:Organization , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , foaf:Agent , vivo:FundingOrganization ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "National Institutes of Health" ;
+        obo:RO_0000053          <https://scholars.duke.edu/individual/fundingRole195634-nationalinstitutesofhealth> ;
+        vitro:mostSpecificType  vivo:FundingOrganization ;
+        vivo:assigns            <https://scholars.duke.edu/individual/gra195634> .

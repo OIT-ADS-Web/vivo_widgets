@@ -16,7 +16,7 @@ WHERE {{
   {
   <${uri}> obo:BFO_0000051+ ?organization .
   ?organization rdfs:label ?organizationName .
-  <${uri}> obo:RO_0000053 ?administratorRole .
+  ?organization obo:RO_0000053 ?administratorRole .
   ?administratorRole a core:AdministratorRole .
   ?administratorRole core:relatedBy ?agreement .
   ?agreement a core:Grant .
