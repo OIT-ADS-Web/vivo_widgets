@@ -56,7 +56,7 @@
         vcard:title             "Programming CIO" .
 
 <http://localhost/individual/per_email503>
-        a                       "http://www.w3.org/2006/vcard/ns#Work" ;
+        a                       vcard:Work ;
         a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Email ;
         vitro:mostSpecificType  vcard:Email ;
         vcard:email             "rsmith@example.org" .
@@ -105,13 +105,13 @@
         vitro-public:mainImage  <http://localhost/individual/file_i503> .
 
 <http://localhost/individual/phone_addr503_work_location>
-        a                       "http://www.w3.org/2006/vcard/ns#Voice" , "http://www.w3.org/2006/vcard/ns#Work" ;
+        a                       vcard:Voice , vcard:Work ;
         a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Telephone ;
         vitro:mostSpecificType  vcard:Telephone ;
         vcard:telephone         "(919) 555-5555" .
 
 <http://localhost/individual/per_addr503_work_location>
-        a                       "http://www.w3.org/2006/vcard/ns#Work" , "http://www.w3.org/2006/vcard/ns#Location" ;
+        a                       vcard:Work , vcard:Location ;
         a                       vcard:Addressing , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Address ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "7605-A Hosp North, Durham, NC 27710" ;
@@ -122,7 +122,7 @@
         vcard:streetAddress     "7605-A Hosp North" .
 
 <http://localhost/individual/per_addr503_work_mailing>
-        a                       "http://www.w3.org/2006/vcard/ns#Work" ;
+        a                       vcard:Work ;
         a                       vcard:Addressing , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Address ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Box 3090 Med Ctr, Durham, NC 27710" ;
@@ -137,7 +137,6 @@
         vcard:hasTelephone  <http://localhost/individual/phone_addr503_work_location> .
 
 <http://localhost/individual/art24520>
-        a                       "http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film" ;
         a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film> , owl:Thing ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Title of the acting work" ;
@@ -164,7 +163,6 @@
                 <http://localhost/individual/urllinkartwork24520http://www.example.com/acting> .
 
 <http://localhost/individual/art24521>
-        a                       "http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition" ;
         a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Musical Work" ;

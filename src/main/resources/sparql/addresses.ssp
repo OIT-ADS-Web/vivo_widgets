@@ -8,8 +8,7 @@ WHERE
 {
   <${ uri }> obo:ARG_2000028 ?individualVcard .
   ?individualVcard vcard:hasAddress ?uri .
-  ?uri vitro:mostSpecificType ?type ;
-    rdfs:label ?label ;
+  ?uri rdfs:label ?label ;
     vcard:streetAddress ?address1 ;
     vcard:locality ?city ;
     vcard:region ?state ;
@@ -18,6 +17,9 @@ WHERE
   OPTIONAL {
     ?uri rdf:type ?type .
     FILTER(?type = vcard:Location)
+  }
+  OPTIONAL {
+    ?uri vitro:mostSpecificType ?type .
   }
   BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri

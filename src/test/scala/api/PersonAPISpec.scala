@@ -141,7 +141,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
     val firstAddress = addresses.head
     firstAddress must havePairs(
       "uri" -> "http://localhost/individual/per_addr503_work_location",
-      "vivoType" -> "http://www.w3.org/2006/vcard/ns#Address",
+      "vivoType" -> "http://www.w3.org/2006/vcard/ns#Location",
       "label" -> "7605-A Hosp North, Durham, NC 27710"
       )
   }
