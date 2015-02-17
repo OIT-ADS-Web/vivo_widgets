@@ -327,7 +327,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       {experience => experience("label") == "Fellowship In Cornea And External Disease, Refractive Surgery, Ophthalmology"}).
       getOrElse(throw new RuntimeException("Prof experience not found."))
     experience must havePairs(
-      "uri" -> "http://localhost/individual/exp200749",
+      "uri" -> "http://localhost/individual/professional_experience200749",
       "vivoType" -> "http://vivoweb.org/ontology/core#EducationalProcess")
   }
 

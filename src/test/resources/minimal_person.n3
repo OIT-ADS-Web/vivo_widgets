@@ -826,15 +826,22 @@
 
 # Educations
 
-<http://localhost/individual/exp200749>
+<http://localhost/individual/professional_experience200749>
         a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#EducationalProcess> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Fellowship In Cornea And External Disease, Refractive Surgery, Ophthalmology" ;
+        <http://purl.obolibrary.org/obo/RO_0002234>
+                <http://localhost/individual/experience200749> ;
         <http://purl.obolibrary.org/obo/RO_0000057>
                 <http://localhost/individual/n503> , <http://localhost/individual/insdukeuniversity> ;
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#EducationalProcess> ;
         <http://vivoweb.org/ontology/core#dateTimeInterval>
                 <http://localhost/individual/dateInterval-s19940701-e19950701> .
+
+<http://localhost/individual/experience200749>
+        a                       obo:BFO_0000002 , obo:ARG_2000021 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000019 , obo:BFO_0000020 ;
+        obo:RO_0002353          <http://localhost/individual/professional_experience200749> ;
+        vitro:mostSpecificType  obo:ARG_2000021 .
 
 <http://localhost/individual/edu5031990academicDegree77>
         a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#EducationalProcess> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
@@ -900,13 +907,13 @@
 
 <http://localhost/individual/n503>
         <http://purl.obolibrary.org/obo/RO_0000056>
-                <http://localhost/individual/exp200749> , <http://localhost/individual/edu5031990academicDegree77> ;
+                <http://localhost/individual/professional_experience200749> , <http://localhost/individual/edu5031990academicDegree77> ;
         <http://vivoweb.org/ontology/core#relatedBy>
                 <http://localhost/individual/awarded_degree5031990academicDegree77> .
 
 <http://localhost/individual/insdukeuniversity>
         <http://purl.obolibrary.org/obo/RO_0000056>
-                <http://localhost/individual/exp200749> .
+                <http://localhost/individual/professional_experience200749> .
 
 <http://localhost/individual/insbrownuniversity>
         <http://purl.obolibrary.org/obo/RO_0000056>
