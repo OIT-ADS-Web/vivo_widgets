@@ -276,7 +276,7 @@
                 "Koo, Denise Tze-wen" ;
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Authorship> ;
         <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
-                false ;
+                true ;
         <http://vivoweb.org/ontology/core#relates>
                 <http://localhost/individual/pub932901> , <http://localhost/individual/n503> .
 
