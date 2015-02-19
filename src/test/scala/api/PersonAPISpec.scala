@@ -248,7 +248,6 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       case Some(pub) => pub("attributes").asInstanceOf[Map[String, Any]]
     }
     pubAttrs must havePairs(
-      "authorship" -> "http://localhost/individual/author932901-503",
       "authorshipType" -> "http://vivoweb.org/ontology/core#Authorship",
       "numPages" -> "9",
       "edition" -> "10",

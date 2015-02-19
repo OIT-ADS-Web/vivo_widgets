@@ -2,8 +2,8 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT (MIN(?authorship) AS ?authorship) ?publication (MIN(?label) AS ?label)
- (MIN(?type) AS ?type) (MIN(?numPages) AS ?numPages) (MIN(?edition) AS ?edition)
+SELECT ?publication (MIN(?label) AS ?label) (MIN(?type) AS ?type)
+ (MIN(?numPages) AS ?numPages) (MIN(?edition) AS ?edition)
  (MIN(?volume) AS ?volume) (MIN(?issue) AS ?issue) (MIN(?isbn10) AS ?isbn10)
  (MIN(?isbn13) AS ?isbn13) (MIN(?publicationVenue) AS ?publicationVenue)
  (MIN(?publishedIn) AS ?publishedIn) (MIN(?authorList) AS ?authorList)
