@@ -15,7 +15,7 @@ WHERE {
   OPTIONAL {?awardReceipt core:description ?description.}
 
   OPTIONAL {
-    ?award_receipt core:assignedBy ?awardedByUri.
+    ?awardReceipt core:assignedBy ?awardedByUri.
     ?awardedByUri rdfs:label ?awardedBy.
   }
 
