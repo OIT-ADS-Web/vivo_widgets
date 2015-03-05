@@ -968,8 +968,6 @@
         <http://purl.obolibrary.org/obo/RO_0000052>
                 <http://localhost/individual/n503> ;
         vitro:mostSpecificType  <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
-        <http://vivoweb.org/ontology/core#dateTimeInterval>
-                <http://localhost/individual/dateInterval-s20140101-e20141231> ;
         <http://vivoweb.org/ontology/core#relatedBy>
                 <http://localhost/individual/gra199341> .
 
