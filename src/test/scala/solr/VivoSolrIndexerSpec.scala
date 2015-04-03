@@ -12,7 +12,7 @@ class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
   
   val vivo = TestServers.vivo
   vivo.setupConnectionPool()
-  TestServers.loadSampleData("/src/test/resources/minimal_person.rdf")
+  TestServers.loadSampleData("/src/test/resources/minimal_person.n3")
 
   val solrSrv = TestServers.widgetSolr
 
