@@ -9,9 +9,10 @@ import edu.duke.oit.vw.scalatra._
 import edu.duke.oit.vw.solr._
 
 class OrganizationPeopleApiSpec extends ScalatraSpec { def is = s2"""
-  The Organization People API should return ${ Step(getJson) }
-    a person                                $peopleSize
   """
+  //The Organization People API should return ${ Step(getJson) }
+    //a person                                $peopleSize
+  //"""
 
   val orgUri = "https://scholars.duke.edu/individual/our_org"
 

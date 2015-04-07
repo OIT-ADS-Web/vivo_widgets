@@ -9,11 +9,12 @@ import edu.duke.oit.vw.scalatra._
 import edu.duke.oit.vw.solr._
 
 class OrganizationGrantsApiSpec extends ScalatraSpec { def is = s2"""
-  The Organization Grants API should return ${ Step(getJson) }
-    a grant                                 $grantsSize
-    correct grant                           $grant
-    correct grant attrs                     $grantAttrs
   """
+  //The Organization Grants API should return ${ Step(getJson) }
+    //a grant                                 $grantsSize
+    //correct grant                           $grant
+    //correct grant attrs                     $grantAttrs
+  //"""
 
   val orgUri = "https://scholars.duke.edu/individual/our_org"
 
