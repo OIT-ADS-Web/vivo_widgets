@@ -20,6 +20,7 @@ import scala.concurrent.util._
 import scala.concurrent.duration._
 import java.util.concurrent.Executors
 
+import collection.mutable.ListBuffer
 
 class VivoSolrIndexer(vivo: Vivo, solr: SolrServer) 
   extends WidgetLogging 
@@ -96,6 +97,31 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
         }
       }
     }
+  }
+
+  def reindexUris(uris: List[String]) = {
+    val personUris:ListBuffer[String] = ListBuffer()
+    val organizationUris:ListBuffer[String] = ListBuffer()
+    uris.foreach{ uri =>
+      reindexUri(uri)
+      var query = new SolrQuery();
+      query.setQuery( "uris:\"" + uri + "\"" )
+      var rsp = solr.query( query )
+      val docs:SolrDocumentList = rsp.getResults()
+      docs.foreach { doc =>
+        doc.getFieldValue("group").asInstanceOf[String] match {
+          case "people" => personUris += doc.getFieldValue("id").asInstanceOf[String]
+          case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
+        }
+      }
+      personUris.toSet.map { uri:String =>
+         reindexPerson(uri)
+      }
+      organizationUris.toSet.map { uri:String =>
+         reindexOrganization(uri)
+      }
+    }
+    solr.commit()
   }
 
   def reindexPerson(uri: String) = {
