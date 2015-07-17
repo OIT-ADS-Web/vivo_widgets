@@ -10,7 +10,7 @@ import akka.actor.{Actor,ActorSystem,Props}
 object IndexUpdater {
 
   val system = ActorSystem("IndexUpdater")
-  val updateActor = system.actorOf(Props[IndexUpdater],name = "updateActor" )
+  val actor = system.actorOf(Props[IndexUpdater],name = "updateActor" )
 
   // def start(vsi: Option[VivoSolrIndexer], hostname:String, port:Int, serviceId: String="VivoWidgets") = {
   //   Actor.remote.start(hostname, port) //Start the server
