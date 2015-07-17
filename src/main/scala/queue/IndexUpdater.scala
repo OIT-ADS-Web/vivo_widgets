@@ -4,9 +4,13 @@ import java.net.URI
 
 import edu.duke.oit.vw.solr.VivoSolrIndexer
 
-import akka.actor.Actor
+import akka.actor.Actor._
+import akka.actor.{Actor,ActorSystem,Props}
 
 object IndexUpdater {
+
+  val system = ActorSystem("IndexUpdater")
+  val actor = system.actorOf(Props[IndexUpdater],name = "updateActor" )
 
   // def start(vsi: Option[VivoSolrIndexer], hostname:String, port:Int, serviceId: String="VivoWidgets") = {
   //   Actor.remote.start(hostname, port) //Start the server
