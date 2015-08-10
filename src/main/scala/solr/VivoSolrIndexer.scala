@@ -103,7 +103,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val personUris:ListBuffer[String] = ListBuffer()
     val organizationUris:ListBuffer[String] = ListBuffer()
     uris.foreach{ uri =>
-      reindexUri(uri)
       var query = new SolrQuery();
       query.setQuery( "uris:\"" + uri + "\"" )
       var rsp = solr.query( query )
