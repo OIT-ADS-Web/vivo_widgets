@@ -84,11 +84,6 @@ object WidgetsConfig {
 
     log.info("Connecting VIVO Core")
     vivoServer = Solr.solrServer(properties("vitro.local.solr.url"))
-
-    log.info("Start IndexUpdater")
-    import edu.duke.oit.vw.queue._
-    val indexUpdater = system.actorOf(Props[IndexUpdater])
-    log.info("IndexUpdater started.")
   }
 
   def loadProperties() = {
