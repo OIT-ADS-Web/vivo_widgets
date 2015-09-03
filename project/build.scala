@@ -15,7 +15,7 @@ object VivowidgetsBuild extends Build {
   lazy val project = Project (
     "vivowidgets",
     file("."),
-    settings = Defaults.defaultSettings ++ ScalatraPlugin.scalatraWithJRebel ++ scalateSettings ++ Seq(
+    settings = Defaults.defaultSettings ++ Seq(ScalatraPlugin.scalatraWithJRebel:_*) ++ Seq(scalateSettings:_*) ++ Seq(
       organization := Organization,
       name := Name,
       version := Version,
