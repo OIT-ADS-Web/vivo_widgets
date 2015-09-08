@@ -1,13 +1,10 @@
 import AssemblyKeys._ 
 
-port in container.Configuration := 8080
-
 artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
    "widgets." + artifact.extension
 }
 
 assemblySettings
-
 
 mergeStrategy in assembly <<= (mergeStrategy in assembly) { (prev) =>
   {
