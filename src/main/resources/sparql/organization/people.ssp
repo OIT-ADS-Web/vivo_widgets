@@ -14,6 +14,7 @@ WHERE {{
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
+      OPTIONAL { ?person core:overview ?overview . }
       BIND(<${uri}> AS ?organization)
       }
       UNION
@@ -29,4 +30,5 @@ WHERE {{
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
+      OPTIONAL { ?person core:overview ?overview . }
       }} ORDER BY ?label ?displayOrder
