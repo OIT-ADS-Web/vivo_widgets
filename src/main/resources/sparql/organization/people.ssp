@@ -20,6 +20,7 @@ WHERE {{
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
       }
+      OPTIONAL { ?person core:overview ?overview . }
       BIND(<${uri}> AS ?organization)
       }
       UNION
@@ -41,4 +42,5 @@ WHERE {{
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
       }
+      OPTIONAL { ?person core:overview ?overview . }
       }} ORDER BY ?label ?displayOrder
