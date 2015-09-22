@@ -30,7 +30,7 @@ VIVO Widgets is made of up the following parts.
   ``target/vivo-widgets.jar``
 
     ```
-    $ ./sbt assembly
+    $ bin/sbt assembly
     ```
 
 3. To start Jetty, run the following command:
@@ -58,14 +58,14 @@ VIVO Widgets is made of up the following parts.
    [Scalatra First Project](http://www.scalatra.org/2.2/getting-started/first-project.html):
 
     ```shell
-    $ ./sbt
+    $ bin/sbt
     > container:start 
     ```
 
 If you want automatic code reloading, do the following:
 
     ```shell
-    $ ./sbt
+    $ bin/sbt
     > container:start
     > ~ ;copy-resources;aux-compile
     ```
@@ -74,7 +74,7 @@ If you want automatic code reloading, do the following:
 
 ### Run the tests
 
-    $ ./sbt
+    $ bin/sbt
     > test
 
 or to run only a few tests:
@@ -82,13 +82,32 @@ or to run only a few tests:
     > test-only edu.duke.oit.solr.test.GrantSpec edu.duke.oit.solr.test.CourseSpec
 
 The acceptance tests will throw errors unless they have a Solr server to talk
-to. (TODO: automate this) To start one, in a separate terminal run:
+to. The application has been tested with solr 4.7.  Download from here: 
 
-    ./bin/solr_dev.sh start
+    http://lucene.apache.org/solr/
+
+
+Then, to start a solr instance, in a separate terminal run:
+    
+    CURRENT_PWD=$PWD
+    TMP_DIR="${CURRENT_PWD}/${BASEDIR}/../tmp"
+    SOLR_DIR="${CURRENT_PWD}/${BASEDIR}/../solr"
+    LOG_FILE="$TMP_DIR/solrconsole.log"
+    
+    cd ${SOLR_DIR}
+    java -Dsolr.solr.home=. -Djetty.home=$TMP_DIR/solr_4.7_examples -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar start.jar 2> $LOG_FILE &
+
 
 And when you are done, remember to run:
 
-    ./bin/solr_dev.sh stop
+
+    CURRENT_PWD=$PWD
+    TMP_DIR="${CURRENT_PWD}/${BASEDIR}/../tmp"
+    SOLR_DIR="${CURRENT_PWD}/${BASEDIR}/../solr"
+    LOG_FILE="$TMP_DIR/solrconsole.log"
+    
+    cd ${SOLR_DIR}
+    java -Dsolr.solr.home=. -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar start.jar --stop
 
 ## Solr Index
 
