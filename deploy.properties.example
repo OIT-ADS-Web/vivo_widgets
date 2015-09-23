@@ -20,8 +20,7 @@
 #
 # http://vivo.cornell.edu/individual/
 #
-#Vitro.defaultNamespace = https://scholars.duke.edu/individual/
-Vitro.defaultNamespace = http://vivo.mydomain.edu/individual/
+Vitro.defaultNamespace = https://vivo.duke.edu/individual/
 
 #
 # Where is the Vitro core directory?
@@ -54,8 +53,7 @@ webapp.name = vivo
 # above) + "solr"
 #   Example:
 #     vitro.local.solr.url = http://localhost:8080/vivosolr
-
-vitro.local.solr.url = http://localhost:8079
+vitro.local.solr.url = http://localhost:9080/solr
 
 #
 # Restricts access to the Solr search platform. The value is a regular expression.
@@ -89,9 +87,9 @@ email.replyTo =
 # URL to reflect your database name (if it is not "vitrodb"). Change the username 
 # and password to match the authorized database user you created.
 #
-VitroConnection.DataSource.url = jdbc:mysql://localhost/vitrodb
-VitroConnection.DataSource.username = vitrodbUsername
-VitroConnection.DataSource.password = vitrodbPassword
+VitroConnection.DataSource.url = jdbc:mysql://docker/vivo
+VitroConnection.DataSource.username = vivo
+VitroConnection.DataSource.password = vivo_password
 
 #
 # The maximum number of active connections in the database connection pool.
@@ -110,26 +108,23 @@ VitroConnection.DataSource.pool.maxIdle = 10
 # Parameters to change in order to use VIVO with a database other than 
 # MySQL.
 #
-
 VitroConnection.DataSource.dbtype = MySQL
 VitroConnection.DataSource.driver = com.mysql.jdbc.Driver
 VitroConnection.DataSource.validationQuery = SELECT 1
+
 #
 # The email address of the root user for the VIVO application. The password 
 # for this user is initially set to "rootPassword", but you will be asked to 
 # change the password the first time you log in.
 #
-#rootUser.emailAddress = vivo_root@duke.edu
-rootUser.emailAddress = vivo_root@mydomain.edu
+rootUser.emailAddress = vivo@duke.edu
 
 #
 # How is a logged-in user associated with a particular Individual? One way is 
 # for the Individual to have a property whose value is the username of the user.
 # This value should be the URI for that property.
 #
-#selfEditing.idMatchingProperty = http://vivo.duke.edu/vivo/ontology/duke-extension#scopedNetid
-#
-selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId
+selfEditing.idMatchingProperty = http://vivo.duke.edu/vivo/ontology/duke-extension#scopedNetid
 
 #
 # If an external authentication system like Shibboleth or CUWebAuth is to be
@@ -138,7 +133,7 @@ selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId
 # a system is not to be used, leave these commented out. Consult the 
 # installation instructions for more details. 
 #
-externalAuth.buttonText = Log with your Duke Netid
+externalAuth.buttonText = Log with your Id
 externalAuth.netIdHeaderName = X_REMOTE_USER
 
 #
@@ -162,7 +157,7 @@ visualization.temporal = enabled
 # For example, to use "Ponce School of Medicine" as the top organization:
 # visualization.topLevelOrg = http://vivo.psm.edu/individual/n2862
 #
-visualization.topLevelOrg = https://scholars.duke.edu/individual/org50000021
+visualization.topLevelOrg = https://vivo.duke.edu/individual/org00000001
 
 #
 # Absolute path on the server of the Harvester root directory.
@@ -189,13 +184,13 @@ profile.eligibleTypeList = http://xmlns.com/foaf/0.1/Person
 # If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
 proxy.eligibleTypeList = http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization
 
-
-# NOTE: VIVO-WIDGETS specific properties here
 WidgetsSolr.directory=/srv/web/apps/widgetsolr
-WidgetUpdateSetup.endpointUri=localhost:8888/widgets/updates/person/uri
+WidgetUpdateSetup.endpointUri=localhost:8080/updates/person/uri
 WidgetUpdateSetup.username=widgets_user
-WidgetUpdateSetup.password=widgest_password
+WidgetUpdateSetup.password=widgets_password
 Widgets.theme=duke
-Widgets.topLevelOrg=https://vivo.mydomain.edu/individual/org000000001
-Widgets.baseProtocolAndDomain=https://vivo.mydomain.edu
+Widgets.topLevelOrg=https://vivo.duke.edu/individual/org00000001
+
+Widgets.baseProtocolAndDomain=http://localhost
+
 
