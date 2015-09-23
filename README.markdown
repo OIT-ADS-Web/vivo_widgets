@@ -86,7 +86,7 @@ such as the following:
 1. Download SOLR from http://lucene.apache.org/solr/
 
 2. This will likely be a file such as solr_4.7_examples.tar.gz.  Try downloading it.  You can put that 
-   in a tmp directory 
+   in a tmp directory (for instance). 
 
     cd tmp
 ``  tar xvzf solr_4.7_examples.tar.gz.
@@ -98,13 +98,14 @@ such as the following:
    mkdir widgetsolr
    cp -R solr/main tmp/solr_4.7_examples/solr/widgetsolr
 
-4. start the server
+4. Start the server with a command much like this.  The directories may be different depending on where you put the solr_examples
+   files etc... following the example above:
     
    ```
    java -Dsolr.home=tmp/solr_4.7_examples -Djetty.home=tmp/solr_4.7_examples -server \
     -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar tmp/solr_4.7_examples/start.jar 2> tmp/solr.log &
 
-If you go somwhere like here (depending on what port it picks) you should be able to verify it's running:
+If you go somwhere like here (depending on the port) you should be able to verify it's running:
 
     http://localhost:8983/solr/
 
@@ -113,7 +114,7 @@ If you go somwhere like here (depending on what port it picks) you should be abl
     java -Dsolr.solr.home=. -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar stmp/solr_4.7_examples/start.jar --stop
 
 
-3. Finally, to start vivo_widgets run the following command:
+3. Finally, to start vivo_widgets run something like the following command:
 
     ```shell
     $ PORT=8888 java -jar -Xmx500m \
@@ -122,7 +123,7 @@ If you go somwhere like here (depending on what port it picks) you should be abl
       target/scala-2.10/vivo-widgets.jar
     ```
 
-4. Browse to http://localhost:8888/.
+4. Browse to http://localhost:8888/widgets/builder?uri=.
 
 5. This will likely say "No Content" - because the Solr index is much like a database, and the database is empty at this point. 
 
