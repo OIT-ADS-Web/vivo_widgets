@@ -76,11 +76,11 @@ Vivo widgets needs a running instance of SOLR.  It has been tested with solr 4.7
 
 You will need to copy the ``solr/main``
 directory located here into the directory on the server where you have solr
-running.  That is determined be WidgetsSolr.directory property in the
+running.  That is determined by WidgetsSolr.directory property in the
 ``deploy.properties`` file (see above).
 
 
-If you are starting from scratch, without an already existing SOLR instance - you can follow steps
+If you are starting from scratch (without an already existing SOLR instance) you can follow steps
 such as the following:
 
 1. Download SOLR from http://lucene.apache.org/solr/
@@ -109,12 +109,12 @@ If you go somwhere like here (depending on the port) you should be able to verif
 
     http://localhost:8983/solr/
 
-(And when you are done, remember to run):
+And when you are done, remember to make it stop, by running something like this:
     
     java -Dsolr.solr.home=. -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar stmp/solr_4.7_examples/start.jar --stop
 
 
-3. Finally, to start vivo_widgets run something like the following command:
+3. Finally, to start vivo_widgets using the jar file run something like the following command:
 
     ```shell
     $ PORT=8888 java -jar -Xmx500m \
@@ -125,12 +125,13 @@ If you go somwhere like here (depending on the port) you should be able to verif
 
 4. Browse to http://localhost:8888/widgets/builder?uri=.
 
-5. This will likely say "No Content" - because the Solr index is much like a database, and the database is empty at this point. 
+5. This will likely say "No Content" - because the Solr index is much like a database, and the database is empty at this point.  But
+   it means it is running.  In order to give it content, see the Solr Index section below.
 
 ## Solr Index
 
 1. When you first start widgets and setup your database and solr location, you
-will need to reindex.  To reindex, run:
+will need to reindex.  To reindex, run (assuming you are running from the jar file on port 8888):
 
     ```
     $ curl -s -u username:password -X POST  \
@@ -188,7 +189,12 @@ If you want automatic code reloading, do the following:
 
 4. Browse to http://localhost:8080/builder?uri=.
 
-
+5. NOTE: Building the solr index will be a slightly different command in this case, becuase running via sbt does NOT add /widgets to 
+   the base url, and the default port is 8080:
+ 
+    $ curl -s -u username:password -X POST  \
+      http://127.0.0.1:8080/updates/rebuild/index
+ 
 ### Run the tests
 
     $ bin/sbt
