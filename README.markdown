@@ -189,7 +189,7 @@ If you want automatic code reloading, do the following:
 
 4. Browse to http://localhost:8080/builder?uri=.
 
-5. NOTE: Building the solr index will be a slightly different command in this case, becuase running via sbt does NOT add /widgets to 
+5. NOTE: Building the solr index will be a slightly different command in this case, because running via sbt does NOT add /widgets to 
    the base url, and the default port is 8080:
  
     $ curl -s -u username:password -X POST  \
