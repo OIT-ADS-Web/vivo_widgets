@@ -31,7 +31,6 @@ VIVO Widgets is made of up the following parts.
 
     ```
     $ bin/sbt assembly
-
     ```
 
 This will create an executable jar located at  
@@ -109,7 +108,7 @@ such as the following:
    ```
    java -Dsolr.home=tmp/solr_4.7_examples -Djetty.home=tmp/solr_4.7_examples -server \
     -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar tmp/solr_4.7_examples/start.jar 2> tmp/solr.log &
-  ```
+   ```
 If you go somwhere like here (depending on the port) you should be able to verify it's running:
 
   ```
@@ -118,7 +117,7 @@ If you go somwhere like here (depending on the port) you should be able to verif
 And when you are done, remember to make it stop, by running something like this:
     
     ```
-    java -Dsolr.solr.home=. -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar stmp/solr_4.7_examples/start.jar --stop
+    java -Dsolr.home=tmp/solr_4.7_examples  -server -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar tmp/solr_4.7_examples/start.jar --stop
     ```
 
 3. Finally, to start vivo_widgets using the jar file run something like the following command:
@@ -226,3 +225,4 @@ or to run only a few tests:
 * There is an old version of a Jena listener in ``listener/src`` that will no
   longer work with this version of vivo widgets.  It needs to be updated to
 support a new format of the json to update widgets.
+
