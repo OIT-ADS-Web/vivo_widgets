@@ -98,7 +98,7 @@ such as the following:
 3. Copy the solr configuration files in ```solr/main`` `into the configuration area of the local solr server.  For instance:
 
    ```
-   mkdir widgetsolr
+   mkdir tmp/solr_4.7_examples/solr/wwidgetsolr
    cp -R solr/main tmp/solr_4.7_examples/solr/widgetsolr
    ```
 
