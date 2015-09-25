@@ -97,23 +97,24 @@ such as the following:
 
 3. Copy the solr configuration files in ```solr/main`` `into the configuration area of the local solr server.  For instance:
 
-   ```
-   mkdir tmp/solr_4.7_examples/solr/wwidgetsolr
-   cp -R solr/main tmp/solr_4.7_examples/solr/widgetsolr
-   ```
+    ```
+    mkdir tmp/solr_4.7_examples/solr/widgetsolr
+    cp -R solr/main tmp/solr_4.7_examples/solr/widgetsolr
+    ```
 
 4. Start the server with a command much like this.  The directories may be different depending on where you put the solr_examples
    files etc... following the example above:
     
-   ```
-   java -Dsolr.home=tmp/solr_4.7_examples -Djetty.home=tmp/solr_4.7_examples -server \
-    -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar tmp/solr_4.7_examples/start.jar 2> tmp/solr.log &
-   ```
+    ```
+    java -Dsolr.home=tmp/solr_4.7_examples -Djetty.home=tmp/solr_4.7_examples -server \
+     -DSTOP.PORT=8079 -DSTOP.KEY=pleasestop -jar tmp/solr_4.7_examples/start.jar 2> tmp/solr.log &
+    ```
 If you go somwhere like here (depending on the port) you should be able to verify it's running:
 
+    ```
+     http://localhost:8983/solr/
   ```
-    http://localhost:8983/solr/
-  ```
+
 And when you are done, remember to make it stop, by running something like this:
     
     ```
@@ -159,15 +160,15 @@ substituting in the person's uri.
 
 3. Once you have data - you can see a page via id by sending the uri paramater. This is just an example:, 
 
-   ```
-   http://localhost:8888/widgets/builder?uri=https://scholars.duke.edu/individual/org50001204
-   ```
+    ```
+    http://localhost:8888/widgets/builder?uri=https://scholars.duke.edu/individual/org50001204
+    ```
 
 You can query for uri ids via solr itself:
 
-  ```  
-  http://localhost:8983/solr/#/vivowidgetcore/query
-  ```
+    ```  
+    http://localhost:8983/solr/#/vivowidgetcore/query
+    ```
   
 ## Developing Locally
 
@@ -201,23 +202,23 @@ If you want automatic code reloading, do the following:
 5. NOTE: Building the solr index will be a slightly different command in this case, because running via sbt does NOT add /widgets to 
    the base url, and the default port is 8080:
 
-   ``` 
-    $ curl -s -u username:password -X POST  \
+    ``` 
+     $ curl -s -u username:password -X POST  \
       http://127.0.0.1:8080/updates/rebuild/index
-   ```
+    ```
 
 ### Run the tests
 
-   ```
+    ```
     $ bin/sbt
     > test
-   ```
+    ```
 
 or to run only a few tests:
 
-  ```
-    > test-only edu.duke.oit.solr.test.GrantSpec edu.duke.oit.solr.test.CourseSpec
-  ```
+    ```
+     > test-only edu.duke.oit.solr.test.GrantSpec edu.duke.oit.solr.test.CourseSpec
+    ```
 
  
 ## Known Issues
