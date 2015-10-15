@@ -83,4 +83,14 @@ deploy.properties
 .project
 *.orig
 
-!Gemfile.lock
+#!Gemfile.lock
+Capfile
+Gemfile
+Gemfile.lock
+README_DUKE.md
+bin/pre_start.sh
+bin/solr_dev.sh
+bin/start_widgets.sh
+bin/vivo-widgets.service
+deploy.properties.erb
+docs/vivo_widgets.conf

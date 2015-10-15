@@ -1,0 +1,49 @@
+<%-- -*- sparql -*- --%>
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
+       ?mentorshipOverview ?mentorshipAvailabilities ?firstName ?lastName
+       ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
+       ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
+       ?imageThumbnailDownload
+WHERE {
+  <${ uri }> obo:ARG_2000028 ?individualVcard ;
+    vitro:mostSpecificType ?type ;
+    rdfs:label ?label ;
+    duke:duid ?alternateId .
+  ?individualVcard vcard:hasTitle ?titleVcard .
+  ?titleVcard vcard:title ?title .
+  OPTIONAL { <${ uri }> core:overview ?overview . }
+  OPTIONAL { <${ uri }> dukeact:mentorshipOverview ?mentorshipOverview . }
+  {
+    SELECT (group_concat(?availability; separator=", ") AS ?mentorshipAvailabilities)
+    WHERE {
+      <${uri}> dukeact:mentorshipAvailability ?availability.
+    }
+  }
+  OPTIONAL {
+    ?individualVcard vcard:hasName ?nameVcard .
+    OPTIONAL { ?nameVcard vcard:givenName ?firstName . }
+    OPTIONAL { ?nameVcard vcard:familyName ?lastName . }
+    OPTIONAL { ?nameVcard core:middleName ?middleName . }
+    OPTIONAL { ?nameVcard vcard:honorificSuffix ?suffixName . }
+    OPTIONAL { ?nameVcard vcard:honorificPrefix ?prefixName . }
+  }
+  OPTIONAL {
+    ?individualVcard vcard:hasEmail ?emailVcard .
+    ?emailVcard vcard:email ?primaryEmail .
+  }
+  OPTIONAL {
+    ?individualVcard vcard:hasTelephone ?phoneVcard .
+    ?phoneVcard vcard:telephone ?phoneNumber .
+  }
+  OPTIONAL { <${ uri }> duke:preferredCitationFormat ?preferredCitationFormat . }
+  OPTIONAL {
+    <${ uri }> vitro-public:mainImage ?imageUri .
+    ?imageUri  vitro-public:downloadLocation ?imageDownload .
+    ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
+    ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+  }
+}
+

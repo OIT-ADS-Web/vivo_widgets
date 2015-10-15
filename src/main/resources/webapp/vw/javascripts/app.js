@@ -62,7 +62,9 @@
         viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
   }
 
-  /* Clipboard from http://code.google.com/p/zeroclipboard/ */
+
+  // Clipboard from http://code.google.com/p/zeroclipboard/
+  
   function initializeClipboard() {
     var clip = null;
 
@@ -78,11 +80,30 @@
     });
     clip.addEventListener('complete', function (client, text) {
       $('#embed').effect("highlight", {}, 1500);
-
     });
     clip.glue( 'd_clip_button', 'd_clip_container' );
-
   }
+
+
+  // Clipboard code for handling JavaScript URL
+
+  function initializeClipboard2() {
+    var clip2 = null;
+
+    clip2 = new ZeroClipboard.Client();
+    clip2.setHandCursor( true );
+
+    clip2.addEventListener('mouseOver', function (client) {
+      // clip2.setText( text_to_get );
+      clip2.setText( $('#embed2').val() );
+
+    });
+    clip2.addEventListener('complete', function (client, text) {
+      $('#embed').effect("highlight", {}, 1500);
+    });
+    clip2.glue( 'js_d_clip_button', 'js_d_clip_container' );
+  }
+
 
   // Initialization
 
@@ -145,6 +166,7 @@
       renderSettings();
       // Update TextArea
       var script = '<script type="text/javascript" src="' + latestUrl + '.js' + latestParams + '"> <\/script>';
+
       $('#embed').val(script);
       // Update other feeds
       $("#rss").attr("href", latestUrl + ".rss" + latestParams);
@@ -152,6 +174,9 @@
       $("#jsonp").attr("href", latestUrl +".jsonp" + latestParams);
       $("#html").attr("href", latestUrl +".html" + latestParams);
       $("#js").attr("href", latestUrl + ".js" + latestParams);
+
+      var jsUrl = latestUrl + '.js' + latestParams;
+      $('#embed2').val(jsUrl);
 
       var fullUrl = groupUrl + "/complete/all";
       var fullParams = '?uri=' + $("#uri").attr("value");
@@ -183,8 +208,7 @@
     });
 
     initializeClipboard();
+    initializeClipboard2();
 
   });
-
-
 })();
