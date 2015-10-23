@@ -13,9 +13,8 @@ import java.util.NoSuchElementException
 import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
 
-object PersonIndexer extends SimpleConversion 
-  with Timer
-  with WidgetLogging 
+object PersonIndexer extends SimpleConversion
+  with WidgetLogging
 {
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
@@ -33,7 +32,6 @@ object PersonIndexer extends SimpleConversion
   }
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
-    log.debug("pull uri: " + uri)
     try {
       buildPerson(uri,vivo).foreach{ p =>
         val solrDoc = new SolrInputDocument()
@@ -42,16 +40,15 @@ object PersonIndexer extends SimpleConversion
         solrDoc.addField("group","people")
         solrDoc.addField("json",p.toJson)
         p.uris.map {uri => solrDoc.addField("uris",uri)}
-        log.info("buildDoc uri: " + uri)
         return Option(solrDoc)
       }
       return None
-    }// catch {
-      //case e:Throwable => {
-       // log.error("PersonIndexer error: ", e)
-        //return None
-      //}
-    //}
+    } catch {
+      case e:Throwable => {
+        log.error("PersonIndexer error: ", e)
+        None
+      }
+    }
   }
 
   def buildPerson(uri: String,vivo: Vivo): Option[Person] = {
@@ -61,51 +58,51 @@ object PersonIndexer extends SimpleConversion
 
       val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
       if (personData.size == 0) {
-        return None
+        None
+      } else {
+        log.debug("pull pubs")
+        val pubs          = Publication.fromUri(vivo, uriContext)
+        log.debug("pull awards")
+        val awards        = Award.fromUri(vivo, uriContext)
+        log.debug("pull artisticWorks")
+        val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
+        log.debug("pull grants")
+        val grants        = Grant.fromUri(vivo, uriContext)
+        log.debug("pull courses")
+        val courses       = Course.fromUri(vivo, uriContext)
+        log.debug("pull professionalActivities")
+        val professionalActivities = ProfessionalActivity.fromUri(vivo, uriContext)
+        log.debug("pull positions")
+        val positions     = Position.fromUri(vivo, uriContext)
+        log.debug("pull addresses")
+        val addresses     = Address.fromUri(vivo, uriContext)
+        log.debug("pull educations")
+        val educations    = Education.fromUri(vivo, uriContext)
+        log.debug("pull rAreas")
+        val rAreas        = ResearchArea.fromUri(vivo, uriContext)
+        log.debug("pull webpages")
+        val webpages      = Webpage.fromUri(vivo, uriContext)
+        log.debug("pull geoFocus")
+        val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
+
+        val p = Person.build(uri, personData.head, pubs, awards,
+                             artisticWorks, grants, courses,
+                             professionalActivities, positions,
+                             addresses, educations, rAreas, webpages,
+                             geoFocus)
+        log.info("buildPerson uri: " + uri)
+        Option(p)
       }
-
-      log.debug("pull pubs")
-      val pubs          = Publication.fromUri(vivo, uriContext)
-      log.debug("pull awards")
-      val awards        = Award.fromUri(vivo, uriContext)
-      log.debug("pull artisticWorks")
-      val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
-      log.debug("pull grants")
-      val grants        = Grant.fromUri(vivo, uriContext)
-      log.debug("pull courses")
-      val courses       = Course.fromUri(vivo, uriContext)
-      log.debug("pull professionalActivities")
-      val professionalActivities = ProfessionalActivity.fromUri(vivo, uriContext)
-      log.debug("pull positions")
-      val positions     = Position.fromUri(vivo, uriContext)
-      log.debug("pull addresses")
-      val addresses     = Address.fromUri(vivo, uriContext)
-      log.debug("pull educations")
-      val educations    = Education.fromUri(vivo, uriContext)
-      log.debug("pull rAreas")
-      val rAreas        = ResearchArea.fromUri(vivo, uriContext)
-      log.debug("pull webpages")
-      val webpages      = Webpage.fromUri(vivo, uriContext)
-      log.debug("pull geoFocus")
-      val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
-
-      val p = Person.build(uri, personData.head, pubs, awards,
-                           artisticWorks, grants, courses,
-                           professionalActivities, positions,
-                           addresses, educations, rAreas, webpages,
-                           geoFocus)
-      log.info("buildPerson uri: " + uri)
-      return Option(p)
-    }// catch {
-      //case e:NoSuchElementException => {
-       // log.error("PersonIndexer error: ", e)
-        //return None
-     // }
-      //case e:Throwable => {
-       // log.error("PersonIndexer error: ", e)
-        //return None
-      //}
-    //}
+    } catch {
+      case e:NoSuchElementException => {
+        log.error("PersonIndexer error: ", e)
+        None
+      }
+      case e:Throwable => {
+        log.error("PersonIndexer error: ", e)
+        None
+      }
+    }
   }
 
 }

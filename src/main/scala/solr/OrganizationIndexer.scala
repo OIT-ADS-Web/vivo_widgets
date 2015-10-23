@@ -9,30 +9,52 @@ import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
+import scala.collection.mutable.ListBuffer
+import scala.collection.JavaConversions._
 
-object OrganizationIndexer extends SimpleConversion 
-  with Timer
-  with ScalateTemplateStringify 
+object OrganizationIndexer extends SimpleConversion
+  with ScalateTemplateStringify
   with WidgetLogging {
 
   def index(uri: String,vivo: Vivo,solr: SolrServer) = {
-    val uriContext = Map("uri" -> uri)
+    indexAll(List(uri),vivo,solr)
+  }
 
+  def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
+    val docs: ListBuffer[SolrInputDocument] = new ListBuffer()
+    uris.foreach{ uri =>
+      buildDoc(uri,vivo).foreach { doc =>
+        docs.append(doc)
+      }
+    }
+    solr.add(docs.toIterable)
+    solr.commit(false,false)
+  }
+
+  def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
+    buildOrganization(uri,vivo).foreach{ o =>
+      val solrDoc = new SolrInputDocument()
+      solrDoc.addField("id",o.uri)
+      solrDoc.addField("group","organizations")
+      solrDoc.addField("json",o.toJson)
+      o.uris.map {uri => solrDoc.addField("uris",uri)}
+      return Option(solrDoc)
+    }
+    return None
+  }
+
+  def buildOrganization(uri: String,vivo: Vivo): Option[Organization] = {
+    log.debug("pull uri: " + uri)
+    val uriContext = Map("uri" -> uri)
     val organizationData = vivo.selectFromTemplate("sparql/organizationData.ssp", uriContext)
     if (organizationData.size > 0) {
       val grants = Grant.fromUri(vivo, uriContext, "sparql/organization/grants.ssp")
       val people = PersonReference.fromUri(vivo, uriContext)
 
       val o = Organization.build(uri, organizationData.head, people, grants)
-      timer("add org to solr") {
-        val solrDoc = new SolrInputDocument()
-        solrDoc.addField("id",o.uri)
-        solrDoc.addField("group","organizations")
-        solrDoc.addField("json",o.toJson)
-        o.uris.map {uri => solrDoc.addField("uris",uri)}
-        solr.add(solrDoc)
-      }
-    }
+      return Option(o)
+     }
+     None
   }
 
 }

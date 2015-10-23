@@ -34,7 +34,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val peopleUris = vivo.select(sparql).map(_('person))
     val parsedUris:ListBuffer[String] = new ListBuffer()
     for (p <- peopleUris) {
-       log.info("queuing uri: " + p)
+       log.debug("person>>>>>: " + p)
        parsedUris.append(p.toString.replaceAll("<|>",""))
     }
     PersonIndexer.indexAll(parsedUris.toList,vivo,solr)
@@ -47,10 +47,12 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/organization.ssp")
     log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql).map(_('organization))
+    val parsedUris:ListBuffer[String] = new ListBuffer()
     for (o <- organizationUris) {
       log.debug("org>>>>> " + o)
-      OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr)
+      parsedUris.append(o.toString.replaceAll("<|>",""))
     }
+    OrganizationIndexer.indexAll(parsedUris.toList,vivo,solr)
     log.info("finished indexing organizations")
     solr.commit()
   }
