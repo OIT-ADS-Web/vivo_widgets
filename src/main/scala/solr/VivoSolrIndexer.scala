@@ -32,12 +32,14 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/person.ssp")
     log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql).map(_('person))
+    val parsedUris:ListBuffer[String] = new ListBuffer()
     for (p <- peopleUris) {
-      log.debug("index uri: " + p)
-      PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr)
+       log.info("queuing uri: " + p)
+       parsedUris.append(p.toString.replaceAll("<|>",""))
     }
+    PersonIndexer.indexAll(parsedUris.toList,vivo,solr)
     log.info("finished indexing people")
-    solr.commit()
+    solr.commit(false,false)
   }
 
   def indexOrganizations() = {
