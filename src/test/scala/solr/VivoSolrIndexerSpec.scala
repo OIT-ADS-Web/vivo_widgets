@@ -25,7 +25,7 @@ class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
       // guard against running tests with bad db
       vivo.numPeople() must be_> (0)
     }
-    
+
     "create a retrievable person" in {
       vsi.indexPeople()
       val people = vivo.select(renderFromClassPath("sparql/person.ssp"))

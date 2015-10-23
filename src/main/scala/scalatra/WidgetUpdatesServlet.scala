@@ -71,7 +71,19 @@ class WidgetUpdatesFilter extends ScalatraFilter
       case _ => "Not a valid request"
     }
   }
-  
+
+  post("/updates/uris") {
+    basicAuth
+    WidgetsConfig.prepareCore
+    params.get("message") match {
+      case Some(message:String) => {
+        BatchIndexUpdater.actor ! message
+        Json.toJson(Map("message" -> "Sent to BatchIndexupdater"))
+      }
+      case _ => "Not a valid request"
+    }
+  }
+
   get("/updates/test") {
     "test---"
   }
