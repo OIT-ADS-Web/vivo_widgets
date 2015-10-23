@@ -65,9 +65,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     params.get("message") match {
       case Some(message:String) => {
-        val system =  JenaCache.system
-        val indexUpdater = system.actorOf(Props[IndexUpdater], name = "indexupdater")
-        indexUpdater ! message
+        IndexUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to Indexupdater"))
       }
       case _ => "Not a valid request"
