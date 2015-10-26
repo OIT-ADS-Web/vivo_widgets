@@ -32,12 +32,12 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/person.ssp")
     log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql).map(_('person))
-    for (p <- peopleUris) {
-      log.debug("index uri: " + p)
-      PersonIndexer.index(p.toString.replaceAll("<|>",""),vivo,solr)
+    val parsedUris = peopleUris.map( p => p.toString.replaceAll("<|>","") )
+    if (parsedUris.size() > 0) {
+      PersonIndexer.indexAll(parsedUris.toList,vivo,solr)
     }
     log.info("finished indexing people")
-    solr.commit()
+    solr.commit(false,false)
   }
 
   def indexOrganizations() = {
@@ -45,16 +45,15 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/organization.ssp")
     log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql).map(_('organization))
-    for (o <- organizationUris) {
-      log.debug("org>>>>> " + o)
-      OrganizationIndexer.index(o.toString.replaceAll("<|>",""),vivo,solr)
+    val parsedUris = organizationUris.map( o => o.toString.replaceAll("<|>","") )
+    if (parsedUris.size() > 0) {
+      OrganizationIndexer.indexAll(parsedUris.toList,vivo,solr)
     }
     log.info("finished indexing organizations")
-    solr.commit()
+    solr.commit(false,false)
   }
 
   def indexAll() = {
-    // import ExecutionContext.Implicits.global
     implicit val executorService = Executors.newFixedThreadPool(2)
     implicit val executorContext = ExecutionContext.fromExecutorService(executorService)
     val futureList = List(
@@ -67,9 +66,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
         log.info("done indexing people and organizations.")
       }
     }
-
     Await.ready(future, Duration(22, HOURS))
-
   }
 
   def indexAllSerially() = {
@@ -113,12 +110,12 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
           case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
         }
       }
-      personUris.toSet.map { uri:String =>
-         reindexPerson(uri)
-      }
-      organizationUris.toSet.map { uri:String =>
-         reindexOrganization(uri)
-      }
+    }
+    if (personUris.size() > 0) {
+      PersonIndexer.indexAll(personUris.toSet.toList,vivo,solr)
+    }
+    if (organizationUris.size() > 0) {
+      OrganizationIndexer.indexAll(organizationUris.toSet.toList, vivo, solr)
     }
     solr.commit()
   }
