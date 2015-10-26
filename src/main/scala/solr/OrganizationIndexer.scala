@@ -9,7 +9,6 @@ import edu.duke.oit.vw.scalatra.ScalateTemplateStringify
 
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
-import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
 
 object OrganizationIndexer extends SimpleConversion
@@ -21,14 +20,8 @@ object OrganizationIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
-    val docs: ListBuffer[SolrInputDocument] = new ListBuffer()
-    uris.foreach{ uri =>
-      buildDoc(uri,vivo).foreach { doc =>
-        docs.append(doc)
-      }
-    }
+    val docs = uris.map( uri => buildDoc(uri,vivo)).flatten
     solr.add(docs.toIterable)
-    solr.commit(false,false)
   }
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {

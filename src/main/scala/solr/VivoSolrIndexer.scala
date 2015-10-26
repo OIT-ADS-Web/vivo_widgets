@@ -32,12 +32,10 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/person.ssp")
     log.debug("sparql>>>> " + sparql)
     val peopleUris = vivo.select(sparql).map(_('person))
-    val parsedUris:ListBuffer[String] = new ListBuffer()
-    for (p <- peopleUris) {
-       log.debug("person>>>>>: " + p)
-       parsedUris.append(p.toString.replaceAll("<|>",""))
+    val parsedUris = peopleUris.map( p => p.toString.replaceAll("<|>","") )
+    if (parsedUris.size() > 0) {
+      PersonIndexer.indexAll(parsedUris.toList,vivo,solr)
     }
-    PersonIndexer.indexAll(parsedUris.toList,vivo,solr)
     log.info("finished indexing people")
     solr.commit(false,false)
   }
@@ -47,18 +45,15 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val sparql = renderFromClassPath("sparql/organization.ssp")
     log.debug("sparql>>>> " + sparql)
     val organizationUris = vivo.select(sparql).map(_('organization))
-    val parsedUris:ListBuffer[String] = new ListBuffer()
-    for (o <- organizationUris) {
-      log.debug("org>>>>> " + o)
-      parsedUris.append(o.toString.replaceAll("<|>",""))
+    val parsedUris = organizationUris.map( o => o.toString.replaceAll("<|>","") )
+    if (parsedUris.size() > 0) {
+      OrganizationIndexer.indexAll(parsedUris.toList,vivo,solr)
     }
-    OrganizationIndexer.indexAll(parsedUris.toList,vivo,solr)
     log.info("finished indexing organizations")
-    solr.commit()
+    solr.commit(false,false)
   }
 
   def indexAll() = {
-    // import ExecutionContext.Implicits.global
     implicit val executorService = Executors.newFixedThreadPool(2)
     implicit val executorContext = ExecutionContext.fromExecutorService(executorService)
     val futureList = List(
@@ -71,9 +66,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
         log.info("done indexing people and organizations.")
       }
     }
-
     Await.ready(future, Duration(22, HOURS))
-
   }
 
   def indexAllSerially() = {
@@ -117,12 +110,12 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
           case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
         }
       }
-      personUris.toSet.map { uri:String =>
-        PersonIndexer.index(uri, vivo, solr)
-      }
-      organizationUris.toSet.map { uri:String =>
-        OrganizationIndexer.index(uri, vivo, solr)
-      }
+    }
+    if (personUris.size() > 0) {
+      PersonIndexer.indexAll(personUris.toSet.toList,vivo,solr)
+    }
+    if (organizationUris.size() > 0) {
+      OrganizationIndexer.indexAll(organizationUris.toSet.toList, vivo, solr)
     }
     solr.commit()
   }
