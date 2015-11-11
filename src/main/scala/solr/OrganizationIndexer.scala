@@ -20,8 +20,10 @@ object OrganizationIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
-    val docs = uris.map( uri => buildDoc(uri,vivo)).flatten
-    solr.add(docs.toIterable)
+    uris.grouped(200).foreach{ groupedUris =>
+      val docs = groupedUris.map( uri => buildDoc(uri,vivo)).flatten
+      solr.add(docs.toIterable)
+    }
   }
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
