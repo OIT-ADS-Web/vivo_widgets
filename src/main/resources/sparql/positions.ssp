@@ -2,11 +2,11 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?rank) AS ?rank) 
-  #(MIN(?dateUri) AS ?dateUri) (MIN(?startDatetimeUri) AS ?startDatetimeUri) (MIN(?startYear) AS ?startYear)
+SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?rank) AS ?rank) (MIN(?dateUri) AS ?dateUri) 
+  (MIN(?startDatetimeUri) AS ?startDatetimeUri) (MIN(?startYear) AS ?startYear) 
   (MIN(?organizationUri) AS ?organizationUri) (MIN(?organizationLabel) AS ?organizationLabel)
   (MIN(?schoolUri) AS ?schoolUri) (MIN(?schoolLabel) AS ?schoolLabel)
-  #(MIN(?endDatetimeUri) AS ?endDatetimeUri) (MIN(?endYear) AS ?endYear)
+  (MIN(?endDatetimeUri) AS ?endDatetimeUri) (MIN(?endYear) AS ?endYear)
   (MIN(?personUri) AS ?personUri)
 WHERE
 {
@@ -14,22 +14,23 @@ WHERE
   ?uri a core:Position ;
     vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
-    #core:dateTimeInterval ?dateUri ;
     core:relates ?organizationUri .
   ?organizationUri a foaf:Organization.
-  #?dateUri core:start ?startDatetimeUri .
-  #?startDatetimeUri core:dateTime ?startYear .
 
   ?organizationUri rdfs:label ?organizationLabel .
 
   ?organizationUri obo:BFO_0000050* ?schoolUri. 
   ?schoolUri vitro:mostSpecificType core:School; rdfs:label ?schoolLabel. 
   FILTER (?schoolUri NOT IN (<https://scholars.duke.edu/individual/org50000021>)) 
+    
 
-  #OPTIONAL {
-   # ?dateUri core:end ?endDatetimeUri . 
-    #?endDatetimeUri core:dateTime ?endYear .
-  #}
+  OPTIONAL {
+  ?uri core:dateTimeInterval ?dateUri .
+  ?dateUri core:start ?startDatetimeUri . 
+  ?startDatetimeUri core:dateTime ?startYear .
+    ?dateUri core:end ?endDatetimeUri . 
+    ?endDatetimeUri core:dateTime ?endYear .
+  }
   ?uri core:rank ?rank .
   BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
