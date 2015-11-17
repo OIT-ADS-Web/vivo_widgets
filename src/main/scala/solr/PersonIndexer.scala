@@ -20,7 +20,7 @@ object PersonIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
-    uris.grouped(10).foreach{ groupedUris =>
+    uris.grouped(100).foreach{ groupedUris =>
       val docs = groupedUris.map( uri => buildDoc(uri,vivo)).flatten
       solr.add(docs.toIterable)
     }
