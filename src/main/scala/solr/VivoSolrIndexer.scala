@@ -100,14 +100,20 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     val personUris:ListBuffer[String] = ListBuffer()
     val organizationUris:ListBuffer[String] = ListBuffer()
     uris.foreach{ uri =>
-      var query = new SolrQuery();
-      query.setQuery( "uris:\"" + uri + "\"" )
-      var rsp = solr.query( query )
-      val docs:SolrDocumentList = rsp.getResults()
-      docs.foreach { doc =>
-        doc.getFieldValue("group").asInstanceOf[String] match {
-          case "people" => personUris += doc.getFieldValue("id").asInstanceOf[String]
-          case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
+      if (uri contains "individual/org") {
+        organizationUris += uri
+      } else if (uri contains "individual/per") {
+        personUris+= uri
+      } else {
+        var query = new SolrQuery();
+        query.setQuery( "uris:\"" + uri + "\"" )
+        var rsp = solr.query( query )
+        val docs:SolrDocumentList = rsp.getResults()
+        docs.foreach { doc =>
+          doc.getFieldValue("group").asInstanceOf[String] match {
+            case "people" => personUris += doc.getFieldValue("id").asInstanceOf[String]
+            case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
+          }
         }
       }
     }
