@@ -102,19 +102,8 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     uris.foreach{ uri =>
       if (uri contains "individual/org") {
         organizationUris += uri
-      } else if (uri contains "individual/per") {
+      } else if (uri matches ".*individual/per[^_]*") {
         personUris+= uri
-      } else {
-        var query = new SolrQuery();
-        query.setQuery( "uris:\"" + uri + "\"" )
-        var rsp = solr.query( query )
-        val docs:SolrDocumentList = rsp.getResults()
-        docs.foreach { doc =>
-          doc.getFieldValue("group").asInstanceOf[String] match {
-            case "people" => personUris += doc.getFieldValue("id").asInstanceOf[String]
-            case "organizations" => organizationUris += doc.getFieldValue("id").asInstanceOf[String]
-          }
-        }
       }
     }
     if (personUris.size() > 0) {
