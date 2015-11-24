@@ -32,7 +32,7 @@ object PersonIndexer extends SimpleConversion
     buildPerson(uri,vivo).foreach{ p =>
       val solrDoc = new SolrInputDocument()
       solrDoc.addField("id",p.uri)
-      solrDoc.addField("alternateId", p.personAttributes.get("alternateId"))
+      solrDoc.addField("alternateId", p.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
       solrDoc.addField("json",p.toJson)
       p.uris.map {uri => solrDoc.addField("uris",uri)}
