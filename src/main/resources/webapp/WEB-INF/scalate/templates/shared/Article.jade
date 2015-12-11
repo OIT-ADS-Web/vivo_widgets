@@ -1,5 +1,7 @@
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 -@ val year: String
+-@ val startDate: String
+-@ val finishDate: String
 
 -# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
 -@ import var it: edu.duke.oit.vw.models.Publication
@@ -21,7 +23,7 @@
   | #{get("conferenceName")}.
 - if(!empty(get("conferenceLocation")))
   | #{get("conferenceLocation")}.
-- if(!empty(get("startDate")))
-  | #{get("startDate")}
-- if(!empty(get("finishDate")))
-  | - #{get("finishDate")}
+- if(!empty(startDate))
+  | #{startDate}
+- if(!empty(finishDate))
+  | - #{finishDate}

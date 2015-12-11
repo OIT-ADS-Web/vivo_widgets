@@ -60,8 +60,16 @@ WHERE {
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
-  OPTIONAL {?publication core:start ?startDate .}             
-  OPTIONAL {?publication core:end ?finishDate .}                      
+
+  OPTIONAL {?publication core:start ?startDate .}
+    #OPTIONAL { 
+      #?publication core:start ?datetime . ?datetime core:dateTime ?startDate .
+    #}             
+  OPTIONAL {?publication core:end ?finishDate .}      
+    #OPTIONAL { 
+      #?publication core:end ?datetime . ?datetime core:dateTime ?finishDate .
+    #}
+
   OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
   OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .} 
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}
