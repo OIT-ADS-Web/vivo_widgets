@@ -13,7 +13,8 @@ SELECT ?publication (MIN(?label) AS ?label) (MIN(?type) AS ?type)
  (MIN(?isFavorite) AS ?isFavorite) (MIN(?parentBookTitle) AS ?parentBookTitle)
  (MIN(?doi) AS ?doi) (MIN(?abstract) AS ?abstract) (MIN(?pmid) AS ?pmid)
  (MIN(?pmcid) AS ?pmcid) (MIN(?publicationSource) AS ?publicationSource)
- (MIN(?subtypes) AS ?subtypes) (MIN(?startDate) AS ?startDate)
+ (MIN(?subtypes) AS ?subtypes) (MIN(?datetimeStart) AS ?datetimeStart) 
+ (MIN(?startDate) AS ?startDate) (MIN(?datetimeFinish) AS ?datetimeFinish)
  (MIN(?finishDate) AS ?finishDate) (MIN(?conferenceName) AS ?conferenceName)
  (MIN(?conferenceLocation) AS ?conferenceLocation) (MIN(?chicagoCitation) AS ?chicagoCitation)
  (MIN(?mlaCitation) AS ?mlaCitation) (MIN(?apaCitation) AS ?apaCitation)
@@ -61,14 +62,12 @@ WHERE {
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
 
-  OPTIONAL {?publication core:start ?startDate .}
-    #OPTIONAL { 
-      #?publication core:start ?datetime . ?datetime core:dateTime ?startDate .
-    #}             
-  OPTIONAL {?publication core:end ?finishDate .}      
-    #OPTIONAL { 
-      #?publication core:end ?datetime . ?datetime core:dateTime ?finishDate .
-    #}
+  OPTIONAL { 
+    ?publication core:start ?datetimeStart . ?datetimeStart core:dateTime ?startDate .
+  }                 
+  OPTIONAL { 
+    ?publication core:end ?datetimeFinish . ?datetimeFinish core:dateTime ?finishDate .
+  }
 
   OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
   OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .} 
