@@ -7,6 +7,9 @@
 
 - val year = it.getOrElse("year","").split("-")(0)
 
+- val startDate = it.getOrElse("startDate","")
+- val finishDate = it.getOrElse("finishDate","")
+
 - formatting match 
   - case "abbreviated" =>
     span
@@ -14,5 +17,5 @@
       - if (!empty(year))
         | (#{year})
   - case _ =>
-    = render(tpath("shared/" + subType + ".jade"), Map("it" -> it, "year" -> year))
+    = render(tpath("shared/" + subType + ".jade"), Map("it" -> it, "year" -> year, "startDate" -> startDate, "finishDate" -> finishDate))
     -# span #{label} (#{year}) #{vivoType} - #{subType}
