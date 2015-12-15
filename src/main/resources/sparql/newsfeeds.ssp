@@ -1,0 +1,16 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+select ?subclass (MIN(?newsObj) AS ?newsObj) (MIN(?newsName) AS ?newsName)
+(MIN(?datetime) AS ?datetime) (MIN(?newsSource) AS ?newsSource)
+(MIN(?newsLink) AS ?newsLink)
+where {
+  ?subject ?property ?newsObj .
+  ?newsObj rdfs:label ?newsName .
+  ?newsObj duke:source ?newsSource .
+  ?newsObj duke:linkToItem ?newsLink .
+  ?newsObj vivo:dateTimeValue ?dateTimeObj .
+  ?dateTimeObj vivo:dateTime ?datetime .
+  ?newsObj vitro:mostSpecificType ?subclass .
+}
+order by ?subclass desc(?dateTimeObj) asc(?newsName)
