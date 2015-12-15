@@ -16,7 +16,11 @@
 ul(style=ulStyle)
   - for (newsfeed <- newsfeeds)
     li(style=liStyle) 
-      | #{newsfeed.label}
+      | #{newsfeed.newsName}
+      | #{newsfeed.newsSource}
+      | #{newsfeed.newsLink}
+      | #{newsfeed.datetime}
+
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 
