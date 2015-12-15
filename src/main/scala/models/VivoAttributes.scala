@@ -53,23 +53,12 @@ class VivoAttributes(uri:String,
     new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(date)
   }
 
-
-
   def officialStartDateKey: String = "startDate"
 
   def officialStartDate: Date = {
     val startDate = get(officialStartDateKey)
-    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(startDate)
+    new SimpleDateFormat("yyyy-MM-dd").parse(startDate)
   }
-
-  def officialFinishDateKey: String = "finishDate"
-
-  def officialFinishDate: Date = {
-    val finishDate = get(officialFinishDateKey)
-    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(finishDate)
-  }
-
-
 
   def withinTimePeriod(start: Date, end: Date): Boolean = {
     if (get(officialDateKey) == null) {

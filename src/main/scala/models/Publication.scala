@@ -22,10 +22,6 @@ case class Publication(uri:String,
     "startDate"
   }
 
-  override def officialFinishDateKey = {
-    "finishDate"
-  }
-
   def subType = {
     val regex = "(.*)/([a-zA-Z0-9.\\-]+)(#)?([a-zA-Z0-9.\\-]+)?".r
     val tmpType = vivoType match {

@@ -259,7 +259,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       // SHOULD TEST THESE
       //NEED TO ADD JOURNAL "publishedIn" -> "",
       //"publicationVenue" -> "http://localhost/individual/jou1938-808X",
-      //"publishedBy" -> "",
+      "publishedBy" -> "Springer New York LLC",
       //"parentBookTitle" -> "",
       //"pmcid" -> "",
       //"subtypes" -> "",
