@@ -63,10 +63,13 @@ WHERE {
   OPTIONAL {?publication duke:subtypes ?subtypes}
 
   OPTIONAL { 
-    ?publication core:start ?datetimeStart . ?datetimeStart core:dateTime ?startDate .
+    ?publication core:start ?datetimeStart . 
+    ?datetimeStart core:dateTime ?startDate .
+    ?datetimeStart core:dateTimePrecision ?startDatePrecision .
   }                 
   OPTIONAL { 
-    ?publication core:end ?datetimeFinish . ?datetimeFinish core:dateTime ?finishDate .
+    ?publication core:end ?datetimeFinish . 
+    ?datetimeFinish core:dateTime ?finishDate .
   }
 
   OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
