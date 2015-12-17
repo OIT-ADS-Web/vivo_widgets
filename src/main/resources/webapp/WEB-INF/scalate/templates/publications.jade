@@ -14,8 +14,14 @@
 
 ul(style=ulStyle)
   - for(publication <- publications)
+    - val rawStartDate = publication.get("startDate")
+    - val startDateSplit = rawStartDate.split("-")
+    -# ^ this is triggering a "java.lang.NullPointerException", which is odd because the same structure in artistic_works is not problematic
+    
+    - val startDateYear = startDateSplit(0)
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
+      | #{startDateYear}...
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"

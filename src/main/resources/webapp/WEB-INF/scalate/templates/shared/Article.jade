@@ -6,15 +6,6 @@
 -# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
 -@ import var it: edu.duke.oit.vw.models.Publication
 
--# val rawStartDate = it.get("startDate")
--# val startDateParts = rawStartDate.split("-")
--# val startDate = it.get("startDatePrecision").split("#")(1) match
-  -# case "yearPrecision" => startDateParts(0)
-  -# case "yearMonthPrecision" =>
-    -# startDateParts(1) + "/" + startDateParts(0)
-  -# case "yearMonthDayPrecision" =>
-    -# startDateParts(1) + "/" + startDateParts(2).split("T")(0) + "/" + startDateParts(0)
-
 
 // = authors.mkString("; ")
 - if (!empty(get("authorList")))
@@ -35,9 +26,5 @@
   | #{get("conferenceName")}.
 - if(!empty(get("conferenceLocation")))
   | #{get("conferenceLocation")}.
-- if(!empty(startDate))
-  | #{startDate}
 - if(!empty(finishDate))
   | - #{finishDate}
--# if(!empty(startDatePrecision))
--#  | . #{startDatePrecision}
