@@ -1,16 +1,34 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-select ?subclass (MIN(?newsObj) AS ?newsObj) (MIN(?newsName) AS ?newsName)
-(MIN(?datetime) AS ?datetime) (MIN(?newsSource) AS ?newsSource)
-(MIN(?newsLink) AS ?newsLink)
-where {
-  ?subject ?property ?newsObj .
-  ?newsObj rdfs:label ?newsName .
-  ?newsObj duke:source ?newsSource .
-  ?newsObj duke:linkToItem ?newsLink .
-  ?newsObj vivo:dateTimeValue ?dateTimeObj .
-  ?dateTimeObj vivo:dateTime ?datetime .
-  ?newsObj vitro:mostSpecificType ?subclass .
+SELECT
+	?newsObj 
+	(MIN(?subclass) AS ?subclass) 
+	(MIN(?newsName) AS ?newsName) 
+	(MIN(?datetime) AS ?datetime) 
+	(MIN(?newsSource) AS ?newsSource) 
+	(MIN(?newsLink) AS ?newsLink)
+WHERE 
+{
+  <${uri}> obo:RO_0000056 ?newsObj .
+  ?newsObj a core:NewsRelease ;
+  	rdfs:label ?newsName ;
+    duke:source ?newsSource ;
+    duke:linkToItem ?newsLink ;
+    vivo:dateTimeValue ?dateTimeObj ;
+    vivo:dateTime ?datetime ;
+    vitro:mostSpecificType ?subclass .
 }
-order by ?subclass desc(?dateTimeObj) asc(?newsName)
+
+# where {
+#  <${uri}> core:relates ?newsObj .
+#  # ?newsObj rdf:type core:NewsRelease .
+#  # ?newsObj a core:NewsRelease .
+#  ?newsObj rdfs:label ?newsName .
+#  ?newsObj duke:source ?newsSource .
+#  ?newsObj duke:linkToItem ?newsLink .
+#  ?newsObj vivo:dateTimeValue ?dateTimeObj .
+#  ?dateTimeObj vivo:dateTime ?datetime .
+#  ?newsObj vitro:mostSpecificType ?subclass .
+# }
+#order by ?subclass desc(?dateTimeObj) asc(?newsName)
