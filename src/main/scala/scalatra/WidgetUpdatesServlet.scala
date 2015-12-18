@@ -72,6 +72,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     }
   }
 
+  /*
   post("/updates/uris") {
     basicAuth
     WidgetsConfig.prepareCore
@@ -83,6 +84,32 @@ class WidgetUpdatesFilter extends ScalatraFilter
       case _ => "Not a valid request"
     }
   }
+  */
+
+  post("/updates/people/uris") {
+    basicAuth
+    WidgetsConfig.prepareCore
+    params.get("message") match {
+      case Some(message:String) => {
+        BatchPeopleUpdater.actor ! message
+        Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
+      }
+      case _ => "Not a valid request"
+    }
+  }
+
+  post("/updates/organization/uris") {
+    basicAuth
+    WidgetsConfig.prepareCore
+    params.get("message") match {
+      case Some(message:String) => {
+        BatchOrganizationUpdater.actor ! message
+        Json.toJson(Map("message" -> "Sent to BatchOrganizationUpdater"))
+      }
+      case _ => "Not a valid request"
+    }
+  }
+
 
   get("/updates/test") {
     "test---"

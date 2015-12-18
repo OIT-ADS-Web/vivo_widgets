@@ -7,21 +7,23 @@ import edu.duke.oit.vw.solr.VivoSolrIndexer
 import akka.actor.Actor._
 import akka.actor.{Actor,ActorSystem,Props}
 
-object BatchIndexUpdater {
+object BatchPeopleUpdater {
 
-  val system = ActorSystem("BatchIndexUpdater")
-  val actor = system.actorOf(Props[BatchIndexUpdater],name = "batchUpdateActor" )
+  val system = ActorSystem("BatchPeopleUpdater")
+  val actor = system.actorOf(Props[BatchPeopleUpdater],name = "batchUpdateActor" )
 
 }
 
 import edu.duke.oit.vw.utils._
 
+/*
 case class BatchUpdateMessage(uris:List[String], from:Option[String])
-
+*/
 
 /**
  * Wraps the lift-json parsing and extraction of a person.
  */
+/*
 object BatchUpdateMessage {
   def apply(json:String) = {
     import net.liftweb.json._
@@ -32,9 +34,9 @@ object BatchUpdateMessage {
     j.extract[BatchUpdateMessage]
   }
 }
+*/
 
-
-class BatchIndexUpdater extends Actor {
+class BatchPeopleUpdater extends Actor {
 
   def receive = {
     case msg:String => {
@@ -44,7 +46,7 @@ class BatchIndexUpdater extends Actor {
       import edu.duke.oit.vw.scalatra.WidgetsConfig
 
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
-      vsi.reindexUris(updateMessage.uris)
+      vsi.reindexPeopleUris(updateMessage.uris)
     }
     case _ => { 
       println(">> no message!!")
