@@ -15,15 +15,20 @@
 ul(style=ulStyle)
   - for(publication <- publications)
     - val rawStartDate = publication.getOrElse("startDate","")
-    - val startDateSplit = rawStartDate.split("-")
-    -# ^ this is triggering a "java.lang.NullPointerException", which is odd because the same structure in artistic_works is not problematic
-    - val startDateYear = startDateSplit(0)
+    - val startDateParts = rawStartDate.split("T")
+    -# startDateParts(1) throws error: "(java.lang.ArrayIndexOutOfBoundsException: 1)""
+    - val startDateImproved = startDateParts(0)
+
+    - val rawFinishDate = publication.getOrElse("finishDate","")
+    - val finishDateParts = rawFinishDate.split("T")
+    - val finishDateImproved = finishDateParts(0)
 
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
-      - if(!empty(rawStartDate))
-      -#| Start Date in Publications Template: #{rawStartDate}
-      | #{startDateYear}...
+      - if(!empty(startDateImproved))
+      | #{startDateImproved}
+      - if(!empty(finishDateImproved))
+      | - #{finishDateImproved}
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
