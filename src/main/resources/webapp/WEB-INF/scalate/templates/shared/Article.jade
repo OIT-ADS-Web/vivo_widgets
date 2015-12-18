@@ -26,5 +26,7 @@
   | #{get("conferenceName")}.
 - if(!empty(get("conferenceLocation")))
   | #{get("conferenceLocation")}.
+  - if(!empty(startDate))
+  | #{startDate}
 - if(!empty(finishDate))
   | - #{finishDate}
