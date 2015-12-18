@@ -5,19 +5,24 @@ SELECT
 	?newsObj 
 	(MIN(?subclass) AS ?subclass) 
 	(MIN(?newsName) AS ?newsName) 
-	(MIN(?datetime) AS ?datetime) 
-	(MIN(?newsSource) AS ?newsSource) 
 	(MIN(?newsLink) AS ?newsLink)
+	(MIN(?newsSource) AS ?newsSource) 
+	(MIN(?datetimeObj) AS ?datetimeObj)
+	(MIN(?datetime) AS ?datetime) 
 WHERE 
 {
-  <${uri}> obo:RO_0000056 ?newsObj .
+  <${uri}> core:relates ?newsObj .
   ?newsObj a core:NewsRelease ;
+  	vitro:mostSpecificType ?subclass ;
   	rdfs:label ?newsName ;
-    duke:source ?newsSource ;
-    duke:linkToItem ?newsLink ;
-    vivo:dateTimeValue ?dateTimeObj ;
-    vivo:dateTime ?datetime ;
-    vitro:mostSpecificType ?subclass .
+  	duke:linkToItem ?newsLink .
+  OPTIONAL {
+    ?newsObj vivo:dateTimeValue ?dateTimeObj .
+    ?dateTimeObj vivo:dateTime ?datetime .
+  }
+  OPTIONAL {	
+    ?newsObj duke:source ?newsSource .
+  }    
 }
 
 # where {
