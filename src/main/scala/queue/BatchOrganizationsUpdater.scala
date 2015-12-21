@@ -48,7 +48,8 @@ class BatchOrganizationsUpdater extends Actor {
       import edu.duke.oit.vw.scalatra.WidgetsConfig
 
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
-      vsi.reindexOrganizationsUris(updateMessage.uris)
+      //vsi.reindexOrganizationsUris(updateMessage.uris)
+      vsi.reindexOrganizations(updateMessage.uris)
     }
     case _ => { 
       println(">> no message!!")

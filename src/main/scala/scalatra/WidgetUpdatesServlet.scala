@@ -103,7 +103,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     params.get("message") match {
       case Some(message:String) => {
-        BatchOrganizationUpdater.actor ! message
+        BatchOrganizationsUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to BatchOrganizationUpdater"))
       }
       case _ => "Not a valid request"
