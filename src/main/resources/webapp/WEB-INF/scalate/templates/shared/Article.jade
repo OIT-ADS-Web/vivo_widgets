@@ -14,6 +14,14 @@
 - if(!empty(get("issue"))) 
   | (#{get("issue")})
 - if(!empty(get("startPage")))
-  |  : #{get("startPage")}
+  | : #{get("startPage")}
 - if(!empty(get("endPage")))
-  | -  #{get("endPage")}
+  | - #{get("endPage")}
+- if(!empty(get("conferenceName")))
+  | #{get("conferenceName")}.
+- if(!empty(get("conferenceLocation")))
+  | #{get("conferenceLocation")}.
+- if(!empty(get("startDate")))
+  | #{get("startDate")}
+- if(!empty(get("finishDate")))
+  | - #{get("finishDate")}

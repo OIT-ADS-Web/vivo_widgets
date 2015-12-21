@@ -5,7 +5,7 @@ SELECT ?agreement (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?roleName) 
        (MIN(?awardedByUri) AS ?awardedByUri) (MIN(?administeredBy) AS ?administeredBy) (MIN(?administeredByUri) AS ?administeredByUri) 
 WHERE {
   <${uri}> obo:RO_0000053 ?role .
-  ?role a core:InvestigatorRole ;
+  ?role a core:ResearcherRole ;
     rdfs:label ?roleName ;
     core:relatedBy ?agreement .
   ?agreement vitro:mostSpecificType ?type ;

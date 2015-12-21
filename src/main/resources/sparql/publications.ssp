@@ -13,7 +13,9 @@ SELECT ?publication (MIN(?label) AS ?label) (MIN(?type) AS ?type)
  (MIN(?isFavorite) AS ?isFavorite) (MIN(?parentBookTitle) AS ?parentBookTitle)
  (MIN(?doi) AS ?doi) (MIN(?abstract) AS ?abstract) (MIN(?pmid) AS ?pmid)
  (MIN(?pmcid) AS ?pmcid) (MIN(?publicationSource) AS ?publicationSource)
- (MIN(?subtypes) AS ?subtypes) (MIN(?chicagoCitation) AS ?chicagoCitation)
+ (MIN(?subtypes) AS ?subtypes) (MIN(?startDate) AS ?startDate)
+ (MIN(?finishDate) AS ?finishDate) (MIN(?conferenceName) AS ?conferenceName)
+ (MIN(?conferenceLocation) AS ?conferenceLocation) (MIN(?chicagoCitation) AS ?chicagoCitation)
  (MIN(?mlaCitation) AS ?mlaCitation) (MIN(?apaCitation) AS ?apaCitation)
  (MIN(?icmjeCitation) AS ?icmjeCitation) (MIN(?authorshipType) AS ?authorshipType)
 WHERE {
@@ -58,6 +60,10 @@ WHERE {
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
+  OPTIONAL {?publication core:start ?startDate .}             
+  OPTIONAL {?publication core:end ?finishDate .}                      
+  OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
+  OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .} 
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
