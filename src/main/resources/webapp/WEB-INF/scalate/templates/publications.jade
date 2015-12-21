@@ -22,6 +22,9 @@ ul(style=ulStyle)
     - val rawFinishDate = publication.getOrElse("finishDate","")
     - val finishDateParts = rawFinishDate.split("T")
     - val finishDateImproved = finishDateParts(0)
+    -# val finishDateYear = finishDateImproved.split("-")(0)
+    -# val finishDateMonth = finishDateImproved.substring(0,1)
+    -# val finishDateDay = finishDateImproved.split("-")(2)
 
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
@@ -29,6 +32,17 @@ ul(style=ulStyle)
       | #{startDateImproved}
       - if(!empty(finishDateImproved))
       | - #{finishDateImproved}
+
+
+      -# if(!empty(finishDateYear))
+      -#| year: #{finishDateYear}
+      -# span(id=finish-month)
+        -# if(!empty(finishDateMonth))
+        -#| month: #{finishDateMonth}
+      -# if(!empty(finishDateDay))
+      -#| year: #{finishDateDay}
+
+
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
