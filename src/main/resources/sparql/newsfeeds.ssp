@@ -3,7 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT
 	?newsObj 
-	(MIN(?subclass) AS ?subclass) 
+	(MIN(?type) AS ?type) 
 	(MIN(?newsName) AS ?newsName) 
 	(MIN(?newsLink) AS ?newsLink)
 	(MIN(?newsSource) AS ?newsSource) 
@@ -11,29 +11,17 @@ SELECT
 	(MIN(?datetime) AS ?datetime) 
 WHERE 
 {
-  <${uri}> core:relates ?newsObj .
+  <${uri}> core:relatedBy ?newsObj .
   ?newsObj a core:NewsRelease ;
-  	vitro:mostSpecificType ?subclass ;
-  	rdfs:label ?newsName ;
-  	duke:linkToItem ?newsLink .
-  OPTIONAL {
-    ?newsObj vivo:dateTimeValue ?dateTimeObj .
-    ?dateTimeObj vivo:dateTime ?datetime .
-  }
+    vitro:mostSpecificType ?type ;
+    rdfs:label ?newsName ;
+    duke:linkToItem ?newsLink .
+	OPTIONAL {
+   	?newsObj core:dateTimeValue ?dateTimeObj .
+    ?dateTimeObj core:dateTime ?datetime .
+ 	}
   OPTIONAL {	
     ?newsObj duke:source ?newsSource .
-  }    
+  }  
 }
-
-# where {
-#  <${uri}> core:relates ?newsObj .
-#  # ?newsObj rdf:type core:NewsRelease .
-#  # ?newsObj a core:NewsRelease .
-#  ?newsObj rdfs:label ?newsName .
-#  ?newsObj duke:source ?newsSource .
-#  ?newsObj duke:linkToItem ?newsLink .
-#  ?newsObj vivo:dateTimeValue ?dateTimeObj .
-#  ?dateTimeObj vivo:dateTime ?datetime .
-#  ?newsObj vitro:mostSpecificType ?subclass .
-# }
-#order by ?subclass desc(?dateTimeObj) asc(?newsName)
+order by ?subclass desc(?dateTimeObj) asc(?newsName)
