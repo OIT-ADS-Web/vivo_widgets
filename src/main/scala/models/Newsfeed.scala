@@ -28,7 +28,7 @@ object Newsfeed extends AttributeParams {
     new Newsfeed(uri        = newsfeed('newsfeed).stripBrackets(),
                  vivoType   = newsfeed('type).stripBrackets(),
                  label      = newsfeed('label),
-                 attributes = parseAttributes(newsfeed,List('newsfeed,'type,'label)))
+                 attributes = parseAttributes(newsfeed, List('newsfeed,'type,'label)))
   }
 
 }

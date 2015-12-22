@@ -2,26 +2,26 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT
-	?newsObj 
+	?newsfeed 
 	(MIN(?type) AS ?type) 
-	(MIN(?newsName) AS ?newsName) 
+	(MIN(?label) AS ?label) 
 	(MIN(?newsLink) AS ?newsLink)
 	(MIN(?newsSource) AS ?newsSource) 
 	(MIN(?datetimeObj) AS ?datetimeObj)
 	(MIN(?datetime) AS ?datetime) 
 WHERE 
 {
-  <${uri}> core:relatedBy ?newsObj .
-  ?newsObj a core:NewsRelease ;
+  <${uri}> core:relatedBy ?newsfeed .
+  ?newsfeed a core:NewsRelease ;
     vitro:mostSpecificType ?type ;
-    rdfs:label ?newsName ;
+    rdfs:label ?label ;
     duke:linkToItem ?newsLink .
 	OPTIONAL {
-   	?newsObj core:dateTimeValue ?dateTimeObj .
+   	?newsfeed core:dateTimeValue ?dateTimeObj .
     ?dateTimeObj core:dateTime ?datetime .
  	}
   OPTIONAL {	
-    ?newsObj duke:source ?newsSource .
+    ?newsfeed duke:source ?newsSource .
   }  
 }
-order by ?subclass desc(?dateTimeObj) asc(?newsName)
+order by ?subclass desc(?dateTimeObj) asc(?label)

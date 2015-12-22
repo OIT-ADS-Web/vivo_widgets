@@ -81,6 +81,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
   var webpages:List[Map[String, Any]] = _
   var awards:List[Map[String, Any]] = _
   var professionalActivities:List[Map[String, Any]] = _
+  var newsfeeds:List[Map[String, Any]] = _
 
   addFilter(new WidgetsFilter("vivowidgetcoretest", "/Users/pmm21/work/vivo_widgets/solr/test"), "/*")
 
@@ -107,6 +108,7 @@ class PersonApiSpec extends ScalatraSpec { def is = s2"""
       webpages = json("webpages").asInstanceOf[List[Map[String, Any]]]
       awards = json("awards").asInstanceOf[List[Map[String, Any]]]
       professionalActivities = json("professionalActivities").asInstanceOf[List[Map[String, Any]]]
+      newsfeeds = json("newsfeeds").asInstanceOf[List[Map[String, Any]]]
     }
   }
 
