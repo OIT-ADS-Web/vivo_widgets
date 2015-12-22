@@ -98,7 +98,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     }
   }
 
-  post("/updates/organization/uris") {
+  post("/updates/organizations/uris") {
     basicAuth
     WidgetsConfig.prepareCore
     params.get("message") match {
