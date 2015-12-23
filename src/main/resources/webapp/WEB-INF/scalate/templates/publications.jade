@@ -15,12 +15,12 @@
 ul(style=ulStyle)
   - for(publication <- publications)
 
-    - val rawStartDate = publication.getOrElse("startDate","")
-    - val startDateParts = rawStartDate.split("T")
-    - val startDateImproved = startDateParts(0)
-    - val rawFinishDate = publication.getOrElse("finishDate","")
-    - val finishDateParts = rawFinishDate.split("T")
-    - val finishDateImproved = finishDateParts(0)
+    -# val rawStartDate = publication.getOrElse("conferenceStartDate","")
+    -# val startDateParts = rawStartDate.split("T")
+    -# val startDateImproved = startDateParts(0)
+    -# val rawFinishDate = publication.getOrElse("conferenceFinishDate","")
+    -# val finishDateParts = rawFinishDate.split("T")
+    -# val finishDateImproved = finishDateParts(0)
 
     -# val startDateFixed = publication.getOrElse("startDateFixed","")
     -# val finishDateFixed = publication.getOrElse("finishDateFixed","")
@@ -28,10 +28,10 @@ ul(style=ulStyle)
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
 
-      - if(!empty(startDateImproved))
-      | #{startDateImproved}
-      - if(!empty(finishDateImproved))
-      | - #{finishDateImproved}
+      -# if(!empty(startDateImproved))
+      -#| #{startDateImproved}
+      -# if(!empty(finishDateImproved))
+      -#| - #{finishDateImproved}
 
       
       -# if (!empty(startDateFixed))
