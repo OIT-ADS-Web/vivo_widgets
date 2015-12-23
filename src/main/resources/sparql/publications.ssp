@@ -13,12 +13,17 @@ SELECT ?publication (MIN(?label) AS ?label) (MIN(?type) AS ?type)
  (MIN(?isFavorite) AS ?isFavorite) (MIN(?parentBookTitle) AS ?parentBookTitle)
  (MIN(?doi) AS ?doi) (MIN(?abstract) AS ?abstract) (MIN(?pmid) AS ?pmid)
  (MIN(?pmcid) AS ?pmcid) (MIN(?publicationSource) AS ?publicationSource)
- (MIN(?subtypes) AS ?subtypes) (MIN(?datetimeStart) AS ?datetimeStart) 
- (MIN(?startDate) AS ?startDate) (MIN(?datetimeFinish) AS ?datetimeFinish)
- (MIN(?finishDate) AS ?finishDate) (MIN(?conferenceName) AS ?conferenceName)
+ (MIN(?subtypes) AS ?subtypes) (MIN(?conferenceName) AS ?conferenceName)
  (MIN(?conferenceLocation) AS ?conferenceLocation) (MIN(?chicagoCitation) AS ?chicagoCitation)
  (MIN(?mlaCitation) AS ?mlaCitation) (MIN(?apaCitation) AS ?apaCitation)
  (MIN(?icmjeCitation) AS ?icmjeCitation) (MIN(?authorshipType) AS ?authorshipType)
+
+ (MIN(?datetimeStart) AS ?datetimeStart) (MIN(?datetimeFinish) AS ?datetimeFinish)
+ (MIN(?startDate) AS ?startDate) (MIN(?finishDate) AS ?finishDate)
+ 
+ #(MIN(CONCAT(STR(MONTH(?startDate)), "/", STR(DAY(?startDate)), "/", STR(YEAR(?startDate))) AS ?startDateFixed) AS ?startDateFixed)
+ #(MIN(CONCAT(STR(MONTH(?finishDate)), "/", STR(DAY(?finishDate)), "/", STR(YEAR(?finishDate))) AS ?finishDateFixed) AS ?finishDateFixed)
+
 WHERE {
   <${uri}> core:relatedBy ?authorship .
   {?authorship a core:Authorship.}
@@ -61,17 +66,14 @@ WHERE {
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
-
   OPTIONAL { 
     ?publication core:start ?datetimeStart . 
     ?datetimeStart core:dateTime ?startDate .
-    ?datetimeStart core:dateTimePrecision ?startDatePrecision .
   }                 
   OPTIONAL { 
     ?publication core:end ?datetimeFinish . 
     ?datetimeFinish core:dateTime ?finishDate .
   }
-
   OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
   OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .} 
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}

@@ -14,35 +14,31 @@
 
 ul(style=ulStyle)
   - for(publication <- publications)
+
     - val rawStartDate = publication.getOrElse("startDate","")
     - val startDateParts = rawStartDate.split("T")
-    -# startDateParts(1) throws error: "(java.lang.ArrayIndexOutOfBoundsException: 1)""
     - val startDateImproved = startDateParts(0)
-
     - val rawFinishDate = publication.getOrElse("finishDate","")
     - val finishDateParts = rawFinishDate.split("T")
     - val finishDateImproved = finishDateParts(0)
-    -# val finishDateYear = finishDateImproved.split("-")(0)
-    -# val finishDateMonth = finishDateImproved.substring(0,1)
-    -# val finishDateDay = finishDateImproved.split("-")(2)
+
+    -# val startDateFixed = publication.getOrElse("startDateFixed","")
+    -# val finishDateFixed = publication.getOrElse("finishDateFixed","")
 
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
+
       - if(!empty(startDateImproved))
       | #{startDateImproved}
       - if(!empty(finishDateImproved))
       | - #{finishDateImproved}
 
-
-      -# if(!empty(finishDateYear))
-      -#| year: #{finishDateYear}
-      -# span(id=finish-month)
-        -# if(!empty(finishDateMonth))
-        -#| month: #{finishDateMonth}
-      -# if(!empty(finishDateDay))
-      -#| year: #{finishDateDay}
-
-
+      
+      -# if (!empty(startDateFixed))
+      -#| #{startDateFixed}
+      -# if (!empty(finishDateFixed))
+      -#| - #{finishDateFixed}
+      
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
