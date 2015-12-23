@@ -3,12 +3,11 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT
 	?newsfeed 
-	(MIN(?type) AS ?type) 
-	(MIN(?label) AS ?label) 
-	(MIN(?newsLink) AS ?newsLink)
-	(MIN(?newsSource) AS ?newsSource) 
-	(MIN(?datetimeObj) AS ?datetimeObj)
-	(MIN(?datetime) AS ?datetime) 
+  ?type
+  ?label
+  ?newsLink
+  ?datetimeObj
+  ?datetime
 WHERE 
 {
   <${uri}> core:relatedBy ?newsfeed .
