@@ -34,7 +34,6 @@ object OrganizationIndexer extends SimpleConversion
       solrDoc.addField("id",o.uri)
       solrDoc.addField("group","organizations")
       solrDoc.addField("json",o.toJson)
-      solrDoc.addField("updated", new Date, 1.0f)
 
       o.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
