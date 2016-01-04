@@ -5,9 +5,13 @@ SELECT
 	?newsfeed 
   ?type
   ?label
+  ?newsSource
   ?newsLink
-  ?datetimeObj
-  ?datetime
+  ?newsDatetimeObj
+  ?newsDatetime
+  (MONTH(?newsDatetime) AS ?newsMonth)
+  (DAY(?newsDatetime) AS ?newsDay)
+  (YEAR(?newsDatetime) AS ?newsYear)
 WHERE 
 {
   <${uri}> core:relatedBy ?newsfeed .
@@ -16,11 +20,11 @@ WHERE
     rdfs:label ?label ;
     duke:linkToItem ?newsLink .
 	OPTIONAL {
-   	?newsfeed core:dateTimeValue ?dateTimeObj .
-    ?dateTimeObj core:dateTime ?datetime .
+   	?newsfeed core:dateTimeValue ?newsDatetimeObj .
+    ?newsDatetimeObj core:dateTime ?newsDatetime .
  	}
   OPTIONAL {	
     ?newsfeed duke:source ?newsSource .
   }  
 }
-order by ?subclass desc(?dateTimeObj) asc(?label)
+order by ?subclass desc(?newsDateTimeObj) asc(?label)
