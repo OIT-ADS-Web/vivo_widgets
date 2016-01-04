@@ -3,6 +3,8 @@ package edu.duke.oit.vw.models
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
+import java.util.Date
+
 object Organization extends SolrModel with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Organization] = {
@@ -12,8 +14,9 @@ object Organization extends SolrModel with AttributeParams {
     }
   }
 
-  def build(uri:String, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
+  def build(uri:String, updatedDate:Date, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
     new Organization(uri,
+                     updatedDate,
                      vivoType    = orgData('type).stripBrackets(),
                      label       = orgData('label),
                      people      = people,
@@ -24,6 +27,7 @@ object Organization extends SolrModel with AttributeParams {
 }
 
 case class Organization(uri:String,
+                        updatedDate:Date,
                         vivoType:String,
                         label:String,
                         people:List[PersonReference],
