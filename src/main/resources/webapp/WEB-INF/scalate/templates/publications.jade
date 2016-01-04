@@ -14,26 +14,17 @@
 
 ul(style=ulStyle)
   - for(publication <- publications)
-
     - val conferenceStartDateMonth = publication.get("conferenceStartDateMonth")
     - val conferenceStartDateDay = publication.get("conferenceStartDateDay")
     - val conferenceStartDateYear = publication.get("conferenceStartDateYear")
-    - val conferenceStartDateFull = if(conferenceStartDateMonth != "" || conferenceStartDateDay != "" || conferenceStartDateYear != "") conferenceStartDateMonth + "/" + conferenceStartDateDay + "/" + conferenceStartDateYear
     - val conferenceFinishDateMonth = publication.get("conferenceFinishDateMonth")
     - val conferenceFinishDateDay = publication.get("conferenceFinishDateDay")
     - val conferenceFinishDateYear = publication.get("conferenceFinishDateYear")
-    - val conferenceFinishDateFull = if(conferenceFinishDateMonth != "" || conferenceFinishDateDay != "" || conferenceFinishDateYear != "") " - " + conferenceFinishDateMonth + "/" + conferenceFinishDateDay + "/" + conferenceFinishDateYear
-    -# val conferenceDates = if(conferenceStartDateFull !="" || conferenceFinishDateFull !="") conferenceStartDateFull + conferenceFinishDateFull
-    -# val confStart = if(conferenceStartDateFull != "") conferenceStartDateFull
+    - val conferenceStartDateFull = if(!empty(conferenceStartDateYear)) conferenceStartDateMonth + "/" + conferenceStartDateDay + "/" + conferenceStartDateYear
+    - val conferenceFinishDateFull = if(!empty(conferenceFinishDateYear)) " - " + conferenceFinishDateMonth + "/" + conferenceFinishDateDay + "/" + conferenceFinishDateYear
 
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
-      -# if(!empty(conferenceStartDateFull))
-      -# "error: overloaded method value empty with alternatives: (valueOption: Option[String])Boolean <and> (value: String)Boolean cannot be applied to (Any)"
-        | #{conferenceStartDateFull}
-      -# if (!empty(conferenceFinishDateFull))
-      -#| #{conferenceFinishDateFull}
-
       | #{conferenceStartDateFull}#{conferenceFinishDateFull}
 
       a(onmouseout="this.style.textDecoration ='underline';"
