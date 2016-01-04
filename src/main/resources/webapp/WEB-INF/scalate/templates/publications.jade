@@ -15,30 +15,27 @@
 ul(style=ulStyle)
   - for(publication <- publications)
 
-    -# val rawStartDate = publication.getOrElse("conferenceStartDate","")
-    -# val startDateParts = rawStartDate.split("T")
-    -# val startDateImproved = startDateParts(0)
-    -# val rawFinishDate = publication.getOrElse("conferenceFinishDate","")
-    -# val finishDateParts = rawFinishDate.split("T")
-    -# val finishDateImproved = finishDateParts(0)
-
-    -# val startDateFixed = publication.getOrElse("startDateFixed","")
-    -# val finishDateFixed = publication.getOrElse("finishDateFixed","")
+    - val conferenceStartDateMonth = publication.get("conferenceStartDateMonth")
+    - val conferenceStartDateDay = publication.get("conferenceStartDateDay")
+    - val conferenceStartDateYear = publication.get("conferenceStartDateYear")
+    - val conferenceStartDateFull = if(conferenceStartDateMonth != "" || conferenceStartDateDay != "" || conferenceStartDateYear != "") conferenceStartDateMonth + "/" + conferenceStartDateDay + "/" + conferenceStartDateYear
+    - val conferenceFinishDateMonth = publication.get("conferenceFinishDateMonth")
+    - val conferenceFinishDateDay = publication.get("conferenceFinishDateDay")
+    - val conferenceFinishDateYear = publication.get("conferenceFinishDateYear")
+    - val conferenceFinishDateFull = if(conferenceFinishDateMonth != "" || conferenceFinishDateDay != "" || conferenceFinishDateYear != "") " - " + conferenceFinishDateMonth + "/" + conferenceFinishDateDay + "/" + conferenceFinishDateYear
+    -# val conferenceDates = if(conferenceStartDateFull !="" || conferenceFinishDateFull !="") conferenceStartDateFull + conferenceFinishDateFull
+    -# val confStart = if(conferenceStartDateFull != "") conferenceStartDateFull
 
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
+      -# if(!empty(conferenceStartDateFull))
+      -# "error: overloaded method value empty with alternatives: (valueOption: Option[String])Boolean <and> (value: String)Boolean cannot be applied to (Any)"
+        | #{conferenceStartDateFull}
+      -# if (!empty(conferenceFinishDateFull))
+      -#| #{conferenceFinishDateFull}
 
-      -# if(!empty(startDateImproved))
-      -#| #{startDateImproved}
-      -# if(!empty(finishDateImproved))
-      -#| - #{finishDateImproved}
+      | #{conferenceStartDateFull}#{conferenceFinishDateFull}
 
-      
-      -# if (!empty(startDateFixed))
-      -#| #{startDateFixed}
-      -# if (!empty(finishDateFixed))
-      -#| - #{finishDateFixed}
-      
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
