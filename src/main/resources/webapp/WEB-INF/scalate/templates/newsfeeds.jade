@@ -15,13 +15,16 @@
 
 ul(style=ulStyle)
   - for (newsfeed <- newsfeeds)
+    - val newsMonth = newsfeed.get("newsMonth")
+    - val newsDay = newsfeed.get("newsDay")
+    - val newsYear = newsfeed.get("newsYear")
+    - val newsDateFull = if(!empty(newsYear)) newsMonth + "/" + newsDay + "/" + newsYear
     li(style=liStyle) 
-      | #{newsfeed.label}. 
-      | #{newsfeed.get("newsSource")}. 
-      | #{newsfeed.get("datetime")} 
-      | #{newsfeed.get("newsLink")}
-
-
+      | "#{newsfeed.label}." 
+      - if(!empty(newsfeed.get("newsSource")))
+        | #{newsfeed.get("newsSource")}, 
+      | #{newsDateFull}.  
+      
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'" 
         style="color:#2485AE;text-decoration:underline" 
