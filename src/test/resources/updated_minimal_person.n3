@@ -1,0 +1,1351 @@
+@prefix ocresd: <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix geo:   <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix scires: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix cito:  <http://purl.org/spar/cito/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix ocrer: <http://purl.org/net/OCRe/research.owl#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix c4o:   <http://purl.org/spar/c4o/> .
+@prefix vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix vivo:  <http://vivoweb.org/ontology/core#> .
+@prefix duke:  <http://vivo.duke.edu/vivo/ontology/duke-extension#> .
+
+<http://localhost/individual/per_vcard503>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , obo:ARG_2000379 , vcard:Kind , owl:Thing , vcard:Individual ;
+        obo:ARG_2000029         <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  vcard:Individual ;
+        vcard:hasEmail          <http://localhost/individual/per_email503> ;
+        vcard:hasName           <http://localhost/individual/per_name503> ;
+        vcard:hasTelephone      <http://localhost/individual/phone_addr503> ;
+        vcard:hasTitle          <http://localhost/individual/per_title503> .
+
+<http://localhost/individual/n503>
+        a                       vivo:FacultyMember , obo:BFO_0000002 , obo:BFO_0000004 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , foaf:Person , obo:BFO_0000001 , foaf:Agent ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Smith, Richard" ;
+        vivo:overview           "This is an overview." ;
+        duke:preferredCitationFormat duke:apaCitation ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipOverview>
+                "A mentor overview." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Faculty" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Deans" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#mentorshipAvailability>
+                "Provosts" ;
+        obo:ARG_2000028         <http://localhost/individual/per_vcard503> ;
+        vitro:mostSpecificType  vivo:FacultyMember ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#duid>
+                "0123456" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#profileLabel>
+                "Richard Smith" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#scopedNetid>
+                "rsmith" .
+
+<http://localhost/individual/per_title503>
+        a                       vcard:Title , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Organizational ;
+        vitro:mostSpecificType  vcard:Title ;
+        vcard:title             "Programming CIO of the Universe" .
+
+<http://localhost/individual/per_email503>
+        a                       vcard:Work ;
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Email ;
+        vitro:mostSpecificType  vcard:Email ;
+        vcard:email             "rsmith@example.org" .
+
+<http://localhost/individual/per_name503>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Identification , vcard:Name ;
+        vitro:mostSpecificType  vcard:Name ;
+        vivo:middleName         "Big" ;
+        vcard:familyName        "Smith" ;
+        vcard:givenName         "Richard" ;
+        vcard:honorificSuffix   "Jr." ;
+        vcard:honorificPrefix   "Miss" .
+
+<http://localhost/individual/file_t503>
+        a                              <http://www.w3.org/2000/01/rdf-schema#Resource> , vitro-public:File , owl:Thing ;
+        vitro:modTime                  "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType         vitro-public:File ;
+        vitro-public:downloadLocation  <http://localhost/individual/t503> ;
+        vitro-public:filename          "thumb_image_503.jpg" ;
+        vitro-public:mimeType          "image/jpeg" .
+
+<http://localhost/individual/file_i503>
+        a                              <http://www.w3.org/2000/01/rdf-schema#Resource> , vitro-public:File , owl:Thing ;
+        vitro:modTime                  "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType         vitro-public:File ;
+        vitro-public:downloadLocation  <http://localhost/individual/i503> ;
+        vitro-public:filename          "image_503.jpg" ;
+        vitro-public:mimeType          "image/jpeg" ;
+        vitro-public:thumbnailImage    <http://localhost/individual/file_t503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#imageOf>
+                <http://localhost/individual/n503> .
+
+<http://localhost/individual/i503>
+        a                               <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vitro-public:FileByteStream ;
+        vitro:modTime                   "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType          vitro-public:FileByteStream ;
+        vitro-public:directDownloadUrl  "/file/i503/image_503.jpg" .
+
+<http://localhost/individual/t503>
+        a                               <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vitro-public:FileByteStream ;
+        vitro:modTime                   "2014-10-31T14:00:45"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vitro:mostSpecificType          vitro-public:FileByteStream ;
+        vitro-public:directDownloadUrl  "/file/t503/thumb_image_503.jpg" .
+
+<http://localhost/individual/n503>
+        vitro-public:mainImage  <http://localhost/individual/file_i503> .
+
+<http://localhost/individual/phone_addr503_work_location>
+        a                       vcard:Voice , vcard:Work ;
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Communication , vcard:Telephone ;
+        vitro:mostSpecificType  vcard:Telephone ;
+        vcard:telephone         "(919) 555-5555" .
+
+<http://localhost/individual/per_addr503_work_location>
+        a                       vcard:Work , vcard:Location ;
+        a                       vcard:Addressing , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Address ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "7605-A Hosp North, Durham, NC 27710" ;
+        vitro:mostSpecificType  vcard:Address ;
+        vcard:locality          "Durham" ;
+        vcard:postalCode        "27710" ;
+        vcard:region            "NC" ;
+        vcard:streetAddress     "7605-A Hosp North" .
+
+<http://localhost/individual/per_addr503_work_mailing>
+        a                       vcard:Work ;
+        a                       vcard:Addressing , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:Address ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Box 3090 Med Ctr, Durham, NC 27710" ;
+        vitro:mostSpecificType  vcard:Address ;
+        vcard:locality          "Durham" ;
+        vcard:postalCode        "27710" ;
+        vcard:region            "NC" ;
+        vcard:streetAddress     "Box 3090 Med Ctr" .
+
+<http://localhost/individual/per_vcard503>
+        vcard:hasAddress    <http://localhost/individual/per_addr503_work_location> , <http://localhost/individual/per_addr503_work_mailing> ;
+        vcard:hasTelephone  <http://localhost/individual/phone_addr503_work_location> .
+
+<http://localhost/individual/art24520>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Title of the acting work" ;
+        <http://purl.obolibrary.org/obo/RO_0002233>
+                <http://localhost/individual/event_51360> ;
+        <http://purl.org/dc/terms/relation>
+                <http://localhost/individual/art24521> ;
+        <http://purl.org/ontology/bibo/abstract>
+                "This is the abstract of the acting work." ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#collaboratorList>
+                "Jocelyn Harrison Olcott; Laurent Dubois; Non-Duke Collaborator" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#commissioningBody>
+                "Motion Picture Commissioners" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
+                true ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/art503_24520> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
+                "Film" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue201406> ;
+        <http://www.w3.org/2006/vcard/ns#hasURL>
+                <http://localhost/individual/urllinkartwork24520http://www.example.com/acting> .
+
+<http://localhost/individual/art24521>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition> , <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticWork> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Musical Work" ;
+        <http://purl.org/dc/terms/relation>
+                <http://localhost/individual/art24520> ;
+        <http://purl.org/ontology/bibo/abstract>
+                "Abstract of a musical work." ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#collaboratorList>
+                "Jocelyn Harrison Olcott" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#commissioningBody>
+                "" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#isCommissionedWork>
+                false ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/art503_24521> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#workType>
+                "Musical Composition" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue2018> ;
+        <http://www.w3.org/2006/vcard/ns#hasURL>
+                <http://localhost/individual/urllinkartwork24521http://www.example.com/music> .
+
+<http://localhost/individual/event_51360>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.org/NET/c4dm/event.owl#Event> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Event for Acting Work" ;
+        vitro:mostSpecificType  <http://purl.org/NET/c4dm/event.owl#Event> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#venue>
+                "Venue for Acting Event" ;
+        <http://vivoweb.org/ontology/core#description>
+                "Description of acting work event." ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20181030> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2018> .
+
+<http://localhost/individual/art503_24521>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> , <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Jocelyn Harrison Olcott, Musical Work" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/art24521> , <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
+                "Composer" ;
+        <http://vivoweb.org/ontology/core#description>
+                "Description of composer role." .
+
+<http://localhost/individual/art503_24520>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> , <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Jocelyn Harrison Olcott, Title of the acting work" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-art-extension#ArtisticRelationship> ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/n503> , <http://localhost/individual/art24520> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-art-extension#roles>
+                "Actor" ;
+        <http://vivoweb.org/ontology/core#description>
+                "A description of the acting role." .
+
+<http://localhost/individual/dateValue2018>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue201406>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-06-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/urllinkartwork24521http://www.example.com/music>
+        a                       <http://www.w3.org/2006/vcard/ns#Explanatory> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Music Link Label" ;
+        vitro:mostSpecificType  <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2006/vcard/ns#url>
+                "http://www.example.com/music" .
+
+<http://localhost/individual/urllinkartwork24520http://www.example.com/acting>
+        a                       <http://www.w3.org/2006/vcard/ns#Explanatory> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Acting Link Label" ;
+        vitro:mostSpecificType  <http://www.w3.org/2006/vcard/ns#URL> ;
+        <http://www.w3.org/2006/vcard/ns#url>
+                "http://www.example.com/acting" .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/art503_24521> , <http://localhost/individual/art503_24520> .
+
+# Authorship
+
+<http://localhost/individual/author932901-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#Authorship> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Koo, Denise Tze-wen" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Authorship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
+                true ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/pub932901> , <http://localhost/individual/n503> .
+
+<http://localhost/individual/pub932901>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/author932901-503> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/author932901-503> .
+
+# Publication
+
+<http://localhost/individual/pub932901>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000031> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.org/ontology/bibo/AcademicArticle> , <http://purl.obolibrary.org/obo/IAO_0000030> , <http://purl.org/ontology/bibo/Document> , <http://purl.org/ontology/bibo/Article> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Teaching population health: a competency map approach to education." ;
+        <http://purl.org/ontology/bibo/abstract>
+                "This is a publication abstract." ;
+        <http://purl.org/ontology/bibo/doi>
+                "10.1097/ACM.0b013e31828acf27" ;
+        <http://purl.org/ontology/bibo/eissn>
+                "1938-808X" ;
+        <http://purl.org/ontology/bibo/issue>
+                "5" ;
+        <http://purl.org/ontology/bibo/pageEnd>
+                "637" ;
+        <http://purl.org/ontology/bibo/pageStart>
+                "626" ;
+        <http://purl.org/ontology/bibo/numPages>
+                "9" ;
+        <http://purl.org/ontology/bibo/pmid>
+                "23524919" ;
+        <http://purl.org/ontology/bibo/volume>
+                "88" ;
+        <http://purl.org/ontology/bibo/edition>
+                "10" ;
+        <http://purl.org/ontology/bibo/isbn10>
+                "isbn10" ;
+        <http://purl.org/ontology/bibo/isbn13>
+                "isbn13" ;
+        vitro:mostSpecificType  <http://purl.org/ontology/bibo/AcademicArticle> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation>
+                "Kaprielian, VS, Silberberg, M. (2013, May). <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> <em>Acad Med</em>, <em>88</em>(5), 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#authorList>
+                "Kaprielian, VS; Silberberg, M" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#editorList>
+                "Editor, SM" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#translatorList>
+                "Translator, SM" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation>
+                "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88, no. 5 (May 2013): 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation>
+                "Kaprielian VS, Silberberg M. <a href=\"http://localhost:8080/individual/pub932901\">Teaching population health: a competency map approach to education.</a> Acad Med. 2013 May;88(5):626-637. PubMed PMID: 23524919." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#language>
+                "eng" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#linkToItem>
+                "http://www.ncbi.nlm.nih.gov/pubmed/23524919" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation>
+                "Kaprielian, VS, Silberberg, M. <a href=\"http://localhost:8080/individual/pub932901\">\"Teaching population health: a competency map approach to education.\"</a> <em>Acad Med</em> 88.5 (May 2013): 626-637." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#source>
+                "pubmed" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue201305> ;
+        <http://vivoweb.org/ontology/core#hasPublicationVenue>
+                <http://localhost/individual/jou1938-808X> ;
+        <http://vivoweb.org/ontology/core#hasSubjectArea>
+                <http://localhost/individual/meshD005194> , <http://localhost/individual/lcshsh96002203> , <http://localhost/individual/meshD006293> , <http://localhost/individual/meshD004504> , <http://localhost/individual/meshD007396> , <http://localhost/individual/meshD016730> , <http://localhost/individual/meshD015397> , <http://localhost/individual/meshD003256> , <http://localhost/individual/meshD010823> , <http://localhost/individual/lcshsh2010014788> , <http://localhost/individual/meshD005180> , <http://localhost/individual/lcshsh90000072> , <http://localhost/individual/meshD003154> , <http://localhost/individual/meshD011634> , <http://localhost/individual/meshD003479> .
+
+<http://localhost/individual/meshD015397>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Program Evaluation" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD005194>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Family Practice" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh96002203>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Humans" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD006293>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Health Promotion" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/jou1938-808X>
+        <http://vivoweb.org/ontology/core#publicationVenueFor>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD004504>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Education, Medical, Undergraduate" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD007396>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Internship and Residency" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD016730>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Program Development" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003256>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Consumer Participation" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD010823>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Physician Assistants" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh2010014788>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "North Carolina" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD005180>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Faculty, Medical" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/lcshsh90000072>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Clinical Competence" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003154>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Community Medicine" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD011634>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Public Health" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/meshD003479>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Curriculum" ;
+        vitro:mostSpecificType  <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://vivoweb.org/ontology/core#subjectAreaOf>
+                <http://localhost/individual/pub932901> .
+
+<http://localhost/individual/dateValue201305>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-05-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+# Translatorship
+
+<http://localhost/individual/translator1029903-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Translatorship> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Balleisen, Edward J." ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Translatorship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
+                false ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/n503> , <http://localhost/individual/pub1029903> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/translator1029903-503> .
+
+<http://localhost/individual/pub1029903>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/translator1029903-503> .
+
+# Translated Pub
+
+<http://localhost/individual/pub1029903>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.org/ontology/bibo/Book> , <http://purl.obolibrary.org/obo/BFO_0000031> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/IAO_0000030> , <http://purl.org/ontology/bibo/Document> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Book 2" ;
+        vitro:mostSpecificType  <http://purl.org/ontology/bibo/Book> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation>
+                "Balleisen, EJ. (2014). <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a>" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#authorList>
+                "Balleisen, EJ" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation>
+                "Balleisen EJ. <a href=\"http://localhost:8080/individual/pub1029903\">Test Book 2.</a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029903\"><em>Test Book 2.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#source>
+                "manual" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue2014> .
+
+# Editorship
+
+<http://localhost/individual/editor1029902-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivoweb.org/ontology/core#Editorship> , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Balleisen, Edward J." ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Editorship> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#isFavorite>
+                false ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/pub1029902> , <http://localhost/individual/n503> .
+
+<http://localhost/individual/pub1029902>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/editor1029902-503> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/editor1029902-503> .
+
+# Edited Pub
+
+<http://localhost/individual/pub1029902>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.org/ontology/bibo/Book> , <http://purl.obolibrary.org/obo/BFO_0000031> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/IAO_0000030> , <http://purl.org/ontology/bibo/Document> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Book 1" ;
+        vitro:mostSpecificType  <http://purl.org/ontology/bibo/Book> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation>
+                "Balleisen, EJ. (2014). <a href=\"http://localhost:8080/individual/pub1029902\"><em>Test Book 1.</em></a>" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#authorList>
+                "Balleisen, EJ" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029902\"><em>Test Book 1.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation>
+                "Balleisen EJ. <a href=\"http://localhost:8080/individual/pub1029902\">Test Book 1.</a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation>
+                "Balleisen, EJ. <a href=\"http://localhost:8080/individual/pub1029902\"><em>Test Book 1.</em></a> 2014." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#source>
+                "manual" ;
+        <http://vivoweb.org/ontology/core#dateTimeValue>
+                <http://localhost/individual/dateValue2014> .
+
+# Courses
+
+<http://localhost/individual/teacherRoleHISTORY364D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY364D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleECON222D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseECON222D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY790S-07-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY790S-07> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRolePOLSCI340D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/coursePOLSCI340D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY365D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY365D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY393-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY393> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY791-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY791> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleHISTORY792-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseHISTORY792> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRoleENVIRON365D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/courseENVIRON365D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/teacherRolePUBPOL219D-503>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#TeacherRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Instructor" ;
+        <http://purl.obolibrary.org/obo/BFO_0000054>
+                <http://localhost/individual/coursePUBPOL219D> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#TeacherRole> .
+
+<http://localhost/individual/dateInterval-s20120101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2012> .
+
+<http://localhost/individual/dateValue2012>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2012-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateInterval-s20150101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2015> .
+
+<http://localhost/individual/dateInterval-s20140101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2014> .
+
+<http://localhost/individual/dateValue2015>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2015-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateInterval-s20130101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2013> .
+
+<http://localhost/individual/dateValue2014>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue2013>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/courseHISTORY365D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  365D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY365D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseENVIRON365D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ENVIRON  365D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleENVIRON365D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY790S-07>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  790S-07: Topics in Politics, Public Life, The State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY790S-07-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/courseECON222D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "ECON  222D: American Business History" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleECON222D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> .
+
+<http://localhost/individual/coursePUBPOL219D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "PUBPOL  219D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRolePUBPOL219D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY364D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  364D: American Business History" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY364D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> .
+
+<http://localhost/individual/courseHISTORY791>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  791: Reading Topics: Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY791-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20120101> , <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/coursePOLSCI340D>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "POLSCI  340D: The Modern Regulatory State" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRolePOLSCI340D-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20150101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY792>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  792: Reading Topics-Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY792-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> , <http://localhost/individual/dateInterval-s20130101> .
+
+<http://localhost/individual/courseHISTORY393>
+        a                       <http://vivoweb.org/ontology/core#Course> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "HISTORY  393: Research Independent Study" ;
+        <http://purl.obolibrary.org/obo/BFO_0000055>
+                <http://localhost/individual/teacherRoleHISTORY393-503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#Course> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101> .
+
+<http://localhost/individual/n503>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/teacherRoleHISTORY364D-503> , <http://localhost/individual/teacherRoleECON222D-503> , <http://localhost/individual/teacherRoleHISTORY790S-07-503> , <http://localhost/individual/teacherRolePOLSCI340D-503> , <http://localhost/individual/teacherRoleHISTORY365D-503> , <http://localhost/individual/teacherRoleHISTORY393-503> , <http://localhost/individual/teacherRoleHISTORY791-503> , <http://localhost/individual/teacherRoleHISTORY792-503> , <http://localhost/individual/teacherRoleENVIRON365D-503> , <http://localhost/individual/teacherRolePUBPOL219D-503> .
+
+# Educations
+
+<http://localhost/individual/professional_experience200749>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#EducationalProcess> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Fellowship In Cornea And External Disease, Refractive Surgery, Ophthalmology" ;
+        <http://purl.obolibrary.org/obo/RO_0002234>
+                <http://localhost/individual/experience200749> ;
+        <http://purl.obolibrary.org/obo/RO_0000057>
+                <http://localhost/individual/n503> , <http://localhost/individual/insdukeuniversity> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#EducationalProcess> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s19940701-e19950701> .
+
+<http://localhost/individual/experience200749>
+        a                       obo:BFO_0000002 , obo:ARG_2000021 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000019 , obo:BFO_0000020 ;
+        obo:RO_0002353          <http://localhost/individual/professional_experience200749> ;
+        vitro:mostSpecificType  obo:ARG_2000021 .
+
+<http://localhost/individual/edu5031990academicDegree77>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#EducationalProcess> , <http://purl.obolibrary.org/obo/BFO_0000003> , <http://purl.obolibrary.org/obo/BFO_0000015> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "M.D. 1990" ;
+        <http://purl.obolibrary.org/obo/RO_0000057>
+                <http://localhost/individual/n503> , <http://localhost/individual/insbrownuniversity> ;
+        <http://purl.obolibrary.org/obo/RO_0002234>
+                <http://localhost/individual/awarded_degree5031990academicDegree77> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#EducationalProcess> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-e19900101> .
+
+<http://localhost/individual/awarded_degree5031990academicDegree77>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#AwardedDegree> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "M.D. 1990" ;
+        <http://purl.obolibrary.org/obo/RO_0002353>
+                <http://localhost/individual/edu5031990academicDegree77> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AwardedDegree> ;
+        <http://vivoweb.org/ontology/core#assignedBy>
+                <http://localhost/individual/insbrownuniversity> ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/n503> , <http://vivoweb.org/ontology/degree/academicDegree77> .
+
+<http://localhost/individual/dateInterval-e19900101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue1990> .
+
+<http://localhost/individual/dateValue1990>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "1990-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue19940701>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "1994-07-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue19950701>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "1995-07-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateInterval-s19940701-e19950701>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue19950701> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue19940701> .
+
+<http://localhost/individual/n503>
+        <http://purl.obolibrary.org/obo/RO_0000056>
+                <http://localhost/individual/professional_experience200749> , <http://localhost/individual/edu5031990academicDegree77> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/awarded_degree5031990academicDegree77> .
+
+<http://localhost/individual/insdukeuniversity>
+        <http://purl.obolibrary.org/obo/RO_0000056>
+                <http://localhost/individual/professional_experience200749> .
+
+<http://localhost/individual/insbrownuniversity>
+        <http://purl.obolibrary.org/obo/RO_0000056>
+                <http://localhost/individual/edu5031990academicDegree77> ;
+        <http://vivoweb.org/ontology/core#assigns>
+                <http://localhost/individual/awarded_degree5031990academicDegree77> .
+
+<http://vivoweb.org/ontology/degree/academicDegree77>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/awarded_degree5031990academicDegree77> .
+
+# Institutions for Educations
+
+<http://localhost/individual/insbrownuniversity>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#University> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Brown University" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#University> .
+
+<http://localhost/individual/insdukeuniversity>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#University> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Duke University" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#University> .
+
+# Academic Degree for Education, found in
+# http://vitro.mannlib.cornell.edu/filegraph/abox/academicDegree.rdf graph
+
+<http://vivoweb.org/ontology/degree/academicDegree77>
+        a                  vivo:AcademicDegree ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "M.D. Doctor of Medicine"@en-US ;
+        vivo:abbreviation  "M.D." .
+
+# Grant
+
+<http://localhost/individual/gra199341>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#Grant> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Development of a Neuroblastoma Clinical Research Program" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-extension#InstitutionalSupportGrant> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20140101-e20141231> ;
+        vivo:assignedBy         <http://localhost/individual/insstbaldricksfoundation> ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> , <http://localhost/individual/org50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/investigatorRole199341-503>  .
+
+<http://localhost/individual/investigatorRole199341-503>
+        a                       <http://vivoweb.org/ontology/core#InvestigatorRole> , owl:Thing , <http://vivoweb.org/ontology/core#ResearcherRole> , <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Principal Investigator" ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/n503> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/org50000886>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/administratorRole202391-50000886> , <http://localhost/individual/administratorRole204058-50000886> , <http://localhost/individual/administratorRole199341-50000886> , <http://localhost/individual/administratorRole204463-50000886> , <http://localhost/individual/administratorRole200020-50000886> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra202391> , <http://localhost/individual/gra204463> , <http://localhost/individual/gra199341> , <http://localhost/individual/gra200020> , <http://localhost/individual/gra204058> .
+
+<http://localhost/individual/n503>
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/investigatorRole199341-503> .
+
+<http://localhost/individual/fundingRole199341-stbaldricksfoundation>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> , <http://purl.obolibrary.org/obo/ERO_0000224> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/insstbaldricksfoundation> ;
+        vitro:mostSpecificType  <http://purl.obolibrary.org/obo/ERO_0000224> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/administratorRole199341-50000886>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://vivoweb.org/ontology/core#AdministratorRole> , <http://purl.obolibrary.org/obo/BFO_0000017> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://purl.obolibrary.org/obo/BFO_0000023> ;
+        <http://purl.obolibrary.org/obo/RO_0000052>
+                <http://localhost/individual/org50000886> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AdministratorRole> ;
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/insstbaldricksfoundation>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://purl.obolibrary.org/obo/BFO_0000004> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#FundingOrganization> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "St. Baldrick's Foundation" ;
+        <http://purl.obolibrary.org/obo/RO_0000053>
+                <http://localhost/individual/fundingRole199341-stbaldricksfoundation> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#FundingOrganization> ;
+        <http://vivoweb.org/ontology/core#assigns>
+                <http://localhost/individual/gra199341> .
+
+<http://localhost/individual/dateInterval-s20140101-e20141231>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20141231> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20140101> .
+
+<http://localhost/individual/dateValue20141231>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-12-31T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue20140101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2014-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+# Administering Organization for Grant
+
+<http://localhost/individual/org50000886>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://vivoweb.org/ontology/core#AcademicDepartment> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#Department> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Pediatrics, Hematology-Oncology" ;
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+                <http://localhost/individual/org50000870> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
+                "50000886"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+
+# Position
+
+<http://localhost/individual/apt3786572>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000002> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivoweb.org/ontology/core#Position> , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://vivoweb.org/ontology/core#PrimaryPosition> , <http://purl.obolibrary.org/obo/BFO_0000020> , <http://vivoweb.org/ontology/core#Relationship> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Professor of Earth and Ocean Sciences" ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#PrimaryPosition> ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20090101> ;
+        <http://vivoweb.org/ontology/core#hrJobTitle>
+                "Professor of Earth and Ocean Sciences" ;
+        <http://vivoweb.org/ontology/core#rank>
+                "1" ;
+        <http://vivoweb.org/ontology/core#relates>
+                <http://localhost/individual/org50000478> , <http://localhost/individual/n503> .
+
+<http://localhost/individual/dateInterval-s20090101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20090101> .
+
+<http://localhost/individual/dateValue20090101>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2009-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/org50000478>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/apt3786572> .
+
+<http://localhost/individual/n503>
+        <http://vivoweb.org/ontology/core#relatedBy>
+                <http://localhost/individual/apt3786572> .
+
+# Org for position
+
+<http://localhost/individual/org50000478>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000004> , <http://vivoweb.org/ontology/core#AcademicDepartment> , <http://xmlns.com/foaf/0.1/Organization> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent> , <http://vivoweb.org/ontology/core#Department> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Nicholas School of the Environment" ;
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+                <http://localhost/individual/org50000021> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#AcademicDepartment> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-extension#orgUnit>
+                "50000478"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+
+# Weblink
+
+<http://localhost/individual/urllink503http://example.com>
+        a                       vcard:Explanatory , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vcard:URL ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "An Example URL" ;
+        vitro:mostSpecificType  vcard:URL ;
+        vcard:url               "http://example.com" .
+
+<http://localhost/individual/per_vcard503>
+        obo:ARG_2000029  <http://localhost/individual/n503> ;
+        vcard:hasURL     <http://localhost/individual/urllink503http://example.com> .
+
+<http://localhost/individual/n503>
+        obo:ARG_2000028  <http://localhost/individual/per_vcard503> .
+
+# Award
+
+<http://localhost/individual/awd41181>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , vivo:Award ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Date Precision. Association of Public Policy and Management." ;
+        vitro:mostSpecificType  vivo:Award ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#awardName>
+                "Test Date Precision" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "School" ;
+        vivo:description        "An award description." ;
+        vivo:relatedBy          <http://localhost/individual/awdrec41181> .
+
+<http://localhost/individual/insassociationofpublicpolicyandmanagement>
+        a                       obo:BFO_0000002 , obo:BFO_0000004 , foaf:Organization , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , foaf:Agent ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Association of Public Policy and Management" ;
+        vitro:mostSpecificType  foaf:Organization ;
+        vivo:assigns            <http://localhost/individual/awdrec41181> .
+
+<http://localhost/individual/awdrec41181>
+        a                       obo:BFO_0000002 , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000020 , vivo:AwardReceipt , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> , vivo:Relationship ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Test Date Precision. Association of Public Policy and Management." ;
+        vitro:mostSpecificType  vivo:AwardReceipt ;
+        vivo:assignedBy         <http://localhost/individual/insassociationofpublicpolicyandmanagement> ;
+        vivo:dateTimeValue      <http://localhost/individual/dateValue20181030> ;
+        vivo:relates            <http://localhost/individual/n503> , <http://localhost/individual/awd41181> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       obo:BFO_0000008 , vivo:DateTimeValue , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , obo:BFO_0000001 , obo:BFO_0000148 , obo:BFO_0000003 ;
+        vitro:mostSpecificType  vivo:DateTimeValue ;
+        vivo:dateTime           "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        vivo:dateTimePrecision  vivo:yearMonthDayPrecision .
+
+<http://localhost/individual/n503>
+        vivo:relatedBy  <http://localhost/individual/awdrec41181> .
+
+# Professional Activities
+
+<http://localhost/individual/dateValue2020>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2020-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/n503>
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performs>
+                <http://localhost/individual/presentation15485> , <http://localhost/individual/outreach11230> , <http://localhost/individual/serviceto_univ24820> , <http://localhost/individual/servicetoprof24520> .
+
+<http://localhost/individual/dateInterval-s20130513-e20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue20181030> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20130513> .
+
+<http://localhost/individual/dateInterval-s2019-e2020>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue2020> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue2019> .
+
+<http://localhost/individual/dateInterval-s20110301-e2011>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue2011> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20110301> .
+
+<http://localhost/individual/presentation15485>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”. Presentation Event Name. Presentation Host Organization. December 2, 2011 - October 2018" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Invited Lectures ; Jocelyn Olcott" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Presentation Host Organization" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Yale University" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#nameOfTalk>
+                "“Riding the New Wave: Mexican Feminism and the Politics of International Women’s Year”" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "Presentation Event Name" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Lecture" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20111202-e201810> .
+
+<http://localhost/individual/dateInterval-s20111202-e201810>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeInterval> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000038> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeInterval> ;
+        <http://vivoweb.org/ontology/core#end>
+                <http://localhost/individual/dateValue201810> ;
+        <http://vivoweb.org/ontology/core#start>
+                <http://localhost/individual/dateValue20111202> .
+
+<http://localhost/individual/dateValue20130513>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2013-05-13T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue20110301>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-03-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://aims.fao.org/aos/geopolitical.owl#Azerbaijan>
+        <http://vivoweb.org/ontology/core#geographicFocusOf>
+                <http://localhost/individual/outreach11230> .
+
+<http://localhost/individual/dateValue2019>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2019-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+<http://localhost/individual/dateValue20181030>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-30T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/outreach11230>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "National Endowment for the Humanities. Reviewer, documentary film proposals. Outreach Host Organization. Azerbaijan. March 1, 2011 - 2011" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Service to the Community" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Outreach Host Organization" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Washington, DC" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#role>
+                "Reviewer, documentary film proposals" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "National Endowment for the Humanities" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Other" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20110301-e2011> ;
+        <http://vivoweb.org/ontology/core#geographicFocus>
+                <http://aims.fao.org/aos/geopolitical.owl#Azerbaijan> .
+
+<http://localhost/individual/serviceto_univ24820>
+        a                       <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity> , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Committee Service. Duke University. The Big Committee. May 13, 2013 - October 30, 2018" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#committeeName>
+                "The Big Committee" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#committeeType>
+                "School" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Description of committee service at Duke." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Duke University" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Duke Campus" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Committee Service" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s20130513-e20181030> .
+
+<http://localhost/individual/dateValue201810>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2018-10-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthPrecision> .
+
+<http://localhost/individual/servicetoprof24520>
+        a                       <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ProfessionalActivity> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Event/Organization Administration. Server to the Profession. Name of Service to Prof. Organization for Serving Profession. 2019 - 2020" ;
+        vitro:mostSpecificType  <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#description>
+                "Describing service to profession." ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#hostOrganization>
+                "Organization for Serving Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#locationOrVenue>
+                "Venue to Serve the Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#performedBy>
+                <http://localhost/individual/n503> ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#role>
+                "Server to the Profession" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceOrEventName>
+                "Name of Service to Prof" ;
+        <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#serviceType>
+                "Event/Organization Administration" ;
+        <http://vivoweb.org/ontology/core#dateTimeInterval>
+                <http://localhost/individual/dateInterval-s2019-e2020> .
+
+<http://localhost/individual/dateValue20111202>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-12-02T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearMonthDayPrecision> .
+
+<http://localhost/individual/dateValue2011>
+        a                       <http://purl.obolibrary.org/obo/BFO_0000008> , <http://vivoweb.org/ontology/core#DateTimeValue> , <http://www.w3.org/2000/01/rdf-schema#Resource> , owl:Thing , <http://purl.obolibrary.org/obo/BFO_0000001> , <http://purl.obolibrary.org/obo/BFO_0000148> , <http://purl.obolibrary.org/obo/BFO_0000003> ;
+        vitro:mostSpecificType  <http://vivoweb.org/ontology/core#DateTimeValue> ;
+        <http://vivoweb.org/ontology/core#dateTime>
+                "2011-01-01T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://vivoweb.org/ontology/core#dateTimePrecision>
+                <http://vivoweb.org/ontology/core#yearPrecision> .
+
+# Geo focus for outreach
+
+<http://aims.fao.org/aos/geopolitical.owl#Azerbaijan>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Azerbaijan"^^<http://www.w3.org/2001/XMLSchema#string> .

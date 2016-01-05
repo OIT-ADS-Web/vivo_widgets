@@ -17,6 +17,7 @@ case class Publication(uri:String,
   override def officialDateKey = {
     "year"
   }
+  
 
   def subType = {
     val regex = "(.*)/([a-zA-Z0-9.\\-]+)(#)?([a-zA-Z0-9.\\-]+)?".r

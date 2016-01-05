@@ -14,8 +14,19 @@
 
 ul(style=ulStyle)
   - for(publication <- publications)
+    - val conferenceStartDateMonth = publication.get("conferenceStartDateMonth")
+    - val conferenceStartDateDay = publication.get("conferenceStartDateDay")
+    - val conferenceStartDateYear = publication.get("conferenceStartDateYear")
+    - val conferenceFinishDateMonth = publication.get("conferenceFinishDateMonth")
+    - val conferenceFinishDateDay = publication.get("conferenceFinishDateDay")
+    - val conferenceFinishDateYear = publication.get("conferenceFinishDateYear")
+    - val conferenceStartDateFull = if(!empty(conferenceStartDateYear)) conferenceStartDateMonth + "/" + conferenceStartDateDay + "/" + conferenceStartDateYear
+    - val conferenceFinishDateFull = if(!empty(conferenceFinishDateYear)) " - " + conferenceFinishDateMonth + "/" + conferenceFinishDateDay + "/" + conferenceFinishDateYear
+
     li(style=liStyle)
       = render(tpath("shared/citation.jade"), Map("it" -> publication))
+      | #{conferenceStartDateFull}#{conferenceFinishDateFull}
+
       a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
