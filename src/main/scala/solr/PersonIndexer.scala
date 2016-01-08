@@ -38,7 +38,7 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", p.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
       solrDoc.addField("json",p.toJson)
-      solrDoc.addField("updatedDate", p.updatedDate)
+      solrDoc.addField("updatedAt", p.updatedAt)
      
       p.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)

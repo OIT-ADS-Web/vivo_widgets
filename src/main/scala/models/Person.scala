@@ -15,7 +15,7 @@ object Person extends SolrModel with AttributeParams {
   }
 
   def build(uri:String,
-            updatedDate:Date,
+            updatedAt:Date,
             personData:Map[Symbol,String],
             pubs:List[Publication],
             awards:List[Award],
@@ -30,7 +30,7 @@ object Person extends SolrModel with AttributeParams {
             webpages:List[Webpage],
             geographicalFocus:List[GeographicFocus]): Person = {
     new Person(uri,
-               updatedDate,
+               updatedAt,
                vivoType           = personData('type).stripBrackets(),
                label              = personData('label),
                title              = personData('title),
@@ -51,7 +51,7 @@ object Person extends SolrModel with AttributeParams {
 }
 
 case class Person(uri:String,
-                  updatedDate:Date,
+                  updatedAt:Date,
                   vivoType:String,
                   label:String,
                   title:String,

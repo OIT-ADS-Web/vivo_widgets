@@ -29,7 +29,7 @@
    <field name="group" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
    <field name="json" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
    <field name="uris" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
-   <field name="updatedDate" type="date" indexed="true" stored="true" multiValued="false" required="false"/> 
+   <field name="updatedAt" type="date" indexed="true" stored="true" multiValued="false" required="false"/> 
  </fields>
 
  <!-- field to use to determine and enforce document uniqueness. -->
