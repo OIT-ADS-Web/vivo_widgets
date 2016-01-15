@@ -13,11 +13,19 @@ SELECT ?publication (MIN(?label) AS ?label) (MIN(?type) AS ?type)
  (MIN(?isFavorite) AS ?isFavorite) (MIN(?parentBookTitle) AS ?parentBookTitle)
  (MIN(?doi) AS ?doi) (MIN(?abstract) AS ?abstract) (MIN(?pmid) AS ?pmid)
  (MIN(?pmcid) AS ?pmcid) (MIN(?publicationSource) AS ?publicationSource)
- (MIN(?subtypes) AS ?subtypes) (MIN(?startDate) AS ?startDate)
- (MIN(?finishDate) AS ?finishDate) (MIN(?conferenceName) AS ?conferenceName)
+ (MIN(?subtypes) AS ?subtypes) (MIN(?conferenceName) AS ?conferenceName)
  (MIN(?conferenceLocation) AS ?conferenceLocation) (MIN(?chicagoCitation) AS ?chicagoCitation)
  (MIN(?mlaCitation) AS ?mlaCitation) (MIN(?apaCitation) AS ?apaCitation)
  (MIN(?icmjeCitation) AS ?icmjeCitation) (MIN(?authorshipType) AS ?authorshipType)
+ (MIN(?conferenceDatetimeStart) AS ?conferenceDatetimeStart) (MIN(?conferenceDatetimeFinish) AS ?conferenceDatetimeFinish)
+ (MIN(?conferenceStartDate) AS ?conferenceStartDate) (MIN(?conferenceFinishDate) AS ?conferenceFinishDate)
+ (MIN(MONTH(?conferenceStartDate)) AS ?conferenceStartDateMonth)
+ (MIN(YEAR(?conferenceStartDate)) AS ?conferenceStartDateYear)
+ (MIN(DAY(?conferenceStartDate)) AS ?conferenceStartDateDay)
+ (MIN(MONTH(?conferenceFinishDate)) AS ?conferenceFinishDateMonth)
+ (MIN(YEAR(?conferenceFinishDate)) AS ?conferenceFinishDateYear)
+ (MIN(DAY(?conferenceFinishDate)) AS ?conferenceFinishDateDay)
+
 WHERE {
   <${uri}> core:relatedBy ?authorship .
   {?authorship a core:Authorship.}
@@ -60,8 +68,14 @@ WHERE {
   OPTIONAL {?publication core:pmcid ?pmcid .}
   OPTIONAL {?publication duke:source ?publicationSource .}
   OPTIONAL {?publication duke:subtypes ?subtypes}
-  OPTIONAL {?publication core:start ?startDate .}             
-  OPTIONAL {?publication core:end ?finishDate .}                      
+  OPTIONAL { 
+    ?publication core:start ?conferenceDatetimeStart . 
+    ?conferenceDatetimeStart core:dateTime ?conferenceStartDate .
+  }                 
+  OPTIONAL { 
+    ?publication core:end ?conferenceDatetimeFinish . 
+    ?conferenceDatetimeFinish core:dateTime ?conferenceFinishDate .
+  }
   OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
   OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .} 
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}

@@ -76,6 +76,8 @@ object PersonIndexer extends SimpleConversion
       val webpages      = Webpage.fromUri(vivo, uriContext)
       log.debug("pull geoFocus")
       val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
+      log.debug("pull newsfeeds")
+      val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
 
       val now = new Date
 
@@ -84,7 +86,7 @@ object PersonIndexer extends SimpleConversion
                            artisticWorks, grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus)
+                           geoFocus, newsfeeds)
       log.info("buildPerson uri: " + uri)
       return Option(p)
     }

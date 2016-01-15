@@ -77,6 +77,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
           case "awards"         => renderCollection(person.awards)
           case "grants"         => renderCollection(person.grants)
           case "courses"        => renderCollection(person.courses)
+          case "newsfeeds"      => renderCollection(person.newsfeeds)
           case "professional_activities"  => renderCollection(person.professionalActivities)
           case "positions"      => renderCollection(person.positions)
           case "addresses"      => renderCollection(person.addresses)

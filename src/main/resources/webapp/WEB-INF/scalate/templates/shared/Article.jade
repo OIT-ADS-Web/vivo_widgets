@@ -4,24 +4,23 @@
 -# using "it", see http://scalate.fusesource.org/documentation/user-guide.html#DRY_IT
 -@ import var it: edu.duke.oit.vw.models.Publication
 
+
 // = authors.mkString("; ")
 - if (!empty(get("authorList")))
   | #{get("authorList")}
 - if(!empty(year)) 
   | (#{year}).
-! "#{label}" #{getOrElse("publishedIn","")}.
+! "#{label}" #{getOrElse("publishedIn","")}
 | #{get("volume") ?: ""}
 - if(!empty(get("issue"))) 
   | (#{get("issue")})
 - if(!empty(get("startPage")))
   | : #{get("startPage")}
 - if(!empty(get("endPage")))
-  | - #{get("endPage")}
+  | - #{get("endPage")}.
+- if(!empty(get("publishedBy")))
+  | #{get("publishedBy") ?: ""}.
 - if(!empty(get("conferenceName")))
   | #{get("conferenceName")}.
 - if(!empty(get("conferenceLocation")))
   | #{get("conferenceLocation")}.
-- if(!empty(get("startDate")))
-  | #{get("startDate")}
-- if(!empty(get("finishDate")))
-  | - #{get("finishDate")}

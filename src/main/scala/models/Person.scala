@@ -28,7 +28,8 @@ object Person extends SolrModel with AttributeParams {
             educations:List[Education],
             researchAreas:List[ResearchArea],
             webpages:List[Webpage],
-            geographicalFocus:List[GeographicFocus]): Person = {
+            geographicalFocus:List[GeographicFocus],
+            newsfeeds:List[Newsfeed]): Person = {
     new Person(uri,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
@@ -40,13 +41,14 @@ object Person extends SolrModel with AttributeParams {
                grants             = grants,
                courses            = courses,
                professionalActivities = professionalActivities,
-               positions          = positions,
-               addresses          = addresses,
-               educations         = educations,
-               researchAreas      = researchAreas,
-               webpages           = webpages,
-               geographicalFocus  = geographicalFocus,
-               attributes         = parseAttributes(personData, List('type,'label,'title)))
+               positions              = positions,
+               addresses              = addresses,
+               educations             = educations,
+               researchAreas          = researchAreas,
+               webpages               = webpages,
+               geographicalFocus      = geographicalFocus,
+               newsfeeds              = newsfeeds,
+               attributes             = parseAttributes(personData, List('type,'label,'title)))
   }
 }
 
@@ -67,6 +69,7 @@ case class Person(uri:String,
                   researchAreas:List[ResearchArea],
                   webpages:List[Webpage],
                   geographicalFocus:List[GeographicFocus],
+                  newsfeeds:List[Newsfeed],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
 {
@@ -84,7 +87,8 @@ case class Person(uri:String,
     educations.foldLeft(List[String]()) {(u,education) => u ++ education.uris} ++
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
-    geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} 
+    geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
+    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} 
   }
 
   def personAttributes() = {
