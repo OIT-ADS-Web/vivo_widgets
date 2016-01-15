@@ -11,6 +11,8 @@ import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
 import scala.collection.JavaConversions._
 
+import java.util.Date
+
 object OrganizationIndexer extends SimpleConversion
   with ScalateTemplateStringify
   with WidgetLogging {
@@ -32,6 +34,8 @@ object OrganizationIndexer extends SimpleConversion
       solrDoc.addField("id",o.uri)
       solrDoc.addField("group","organizations")
       solrDoc.addField("json",o.toJson)
+      solrDoc.addField("updatedAt", o.updatedAt)
+ 
       o.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
     }
@@ -46,10 +50,12 @@ object OrganizationIndexer extends SimpleConversion
       val grants = Grant.fromUri(vivo, uriContext, "sparql/organization/grants.ssp")
       val people = PersonReference.fromUri(vivo, uriContext)
 
-      val o = Organization.build(uri, organizationData.head, people, grants)
+      val now = new Date
+      val o = Organization.build(uri, now, organizationData.head, people, grants)
       return Option(o)
      }
      None
   }
+
 
 }

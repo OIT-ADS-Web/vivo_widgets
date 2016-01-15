@@ -96,24 +96,20 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     }
   }
 
-  def reindexUris(uris: List[String]) = {
-    val personUris:ListBuffer[String] = ListBuffer()
-    val organizationUris:ListBuffer[String] = ListBuffer()
-    uris.foreach{ uri =>
-      if (uri contains "individual/org") {
-        organizationUris += uri
-      } else if (uri matches ".*individual/per[^_]*") {
-        personUris+= uri
-      }
-    }
-    if (personUris.size() > 0) {
-      PersonIndexer.indexAll(personUris.toSet.toList,vivo,solr)
-    }
-    if (organizationUris.size() > 0) {
-      OrganizationIndexer.indexAll(organizationUris.toSet.toList, vivo, solr)
+  def reindexPeople(uris: List[String]) = {
+    if (uris.size() > 0) {
+      PersonIndexer.indexAll(uris.toSet.toList,vivo,solr)
     }
     solr.commit()
   }
+
+  def reindexOrganizations(uris: List[String]) = {
+    if (uris.size() > 0) {
+      OrganizationIndexer.indexAll(uris.toSet.toList, vivo, solr)
+    }
+    solr.commit()
+  }
+
 
   def reindexPerson(uri: String) = {
     timer("index person") {

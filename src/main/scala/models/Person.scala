@@ -3,6 +3,8 @@ package edu.duke.oit.vw.models
 import org.apache.solr.client.solrj.SolrServer
 import edu.duke.oit.vw.utils._
 
+import java.util.Date
+
 object Person extends SolrModel with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Person] = {
@@ -13,6 +15,7 @@ object Person extends SolrModel with AttributeParams {
   }
 
   def build(uri:String,
+            updatedAt:Date,
             personData:Map[Symbol,String],
             pubs:List[Publication],
             awards:List[Award],
@@ -28,14 +31,15 @@ object Person extends SolrModel with AttributeParams {
             geographicalFocus:List[GeographicFocus],
             newsfeeds:List[Newsfeed]): Person = {
     new Person(uri,
-               vivoType               = personData('type).stripBrackets(),
-               label                  = personData('label),
-               title                  = personData('title),
-               publications           = pubs,
-               awards                 = awards,
-               artisticWorks          = artisticWorks,
-               grants                 = grants,
-               courses                = courses,
+               updatedAt,
+               vivoType           = personData('type).stripBrackets(),
+               label              = personData('label),
+               title              = personData('title),
+               publications       = pubs,
+               awards             = awards,
+               artisticWorks      = artisticWorks,
+               grants             = grants,
+               courses            = courses,
                professionalActivities = professionalActivities,
                positions              = positions,
                addresses              = addresses,
@@ -49,6 +53,7 @@ object Person extends SolrModel with AttributeParams {
 }
 
 case class Person(uri:String,
+                  updatedAt:Date,
                   vivoType:String,
                   label:String,
                   title:String,

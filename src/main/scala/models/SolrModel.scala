@@ -32,6 +32,13 @@ trait SolrModel {
     }
   }
 
+  /*
+  def getDocumentByUpdatedDate(since: Date,solr: SolrServer): Option[SolrDocument] = {
+    val query = new SolrQuery().setQuery("updatedAt:\" >= " + since + "\"")
+    getBySolrQuery(query, solr)
+  }
+  */
+  
   protected def getBySolrQuery(query: SolrQuery, solr: SolrServer): Option[SolrDocument] = {
     val docList = solr.query(query).getResults()
     if (docList.getNumFound() > 0) {

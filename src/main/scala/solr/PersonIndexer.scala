@@ -10,7 +10,10 @@ import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.duke.oit.vw.jena.Sparqler
 
 import java.util.NoSuchElementException
+import java.util.Date
 import scala.collection.JavaConversions._
+
+import java.text.SimpleDateFormat
 
 object PersonIndexer extends SimpleConversion
   with WidgetLogging
@@ -35,6 +38,8 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", p.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
       solrDoc.addField("json",p.toJson)
+      solrDoc.addField("updatedAt", p.updatedAt)
+     
       p.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
     }
@@ -74,7 +79,10 @@ object PersonIndexer extends SimpleConversion
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
 
-      val p = Person.build(uri, personData.head, pubs, awards,
+      val now = new Date
+
+      val p = Person.build(uri, now, personData.head, 
+                           pubs, awards,
                            artisticWorks, grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,

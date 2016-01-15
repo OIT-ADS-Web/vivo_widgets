@@ -33,15 +33,6 @@
   <admin>
     <defaultQuery>solr</defaultQuery>
   </admin>
-
-
-
-
-
-
-
-
-
   <indexConfig>
    <!-- Values here affect all index writers and act as a default unless overridden. -->
     <useCompoundFile>false</useCompoundFile>
