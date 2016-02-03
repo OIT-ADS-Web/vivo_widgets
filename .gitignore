@@ -95,3 +95,6 @@ bin/start_widgets.sh
 bin/vivo-widgets.service
 deploy.properties.erb
 docs/vivo_widgets.conf
+
+*.log.gz
+
