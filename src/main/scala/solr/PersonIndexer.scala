@@ -39,21 +39,12 @@ object PersonIndexer extends SimpleConversion
     val existingJson = existing.toJson
     val toCheckJson = toCheck.toJson
 
-    log.debug("existing="+existingJson)
-    log.debug("toCheck="+toCheckJson)
-
     // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
     val changed, added, deleted = existingJson diff toCheckJson
  
-    log.debug("changed="+changed.toString)
-    log.debug("added="+added.toString)
-    log.debug("deleted="+deleted.toString)
-
     if (changed.toString.equals("") && added.toString.equals("") && deleted.toString.equals("")) {
-      log.debug("PersonIndexer.detectChanges : returning false")
       return false
     } else {
-      log.debug("PersonIndexer.detectChanges : returning true")
       return true
     }
 
@@ -81,39 +72,31 @@ object PersonIndexer extends SimpleConversion
       var person:Person = p.copy()
 
       if (existing.isDefined && existing.get.updatedAt.isDefined) {
-        val updatedAt:Date = existing.get.updatedAt.get
+        val updatedAt = existing.get.updatedAt
 
-        person = p.copy(updatedAt = Option.apply(updatedAt))
-
-        //person.updatedAt = updatedAt
+        person = p.copy(updatedAt = updatedAt)
 
         val changes:Boolean = detectChanges(existing.get, person)
         skip = !(changes)
-        log.debug("buildDoc skip="+skip+";"+uri)
-
       }
       
       if (skip) {
-         val updatedAt:Date = p.updatedAt.get
-         person = p.copy(updatedAt = Option.apply(updatedAt))
-
+         val updatedAt = existing.get.updatedAt
+         person = p.copy(updatedAt = updatedAt)
+         
+         log.debug(String.format("Skipping index for %s. No changes detected", uri))
       } 
       
       val solrDoc = new SolrInputDocument()
       
-      //solrDoc.addField("id",p.uri)
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("id",person.uri)
-      //solrDoc.addField("alternateId", p.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
-      //solrDoc.addField("json",p.toJson)
       solrDoc.addField("json",person.toJson)
       
-      solrDoc.addField("updatedAt", person.updatedAt)
-      //solrDoc.addField("updatedAt", p.updatedAt)
+      solrDoc.addField("updatedAt", person.updatedAt.get)
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
-      //p.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
       
     }
