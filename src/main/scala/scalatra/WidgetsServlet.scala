@@ -11,6 +11,11 @@ import scalate.ScalateSupport
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
+import java.util.Date
+
+import org.slf4j.{Logger, LoggerFactory}
+
+
 trait FormatType
 object FormatHTML extends FormatType
 object FormatJS extends FormatType
@@ -21,6 +26,8 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   with ScalateSupport
   with ScalateTemplateStringify
   with Timer {
+
+  val log =  LoggerFactory.getLogger(getClass)
 
   def this() {
     this("vivowidgetcore", WidgetsConfig.loadProperties()("WidgetsSolr.directory"))
@@ -35,6 +42,44 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   get("/api/v0.9/organizations/:collectionName/:count.:format") {
     renderOrganizations
   }
+
+  protected def parseDate(dateParam: String):Date = {
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    // FIXME: there's bound to be a more Scala way to do this 
+    val startDate =
+      if(dateParam != null && !dateParam.isEmpty()) {
+        dateFormat.parse(dateParam)
+      }
+      else if(dateParam != null && dateParam.isEmpty()) {
+        dateFormat.parse("1000-01-01")
+      }
+      else {
+        null
+      }
+    return startDate
+  }
+
+  // GET /search/modified-since.json?date={date}
+  get("/search/modified-since.:format") {
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
+    requestSetup
+
+    // FIXME: need a to, from (range) kind of option
+    var dateStartParam = params.getOrElse("start","")
+    var dateEndParam = params.getOrElse("end",null)
+    
+    var start = parseDate(dateStartParam)
+    var end = parseDate(dateEndParam)
+
+    log.debug("search from:" + start + " to " + end)
+
+    val result = WidgetsSearcher.searchByUpdatedAt(start, Option.apply(end), WidgetsConfig.widgetServer)
+   
+    renderCollection(result)
+
+  }
+
+
 
   // GET /search.json?query=theory*
   get("/search.:format") {

@@ -12,7 +12,13 @@ import edu.duke.oit.vw.utils._
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
+import java.util.Date
+
+import org.slf4j.{Logger, LoggerFactory}
+
 trait SolrModel {
+  
+  val log = LoggerFactory.getLogger(getClass)
 
   def getDocumentById(id: String,solr: SolrServer): Option[SolrDocument] = {
     val query = new SolrQuery().setQuery("id:\"" + id + "\"")
@@ -32,13 +38,6 @@ trait SolrModel {
     }
   }
 
-  /*
-  def getDocumentByUpdatedDate(since: Date,solr: SolrServer): Option[SolrDocument] = {
-    val query = new SolrQuery().setQuery("updatedAt:\" >= " + since + "\"")
-    getBySolrQuery(query, solr)
-  }
-  */
-  
   protected def getBySolrQuery(query: SolrQuery, solr: SolrServer): Option[SolrDocument] = {
     val docList = solr.query(query).getResults()
     if (docList.getNumFound() > 0) {
@@ -55,6 +54,7 @@ trait SolrModel {
 
     val docList = response.getResults()
     val items = parseItemList(docList)
+    
     items.size match {
       case 0 => new VivoSearchResult(0,Map(),List())
       case _ => {

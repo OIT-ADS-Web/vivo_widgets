@@ -24,10 +24,14 @@
 
   <logger name="widget.timer" level="info" />
   <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="info" />
-  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="info" />
+  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="debug" />
 
   <logger name="edu.duke.oit.vw.solr.PersonIndexer" level="debug" />
   <logger name="edu.duke.oit.vw.solr.VivoSolrIndexer" level="debug" />
+
+  <logger name="edu.duke.oit.vw.solr.VivoSearcher" level="debug" />
+  <logger name="edu.duke.oit.vw.solr.WidgetsSearcher" level="debug" />
+
 
   <root level="info">
     <!-- <appender-ref ref="STDOUT" /> -->
