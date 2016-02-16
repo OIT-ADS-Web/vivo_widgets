@@ -74,6 +74,8 @@ object PersonIndexer extends SimpleConversion
       if (existing.isDefined && existing.get.updatedAt.isDefined) {
         val updatedAt = existing.get.updatedAt
 
+        // need to make a person with same updatedAt value so 
+        // it doesn't diff merely on that field alone
         person = p.copy(updatedAt = updatedAt)
 
         val changes:Boolean = detectChanges(existing.get, person)
@@ -85,7 +87,11 @@ object PersonIndexer extends SimpleConversion
          person = p.copy(updatedAt = updatedAt)
          
          log.debug(String.format("Skipping index for %s. No changes detected", uri))
-      } 
+      } else {
+         // if we do NOT skip, then make the person the same as the p 
+         // e.g. (with NOW as the updatedAt value)
+         person = p.copy()
+      }
       
       val solrDoc = new SolrInputDocument()
       

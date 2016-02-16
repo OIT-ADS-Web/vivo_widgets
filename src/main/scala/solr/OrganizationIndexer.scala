@@ -83,7 +83,10 @@ object OrganizationIndexer extends SimpleConversion
          organization = o.copy(updatedAt = updatedAt)
          
          log.debug(String.format("Skipping index for %s. No changes detected", uri))
-      } 
+      } else {
+        // NOTE: if it IS different, need to just copy the version from buildOrganization
+        organization = o.copy()
+      }
       
       val solrDoc = new SolrInputDocument()
       
