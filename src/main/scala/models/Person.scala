@@ -14,6 +14,8 @@ object Person extends SolrModel with AttributeParams {
     }
   }
 
+  // NOTE: person and organization have Option[Date] instead of Date for updatedAt because some people exist
+  // in the index preceding the existence of that field.  If it is not Option[], it returns an error
   def build(uri:String,
             updatedAt:Option[Date],
             personData:Map[Symbol,String],

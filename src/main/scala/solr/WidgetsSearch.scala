@@ -16,32 +16,26 @@ import edu.duke.oit.vw.solr._
 import edu.duke.oit.vw.utils._
 
 import java.util.Date
+import java.util.Calendar
+import java.text.SimpleDateFormat
 
 object WidgetsSearcher extends SolrModel {
 
-    def searchByUpdatedAt(start: Date, end: Option[Date], solr:SolrServer): List[WidgetsSearchResultItem] = {
+  def searchByUpdatedAt(start: Date, end: Option[Date], solr:SolrServer): List[WidgetsSearchResultItem] = {
     // NOTE: syntax for searh in SOLR looks this: 
     // updatedAt:[2016-02-10T00:00:00Z TO NOW]
-   
-    val format = new java.text.SimpleDateFormat("YYYY-MM-dd'T'00:00:00'Z'")
+  
+    log.debug("************searchByUpdatedAt***********")
+
+    val format = new SimpleDateFormat("YYYY-MM-dd'T'00:00:00'Z'")
     //see: http://stackoverflow.com/questions/26037324/solrj-date-request
 
     val dateStart = format.format(start)
-    
-    //val dateEnd = format.format(end)
-    //http://blog.originate.com/blog/2014/06/15/idiomatic-scala-your-options-do-not-match/
 
-    //val dateEnd = end.fold("NOW")(_ + format.format(end))
-    
     val dateEnd = end match {
-      case Some(end) => format.format(end)
+      case Some(end) => getNextDay(format, end) //format.format(end)
       case None => "NOW"
     }
-
- 
-    // NOTE: need to either do to NOW or to %s secondDate
-    //val dateEnd = "NOW"
-
 
     val queryString = String.format("updatedAt:[%s TO %s]", dateStart, dateEnd)
 
@@ -63,6 +57,14 @@ object WidgetsSearcher extends SolrModel {
 
   }
 
+
+  def getNextDay(format: SimpleDateFormat, end: Date): String = {
+    val c = Calendar.getInstance()
+    c.setTime(end)
+    c.add(Calendar.DATE, 1)
+    
+    return format.format(c.getTime())
+  }
 
   def parseWidgetsItemList(docList: SolrDocumentList): List[WidgetsSearchResultItem] = {
     docList.toList filter  (_.get("group") != null ) map { doc =>

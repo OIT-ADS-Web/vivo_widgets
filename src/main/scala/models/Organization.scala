@@ -14,7 +14,7 @@ object Organization extends SolrModel with AttributeParams {
     }
   }
 
-  def build(uri:String, updatedAt:Date, orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
+  def build(uri:String, updatedAt:Option[Date], orgData:Map[Symbol,String], people:List[PersonReference], grants:List[Grant]): Organization = {
     new Organization(uri,
                      updatedAt,
                      vivoType    = orgData('type).stripBrackets(),
@@ -27,7 +27,7 @@ object Organization extends SolrModel with AttributeParams {
 }
 
 case class Organization(uri:String,
-                        updatedAt:Date,
+                        updatedAt:Option[Date],
                         vivoType:String,
                         label:String,
                         people:List[PersonReference],
