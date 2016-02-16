@@ -65,8 +65,8 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     requestSetup
 
     // FIXME: need a to, from (range) kind of option
-    var dateStartParam = params.getOrElse("start","")
-    var dateEndParam = params.getOrElse("end",null)
+    var dateStartParam = params.getOrElse("modifiedFrom","")
+    var dateEndParam = params.getOrElse("modifiedTo",null)
     
     var start = parseDate(dateStartParam)
     var end = parseDate(dateEndParam)
