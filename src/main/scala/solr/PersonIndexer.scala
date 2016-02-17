@@ -17,9 +17,11 @@ import java.text.SimpleDateFormat
 
 import net.liftweb.json._
 
+import edu.duke.oit.vw.scalatra.WidgetsConfig
+ 
 object PersonIndexer extends SimpleConversion
   with WidgetLogging
-{
+  with JsonDiff {
 
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
@@ -34,27 +36,8 @@ object PersonIndexer extends SimpleConversion
     }
   }
 
-  def detectChanges(existing: Person, toCheck: Person): Boolean = {
- 
-    val existingJson = existing.toJson
-    val toCheckJson = toCheck.toJson
-
-    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
-    val changed, added, deleted = existingJson diff toCheckJson
- 
-    if (changed.toString.equals("") && added.toString.equals("") && deleted.toString.equals("")) {
-      return false
-    } else {
-      return true
-    }
-
-  }
-
   def checkExisting(uri: String): Option[Person] = {
 
-    import edu.duke.oit.vw.solr.VivoSolrIndexer
-    import edu.duke.oit.vw.scalatra.WidgetsConfig
- 
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
  
     val person = vsi.getPerson(uri)
@@ -78,7 +61,7 @@ object PersonIndexer extends SimpleConversion
         // it doesn't diff merely on that field alone
         person = p.copy(updatedAt = updatedAt)
 
-        val changes:Boolean = detectChanges(existing.get, person)
+        val changes:Boolean = hasChanges(existing.get, person)
         skip = !(changes)
       }
       

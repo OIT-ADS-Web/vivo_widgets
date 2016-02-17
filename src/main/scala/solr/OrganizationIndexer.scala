@@ -13,9 +13,12 @@ import scala.collection.JavaConversions._
 
 import java.util.Date
 
+import edu.duke.oit.vw.scalatra.WidgetsConfig
+ 
 object OrganizationIndexer extends SimpleConversion
   with ScalateTemplateStringify
-  with WidgetLogging {
+  with WidgetLogging 
+  with JsonDiff {
 
   def index(uri: String,vivo: Vivo,solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
@@ -28,36 +31,13 @@ object OrganizationIndexer extends SimpleConversion
     }
   }
 
-  // FIXME: probably a way to centralize this from Person and Organization
-  // instead of duplicating
-  def detectChanges(existing: Organization, toCheck: Organization): Boolean = {
- 
-    val existingJson = existing.toJson
-    val toCheckJson = toCheck.toJson
-
-    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
-    val changed, added, deleted = existingJson diff toCheckJson
- 
-    if (changed.toString.equals("") && added.toString.equals("") && deleted.toString.equals("")) {
-      return false
-    } else {
-      return true
-    }
-
-  }
-
   def checkExisting(uri: String): Option[Organization] = {
-
-    import edu.duke.oit.vw.solr.VivoSolrIndexer
-    import edu.duke.oit.vw.scalatra.WidgetsConfig
- 
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
  
     val organization = vsi.getOrganization(uri)
 
     return organization
   }
-
 
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
@@ -74,7 +54,7 @@ object OrganizationIndexer extends SimpleConversion
 
         organization = o.copy(updatedAt = updatedAt)
 
-        val changes:Boolean = detectChanges(existing.get, organization)
+        val changes:Boolean = hasChanges(existing.get, organization)
         skip = !(changes)
       }
       

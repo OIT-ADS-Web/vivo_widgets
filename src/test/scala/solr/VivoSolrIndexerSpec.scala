@@ -81,7 +81,8 @@ class VivoSolrIndexerSpec extends Specification with ScalateTemplateStringify {
      TestServers.loadSampleData("/src/test/resources/updated_minimal_person.n3")
 
      val uris = List("http://localhost/individual/art24520","http://localhost/individual/courseHISTORY790S-07")
-     vsi.reindexUris(uris)
+     vsi.reindexPeople(uris) 
+ 
      val person = vsi.getPerson(uri)
      val title = person.get.title
      title must_== "Programming CIO of the Universe"
