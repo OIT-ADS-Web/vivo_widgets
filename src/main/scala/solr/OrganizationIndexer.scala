@@ -103,22 +103,6 @@ object OrganizationIndexer extends SimpleConversion
     return None
   }
 
-  /*
-  def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
-    buildOrganization(uri,vivo).foreach{ o =>
-      val solrDoc = new SolrInputDocument()
-      solrDoc.addField("id",o.uri)
-      solrDoc.addField("group","organizations")
-      solrDoc.addField("json",o.toJson)
-      solrDoc.addField("updatedAt", o.updatedAt)
- 
-      o.uris.map {uri => solrDoc.addField("uris",uri)}
-      return Option(solrDoc)
-    }
-    return None
-  }
-  */
-
 
   def buildOrganization(uri: String,vivo: Vivo): Option[Organization] = {
     log.debug("pull uri: " + uri)
