@@ -13,12 +13,13 @@ import scala.collection.JavaConversions._
 
 import java.util.Date
 
+import net.liftweb.json._
+
 import edu.duke.oit.vw.scalatra.WidgetsConfig
  
 object OrganizationIndexer extends SimpleConversion
   with ScalateTemplateStringify
-  with WidgetLogging 
-  with JsonDiff {
+  with WidgetLogging { 
 
   def index(uri: String,vivo: Vivo,solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
@@ -39,35 +40,45 @@ object OrganizationIndexer extends SimpleConversion
     return organization
   }
 
+  def hasChanges(existing: Organization, toCheck: Organization): Boolean = {
+    val existingJson = existing.toJson
+    val toCheckJson = toCheck.toJson
+
+    log.debug("existing="+existingJson)
+    log.debug("check="+toCheckJson)
+
+    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
+    val Diff(changed, added, deleted) = parse(existingJson) diff parse(toCheckJson)
+
+    log.debug("changed="+changed+";added="+added+";deleted="+deleted)
+    
+    if (changed == JNothing && added == JNothing && deleted == JNothing) {
+      return false
+    } else {
+      return true
+    }
+
+  }
+
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildOrganization(uri,vivo).foreach{ o =>
-  
-      val existing = checkExisting(o.uri)
-
-      var skip:Boolean = false
 
       var organization:Organization = o.copy()
-
+      val existing = checkExisting(o.uri)
+      
       if (existing.isDefined && existing.get.updatedAt.isDefined) {
-        val updatedAt = existing.get.updatedAt
+        // NOTE: need to compare with a person with the same updatedAt value so 
+        // it doesn't diff merely on that field alone
+        val changes:Boolean = hasChanges(existing.get, o.copy(updatedAt=existing.get.updatedAt))
 
-        organization = o.copy(updatedAt = updatedAt)
-
-        val changes:Boolean = hasChanges(existing.get, organization)
-        skip = !(changes)
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          organization = o.copy(updatedAt = existing.get.updatedAt)
+          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+       } 
       }
-      
-      if (skip) {
-         val updatedAt = existing.get.updatedAt
-         organization = o.copy(updatedAt = updatedAt)
-         
-         log.debug(String.format("Skipping index for %s. No changes detected", uri))
-      } else {
-        // NOTE: if it IS different, need to just copy the version from buildOrganization
-        organization = o.copy()
-      }
-      
+ 
       val solrDoc = new SolrInputDocument()
       
       solrDoc.addField("id",organization.uri)

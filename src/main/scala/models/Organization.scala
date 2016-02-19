@@ -33,7 +33,9 @@ case class Organization(uri:String,
                         people:List[PersonReference],
                         grants:List[Grant],
                         attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) 
+     with AddToJson
+     with Timestamped
 {
 
   override def uris() = {

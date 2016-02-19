@@ -8,10 +8,10 @@
   </appender>
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${widget.logging.dir:-}widgets.log</file>
+    <file>${widget.logging.dir:-./}widgets.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>${widget.logging.dir:-}widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <fileNamePattern>${widget.logging.dir:./}widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
 
       <!-- keep 20 days' worth of history -->
       <maxHistory>20</maxHistory>

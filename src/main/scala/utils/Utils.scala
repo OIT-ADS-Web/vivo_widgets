@@ -45,26 +45,13 @@ trait SimpleConversion {
   }
 }
 
-import edu.duke.oit.vw.models.SolrModel
+import java.util.Date
 
-trait JsonDiff {
-  
-  def hasChanges(existing: AddToJson, toCheck: AddToJson): Boolean = {
- 
-    val existingJson = existing.toJson
-    val toCheckJson = toCheck.toJson
-
-    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
-    val changed, added, deleted = existingJson diff toCheckJson
- 
-    if (changed.toString.equals("") && added.toString.equals("") && deleted.toString.equals("")) {
-      return false
-    } else {
-      return true
-    }
-  }
-
+trait Timestamped {
+    val uri:String
+    val updatedAt:Option[Date]
 }
+
 
 object Int {
   def isInteger(s : String) : Boolean = {
