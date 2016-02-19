@@ -69,7 +69,12 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     requestSetup
     
     var dateSinceParam = params.getOrElse("since","")
-    var since = parseDate(dateSinceParam)
+    
+    var since = try {
+      parseDate(dateSinceParam)
+    } catch {
+      case e: java.text.ParseException => halt(status=400, body = String.format("Could not parse date %s", dateSinceParam))
+    }
 
     log.debug("search from:" + since)
 
