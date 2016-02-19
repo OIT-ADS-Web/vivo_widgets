@@ -20,9 +20,8 @@ import net.liftweb.json._
 import edu.duke.oit.vw.scalatra.WidgetsConfig
  
 object PersonIndexer extends SimpleConversion
-  with WidgetLogging
-  with JsonDiff {
-
+  with WidgetLogging {
+ 
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
   }
@@ -37,45 +36,49 @@ object PersonIndexer extends SimpleConversion
   }
 
   def checkExisting(uri: String): Option[Person] = {
-
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
- 
-    val person = vsi.getPerson(uri)
-
-    return person
+    return vsi.getPerson(uri)
   }
+
+  def hasChanges(existing: Person, toCheck: Person): Boolean = {
+    val existingJson = existing.toJson
+    val toCheckJson = toCheck.toJson
+
+    log.debug("existing="+existingJson)
+    log.debug("check="+toCheckJson)
+
+    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
+    val Diff(changed, added, deleted) = parse(existingJson) diff parse(toCheckJson)
+
+    log.debug("changed="+changed+";added="+added+";deleted="+deleted)
+    
+    if (changed == JNothing && added == JNothing && deleted == JNothing) {
+      return false
+    } else {
+      return true
+    }
+
+  }
+
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildPerson(uri,vivo).foreach{ p =>
-  
-      val existing = checkExisting(p.uri)
-
-      var skip:Boolean = false
 
       var person:Person = p.copy()
-
+      val existing = checkExisting(p.uri)
+      
       if (existing.isDefined && existing.get.updatedAt.isDefined) {
-        val updatedAt = existing.get.updatedAt
-
-        // need to make a person with same updatedAt value so 
+        // NOTE: need to compare with a person with the same updatedAt value so 
         // it doesn't diff merely on that field alone
-        person = p.copy(updatedAt = updatedAt)
+        val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))
 
-        val changes:Boolean = hasChanges(existing.get, person)
-        skip = !(changes)
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          person = p.copy(updatedAt = existing.get.updatedAt)
+          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+       } 
       }
-      
-      if (skip) {
-         val updatedAt = existing.get.updatedAt
-         person = p.copy(updatedAt = updatedAt)
-         
-         log.debug(String.format("Skipping index for %s. No changes detected", uri))
-      } else {
-         // if we do NOT skip, then make the person the same as the p 
-         // e.g. (with NOW as the updatedAt value)
-         person = p.copy()
-      }
-      
+     
       val solrDoc = new SolrInputDocument()
       
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
@@ -98,8 +101,6 @@ object PersonIndexer extends SimpleConversion
     
     val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
     
-    //
-    //if (personData.size > 0 && anyChanges) {
     if (personData.size > 0) {
       log.debug("pull pubs")
       val pubs          = Publication.fromUri(vivo, uriContext)
@@ -128,15 +129,8 @@ object PersonIndexer extends SimpleConversion
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
 
-      // might have to check here
       var now = new Date
       
-      //val existing = checkExisting(uri)
-      //if (existing.isDefined) {
-      //  now = existing.get("updatedAt")
-      //}
-
-      // 
       var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
                            artisticWorks, grants, courses,
