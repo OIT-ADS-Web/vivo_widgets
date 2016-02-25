@@ -45,6 +45,14 @@ trait SimpleConversion {
   }
 }
 
+import java.util.Date
+
+trait Timestamped {
+    val uri:String
+    val updatedAt:Option[Date]
+}
+
+
 object Int {
   def isInteger(s : String) : Boolean = {
     apply(s) match {

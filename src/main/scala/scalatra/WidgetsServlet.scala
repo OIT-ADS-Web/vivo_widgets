@@ -11,6 +11,12 @@ import scalate.ScalateSupport
 // use scala collections with java iterators
 import scala.collection.JavaConversions._
 
+import java.util.Date
+import java.lang.NumberFormatException
+
+import org.slf4j.{Logger, LoggerFactory}
+
+
 trait FormatType
 object FormatHTML extends FormatType
 object FormatJS extends FormatType
@@ -21,6 +27,8 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   with ScalateSupport
   with ScalateTemplateStringify
   with Timer {
+
+  val log =  LoggerFactory.getLogger(getClass)
 
   def this() {
     this("vivowidgetcore", WidgetsConfig.loadProperties()("WidgetsSolr.directory"))
@@ -35,6 +43,49 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   get("/api/v0.9/organizations/:collectionName/:count.:format") {
     renderOrganizations
   }
+
+  protected def parseDate(dateParam: String):Date = {
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    // FIXME: there's bound to be a more Scala way to do this 
+    val startDate =
+      if(!dateParam.isEmpty()) {
+        dateFormat.parse(dateParam)
+      }
+      else {
+        dateFormat.parse("1000-01-01")
+      }
+    return startDate
+  }
+
+  def safeOffset(str: String): Option[Integer] = try {
+      Some(str.toInt)
+    } catch {
+    case e: NumberFormatException => None
+  }
+
+  // GET /search/modified.json?since={YYYY-MM-DD}
+  get("/search/modified.:format") {
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
+    requestSetup
+    
+    var dateSinceParam = params.getOrElse("since","")
+    
+    var since = try {
+      parseDate(dateSinceParam)
+    } catch {
+      case e: java.text.ParseException => halt(status=400, body = String.format("Could not parse date %s", dateSinceParam))
+    }
+
+    log.debug("search from:" + since)
+
+    val offset: Option[Integer] = safeOffset(params.getOrElse("offset", "0"))
+ 
+    val results = WidgetsSearcher.searchByUpdatedAt(since, offset.getOrElse(0), WidgetsConfig.widgetServer)
+   
+    renderSearchResults(results)
+
+  }
+
 
   // GET /search.json?query=theory*
   get("/search.:format") {
@@ -122,6 +173,15 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     timer("WidgetsServlet.formatCollection") {
       renderTemplateString(servletContext, template, modelData.toMap)
     }.asInstanceOf[String]
+  }
+
+  protected def renderSearchResults(results: WidgetsSearchResult) = {
+    // NOTE: I believe we only want JSON results for this (right now)
+    request("format") match {
+      case FormatJSON => Json.toJson(results)
+      case _ => "not content"
+    }
+
   }
 
   protected def renderCollection(collection: List[AnyRef]) = {

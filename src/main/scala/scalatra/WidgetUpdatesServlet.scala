@@ -6,6 +6,10 @@ import akka.actor.{Actor,ActorSystem,Props}
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,WidgetLogging,Timer}
 import edu.duke.oit.vw.solr.VivoSolrIndexer
 import edu.duke.oit.vw.solr.VivoSearcher
+
+//import edu.duke.oit.vw.solr.WidgetSearcher
+
+
 import edu.duke.oit.vw.models.Person
 import edu.duke.oit.vw.jena.JenaCache
 import java.net.URL

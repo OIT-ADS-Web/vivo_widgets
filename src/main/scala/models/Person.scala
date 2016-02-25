@@ -5,7 +5,8 @@ import edu.duke.oit.vw.utils._
 
 import java.util.Date
 
-object Person extends SolrModel with AttributeParams {
+object Person extends SolrModel 
+  with AttributeParams {
 
   def find(uri: String, solr: SolrServer): Option[Person] = {
     getDocumentByIdOrAlternateId(uri,solr) match {
@@ -14,8 +15,10 @@ object Person extends SolrModel with AttributeParams {
     }
   }
 
+  // NOTE: person and organization have Option[Date] instead of Date for updatedAt because some people exist
+  // in the index preceding the existence of that field.  If it is not Option[], it returns an error
   def build(uri:String,
-            updatedAt:Date,
+            updatedAt:Option[Date],
             personData:Map[Symbol,String],
             pubs:List[Publication],
             awards:List[Award],
@@ -53,7 +56,7 @@ object Person extends SolrModel with AttributeParams {
 }
 
 case class Person(uri:String,
-                  updatedAt:Date,
+                  updatedAt:Option[Date],
                   vivoType:String,
                   label:String,
                   title:String,
@@ -71,7 +74,9 @@ case class Person(uri:String,
                   geographicalFocus:List[GeographicFocus],
                   newsfeeds:List[Newsfeed],
                   attributes:Option[Map[String, String]])
-     extends VivoAttributes(uri, vivoType, label, attributes) with AddToJson
+     extends VivoAttributes(uri, vivoType, label, attributes) 
+     with AddToJson
+     with Timestamped
 {
 
   override def uris() = {

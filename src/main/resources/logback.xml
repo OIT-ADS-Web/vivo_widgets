@@ -8,10 +8,10 @@
   </appender>
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${widget.logging.dir:-}widgets.log</file>
+    <file>${widget.logging.dir:-./}widgets.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>${widget.logging.dir:-}widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <fileNamePattern>${widget.logging.dir:./}widgets.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
 
       <!-- keep 20 days' worth of history -->
       <maxHistory>20</maxHistory>
@@ -24,10 +24,14 @@
 
   <logger name="widget.timer" level="info" />
   <logger name="edu.duke.oit.vw.scalatra.WidgetUpdatesFilter" level="info" />
-  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="info" />
+  <logger name="edu.duke.oit.vw.scalatra.WidgetsFilter" level="debug" />
 
   <logger name="edu.duke.oit.vw.solr.PersonIndexer" level="debug" />
   <logger name="edu.duke.oit.vw.solr.VivoSolrIndexer" level="debug" />
+
+  <logger name="edu.duke.oit.vw.solr.VivoSearcher" level="debug" />
+  <logger name="edu.duke.oit.vw.solr.WidgetsSearcher" level="debug" />
+
 
   <root level="info">
     <!-- <appender-ref ref="STDOUT" /> -->

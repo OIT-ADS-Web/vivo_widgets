@@ -15,9 +15,13 @@ import scala.collection.JavaConversions._
 
 import java.text.SimpleDateFormat
 
+import net.liftweb.json._
+
+import edu.duke.oit.vw.scalatra.WidgetsConfig
+ 
 object PersonIndexer extends SimpleConversion
-  with WidgetLogging
-{
+  with WidgetLogging {
+ 
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
   }
@@ -31,17 +35,62 @@ object PersonIndexer extends SimpleConversion
     }
   }
 
+  def checkExisting(uri: String): Option[Person] = {
+    val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+    return vsi.getPerson(uri)
+  }
+
+  def hasChanges(existing: Person, toCheck: Person): Boolean = {
+    val existingJson = existing.toJson
+    val toCheckJson = toCheck.toJson
+
+    log.debug("existing="+existingJson)
+    log.debug("check="+toCheckJson)
+
+    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
+    val Diff(changed, added, deleted) = parse(existingJson) diff parse(toCheckJson)
+
+    log.debug("changed="+changed+";added="+added+";deleted="+deleted)
+    
+    if (changed == JNothing && added == JNothing && deleted == JNothing) {
+      return false
+    } else {
+      return true
+    }
+
+  }
+
+
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildPerson(uri,vivo).foreach{ p =>
-      val solrDoc = new SolrInputDocument()
-      solrDoc.addField("id",p.uri)
-      solrDoc.addField("alternateId", p.personAttributes.get("alternateId").get)
-      solrDoc.addField("group","people")
-      solrDoc.addField("json",p.toJson)
-      solrDoc.addField("updatedAt", p.updatedAt)
+
+      var person:Person = p.copy()
+      val existing = checkExisting(p.uri)
+      
+      if (existing.isDefined && existing.get.updatedAt.isDefined) {
+        // NOTE: need to compare with a person with the same updatedAt value so 
+        // it doesn't diff merely on that field alone
+        val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))
+
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          person = p.copy(updatedAt = existing.get.updatedAt)
+          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+       } 
+      }
      
-      p.uris.map {uri => solrDoc.addField("uris",uri)}
+      val solrDoc = new SolrInputDocument()
+      
+      solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
+      solrDoc.addField("id",person.uri)
+      solrDoc.addField("group","people")
+      solrDoc.addField("json",person.toJson)
+      
+      solrDoc.addField("updatedAt", person.updatedAt.get)
+      person.uris.map {uri => solrDoc.addField("uris",uri)}
+     
       return Option(solrDoc)
+      
     }
     return None
   }
@@ -49,8 +98,9 @@ object PersonIndexer extends SimpleConversion
   def buildPerson(uri: String,vivo: Vivo): Option[Person] = {
     log.debug("pull uri: " + uri)
     val uriContext = Map("uri" -> uri)
-
+    
     val personData = vivo.selectFromTemplate("sparql/personData.ssp", uriContext)
+    
     if (personData.size > 0) {
       log.debug("pull pubs")
       val pubs          = Publication.fromUri(vivo, uriContext)
@@ -79,14 +129,15 @@ object PersonIndexer extends SimpleConversion
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
 
-      val now = new Date
-
-      val p = Person.build(uri, now, personData.head, 
+      var now = new Date
+      
+      var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
                            artisticWorks, grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
                            geoFocus, newsfeeds)
+      
       log.info("buildPerson uri: " + uri)
       return Option(p)
     }

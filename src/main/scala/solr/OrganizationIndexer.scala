@@ -13,9 +13,13 @@ import scala.collection.JavaConversions._
 
 import java.util.Date
 
+import net.liftweb.json._
+
+import edu.duke.oit.vw.scalatra.WidgetsConfig
+ 
 object OrganizationIndexer extends SimpleConversion
   with ScalateTemplateStringify
-  with WidgetLogging {
+  with WidgetLogging { 
 
   def index(uri: String,vivo: Vivo,solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
@@ -28,19 +32,68 @@ object OrganizationIndexer extends SimpleConversion
     }
   }
 
+  def checkExisting(uri: String): Option[Organization] = {
+    val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+ 
+    val organization = vsi.getOrganization(uri)
+
+    return organization
+  }
+
+  def hasChanges(existing: Organization, toCheck: Organization): Boolean = {
+    val existingJson = existing.toJson
+    val toCheckJson = toCheck.toJson
+
+    log.debug("existing="+existingJson)
+    log.debug("check="+toCheckJson)
+
+    // http://scala-tools.org/mvnsites/liftweb-2.2-RC5/framework/lift-base_2.7.7/scaladocs/net/liftweb/json/Diff.html
+    val Diff(changed, added, deleted) = parse(existingJson) diff parse(toCheckJson)
+
+    log.debug("changed="+changed+";added="+added+";deleted="+deleted)
+    
+    if (changed == JNothing && added == JNothing && deleted == JNothing) {
+      return false
+    } else {
+      return true
+    }
+
+  }
+
+
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildOrganization(uri,vivo).foreach{ o =>
-      val solrDoc = new SolrInputDocument()
-      solrDoc.addField("id",o.uri)
-      solrDoc.addField("group","organizations")
-      solrDoc.addField("json",o.toJson)
-      solrDoc.addField("updatedAt", o.updatedAt)
+
+      var organization:Organization = o.copy()
+      val existing = checkExisting(o.uri)
+      
+      if (existing.isDefined && existing.get.updatedAt.isDefined) {
+        // NOTE: need to compare with a person with the same updatedAt value so 
+        // it doesn't diff merely on that field alone
+        val changes:Boolean = hasChanges(existing.get, o.copy(updatedAt=existing.get.updatedAt))
+
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          organization = o.copy(updatedAt = existing.get.updatedAt)
+          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+       } 
+      }
  
-      o.uris.map {uri => solrDoc.addField("uris",uri)}
+      val solrDoc = new SolrInputDocument()
+      
+      solrDoc.addField("id",organization.uri)
+      solrDoc.addField("group","organizations")
+      solrDoc.addField("json",organization.toJson)
+      
+      solrDoc.addField("updatedAt", organization.updatedAt.get)
+      organization.uris.map {uri => solrDoc.addField("uris",uri)}
+     
       return Option(solrDoc)
+      
     }
     return None
   }
+
 
   def buildOrganization(uri: String,vivo: Vivo): Option[Organization] = {
     log.debug("pull uri: " + uri)
@@ -51,7 +104,7 @@ object OrganizationIndexer extends SimpleConversion
       val people = PersonReference.fromUri(vivo, uriContext)
 
       val now = new Date
-      val o = Organization.build(uri, now, organizationData.head, people, grants)
+      val o = Organization.build(uri, Option.apply(now), organizationData.head, people, grants)
       return Option(o)
      }
      None
