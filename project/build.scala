@@ -37,8 +37,6 @@ object VivowidgetsBuild extends Build {
 
         "org.fusesource.scalate"  % "scalate-core_2.10" % "1.6.1",
         "org.scalatra" %% "scalatra-auth" % "2.2.0",
-        "org.slf4j" % "slf4j-api" % "1.7.2",
-        "org.slf4j" % "slf4j-jdk14" % "1.7.2",
 
         // jena libs
         // "com.hp.hpl.jena" % "jena" % "2.6.4" exclude("org.slf4j", "slf4j-api"),
@@ -59,9 +57,7 @@ object VivowidgetsBuild extends Build {
         "com.h2database" % "h2" % "1.3.154" % "test",
         "com.mchange" % "c3p0" % "0.9.2",
             
-    
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
-        "ch.qos.logback" % "logback-classic" % "1.0.6",
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "container,runtime,compile,test",
         "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
       ),
