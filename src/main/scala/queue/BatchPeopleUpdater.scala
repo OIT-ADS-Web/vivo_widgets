@@ -48,6 +48,13 @@ class BatchPeopleUpdater extends Actor {
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
       vsi.reindexPeople(updateMessage.uris)
     }
+    case msg:BatchUpdateMessage => {
+      import edu.duke.oit.vw.solr.VivoSolrIndexer
+      import edu.duke.oit.vw.scalatra.WidgetsConfig
+
+      val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+      vsi.reindexPeople(msg.uris)
+    } 
     case _ => { 
       println(">> no message!!")
     }

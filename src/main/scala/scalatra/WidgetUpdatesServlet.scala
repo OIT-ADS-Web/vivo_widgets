@@ -64,6 +64,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
 
   }
 
+  /*
   post("/updates/uri") {
     basicAuth
     WidgetsConfig.prepareCore
@@ -76,7 +77,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     }
   }
 
-  /*
+  
   post("/updates/uris") {
     basicAuth
     WidgetsConfig.prepareCore
@@ -90,16 +91,49 @@ class WidgetUpdatesFilter extends ScalatraFilter
   }
   */
 
+
+   /*
+    // FIXME: should update to accept Content-Type header
+    // http://scalatra.org/2.3/guides/formats/json.html
+    // parsedBody.extract[BatchUpdateMessage]
+   
+   http://alvinalexander.com/scala/how-to-access-post-request-data-with-scalatra
+
+   */
+
   post("/updates/people/uris") {
     basicAuth
     WidgetsConfig.prepareCore
-    params.get("message") match {
-      case Some(message:String) => {
+   
+    log.debug("Content-Type: "+ request.getContentType())
+    //val contentType = request.getContentType()
+
+    if (contentType == "application/json") {
+        import net.liftweb.json._
+
+        // get the POST request data
+        val jsonString = request.body
+
+        // needed for Lift-JSON
+        implicit val formats = DefaultFormats
+
+        // convert the JSON string to a JValue object
+        val parsedBody = parse(jsonString)
+
+        // FIXME: should update to accept Content-Type header
+        // http://scalatra.org/2.3/guides/formats/json.html
+        var message = parsedBody.extract[BatchUpdateMessage]
         BatchPeopleUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
+      } else {
+        params.get("message") match {
+          case Some(message:String) => {
+            BatchPeopleUpdater.actor ! message
+            Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
+          }
+          case _ => "Not a valid request"
+        }
       }
-      case _ => "Not a valid request"
-    }
   }
 
   post("/updates/organizations/uris") {
