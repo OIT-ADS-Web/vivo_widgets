@@ -7,8 +7,7 @@ import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,WidgetLogging,Timer}
 import edu.duke.oit.vw.solr.VivoSolrIndexer
 import edu.duke.oit.vw.solr.VivoSearcher
 
-//import edu.duke.oit.vw.solr.WidgetSearcher
-
+import net.liftweb.json._
 
 import edu.duke.oit.vw.models.Person
 import edu.duke.oit.vw.jena.JenaCache
@@ -64,34 +63,6 @@ class WidgetUpdatesFilter extends ScalatraFilter
 
   }
 
-  /*
-  post("/updates/uri") {
-    basicAuth
-    WidgetsConfig.prepareCore
-    params.get("message") match {
-      case Some(message:String) => {
-        IndexUpdater.actor ! message
-        Json.toJson(Map("message" -> "Sent to Indexupdater"))
-      }
-      case _ => "Not a valid request"
-    }
-  }
-
-  
-  post("/updates/uris") {
-    basicAuth
-    WidgetsConfig.prepareCore
-    params.get("message") match {
-      case Some(message:String) => {
-        BatchIndexUpdater.actor ! message
-        Json.toJson(Map("message" -> "Sent to BatchIndexupdater"))
-      }
-      case _ => "Not a valid request"
-    }
-  }
-  */
-
-
    /*
     // FIXME: should update to accept Content-Type header
     // http://scalatra.org/2.3/guides/formats/json.html
@@ -106,11 +77,9 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
    
     log.debug("Content-Type: "+ request.getContentType())
-    //val contentType = request.getContentType()
+    val contentType = request.getContentType()
 
     if (contentType == "application/json") {
-        import net.liftweb.json._
-
         // get the POST request data
         val jsonString = request.body
 
@@ -120,8 +89,6 @@ class WidgetUpdatesFilter extends ScalatraFilter
         // convert the JSON string to a JValue object
         val parsedBody = parse(jsonString)
 
-        // FIXME: should update to accept Content-Type header
-        // http://scalatra.org/2.3/guides/formats/json.html
         var message = parsedBody.extract[BatchUpdateMessage]
         BatchPeopleUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
@@ -139,12 +106,32 @@ class WidgetUpdatesFilter extends ScalatraFilter
   post("/updates/organizations/uris") {
     basicAuth
     WidgetsConfig.prepareCore
-    params.get("message") match {
-      case Some(message:String) => {
+    
+    log.debug("Content-Type: "+ request.getContentType())
+    val contentType = request.getContentType()
+
+    if (contentType == "application/json") {
+         // get the POST request data
+        val jsonString = request.body
+
+        // needed for Lift-JSON
+        implicit val formats = DefaultFormats
+
+        // convert the JSON string to a JValue object
+        val parsedBody = parse(jsonString)
+
+        var message = parsedBody.extract[BatchUpdateMessage]
         BatchOrganizationsUpdater.actor ! message
-        Json.toJson(Map("message" -> "Sent to BatchOrganizationUpdater"))
+        Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
+ 
+    } else  {
+      params.get("message") match {
+        case Some(message:String) => {
+          BatchOrganizationsUpdater.actor ! message
+          Json.toJson(Map("message" -> "Sent to BatchOrganizationUpdater"))
+        }
+        case _ => "Not a valid request"
       }
-      case _ => "Not a valid request"
     }
   }
 
