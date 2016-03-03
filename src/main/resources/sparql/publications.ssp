@@ -46,7 +46,6 @@ WHERE {
   ?publication a obo:IAO_0000030 .
   ?publication rdfs:label ?label .
   ?publication vitro:mostSpecificType ?type .
-  ?publication a bibo:Document .
   OPTIONAL { ?publication bibo:numPages ?numPages . }
   OPTIONAL { ?publication bibo:edition ?edition . }
   OPTIONAL { ?publication bibo:volume ?volume . }
@@ -94,6 +93,9 @@ WHERE {
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
+
+  FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship))
+
 } 
 ORDER BY desc(?datetime)
 
