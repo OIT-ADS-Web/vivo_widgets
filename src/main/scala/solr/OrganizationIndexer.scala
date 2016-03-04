@@ -26,7 +26,9 @@ object OrganizationIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
+    log.info("Building OrganizationIndexer.indexAll URIS:" + uris)
     uris.grouped(10).foreach{ groupedUris =>
+      log.info("_Grouped URIS:" + uris)
       val docs = groupedUris.map( uri => buildDoc(uri,vivo)).flatten
       solr.add(docs.toIterable)
     }
@@ -75,7 +77,7 @@ object OrganizationIndexer extends SimpleConversion
         if (!changes) {
           // if we are skipping (no changes) reset updated at
           organization = o.copy(updatedAt = existing.get.updatedAt)
-          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+          log.info(String.format("Skipping index for %s. No changes detected", uri))
        } 
       }
  

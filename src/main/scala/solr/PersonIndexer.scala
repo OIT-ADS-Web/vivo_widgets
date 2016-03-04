@@ -27,9 +27,9 @@ object PersonIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
-    log.info("Buidling URIS:" + uris)
+    log.info("Building PersonIndexer.indexAll URIS:" + uris)
     uris.grouped(100).foreach{ groupedUris =>
-      log.info("Grouped URIS:" + uris)
+      log.info("_Grouped URIS:" + uris)
       val docs = groupedUris.map( uri => buildDoc(uri,vivo)).flatten
       solr.add(docs.toIterable)
     }
@@ -75,7 +75,7 @@ object PersonIndexer extends SimpleConversion
         if (!changes) {
           // if we are skipping (no changes) reset updated at
           person = p.copy(updatedAt = existing.get.updatedAt)
-          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+          log.info(String.format("Skipping index for %s. No changes detected", uri))
        } 
       }
      
