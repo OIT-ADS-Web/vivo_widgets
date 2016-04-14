@@ -58,6 +58,7 @@ WHERE {
   }
   OPTIONAL { ?publication duke:publicationVenue ?publishedIn }
   OPTIONAL { ?publication duke:authorList ?authorList }
+  OPTIONAL { ?publication duke:onlineContent ?onlineContent }
   OPTIONAL { ?publication duke:editorList ?editorList }
   OPTIONAL { ?publication duke:translatorList ?translatorList }
   OPTIONAL {
@@ -71,7 +72,6 @@ WHERE {
   OPTIONAL {?authorship duke:isFavorite ?isFavorite .}
   OPTIONAL {?publication duke:parentBookTitle ?parentBookTitle .}
   OPTIONAL {?publication bibo:doi ?doi .}
-  OPTIONAL {?publication duke:onlineContent ?onlineContent.}
   OPTIONAL {?publication bibo:abstract ?abstract .}
   OPTIONAL {?publication bibo:pmid ?pmid .}
   OPTIONAL {?publication core:pmcid ?pmcid .}
