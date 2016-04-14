@@ -22,7 +22,7 @@ SELECT ?publication
 ?datetime
 ?year
 ?isFavorite ?parentBookTitle
-?doi ?abstract ?pmid
+?doi ?onlineContent ?abstract ?pmid
 ?pmcid ?publicationSource
 ?subtypes ?conferenceName
 ?conferenceLocation ?chicagoCitation
@@ -71,6 +71,7 @@ WHERE {
   OPTIONAL {?authorship duke:isFavorite ?isFavorite .}
   OPTIONAL {?publication duke:parentBookTitle ?parentBookTitle .}
   OPTIONAL {?publication bibo:doi ?doi .}
+  OPTIONAL {?publication duke:onlineContent ?onlineContent.}
   OPTIONAL {?publication bibo:abstract ?abstract .}
   OPTIONAL {?publication bibo:pmid ?pmid .}
   OPTIONAL {?publication core:pmcid ?pmcid .}
@@ -93,6 +94,7 @@ WHERE {
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
+
 
   FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship))
 
