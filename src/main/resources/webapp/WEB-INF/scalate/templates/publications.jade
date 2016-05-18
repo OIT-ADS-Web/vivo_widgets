@@ -13,12 +13,6 @@
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
-:!javascript
-  var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
-  if (apa) {
-    alert("APA!")
-  }
-
 ul(style=ulStyle)
   - for(publication <- publications)
     - val chicagoCitation = publication.get("chicagoCitation")
@@ -33,11 +27,21 @@ ul(style=ulStyle)
     - val icmjeCitation = publication.get("icmjeCitation")
     - var fixedIcmje = icmjeCitation
 
+    :&javascript
+      var citationContainers = document.getElementsByClassName("citation")
+      var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+      for (var i = 0; i < citationContainers.length; i++) {  
+        if (apa) {
+          var apaString = "#{fixedApa}"
+          citationContainers[i].innerHTML = apaString    
+        }          
+      }         
+
     li(style=liStyle)
       p
         span.citation
-          != fixedApa
-          a(onmouseout="this.style.textDecoration ='underline';"
-          onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
-          style="color:#2485AE;text-decoration:underline"
-          href="#{fixURL(publication.uri)}") More info
+        -# != fixedApa
+        a(onmouseout="this.style.textDecoration ='underline';"
+        onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
+        style="color:#2485AE;text-decoration:underline"
+        href="#{fixURL(publication.uri)}") More info
