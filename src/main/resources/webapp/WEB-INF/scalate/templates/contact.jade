@@ -1,4 +1,4 @@
--# include template helpesr
+-# include template helpers
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 
 - import edu.duke.oit.vw.models.Person
@@ -8,6 +8,8 @@
 
 -# The contact object is really a list of person objects.
 - for (personAttributes <- contact)
+  - if (!empty(personAttributes.get("preferredCitationFormat")))
+    p.preferredCitationFormat #{personAttributes.get("preferredCitationFormat")}
   - if (!empty(personAttributes.get("primaryEmail")))
     - val email = personAttributes.get("primaryEmail")
     p.email 

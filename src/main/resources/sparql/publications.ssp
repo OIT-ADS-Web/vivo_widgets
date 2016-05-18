@@ -9,6 +9,7 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
 PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?publication
 ?label ?type
@@ -38,8 +39,12 @@ SELECT ?publication
 (MONTH(?conferenceFinishDate) AS ?conferenceFinishDateMonth)
 (YEAR(?conferenceFinishDate) AS ?conferenceFinishDateYear)
 (DAY(?conferenceFinishDate) AS ?conferenceFinishDateDay)
+#FDP-2614
+?preferredCitationFormat
 
 WHERE {
+  #FDP-2614
+  <${uri}> duke:preferredCitationFormat ?preferredCitationFormat .
   <${uri}> core:relatedBy ?authorship .
   ?authorship vitro:mostSpecificType ?authorshipType .
   ?authorship core:relates ?publication .
@@ -70,6 +75,10 @@ WHERE {
     ?publication core:dateTimeValue ?datetime . ?datetime core:dateTime ?year .
   }
   OPTIONAL {?authorship duke:isFavorite ?isFavorite .}
+  #FDP-2614
+  #OPTIONAL { <${ uri }> duke:preferredCitationFormat ?preferredCitationFormat . }
+  #?authorship core:relates ?person .
+  #?person a foaf:Person .
   OPTIONAL {?publication duke:parentBookTitle ?parentBookTitle .}
   OPTIONAL {?publication bibo:doi ?doi .}
   OPTIONAL {?publication bibo:abstract ?abstract .}

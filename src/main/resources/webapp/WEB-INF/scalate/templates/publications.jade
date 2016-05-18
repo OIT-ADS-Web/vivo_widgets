@@ -1,5 +1,6 @@
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 - import edu.duke.oit.vw.models.Publication
+
 -@ var publications: List[Publication]
 -@ var style: String
 -@ val searchURI: String = ""
@@ -12,17 +13,31 @@
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
+:!javascript
+  var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+  if (apa) {
+    alert("APA!")
+  }
+
 ul(style=ulStyle)
   - for(publication <- publications)
     - val chicagoCitation = publication.get("chicagoCitation")
-    - var fixed = chicagoCitation
-    - var sample = "<em>Dog</em>"
+    - var fixedChicago = chicagoCitation
+
+    - val apaCitation = publication.get("apaCitation")
+    - var fixedApa = apaCitation
+
+    - val mlaCitation = publication.get("mlaCitation")
+    - var fixedMla = mlaCitation
+
+    - val icmjeCitation = publication.get("icmjeCitation")
+    - var fixedIcmje = icmjeCitation
 
     li(style=liStyle)
       p
-        != fixed
-
-      a(onmouseout="this.style.textDecoration ='underline';"
-        onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
-        style="color:#2485AE;text-decoration:underline"
-        href="#{fixURL(publication.uri)}") More info
+        span.citation
+          != fixedApa
+          a(onmouseout="this.style.textDecoration ='underline';"
+          onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
+          style="color:#2485AE;text-decoration:underline"
+          href="#{fixURL(publication.uri)}") More info
