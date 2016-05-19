@@ -1,5 +1,6 @@
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 - import edu.duke.oit.vw.models.Publication
+-#@ import val person: edu.duke.oit.vw.models.Person
 
 -@ var publications: List[Publication]
 -@ var style: String
@@ -12,6 +13,17 @@
 -# if we are styling, set a couple of variables
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
+
+-# val getApa = person.get("preferredCitationFormat")
+-# var displayApa = getApa
+- var displayApa = "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation"
+
+:&javascript
+  var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")         
+  if (apa) {
+    //alert("APA!!!")
+    return apa
+  }
 
 ul(style=ulStyle)
   - for(publication <- publications)
@@ -27,19 +39,20 @@ ul(style=ulStyle)
     - val icmjeCitation = publication.get("icmjeCitation")
     - var fixedIcmje = icmjeCitation
 
-    :&javascript
-      var citationContainers = document.getElementsByClassName("citation")
-      var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
-      for (var i = 0; i < citationContainers.length; i++) {  
-        if (apa) {
-          var apaString = "#{fixedApa}"
-          citationContainers[i].innerHTML = apaString    
-        }          
-      }         
-
     li(style=liStyle)
+      :&javascript
+        /* var citationContainers = document.getElementsByClassName("citation")
+        var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+        for (var i = 0; i < citationContainers.length; i++) {  
+          if (apa) {
+            var apaString = "#{fixedApa}"
+            citationContainers[i].innerHTML = apaString    
+          }          
+        } */
       p
-        span.citation
+        - if (displayApa == "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+          != fixedApa
+        -# span.citation
         -# != fixedApa
         a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
