@@ -123,17 +123,17 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
           case "complete"       => render(person)
-          case "publications"   => renderCollection(person.publications)
-          case "artistic_works" => renderCollection(person.artisticWorks)
-          case "awards"         => renderCollection(person.awards)
-          case "grants"         => renderCollection(person.grants)
-          case "courses"        => renderCollection(person.courses)
-          case "newsfeeds"      => renderCollection(person.newsfeeds)
-          case "professional_activities"  => renderCollection(person.professionalActivities)
-          case "positions"      => renderCollection(person.positions)
-          case "addresses"      => renderCollection(person.addresses)
-          case "overview"       => renderCollection(List(person.personAttributes()))
-          case "contact"        => renderCollection(List(person.personAttributes()))
+          case "publications"   => renderPersonCollection(person,person.publications)
+          case "artistic_works" => renderPersonCollection(person,person.artisticWorks)
+          case "awards"         => renderPersonCollection(person,person.awards)
+          case "grants"         => renderPersonCollection(person,person.grants)
+          case "courses"        => renderPersonCollection(person,person.courses)
+          case "newsfeeds"      => renderPersonCollection(person,person.newsfeeds)
+          case "professional_activities"  => renderPersonCollection(person,person.professionalActivities)
+          case "positions"      => renderPersonCollection(person,person.positions)
+          case "addresses"      => renderPersonCollection(person,person.addresses)
+          case "overview"       => renderPersonCollection(person,List(person.personAttributes()))
+          case "contact"        => renderPersonCollection(person,List(person.personAttributes()))
           case x                => "Collection not found: " + x
         }
       }
@@ -147,8 +147,8 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     Organization.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(organization) => {
         params.getOrElse('collectionName, "") match {
-          case "people" => renderCollection(organization.people)
-          case "grants" => renderCollection(organization.grants)
+          case "people" => renderOrganizationCollection(organization,organization.people)
+          case "grants" => renderOrganizationCollection(organization,organization.grants)
           case x => "Collection not found: " + x
         }
       }
@@ -156,8 +156,29 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     }
   }
 
-  protected def formatCollection(formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
+  protected def formatPersonCollection(person: Person, formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
+    modelData.put("person", person)
+
+    items match {
+      case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
+      case _ => modelData.put(collectionName, collection)
+    }
+
+    modelData.put("style", style)
+    modelData.put("formatting", formatting)
+    modelData.put("layout", "")
+
+    val template = TemplateHelpers.tpath(collectionName + ".jade")
+
+    timer("WidgetsServlet.formatCollection") {
+      renderTemplateString(servletContext, template, modelData.toMap)
+    }.asInstanceOf[String]
+  }
+
+  protected def formatOrganizationCollection(organization: Organization, formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
+    var modelData = scala.collection.mutable.Map[String,Any]()
+    modelData.put("organization", Organization)
 
     items match {
       case Some(x:Int) => modelData.put(collectionName, collection.slice(0, x))
@@ -184,7 +205,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
 
   }
 
-  protected def renderCollection(collection: List[AnyRef]) = {
+  protected def renderPersonCollection(person: Person, collection: List[AnyRef]) = {
     val start = params.getOrElse("start", "")
     val end = params.getOrElse("end", "")
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
@@ -214,7 +235,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
       case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
       case FormatHTML => {
         timer("WidgetsServlet.renderCollection") {
-          formatCollection(FormatHTML, params("collectionName"),
+          formatPersonCollection(person, FormatHTML, params("collectionName"),
                            dateFilteredCollection,
                            Int(params.getOrElse("count", "all")),
                            params.getOrElse("formatting", "detailed"),
@@ -224,7 +245,62 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
         }
       }
       case FormatJS => {
-        val output = formatCollection(FormatJS, params("collectionName"),
+        val output = formatPersonCollection(person, FormatJS, params("collectionName"),
+                                      dateFilteredCollection,
+                                      Int(params.getOrElse("count", "all")),
+                                      params.getOrElse("formatting", "detailed"),
+                                      params.getOrElse("style", "yes"),
+                                      params.getOrElse("start", ""),
+                                      params.getOrElse("end", ""))
+        val lines = output.split('\n').toList
+        val documentWrites = lines.map { "document.write('"+_.replaceAll("'","\\\\'")+"');" }
+        documentWrites.mkString("\n")
+      }
+      case _ => "not content"
+    }
+  }
+
+  protected def renderOrganizationCollection(organization: Organization, collection: List[AnyRef]) = {
+    val start = params.getOrElse("start", "")
+    val end = params.getOrElse("end", "")
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    val startDate =
+      if(!start.isEmpty()) {
+        dateFormat.parse(start) }
+      else {
+        dateFormat.parse("1000-01-01")
+      }
+    val endDate =
+      if(!end.isEmpty()) {
+        dateFormat.parse(end)}
+      else {
+        dateFormat.parse("9999-12-31")
+      }
+    val dateFilteredCollection = collection.filter(x => {
+      if (x.isInstanceOf[VivoAttributes]) {
+        val attributeItem = x.asInstanceOf[VivoAttributes]
+        attributeItem.withinTimePeriod(startDate, endDate)
+      } else {
+        true
+      }
+    })
+
+    request("format") match {
+      case FormatJSON => Json.toJson(dateFilteredCollection)
+      case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
+      case FormatHTML => {
+        timer("WidgetsServlet.renderCollection") {
+          formatOrganizationCollection(organization, FormatHTML, params("collectionName"),
+                           dateFilteredCollection,
+                           Int(params.getOrElse("count", "all")),
+                           params.getOrElse("formatting", "detailed"),
+                           params.getOrElse("style", "yes"),
+                           params.getOrElse("start", ""),
+                           params.getOrElse("end", ""))
+        }
+      }
+      case FormatJS => {
+        val output = formatOrganizationCollection(organization, FormatJS, params("collectionName"),
                                       dateFilteredCollection,
                                       Int(params.getOrElse("count", "all")),
                                       params.getOrElse("formatting", "detailed"),

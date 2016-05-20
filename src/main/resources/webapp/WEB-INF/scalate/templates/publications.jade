@@ -1,8 +1,9 @@
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 - import edu.duke.oit.vw.models.Publication
--#@ import val person: edu.duke.oit.vw.models.Person
+- import edu.duke.oit.vw.models.Person
 
 -@ var publications: List[Publication]
+-@ var person: Person
 -@ var style: String
 -@ val searchURI: String = ""
 
@@ -14,46 +15,37 @@
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
--# val getApa = person.get("preferredCitationFormat")
--# var displayApa = getApa
-- var displayApa = "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation"
-
 :&javascript
   var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")         
   if (apa) {
-    //alert("APA!!!")
-    return apa
+    alert("APA!!!")
   }
+
+- val getCitation = person.get("preferredCitationFormat")
+- var displayCitation = getCitation
 
 ul(style=ulStyle)
   - for(publication <- publications)
-    - val chicagoCitation = publication.get("chicagoCitation")
-    - var fixedChicago = chicagoCitation
-
     - val apaCitation = publication.get("apaCitation")
     - var fixedApa = apaCitation
-
+    - val chicagoCitation = publication.get("chicagoCitation")
+    - var fixedChicago = chicagoCitation
     - val mlaCitation = publication.get("mlaCitation")
     - var fixedMla = mlaCitation
-
     - val icmjeCitation = publication.get("icmjeCitation")
     - var fixedIcmje = icmjeCitation
 
     li(style=liStyle)
-      :&javascript
-        /* var citationContainers = document.getElementsByClassName("citation")
-        var apa = document.getElementById("http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
-        for (var i = 0; i < citationContainers.length; i++) {  
-          if (apa) {
-            var apaString = "#{fixedApa}"
-            citationContainers[i].innerHTML = apaString    
-          }          
-        } */
       p
-        - if (displayApa == "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+        - if (displayCitation == "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
           != fixedApa
-        -# span.citation
-        -# != fixedApa
+        - if (displayCitation == "http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation")
+          != fixedChicago
+        - if (displayCitation == "http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation")
+          != fixedMla
+        - if (displayCitation == "http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation")
+          != fixedIcmje
+
         a(onmouseout="this.style.textDecoration ='underline';"
         onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
         style="color:#2485AE;text-decoration:underline"
