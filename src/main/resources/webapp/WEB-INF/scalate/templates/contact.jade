@@ -8,8 +8,6 @@
 
 -# The contact object is really a list of person objects.
 - for (personAttributes <- contact)
-  - if (!empty(personAttributes.get("preferredCitationFormat")))
-    p.preferredCitationFormat #{personAttributes.get("preferredCitationFormat")}
   - if (!empty(personAttributes.get("primaryEmail")))
     - val email = personAttributes.get("primaryEmail")
     p.email 
