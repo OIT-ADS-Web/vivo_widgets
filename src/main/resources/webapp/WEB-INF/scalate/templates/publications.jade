@@ -1,6 +1,9 @@
 - import edu.duke.oit.vw.scalatra.TemplateHelpers._
 - import edu.duke.oit.vw.models.Publication
+- import edu.duke.oit.vw.models.Person
+
 -@ var publications: List[Publication]
+-@ var person: Person
 -@ var style: String
 -@ val searchURI: String = ""
 
@@ -12,24 +15,22 @@
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
+- val findPreferredFormat = person.get("preferredCitationFormat")
+- var preferredFormat = findPreferredFormat
+
 ul(style=ulStyle)
   - for(publication <- publications)
-    - val conferenceStartDateMonth = publication.get("conferenceStartDateMonth")
-    - val conferenceStartDateDay = publication.get("conferenceStartDateDay")
-    - val conferenceStartDateYear = publication.get("conferenceStartDateYear")
-    - val conferenceFinishDateMonth = publication.get("conferenceFinishDateMonth")
-    - val conferenceFinishDateDay = publication.get("conferenceFinishDateDay")
-    - val conferenceFinishDateYear = publication.get("conferenceFinishDateYear")
-    - val conferenceStartDateFull = if(!empty(conferenceStartDateYear)) conferenceStartDateMonth + "/" + conferenceStartDateDay + "/" + conferenceStartDateYear
-    - val conferenceFinishDateFull = if(!empty(conferenceFinishDateYear)) " - " + conferenceFinishDateMonth + "/" + conferenceFinishDateDay + "/" + conferenceFinishDateYear
-
     li(style=liStyle)
-      = render(tpath("shared/citation.jade"), Map("it" -> publication))
-      | #{conferenceStartDateFull}#{conferenceFinishDateFull}
+      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
+        != publication.get("apaCitation")
+      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation")
+        != publication.get("chicagoCitation")
+      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation")
+        != publication.get("mlaCitation")
+      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation")
+        != publication.get("icmjeCitation")
 
       a(onmouseout="this.style.textDecoration ='underline';"
-        onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
-        style="color:#2485AE;text-decoration:underline"
-        href="#{fixURL(publication.uri)}") More info
-
-
+      onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
+      style="color:#2485AE;text-decoration:underline"
+      href="#{fixURL(publication.uri)}") More info

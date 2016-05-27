@@ -9,6 +9,7 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
 PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?publication
 ?label ?type
@@ -100,4 +101,3 @@ WHERE {
 
 } 
 ORDER BY desc(?datetime)
-
