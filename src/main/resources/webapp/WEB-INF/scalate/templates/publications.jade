@@ -29,6 +29,8 @@ ul(style=ulStyle)
         != publication.get("mlaCitation")
       - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation")
         != publication.get("icmjeCitation")
+      - else
+        != publication.get("chicagoCitation")
 
       a(onmouseout="this.style.textDecoration ='underline';"
       onmouseover="this.style.textDecoration ='none';this.style.cursor='pointer'"
