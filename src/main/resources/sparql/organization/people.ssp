@@ -14,6 +14,7 @@ WHERE {{
       ?person rdfs:label ?label .
       ?position core:hrJobTitle ?title .
       ?person vitro:mostSpecificType ?type .
+      ?person duke:profileURL ?profileURL
       OPTIONAL {
         ?person vitro-public:mainImage ?imageUri .
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
