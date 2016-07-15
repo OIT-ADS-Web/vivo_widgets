@@ -19,7 +19,8 @@ WHERE {{
         ?person vitro-public:mainImage ?imageUri .
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
-        ?modTime   vitro-public:modTime ?imageModTime .
+        ?modTime   vitro:modTime ?imageModTime .
+        ?fileName  vitro-public:fileName ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
       }
       OPTIONAL { ?person core:overview ?overview . }
@@ -43,7 +44,8 @@ WHERE {{
         ?person vitro-public:mainImage ?imageUri .
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
-        ?modTime   vitro-public:modTime ?imageModTime .
+        ?modTime   vitro:modTime ?imageModTime .
+        ?fileName  vitro-public:fileName ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
       }
       OPTIONAL { ?person core:overview ?overview . }

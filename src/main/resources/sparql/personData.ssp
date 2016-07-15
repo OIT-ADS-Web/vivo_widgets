@@ -6,7 +6,7 @@ SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?mentorshipOverview ?mentorshipAvailabilities ?firstName ?lastName
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
-       ?imageThumbnailDownload ?netid ?officehours ?profileURL ?imageModTime
+       ?imageThumbnailDownload ?netid ?officehours ?profileURL ?imageModTime ?imageFileName
 WHERE {
   <${ uri }> obo:ARG_2000028 ?individualVcard ;
     vitro:mostSpecificType ?type ;
@@ -43,7 +43,8 @@ WHERE {
     <${ uri }> vitro-public:mainImage ?imageUri .
     ?imageUri  vitro-public:downloadLocation ?imageDownload .
     ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
-    ?modTime   vitro-public:modTime ?imageModTime .
+    ?modTime   vitro:modTime ?imageModTime .
+    ?fileName  vitro-public:fileName ?imageFileName .
     ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
   }
   OPTIONAL { <${ uri }> duke:scopedNetid ?netid }
