@@ -29,7 +29,7 @@ object WidgetsSearcher extends SolrModel {
     val dateSince = format.format(since)
     val dateEnd = "NOW"
 
-    val queryString = String.format("updatedAt:[%s TO %s] AND group=people", dateSince, dateEnd)
+    val queryString = String.format("updatedAt:[%s TO %s] AND group:people", dateSince, dateEnd)
 
     val query = new SolrQuery()
    
