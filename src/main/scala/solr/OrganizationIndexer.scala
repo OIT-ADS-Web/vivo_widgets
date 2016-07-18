@@ -65,20 +65,7 @@ object OrganizationIndexer extends SimpleConversion
     buildOrganization(uri,vivo).foreach{ o =>
 
       var organization:Organization = o.copy()
-      val existing = checkExisting(o.uri)
-      
-      if (existing.isDefined && existing.get.updatedAt.isDefined) {
-        // NOTE: need to compare with a person with the same updatedAt value so 
-        // it doesn't diff merely on that field alone
-        val changes:Boolean = hasChanges(existing.get, o.copy(updatedAt=existing.get.updatedAt))
 
-        if (!changes) {
-          // if we are skipping (no changes) reset updated at
-          organization = o.copy(updatedAt = existing.get.updatedAt)
-          log.debug(String.format("Skipping index for %s. No changes detected", uri))
-       } 
-      }
- 
       val solrDoc = new SolrInputDocument()
       
       solrDoc.addField("id",organization.uri)
