@@ -15,19 +15,18 @@
 - val ulStyle = if(style == "yes") " list-style:none;border:solid 1px #CCC;-moz-border-radius: 15px;border-radius: 15px;margin:3px;padding:4px; " else ""
 - val liStyle = if(style == "yes") " margin:.45em;padding:.45em; " else ""
 
-- val findPreferredFormat = person.get("preferredCitationFormat")
-- var preferredFormat = findPreferredFormat
+- val preferredFormat = person.get("preferredCitationFormat")
 
 ul(style=ulStyle)
   - for(publication <- publications)
     li(style=liStyle)
       - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation")
         != publication.get("apaCitation")
-      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation")
+      - else if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation")
         != publication.get("chicagoCitation")
-      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation")
+      - else if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation")
         != publication.get("mlaCitation")
-      - if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation")
+      - else if (preferredFormat == "http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation")
         != publication.get("icmjeCitation")
       - else
         != publication.get("chicagoCitation")
