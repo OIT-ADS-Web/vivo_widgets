@@ -43,8 +43,8 @@ WHERE {
     <${ uri }> vitro-public:mainImage ?imageUri .
     ?imageUri  vitro-public:downloadLocation ?imageDownload .
     ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
-    ?modTime   vitro:modTime ?imageModTime .
-    ?fileName  vitro-public:fileName ?imageFileName .
+    ?imageUri  vitro:modTime ?imageModTime .
+    ?imageUri  vitro-public:filename  ?imageFileName .
     ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
   }
   OPTIONAL { <${ uri }> duke:scopedNetid ?netid }
