@@ -46,7 +46,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
 
   protected def parseDate(dateParam: String):Date = {
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
-    // FIXME: there's bound to be a more Scala way to do this 
+    // FIXME: there's bound to be a more Scala way to do this
     val startDate =
       if(!dateParam.isEmpty()) {
         dateFormat.parse(dateParam)
@@ -67,9 +67,9 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   get("/search/modified.:format") {
     WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
-    
+
     var dateSinceParam = params.getOrElse("since","")
-    
+
     var since = try {
       parseDate(dateSinceParam)
     } catch {
@@ -79,9 +79,9 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     log.debug("search from:" + since)
 
     val offset: Option[Integer] = safeOffset(params.getOrElse("offset", "0"))
- 
+
     val results = WidgetsSearcher.searchByUpdatedAt(since, offset.getOrElse(0), WidgetsConfig.widgetServer)
-   
+
     renderSearchResults(results)
 
   }
@@ -137,7 +137,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
           case x                => "Collection not found: " + x
         }
       }
-      case _ => "Not Found"
+      case _ => NotFound("Not Found")
     }
   }
 
@@ -152,7 +152,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
           case x => "Collection not found: " + x
         }
       }
-      case _ => "Not Found"
+      case _ => NotFound("Not Found")
     }
   }
 
@@ -256,7 +256,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
         val documentWrites = lines.map { "document.write('"+_.replaceAll("'","\\\\'")+"');" }
         documentWrites.mkString("\n")
       }
-      case _ => "not content"
+      case _ => "no content"
     }
   }
 
