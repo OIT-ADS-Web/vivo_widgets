@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Vivo Widgets",
+    "description": "Vivo widgets API in the swagger-2.0 specification"
+  },
+  "host": "scholars.duke.edu",
+  "basePath": "/widgets",
+  "schemes": ["https"],
+  "produces": [
+    "application/json",
+    "application/html",
+    "application/javascript" 
+  ],
+ "paths": {
+    "/api/v0.9/people/{collectionName}/{count}.{format}": {
+      "get": {
+       "description": "Returns a person or attributes of a person - in a variety of formats",
+       "parameters": [
+         {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "which things to show (publications, grants etc... ) - 'complete' is a valid value",
+          "enum": ["publications", "artistic_works", "awards", "grants", "courses", "newsfeeds", "professional_activities", "positions", "addresses", "overview", "contact", "complete"]
+         },
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value"
+         },
+         { 
+           "name": "format",
+           "enum": ["json", "jsonp", "js", "html"]
+         {
+           "name": "uri",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false
+         }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request"
+          }
+        }
+      }
+    },
+    "/api/v0.9/organizations/{collectionName}/{count}.{format}": {
+      "get": {
+       "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
+       "parameters": [
+         {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "which things to show (publications, grants etc... ) - 'complete' is a valid value",
+          "enum": ["publications", "artistic_works", "awards", "grants", "courses", "newsfeeds", "professional_activities", "positions", "addresses", "overview", "contact", "complete"]
+         },
+         {
+           "name": "format",
+           "enum": ["json", "html"]
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value"
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false
+         }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request"
+          }
+        }
+      }
+         
+    }
+    
+  },
+  "/search/modified.{format}": { 
+    "get": { 
+        "parameters": [
+          {
+            "name": "since",
+            "paramType": "query"
+          },
+          {
+            "name": "format",
+            "paramType": "path",
+            "enum": ["json"]
+          }
+        ]
+    }
+  },
+  "/search.{format}": { 
+    "get": { 
+      "parameters": [
+         {
+           "name": "query",
+           "paramType": "query"
+         },
+         {
+           "name": "format",
+           "paramType": "path"
+         }
+     ]
+    },
+    "responses": {
+       "200": {
+         "description": "Expected response to a valid request"
+       }
+    }
+  },
+  {
+    "definitions": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+ 
+}
+
+
+
