@@ -34,11 +34,14 @@
          },
          { 
            "name": "format",
+           "description": "In what format to return results",
            "enum": ["json", "jsonp", "js", "html"]
+         },
          {
            "name": "uri",
            "in": "query",
-           "required": false
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
          },
          {
            "name": "formatting",
@@ -63,7 +66,10 @@
        ],
        "responses": {
           "200": {
-            "description": "Expected response to a valid request"
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }          
           }
         }
       }
@@ -94,6 +100,11 @@
            "in": "query",
            "required": false
          },
+         { 
+           "name": "format",
+           "description": "In what format to return results",
+           "enum": ["json", "jsonp", "js", "html"]
+         },
          {
            "name": "formatting",
            "in": "query",
@@ -117,7 +128,10 @@
        ],
        "responses": {
           "200": {
-            "description": "Expected response to a valid request"
+            "description": "Expected response to a valid request",
+             "schema": {
+              "$ref": "#/definitions/Organization"
+            }          
           }
         }
       }
@@ -130,14 +144,31 @@
         "parameters": [
           {
             "name": "since",
-            "paramType": "query"
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "date in YYYY-MM-DD format"
           },
           {
             "name": "format",
-            "paramType": "path",
-            "enum": ["json"]
-          }
-        ]
+            "in": "path",
+            "enum": ["json"],
+            "description": "format is requested by *.ext - but the only returned format is 'json' at the moment"
+          },
+          {
+            "name": "offset",
+            "in" : "query",
+            "type": "integer",
+            "description": "where to start the list (if there are more than 1000)"
+        ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/ModifiedList"
+            }
+        }
+ 
     }
   },
   "/search.{format}": { 
@@ -145,11 +176,15 @@
       "parameters": [
          {
            "name": "query",
-           "paramType": "query"
+           "in": "query",
+           "type": "string",
+           "description": "what to search for"
          },
          {
            "name": "format",
-           "paramType": "path"
+           "in": "path",
+            "enum": ["json"],
+            "description": "format is requested by *.ext - but the only returned format is 'json' at the moment"
          }
      ]
     },
@@ -176,11 +211,37 @@
             "type": "string"
           }
         }
+      },
+      "SearchResults": {
+        "type": "object",
+        "properties": {
+          "numFound": { "type": "integer" },
+          "groups": {"type": "object" },
+          "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }}
+        }
+     },
+     "ModifiedList": {
+       "type": "object",
+       "properties": {
+        "numFound": { "type": "integer" },
+        "offset": {"type": "integer" },
+        "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }} }
+     },
+     "SearchResultItem": {
+       "uri" : "string",
+       "name": "string",
+       "group": "integer"
+      },
+      "ModifiedListItem": {
+        "uri": "string"
       }
+     }
     }
-  }
- 
+   }
+ }
 }
+
+
 
 
 
