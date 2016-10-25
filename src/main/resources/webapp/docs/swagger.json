@@ -11,18 +11,10 @@
     "application/javascript" 
   ],
  "paths": {
-    "/api/v0.9/people/{collectionName}/{count}{.format}": {
+    "/api/v0.9/people/complete/{count}{.format}": {
       "get": {
        "description": "Returns a person or attributes of a person - in a variety of formats",
        "parameters": [
-         {
-          "name": "collectionName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "Which things to show (publications, grants etc... ) - 'complete' *is* a valid value (unlike organizations)",
-          "enum": ["publications", "artistic_works", "awards", "grants", "courses", "newsfeeds", "professional_activities", "positions", "addresses", "overview", "contact", "complete"]
-         },
          {
            "name": "count",
            "in": "path",
@@ -72,6 +64,710 @@
             "description": "Expected response to a valid request",
             "schema": {
               "$ref": "#/definitions/Person"
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v0.9/people/publications/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's publications",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Publication"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v0.9/people/artistic_works/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's artistic works",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtisticWork"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/awards/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's awards",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Award"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/grants/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's grants",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Grant"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/courses/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's courses",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Course"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/newsfeeds/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's newsfeeds",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Newsfeed"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/professional_activities/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's professional activities",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfessionalActivity"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/positions/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's positions",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Position"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/addresses/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's addresses",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/overview/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's overview",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Overview"
+              }
+            }          
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/contact/{count}{.format}": {
+      "get": {
+       "description": "Returns a person's contact information",
+       "parameters": [
+         {
+           "name": "count",
+           "in": "path",
+           "required": "true",
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
+         },
+         { 
+           "name": "format",
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
+         },
+         {
+           "name": "uri",
+           "in": "query",
+           "required": true,
+           "description": "which URI to look at.  If missing will return 'key not found: uri'"
+         },
+         {
+           "name": "formatting",
+           "in": "query",
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
+         },
+         {
+           "name": "style",
+           "in": "query",
+           "required": false,
+           "enum": ["styled", "unstyled"]
+         },
+         {
+           "name": "start",
+           "in": "query",
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
+         },
+         {
+           "name": "end",
+           "in": "query",
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
             }          
           },
           "404": {
@@ -290,15 +986,55 @@
           "attributes": { "type": "object",
             "properties": {
               "preferredTitle": {"type": "string" },
+              "phoneNumber": {"type": "string" },
               "primaryEmail": {"type": "string" },
+              "middleName": {"type": "string" },
+              "profileURL": { "$ref": "#/definitions/uri" },
+              "imageModTime": {"type": "datetime"},
+              "suffixName": {"type": "string" },
+              "imageUri": { "$ref": "#/definitions/uri" },
               "mentorshipAvailabilities": {"type": "string" },
               "netid": {"type": "string" },
+              "uri": { "$ref": "#/definitions/uri" },
               "alternateId": {"type": "string" },
+              "prefixName": {"type": "string" },
+              "imageDownload": { "$ref": "#/definitions/uri" },
               "lastName": {"type": "string" },
-              "firstName":   {"type": "string" }
+              "firstName": {"type": "string" },
+              "imageThumbnailUri":{ "$ref": "#/definitions/uri" },
+              "imageThumbnailDownload": { "$ref": "#/definitions/uri" },
+              "overview": {"type": "string" },
+              "preferredCitationFormat": { "$ref": "#/definitions/uri" },
+              "imageFileName": {"type": "string" }
           }
-         }
+        }
        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "preferredTitle": {"type": "string" },
+          "phoneNumber": {"type": "string" },
+          "primaryEmail": {"type": "string" },
+          "middleName": {"type": "string" },
+          "profileURL": { "$ref": "#/definitions/uri" },
+          "imageModTime": {"type": "datetime"},
+          "suffixName": {"type": "string" },
+          "imageUri": { "$ref": "#/definitions/uri" },
+          "mentorshipAvailabilities": {"type": "string" },
+          "netid": {"type": "string" },
+          "uri": { "$ref": "#/definitions/uri" },
+          "alternateId": {"type": "string" },
+          "prefixName": {"type": "string" },
+          "imageDownload": { "$ref": "#/definitions/uri" },
+          "lastName": {"type": "string" },
+          "firstName": {"type": "string" },
+          "imageThumbnailUri":{ "$ref": "#/definitions/uri" },
+          "imageThumbnailDownload": { "$ref": "#/definitions/uri" },
+          "overview": {"type": "string" },
+          "preferredCitationFormat": { "$ref": "#/definitions/uri" },
+          "imageFileName": {"type": "string" }
+        }
       },
       "OrganizationGrant": {
         "type": "object",
