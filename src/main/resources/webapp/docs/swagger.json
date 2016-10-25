@@ -5,9 +5,9 @@
     "title": "Swagger Vivo Widgets",
     "description": "Vivo widgets API in the swagger-2.0 specification"
   },
-  "host": "scholars.duke.edu",
-  "basePath": "/widgets",
-  "schemes": ["https"],
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http"],
   "produces": [
     "application/json",
     "application/html",
@@ -34,8 +34,9 @@
          },
          { 
            "name": "format",
-           "description": "In what format to return results",
-           "enum": ["json", "jsonp", "js", "html"]
+           "description": "In what format to return results ('js' and 'html' redirect however)",
+           "enum": ["json", "jsonp"],
+           "required": true
          },
          {
            "name": "uri",
@@ -89,6 +90,7 @@
          {
            "name": "format",
            "enum": ["json", "html"]
+         },
          {
            "name": "count",
            "in": "path",
@@ -103,7 +105,8 @@
          { 
            "name": "format",
            "description": "In what format to return results",
-           "enum": ["json", "jsonp", "js", "html"]
+           "enum": ["json", "jsonp"],
+           "required": true
          },
          {
            "name": "formatting",
@@ -160,6 +163,7 @@
             "in" : "query",
             "type": "integer",
             "description": "where to start the list (if there are more than 1000)"
+          }
         ],
        "responses": {
           "200": {
@@ -169,7 +173,8 @@
             }
         }
  
-    }
+     }
+   }
   },
   "/search.{format}": { 
     "get": { 
@@ -194,22 +199,20 @@
        }
     }
   },
-  {
-    "definitions": {
+  "definitions": {
       "Person": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
-          }
+          "uri": { "$ref": "#/definitions/uri" },
+          "updatedAt": { "type": "date" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" }
         }
       },
       "Organization": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
-          }
+          "name": {"$ref": "#/definitions/uri" }
         }
       },
       "SearchResults": {
@@ -233,13 +236,14 @@
        "group": "integer"
       },
       "ModifiedListItem": {
-        "uri": "string"
-      }
-     }
-    }
-   }
- }
+        "$ref": "#/definitions/uri"
+      },
+      "uri": { "type": "string" }
+     
+  }
+   
 }
+
 
 
 
