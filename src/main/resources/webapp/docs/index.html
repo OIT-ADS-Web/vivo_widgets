@@ -32,10 +32,25 @@
   <!-- <script src='lang/en.js' type='text/javascript'></script> -->
 
   <script type="text/javascript">
+    // Get the url:
+    //var myUrl = window.location.protocol+"//" + window.location.host + "/docs";
+    
+    var host = window.location.host;
+
+    var basePath = "/";
+    if (host == 'scholars2-test.oit.duke.edu' || host == 'scholars.duke.edu') {
+       basePath = "/widgets";
+     }
+
+    //"host": "scholars.duke.edu",
+    //"basePath": "/widgets",
+    //"schemes": ["https"],
+
     $(function () {
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
+        //url = myUrl + "/swagger.json";
       } else {
         url = "swagger.json";
       }
@@ -50,6 +65,7 @@
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
+        basePath: basePath,
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         /*

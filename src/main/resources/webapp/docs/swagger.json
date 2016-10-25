@@ -5,10 +5,7 @@
     "title": "Swagger Vivo Widgets",
     "description": "Vivo widgets API in the swagger-2.0 specification"
   },
-  "host": "localhost:8080",
-  "basePath": "/",
-  "schemes": ["http"],
-  "produces": [
+ "produces": [
     "application/json",
     "application/html",
     "application/javascript" 
@@ -30,7 +27,8 @@
            "name": "count",
            "in": "path",
            "required": "true",
-           "description": "how many records to show - 'all' is a valid value"
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
          },
          { 
            "name": "format",
@@ -47,23 +45,27 @@
          {
            "name": "formatting",
            "in": "query",
-           "required": false
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
          },
          {
            "name": "style",
            "in": "query",
-           "required": false
+           "required": false,
+           "enum": ["styled", "unstyled"]
          },
          {
            "name": "start",
            "in": "query",
-           "required": false
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
          },
          {
            "name": "end",
            "in": "query",
-           "required": false
-         }
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
+          }
        ],
        "responses": {
           "200": {
@@ -71,6 +73,9 @@
             "schema": {
               "$ref": "#/definitions/Person"
             }          
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -88,19 +93,16 @@
           "enum": ["publications", "artistic_works", "awards", "grants", "courses", "newsfeeds", "professional_activities", "positions", "addresses", "overview", "contact", "complete"]
          },
          {
-           "name": "format",
-           "enum": ["json", "html"]
-         },
-         {
            "name": "count",
            "in": "path",
            "required": "true",
-           "description": "how many records to show - 'all' is a valid value"
+           "description": "how many records to show - 'all' is a valid value",
+           "enum": ["5", "10", "15", "all"]
          },
          {
            "name": "uri",
            "in": "query",
-           "required": false
+           "required": true
          },
          { 
            "name": "format",
@@ -111,22 +113,26 @@
          {
            "name": "formatting",
            "in": "query",
-           "required": false
+           "required": false,
+           "enum": ["detailed", "abbreviated"]
          },
          {
            "name": "style",
            "in": "query",
-           "required": false
+           "required": false,
+           "enum": ["styled", "unstyled"]
          },
          {
            "name": "start",
            "in": "query",
-           "required": false
+           "required": false,
+           "description": "start range in yyyy-mm-dd format"
          },
          {
            "name": "end",
            "in": "query",
-           "required": false
+           "required": false,
+           "description": "end range in yyyy-mm-dd format"
          }
        ],
        "responses": {
@@ -135,6 +141,9 @@
              "schema": {
               "$ref": "#/definitions/Organization"
             }          
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -156,12 +165,14 @@
             "name": "format",
             "in": "path",
             "enum": ["json"],
-            "description": "format is requested by *.ext - but the only returned format is 'json' at the moment"
+            "required": true,
+            "description": "format is requested by *.extension - but the only returned format is 'json' at the moment"
           },
           {
             "name": "offset",
             "in" : "query",
             "type": "integer",
+            "required": false,
             "description": "where to start the list (if there are more than 1000)"
           }
         ],
@@ -228,12 +239,12 @@
        "properties": {
         "numFound": { "type": "integer" },
         "offset": {"type": "integer" },
-        "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }} }
+        "items": { "type": "array", "items": { "$ref": "#/definitions/ModifiedListItem" }} }
      },
      "SearchResultItem": {
        "uri" : "string",
        "name": "string",
-       "group": "integer"
+       "group": "string"
       },
       "ModifiedListItem": {
         "$ref": "#/definitions/uri"
