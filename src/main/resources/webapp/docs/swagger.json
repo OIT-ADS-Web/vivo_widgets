@@ -702,7 +702,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Overview"
+                "$ref": "#/definitions/Contact"
               }
             }          
           },
@@ -962,55 +962,7 @@
           "attributes": { "type": "object" }
         }
       },
-      "Person": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "updatedAt": { "type": "date" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "title": { "type": "string" },
-          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"} },
-          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"} },
-          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"} },
-          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"} },
-          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"} },
-          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"} },
-          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"} },
-          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"} },
-          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"} },
-          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"} },
-          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"} },
-          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus"} },
-          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"} },
-          "attributes": { "type": "object",
-            "properties": {
-              "preferredTitle": {"type": "string" },
-              "phoneNumber": {"type": "string" },
-              "primaryEmail": {"type": "string" },
-              "middleName": {"type": "string" },
-              "profileURL": { "$ref": "#/definitions/uri" },
-              "imageModTime": {"type": "datetime"},
-              "suffixName": {"type": "string" },
-              "imageUri": { "$ref": "#/definitions/uri" },
-              "mentorshipAvailabilities": {"type": "string" },
-              "netid": {"type": "string" },
-              "uri": { "$ref": "#/definitions/uri" },
-              "alternateId": {"type": "string" },
-              "prefixName": {"type": "string" },
-              "imageDownload": { "$ref": "#/definitions/uri" },
-              "lastName": {"type": "string" },
-              "firstName": {"type": "string" },
-              "imageThumbnailUri":{ "$ref": "#/definitions/uri" },
-              "imageThumbnailDownload": { "$ref": "#/definitions/uri" },
-              "overview": {"type": "string" },
-              "preferredCitationFormat": { "$ref": "#/definitions/uri" },
-              "imageFileName": {"type": "string" }
-          }
-        }
-       }
-      },
-      "Contact": {
+      "PersonAttributes": {
         "type": "object",
         "properties": {
           "preferredTitle": {"type": "string" },
@@ -1035,6 +987,33 @@
           "preferredCitationFormat": { "$ref": "#/definitions/uri" },
           "imageFileName": {"type": "string" }
         }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "updatedAt": { "type": "date" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "title": { "type": "string" },
+          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"} },
+          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"} },
+          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"} },
+          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"} },
+          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"} },
+          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"} },
+          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"} },
+          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"} },
+          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"} },
+          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"} },
+          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"} },
+          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus"} },
+          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"} },
+          "attributes": {"$ref": "#/definitions/PersonAttributes" }
+        }
+      },
+      "Contact": {
+        "$ref": "#/definitions/PersonAttributes"
       },
       "OrganizationGrant": {
         "type": "object",
