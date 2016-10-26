@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Swagger Vivo Widgets",
+    "title": "Swagger for Vivo Widgets",
     "description": "Vivo widgets API in the swagger-2.0 specification"
   },
  "produces": [
@@ -11,7 +11,7 @@
     "application/javascript" 
   ],
  "paths": {
-    "/api/v0.9/people/complete/{count}{.format}": {
+    "/api/v0.9/people/complete/{count}.{format}": {
       "get": {
        "description": "Returns a person or attributes of a person - in a variety of formats",
        "parameters": [
@@ -36,7 +36,7 @@
         }
       }
     },
-    "/api/v0.9/people/publications/{count}{.format}": {
+    "/api/v0.9/people/publications/{count}.{format}": {
       "get": {
        "description": "Returns a person's publications",
        "parameters": [
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/api/v0.9/people/artistic_works/{count}{.format}": {
+    "/api/v0.9/people/artistic_works/{count}.{format}": {
       "get": {
        "description": "Returns a person's artistic works",
        "parameters": [
@@ -92,7 +92,7 @@
         }
       }
     },
-     "/api/v0.9/people/awards/{count}{.format}": {
+     "/api/v0.9/people/awards/{count}.{format}": {
       "get": {
        "description": "Returns a person's awards",
        "parameters": [
@@ -120,7 +120,7 @@
         }
       }
     },
-     "/api/v0.9/people/grants/{count}{.format}": {
+     "/api/v0.9/people/grants/{count}.{format}": {
       "get": {
        "description": "Returns a person's grants",
        "parameters": [
@@ -148,7 +148,7 @@
         }
       }
     },
-     "/api/v0.9/people/courses/{count}{.format}": {
+     "/api/v0.9/people/courses/{count}.{format}": {
       "get": {
        "description": "Returns a person's courses",
        "parameters": [
@@ -176,7 +176,7 @@
         }
       }
     },
-     "/api/v0.9/people/newsfeeds/{count}{.format}": {
+     "/api/v0.9/people/newsfeeds/{count}.{format}": {
       "get": {
        "description": "Returns a person's newsfeeds",
        "parameters": [
@@ -204,7 +204,7 @@
         }
       }
     },
-     "/api/v0.9/people/professional_activities/{count}{.format}": {
+     "/api/v0.9/people/professional_activities/{count}.{format}": {
       "get": {
        "description": "Returns a person's professional activities",
        "parameters": [
@@ -232,7 +232,7 @@
         }
       }
     },
-     "/api/v0.9/people/positions/{count}{.format}": {
+     "/api/v0.9/people/positions/{count}.{format}": {
       "get": {
        "description": "Returns a person's positions",
        "parameters": [
@@ -260,7 +260,7 @@
         }
       }
     },
-     "/api/v0.9/people/addresses/{count}{.format}": {
+     "/api/v0.9/people/addresses/{count}.{format}": {
       "get": {
        "description": "Returns a person's addresses",
        "parameters": [
@@ -288,7 +288,7 @@
         }
       }
     },
-     "/api/v0.9/people/overview/{count}{.format}": {
+     "/api/v0.9/people/overview/{count}.{format}": {
       "get": {
        "description": "Returns a person's overview",
        "parameters": [
@@ -316,7 +316,7 @@
         }
       }
     },
-     "/api/v0.9/people/contact/{count}{.format}": {
+     "/api/v0.9/people/contact/{count}.{format}": {
       "get": {
        "description": "Returns a person's contact information",
        "parameters": [
