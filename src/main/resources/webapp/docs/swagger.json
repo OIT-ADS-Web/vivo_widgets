@@ -31,7 +31,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -59,7 +59,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -87,7 +87,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -115,7 +115,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -143,7 +143,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -171,7 +171,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -199,7 +199,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -227,7 +227,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -255,7 +255,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -283,7 +283,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -311,7 +311,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -339,7 +339,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
         }
       }
@@ -365,7 +365,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
       }
     }
@@ -391,7 +391,7 @@
             }          
           },
           "404": {
-            "description": "Not Found"
+            "$ref": "#/responses/NotFound"
           }
       }
     }
@@ -502,6 +502,11 @@
        "in": "query",
        "required": false,
        "description": "end range in yyyy-mm-dd format"
+    }
+  },
+  "responses": {
+    "NotFound": {
+       "description": "Nothing found to return"
     }
   },
   "definitions": {
@@ -890,7 +895,7 @@
         "items": { "type": "array", "items": { "$ref": "#/definitions/ModifiedListItem" }} }
      },
      "SearchResultItem": {
-       "uri" : "string",
+       "uri" : { "$ref": "#/definitions/uri" },
        "name": "string",
        "group": "string"
       },
