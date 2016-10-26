@@ -15,49 +15,13 @@
       "get": {
        "description": "Returns a person or attributes of a person - in a variety of formats",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -76,49 +40,13 @@
       "get": {
        "description": "Returns a person's publications",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -140,50 +68,14 @@
       "get": {
        "description": "Returns a person's artistic works",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
-       ],
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],  
        "responses": {
           "200": {
             "description": "Expected response to a valid request",
@@ -204,49 +96,13 @@
       "get": {
        "description": "Returns a person's awards",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -268,49 +124,13 @@
       "get": {
        "description": "Returns a person's grants",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -332,49 +152,13 @@
       "get": {
        "description": "Returns a person's courses",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -396,49 +180,13 @@
       "get": {
        "description": "Returns a person's newsfeeds",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -460,49 +208,13 @@
       "get": {
        "description": "Returns a person's professional activities",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -524,49 +236,13 @@
       "get": {
        "description": "Returns a person's positions",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -588,49 +264,13 @@
       "get": {
        "description": "Returns a person's addresses",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -652,49 +292,13 @@
       "get": {
        "description": "Returns a person's overview",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -716,49 +320,13 @@
       "get": {
        "description": "Returns a person's contact information",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         { 
-           "name": "format",
-           "description": "In what format to return results ('js' and 'html' redirect however)",
-           "enum": ["json", "jsonp"],
-           "required": true
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true,
-           "description": "which URI to look at.  If missing will return 'key not found: uri'"
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         },
-         {
-           "name": "start",
-           "in": "query",
-           "required": false,
-           "description": "start range in yyyy-mm-dd format"
-         },
-         {
-           "name": "end",
-           "in": "query",
-           "required": false,
-           "description": "end range in yyyy-mm-dd format"
-          }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
        ],
        "responses": {
           "200": {
@@ -780,37 +348,11 @@
       "get": {
        "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true
-         },
-         { 
-           "name": "format",
-           "in": "path",
-           "description": "In what format to return results",
-           "enum": ["json", "jsonp", "html", "js"],
-           "required": true
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" }
        ],
        "responses": {
           "200": {
@@ -832,37 +374,11 @@
       "get": {
        "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
        "parameters": [
-         {
-           "name": "count",
-           "in": "path",
-           "required": "true",
-           "description": "how many records to show - 'all' is a valid value",
-           "enum": ["5", "10", "15", "all"]
-         },
-         {
-           "name": "uri",
-           "in": "query",
-           "required": true
-         },
-         { 
-           "name": "format",
-           "in": "path",
-           "description": "In what format to return results",
-           "enum": ["json", "jsonp", "html", "js"],
-           "required": true
-         },
-         {
-           "name": "formatting",
-           "in": "query",
-           "required": false,
-           "enum": ["detailed", "abbreviated"]
-         },
-         {
-           "name": "style",
-           "in": "query",
-           "required": false,
-           "enum": ["styled", "unstyled"]
-         }
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/formattingParam" },
+         { "$ref": "#/parameters/styleParam" }
        ],
        "responses": {
           "200": {
@@ -943,6 +459,51 @@
     }
   }
  },
+ "parameters": {
+    "countParam": {
+       "name": "count",
+       "in": "path",
+       "required": "true",
+       "description": "how many records to show - 'all' is a valid value",
+       "enum": ["5", "10", "15", "all"]
+    },
+    "formatParam": {
+       "name": "format",
+       "description": "In what format to return results ('js' and 'html' redirect however)",
+       "enum": ["json", "jsonp"],
+       "required": true
+    },
+    "uriParam": {
+       "name": "uri",
+       "in": "query",
+       "required": true,
+       "description": "which URI to look at.  If missing will return 'key not found: uri'"
+    },
+    "formattingParam": {
+       "name": "formatting",
+       "in": "query",
+       "required": false,
+       "enum": ["detailed", "abbreviated"]
+    },
+    "styleParam": {
+       "name": "style",
+       "in": "query",
+       "required": false,
+       "enum": ["styled", "unstyled"]
+    },
+    "startParam": {
+       "name": "start",
+       "in": "query",
+       "required": false,
+       "description": "start range in yyyy-mm-dd format"
+    },
+    "endParam": {
+       "name": "end",
+       "in": "query",
+       "required": false,
+       "description": "end range in yyyy-mm-dd format"
+    }
+  },
   "definitions": {
       "WidgetItem": {
         "type": "object",
