@@ -67,6 +67,7 @@
       window.swaggerUi = new SwaggerUi({
         url: url,
         basePath: basePath,
+        schemes: [window.location.protocol],
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         /*
@@ -96,7 +97,10 @@
       });
 
       window.swaggerUi.load();
+      window.swaggerUi.api.setBasePath(basePath);
 
+      window.swaggerUi.api.setSchemes([window.location.protocol]);
+      
       function log() {
         if ('console' in window) {
           console.log.apply(console, arguments);
