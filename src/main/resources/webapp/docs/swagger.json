@@ -39,7 +39,7 @@
        "description": "Returns a person's publications",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -65,7 +65,7 @@
        "description": "Returns a person's artistic works",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -91,7 +91,7 @@
        "description": "Returns a person's awards",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -117,7 +117,7 @@
        "description": "Returns a person's grants",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -143,7 +143,7 @@
        "description": "Returns a person's courses",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -169,7 +169,7 @@
        "description": "Returns a person's newsfeeds",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -195,7 +195,7 @@
        "description": "Returns a person's professional activities",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -221,7 +221,7 @@
        "description": "Returns a person's positions",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -247,7 +247,7 @@
        "description": "Returns a person's addresses",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -273,7 +273,7 @@
        "description": "Returns a person's overview",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
@@ -299,7 +299,7 @@
        "description": "Returns a person's contact information",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParamExt" },
+         { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
