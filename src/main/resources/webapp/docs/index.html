@@ -64,14 +64,16 @@
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
-        //basePath: basePath,
+        basePath: basePath,
         schemes: [window.location.protocol],
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         
         onComplete: function(swaggerApi, swaggerUi){
-          swaggerApi.setSchemes(schemes);
-          swaggerApi.setBasePath(basePath);
+          if (host == 'scholars2-test.oit.duke.edu' || host == 'scholars.duke.edu') {
+            swaggerApi.setSchemes(schemes);
+            swaggerApi.setBasePath(basePath);
+          }
           /*
           if(typeof initOAuth == "function") {
             initOAuth({
