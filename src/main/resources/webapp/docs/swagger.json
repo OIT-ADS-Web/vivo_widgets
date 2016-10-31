@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "0.9.0",
     "title": "Swagger for Vivo Widgets",
     "description": "Vivo widgets API in the swagger-2.0 specification"
   },
@@ -18,8 +18,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -43,8 +41,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -71,8 +67,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],  
@@ -99,8 +93,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -127,8 +119,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -155,8 +145,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -183,8 +171,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -211,8 +197,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -239,8 +223,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -267,8 +249,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -295,8 +275,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -323,8 +301,6 @@
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
          { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
        ],
@@ -350,9 +326,7 @@
        "parameters": [
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" }
+         { "$ref": "#/parameters/uriParam" }
        ],
        "responses": {
           "200": {
@@ -376,9 +350,7 @@
        "parameters": [
          { "$ref": "#/parameters/countParam" },
          { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/formattingParam" },
-         { "$ref": "#/parameters/styleParam" }
+         { "$ref": "#/parameters/uriParam" }
        ],
        "responses": {
           "200": {
@@ -432,33 +404,6 @@
      }
    }
   },
-  "/search.{format}": { 
-    "get": { 
-      "parameters": [
-         {
-           "name": "query",
-           "in": "query",
-           "type": "string",
-           "description": "what to search for"
-         },
-         {
-           "name": "format",
-           "in": "path",
-            "enum": ["json"],
-            "description": "format is requested by *.ext - but the only returned format is 'json' at the moment"
-         }
-     ]
-    },
-    "responses": {
-       "200": {
-         "description": "Expected response to a valid request"
-       },
-       "400": {
-         "description": "Bad Response.  Returned if date cannot be parsed"
-      }
-    }
-  }
- },
  "parameters": {
     "countParam": {
        "name": "count",
@@ -477,7 +422,7 @@
        "name": "uri",
        "in": "query",
        "required": true,
-       "description": "which URI to look at.  If missing will return 'key not found: uri'"
+       "description": "which URI to look at.  If missing will return 'key not found: uri'.  This can be simply a duid (e.g. Duke Unique Identifier - 7 digits)."
     },
     "formattingParam": {
        "name": "formatting",
