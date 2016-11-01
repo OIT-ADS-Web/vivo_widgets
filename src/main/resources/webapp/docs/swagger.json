@@ -13,6 +13,9 @@
  "paths": {
     "/api/v0.9/people/complete/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person or attributes of a person - in a variety of formats",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -36,6 +39,9 @@
     },
     "/api/v0.9/people/publications/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's publications",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -62,6 +68,9 @@
     },
     "/api/v0.9/people/artistic_works/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's artistic works",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -88,6 +97,9 @@
     },
      "/api/v0.9/people/awards/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's awards",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -114,6 +126,9 @@
     },
      "/api/v0.9/people/grants/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's grants",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -140,6 +155,9 @@
     },
      "/api/v0.9/people/courses/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's courses",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -166,6 +184,9 @@
     },
      "/api/v0.9/people/newsfeeds/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's newsfeeds",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -192,6 +213,9 @@
     },
      "/api/v0.9/people/professional_activities/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's professional activities",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -218,6 +242,9 @@
     },
      "/api/v0.9/people/positions/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's positions",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -244,6 +271,9 @@
     },
      "/api/v0.9/people/addresses/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's addresses",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -270,6 +300,9 @@
     },
      "/api/v0.9/people/overview/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's overview",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -296,6 +329,9 @@
     },
      "/api/v0.9/people/contact/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns a person's contact information",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -322,6 +358,9 @@
     },
     "/api/v0.9/organizations/people/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -346,6 +385,9 @@
   },
   "/api/v0.9/organizations/grants/{count}.{format}": {
       "get": {
+       "tags": [
+          "widgets"
+       ],
        "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
        "parameters": [
          { "$ref": "#/parameters/countParam" },
@@ -369,8 +411,12 @@
     }
   },
   "/search/modified.{format}": { 
-    "get": { 
-        "parameters": [
+    "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "search for most recently modified URIs - starting from a specified date",      
+       "parameters": [
           {
             "name": "since",
             "in": "query",
