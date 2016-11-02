@@ -1,0 +1,910 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.9.0",
+    "title": "Swagger for Vivo Widgets",
+    "description": "Vivo widgets API in the swagger-2.0 specification"
+  },
+ "produces": [
+    "application/json",
+    "application/html",
+    "application/javascript" 
+  ],
+ "paths": {
+    "/api/v0.9/people/complete/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person or attributes of a person - in a variety of formats",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/api/v0.9/people/publications/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's publications",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Publication"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/api/v0.9/people/artistic_works/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's artistic works",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],  
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtisticWork"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/awards/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's awards",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Award"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/grants/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's grants",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Grant"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/courses/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's courses",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Course"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/newsfeeds/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's newsfeeds",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Newsfeed"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/professional_activities/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's professional activities",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfessionalActivity"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/positions/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's positions",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Position"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/addresses/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's addresses",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/overview/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's overview",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+     "/api/v0.9/people/contact/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns a person's contact information",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" },
+         { "$ref": "#/parameters/startParam" },
+         { "$ref": "#/parameters/endParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/api/v0.9/organizations/people/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+             "schema": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/OrganizationPerson"
+                }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+      }
+    }
+  },
+  "/api/v0.9/organizations/grants/{count}.{format}": {
+      "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
+       "parameters": [
+         { "$ref": "#/parameters/countParam" },
+         { "$ref": "#/parameters/formatParam" },
+         { "$ref": "#/parameters/uriParam" }
+       ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+             "schema": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/OrganizationGrant"
+                }
+            }          
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+      }
+    }
+  },
+  "/search/modified.{format}": { 
+    "get": {
+       "tags": [
+          "widgets"
+       ],
+       "description": "search for most recently modified URIs - starting from a specified date",      
+       "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "date in YYYY-MM-DD format"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "enum": ["json"],
+            "required": true,
+            "description": "format is requested by *.extension - but the only returned format is 'json' at the moment"
+          },
+          {
+            "name": "offset",
+            "in" : "query",
+            "type": "integer",
+            "required": false,
+            "description": "where to start the list (if there are more than 1000)"
+          }
+        ],
+       "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/ModifiedList"
+            }
+        }
+ 
+     }
+   }
+  }
+ },
+ "parameters": {
+    "countParam": {
+       "name": "count",
+       "in": "path",
+       "required": "true",
+       "description": "how many records to show - 'all' is a valid value",
+       "enum": ["5", "10", "15", "all"]
+    },
+    "formatParam": {
+       "name": "format",
+       "description": "In what format to return results ('js' and 'html' are valid, but redirect)",
+       "enum": ["json", "jsonp"],
+       "required": true,
+       "in": "path"
+    },
+    "formatParamExt": {
+       "name": "format",
+       "description": "In what format to return results",
+       "enum": ["json", "jsonp", "html", "js"],
+       "required": true,
+       "in": "path"
+    },
+    "uriParam": {
+       "name": "uri",
+       "in": "query",
+       "required": true,
+       "description": "which URI to look at.  If missing will return 'key not found: uri'.  This can be simply a duid (e.g. Duke Unique Identifier - 7 digits)."
+    },
+    "formattingParam": {
+       "name": "formatting",
+       "in": "query",
+       "required": false,
+       "enum": ["detailed", "abbreviated"]
+    },
+    "styleParam": {
+       "name": "style",
+       "in": "query",
+       "required": false,
+       "enum": ["styled", "unstyled"]
+    },
+    "startParam": {
+       "name": "start",
+       "in": "query",
+       "required": false,
+       "description": "start range in yyyy-mm-dd format"
+    },
+    "endParam": {
+       "name": "end",
+       "in": "query",
+       "required": false,
+       "description": "end range in yyyy-mm-dd format"
+    }
+  },
+  "responses": {
+    "NotFound": {
+       "description": "Nothing found to return"
+    }
+  },
+  "definitions": {
+      "WidgetItem": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "type": "object" }
+        } 
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "type": "object" }
+        }
+      },
+      "PersonAttributes": {
+        "type": "object",
+        "properties": {
+          "preferredTitle": {"type": "string" },
+          "phoneNumber": {"type": "string" },
+          "primaryEmail": {"type": "string" },
+          "middleName": {"type": "string" },
+          "profileURL": { "$ref": "#/definitions/uri" },
+          "imageModTime": {"type": "datetime"},
+          "suffixName": {"type": "string" },
+          "imageUri": { "$ref": "#/definitions/uri" },
+          "mentorshipAvailabilities": {"type": "string" },
+          "netid": {"type": "string" },
+          "uri": { "$ref": "#/definitions/uri" },
+          "alternateId": {"type": "string" },
+          "prefixName": {"type": "string" },
+          "imageDownload": { "$ref": "#/definitions/uri" },
+          "lastName": {"type": "string" },
+          "firstName": {"type": "string" },
+          "imageThumbnailUri":{ "$ref": "#/definitions/uri" },
+          "imageThumbnailDownload": { "$ref": "#/definitions/uri" },
+          "overview": {"type": "string" },
+          "preferredCitationFormat": { "$ref": "#/definitions/uri" },
+          "imageFileName": {"type": "string" }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "updatedAt": { "type": "date" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "title": { "type": "string" },
+          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"} },
+          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"} },
+          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"} },
+          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"} },
+          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"} },
+          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"} },
+          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"} },
+          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"} },
+          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"} },
+          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"} },
+          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"} },
+          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus"} },
+          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"} },
+          "attributes": {"$ref": "#/definitions/PersonAttributes" }
+        }
+      },
+      "Contact": {
+        "$ref": "#/definitions/PersonAttributes"
+      },
+      "OrganizationGrant": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { 
+            "type": "object",
+            "properties": {
+              "organization": {"$ref": "#/definitions/uri" },
+              "organizationName": {"type": "string" } 
+             }
+          }
+        }
+      },
+      "OrganizationPerson": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { 
+            "type": "object",
+            "properties": {
+              "organization": {"$ref": "#/definitions/uri" },
+              "organizationName": {"type": "string" },
+              "position": {"$ref": "#/definitions/uri" }, 
+              "positionType": {"$ref": "#/definitions/uri" },
+              "profileURL": {"$ref": "#/definitions/uri" },
+              "imageModTime": {"type": "datetime" },
+              "imageUri": {"$ref": "#/definitions/uri" },
+              "imageDownload": {"$ref": "#/definitions/uri" },
+              "imageThumbnailUri": {"$ref": "#/definitions/uri" },
+              "imageThumbnailDownload": {"$ref": "#/definitions/uri" },
+              "overview": {"type": "string" },
+              "imageFileName": {"type": "string" }
+            }
+          }
+        }
+      },
+      "Publication": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/PublicationAttributes" }
+       }
+      },
+      "Award": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/AwardAttributes" }
+       }
+      },
+      "ArtisticWork": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/ArtisticWorkAttributes" }
+       }
+      },
+      "Grant": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/GrantAttributes" }
+       }
+      },
+      "Course": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/CourseAttributes" }
+       }
+      },
+      "ProfessionalActivity": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/ProfessionalActivityAttributes" }
+       }
+      },
+      "Position": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/PositionAttributes" }
+       }
+      },
+      "Address": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/AddressAttributes" }
+       }
+      },
+      "Education": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/EducationAttributes" }
+       }
+      },
+      "ResearchArea": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/ResearchAreaAttributes" }
+       }
+      },
+      "Webpage": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/WebpageAttributes" }
+       }
+      },
+      "GeographicalFocus": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/GeographicalFocusAttributes" }
+       }
+      },
+      "Newsfeed": {
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "$ref": "#/definitions/NewsfeedAttributes" }
+       }
+      },
+      "PublicationAttributes": {
+        "type": "object",
+        "properties": { 
+          "icmjeCitation": { "type": "string" },
+          "mlaCitation": {},
+          "isFavorite": { "type": "boolean" },
+          "authorList": { "type": "string" },
+          "dateTime": { "$ref": "#/definitions/uri" },
+          "conferenceLocation": {"type": "string" },
+          "abstract":{"type": "string" },
+          "pmid": {"type": "string" },
+          "apaCitation": {"type": "string" },
+          "year": {"type": "datetime" },
+          "endPage": {"type": "integer" },
+          "publicationSource": {"type": "string" },
+          "chicagoCitation": {"type": "string" },
+          "authorshipType": { "$ref": "#/definitions/uri" },
+          "issue": {"type": "string" },
+          "subtypes": {"type": "string" },
+          "publicationVenue":{"type": "string" },
+          "publishedIn": {"type": "string" },
+          "startPage": {"type": "integer" },
+          "doi": {"type": "string" },
+          "volume": { "type": "string" }
+        }
+      },
+      "AwardAttributes": {
+        "type": "object",
+        "properties": {
+          "serviceType": {"type": "string" },
+          "name": {"type": "string" },
+          "datePrecision": { "$ref": "#/definitions/uri" }, 
+          "awardedBy": {"type": "string" },
+          "awardedByUri": { "$ref": "#/definitions/uri" },
+          "date": {"type": "datetime" }
+        }
+      },
+      "ArtisticWorkAttributes": {
+        "type": "object",
+        "properties": {
+          "role": {"type": "string" },
+          "abstract": {"type": "string" }, 
+          "role_description": {"type": "string" }, 
+          "date": {"type": "datetime" },
+          "type_description": {"type": "string" }, 
+          "date_precision": {"$ref": "#/definitions/uri" },
+          "collaborators": {"type": "string" }
+        }
+      },
+      "GrantAttributes": {
+        "type": "object",
+        "properties": {
+          "endDate": {"type": "datetime" },
+          "roleName": {"type": "string"},
+          "awardedBy": {"type": "string"},
+          "administeredBy": {"type": "string"},
+          "awardedByUri": {"$ref": "#/definitions/uri" },
+          "administeredByUri": {"$ref": "#/definitions/uri" },
+          "startDate": {"type": "datetime" }
+        }
+      },
+      "CourseAttributes": {
+        "type": "object",
+        "properties": {
+          "role": {"$ref": "#/definitions/uri" },
+          "roleName": {"type": "string"}
+        }
+      },
+      "ProfessionalActivityAttributes": {
+        "type": "object",
+        "properties": {
+          "startDatePrecision": {"$ref": "#/definitions/uri" },
+          "serviceOrEventName": {"type": "string" },
+          "serviceType": {"type": "string" },
+          "role": {"type": "string" },
+          "hostOrganization": {"type": "string" },
+          "locationOrVenue": {"type": "string" },
+          "startDate": {"type": "datetime" }
+        }
+      },
+      "AddressAttributes": {
+        "type": "object",
+        "properties": {
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "postalCode": {"type": "string"},
+          "personUri": {"$ref": "#/definitions/uri"},
+          "address1": {"type": "string"}
+        }
+      },
+      "EducationAttributes": {
+        "type": "object",
+        "properties": {
+          "degreeUri":  {"$ref": "#/definitions/uri"},
+          "endDate": {"type": "datetime" },
+          "degree":  {"type": "string" },
+          "organizationUri":  {"$ref": "#/definitions/uri"},
+          "institution": {"type": "string"},
+          "dateTimeUri":  {"$ref": "#/definitions/uri"},
+          "personUri":  {"$ref": "#/definitions/uri"},
+          "endUri":  {"$ref": "#/definitions/uri"}
+        }
+      },
+      "ResearchAreaAttributes": {
+        "type": "object",
+        "properties": {
+          "personUri": {"$ref": "#/definitions/uri" }
+        }        
+      },
+      "WebpageAttributes": {
+        "type": "object",
+        "properties": {
+          "personUri": {"$ref": "#/definitions/uri" },
+          "linkURI": {"$ref": "#/definitions/uri" }
+        }
+      },
+      "GeographicalFocusAttributes": {
+        "type": "object",
+        "properties": {
+          "focusTypeLabel": {"type": "string" },
+          "focusType": {"$ref": "#/definitions/uri" },
+          "personUri": {"$ref": "#/definitions/uri" }
+        }
+      },
+      "NewsfeedAttributes": {
+        "type": "object",
+        "properties": {
+          "newsDatetimeObj": {"$ref": "#/definitions/uri"},
+          "newsLink": {"$ref": "#/definitions/uri" },
+          "newsDatetime": {"type": "datetime"},
+          "newsMonth": {"type": "integer"},
+          "newsDay": {"type": "integer"},
+          "newsYear": {"type": "integer"},
+          "newsSource": {"type": "string" }
+        }
+      },
+      "PositionAttributes": {
+        "type": "object",
+        "properties": {
+          "uri": { "$ref": "#/definitions/uri" },
+          "vivoType": { "$ref": "#/definitions/uri" },
+          "label": { "type": "string" },
+          "attributes": { "type": "object", 
+              "properties": {
+                "schoolLabel": { "type": "string" },
+                "organizationLabel": { "type": "Biology" },
+                "organizationUri": { "$ref": "#/definitions/uri" },
+                "rank" : { "type": "integer" },
+                "personUri": { "$ref": "#/definitions/uri" },
+                "schoolUri": { "$ref": "#/definitions/uri" }
+              }
+          }
+        }
+      },
+      "SearchResults": {
+        "type": "object",
+        "properties": {
+          "numFound": { "type": "integer" },
+          "groups": {"type": "object" },
+          "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }}
+        }
+     },
+     "ModifiedList": {
+       "type": "object",
+       "properties": {
+        "numFound": { "type": "integer" },
+        "offset": {"type": "integer" },
+        "items": { "type": "array", "items": { "$ref": "#/definitions/ModifiedListItem" }} }
+     },
+     "SearchResultItem": {
+       "uri" : { "$ref": "#/definitions/uri" },
+       "name": "string",
+       "group": "string"
+      },
+      "ModifiedListItem": {
+        "$ref": "#/definitions/uri"
+      },
+      "uri": { "type": "string" }
+     
+  }
+   
+}
+
