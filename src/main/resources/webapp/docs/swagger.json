@@ -8,7 +8,7 @@
  "produces": [
     "application/json",
     "application/html",
-    "application/javascript" 
+    "application/javascript"
   ],
  "paths": {
     "/api/v0.9/people/complete/{count}.{format}": {
@@ -29,7 +29,7 @@
             "description": "Expected response to a valid request",
             "schema": {
               "$ref": "#/definitions/Person"
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -58,7 +58,7 @@
               "items": {
                 "$ref": "#/definitions/Publication"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -78,7 +78,7 @@
          { "$ref": "#/parameters/uriParam" },
          { "$ref": "#/parameters/startParam" },
          { "$ref": "#/parameters/endParam" }
-       ],  
+       ],
        "responses": {
           "200": {
             "description": "Expected response to a valid request",
@@ -87,7 +87,7 @@
               "items": {
                 "$ref": "#/definitions/ArtisticWork"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -116,7 +116,7 @@
               "items": {
                 "$ref": "#/definitions/Award"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -145,7 +145,7 @@
               "items": {
                 "$ref": "#/definitions/Grant"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -174,7 +174,7 @@
               "items": {
                 "$ref": "#/definitions/Course"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -203,7 +203,7 @@
               "items": {
                 "$ref": "#/definitions/Newsfeed"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -232,7 +232,7 @@
               "items": {
                 "$ref": "#/definitions/ProfessionalActivity"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -261,7 +261,7 @@
               "items": {
                 "$ref": "#/definitions/Position"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -290,7 +290,7 @@
               "items": {
                 "$ref": "#/definitions/Address"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -319,7 +319,7 @@
               "items": {
                 "$ref": "#/definitions/Contact"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -348,7 +348,7 @@
               "items": {
                 "$ref": "#/definitions/Contact"
               }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -375,7 +375,7 @@
                "items": {
                   "$ref": "#/definitions/OrganizationPerson"
                 }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -402,7 +402,7 @@
                "items": {
                   "$ref": "#/definitions/OrganizationGrant"
                 }
-            }          
+            }
           },
           "404": {
             "$ref": "#/responses/NotFound"
@@ -410,12 +410,12 @@
       }
     }
   },
-  "/search/modified.{format}": { 
+  "/search/modified.{format}": {
     "get": {
        "tags": [
           "widgets"
        ],
-       "description": "search for most recently modified URIs - starting from a specified date",      
+       "description": "search for most recently modified URIs - starting from a specified date",
        "parameters": [
           {
             "name": "since",
@@ -446,7 +446,7 @@
               "$ref": "#/definitions/ModifiedList"
             }
         }
- 
+
      }
    }
   }
@@ -517,7 +517,7 @@
           "vivoType": { "$ref": "#/definitions/uri" },
           "label": { "type": "string" },
           "attributes": { "type": "object" }
-        } 
+        }
       },
       "Organization": {
         "type": "object",
@@ -531,51 +531,51 @@
       "PersonAttributes": {
         "type": "object",
         "properties": {
-          "preferredTitle": {"type": "string" },
-          "phoneNumber": {"type": "string" },
-          "primaryEmail": {"type": "string" },
-          "middleName": {"type": "string" },
-          "profileURL": { "$ref": "#/definitions/uri" },
-          "imageModTime": {"type": "datetime"},
-          "suffixName": {"type": "string" },
-          "imageUri": { "$ref": "#/definitions/uri" },
-          "mentorshipAvailabilities": {"type": "string" },
-          "netid": {"type": "string" },
-          "uri": { "$ref": "#/definitions/uri" },
-          "alternateId": {"type": "string" },
-          "prefixName": {"type": "string" },
-          "imageDownload": { "$ref": "#/definitions/uri" },
-          "lastName": {"type": "string" },
-          "firstName": {"type": "string" },
-          "imageThumbnailUri":{ "$ref": "#/definitions/uri" },
-          "imageThumbnailDownload": { "$ref": "#/definitions/uri" },
-          "overview": {"type": "string" },
-          "preferredCitationFormat": { "$ref": "#/definitions/uri" },
-          "imageFileName": {"type": "string" }
+          "preferredTitle": {"type": "string", "description":"The title in the Positions section of the widgets that has the lowest 'rank' value (highest precedence value)" },
+          "phoneNumber": {"type": "string", "description": "Phone number from the Duke directory (LDAP)" },
+          "primaryEmail": {"type": "string", "description": "Email adddress from the Duke directory (LDAP)" },
+          "middleName": {"type": "string", "description":"The person's middle name (if available)" },
+          "profileURL": { "$ref": "#/definitions/uri", "description":"The customizable and human-readable URL for the profile.  The default profileURL is based on the Duke email alias" },
+          "imageModTime": {"type": "datetime", "description": "The latest modification date and time of the profile image"},
+          "suffixName": {"type": "string", "description":"The suffix in the professional name as specified in Duke's faculty appointment system (dFAc)" },
+          "imageUri": { "$ref": "#/definitions/uri", "description":"URI for the page that links to the full profle image and thumbnail" },
+          "mentorshipAvailabilities": {"type": "string", "description":"A text description about a person's availability to mentor others at Duke" },
+          "netid": {"type": "string", "description":"Duke Net ID"  },
+          "uri": { "$ref": "#/definitions/uri", "description":"The unique identifier for a person in Scholars@Duke. Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile." },
+          "alternateId": {"type": "string", "description":"Duke Unique ID" },
+          "prefixName": {"type": "string", "description":"The prefix in the professional name as specified in Duke's faculty appointment system (dFac)" },
+          "imageDownload": { "$ref": "#/definitions/uri", "description":"A link to the full-size profile image" },
+          "lastName": {"type": "string", "description":"The last name in the professional name as specified in Duke's faculty appointment system (dFac)" },
+          "firstName": {"type": "string", "description":"The first name in the professional name as specified in Duke's faculty appointment system (dFac)" },
+          "imageThumbnailUri":{ "$ref": "#/definitions/uri", "description":"The URI for a page that contains a link to the thumbnail profile image" },
+          "imageThumbnailDownload": { "$ref": "#/definitions/uri", "description":"The link to the thumbnail of a profile image" },
+          "overview": {"type": "string", "description":"The text description summarizing a person’s research." },
+          "preferredCitationFormat": { "$ref": "#/definitions/uri", "description":"The preferred citation style in which publications are displayed on the profile.  This preference is set by the user." },
+          "imageFileName": {"type": "string","description":"The standardized file name for the profile image based off of the person's Scholars URI" }
         }
       },
       "Person": {
         "type": "object",
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "updatedAt": { "type": "date" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "title": { "type": "string" },
-          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"} },
-          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"} },
-          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"} },
-          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"} },
-          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"} },
-          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"} },
-          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"} },
-          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"} },
-          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"} },
-          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"} },
-          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"} },
-          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus"} },
-          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"} },
-          "attributes": {"$ref": "#/definitions/PersonAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"The unique identifier for a person in Scholars@Duke.  Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile." },
+          "updatedAt": { "type": "date", "description":"The date showing when an individual profile has changed. This also includes an endpoint (https://scholars.duke.edu/widgets/search/modified.json?since=2016-04-15) where you can query all profiles that have changed since a given date. " },
+          "vivoType": { "$ref": "#/definitions/uri" , "description":"The category of profile determined by the affiliation with Duke.  This is what determines the structure of the URI. "},
+          "label": { "type": "string", "description":"The Professional Name (Last, First, Middle) designated in dFac " },
+          "title": { "type": "string", "description":"The Preferred (aka “highest precedence”) title as designated in dFac.  This is the title in which the attribute of “rank” has the lowest value." },
+          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"}, "description":"each publication feeding in from Elements (elements.duke.edu) will have some of the following metadata.  Metadata with an asterisk will be present for each publication, while the others are optional." },
+          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"},"description":"awards & honors that are manually entered in Scholars@Duke.  Because the data is manually entered, this section may also include grants that were not submitted to SPS (Duke’s official grants database)" },
+          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"}, "description":"[non-print outputs that represent a faculty member’s primary scholarship.  These are works that are parallel to publications and not adequately captured in the publication citation style]" },
+          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"},"description":"select grants from Duke’s Sponsored Project System (SPS).  If applicable, one grant will represent multiple renewal years, as well as any mini grants that associated with it.  Grants with publicity restrictions are not included." },
+          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"},"description":"courses taught in the past 3 years" },
+          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"}, "description":"Service to Duke, Service to the Profession, Outreach & Engaged Scholarsip, or Presentations" },
+          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"}, "description":"faculty appointments and center memberships contained in dFac.  This section also includes non-faculty member’s HR title and non-faculty affiliations as designated in Scholars@Duke." },
+          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"},"description":"there are 2 addresses in Scholars@Duke--the mailing address and the office location" },
+          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"}, "description":"a faculty member’s education and professional training as displayed in dFac.  This section is only available for faculty who are active in dFac." },
+          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"}, "description":"subject headings from MesH & Library of Congress that describe a person’s research & areas of expertise" },
+          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"}, "description":"websites that were manually entered onto a person’s profile (typically includes links to a CV, department site, personal site, or Google Scholar page, etc.)" },
+          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus", "description":"geographic areas of expertise, sites of teaching, or places where research was conducted"} },
+          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"}, "description": "news articles reported by Duke Today or manually entered into the profile" },
+          "attributes": {"$ref": "#/definitions/PersonAttributes", "description":"additional person attributes" }
         }
       },
       "Contact": {
@@ -587,11 +587,11 @@
           "uri": { "$ref": "#/definitions/uri" },
           "vivoType": { "$ref": "#/definitions/uri" },
           "label": { "type": "string" },
-          "attributes": { 
+          "attributes": {
             "type": "object",
             "properties": {
               "organization": {"$ref": "#/definitions/uri" },
-              "organizationName": {"type": "string" } 
+              "organizationName": {"type": "string" }
              }
           }
         }
@@ -602,207 +602,207 @@
           "uri": { "$ref": "#/definitions/uri" },
           "vivoType": { "$ref": "#/definitions/uri" },
           "label": { "type": "string" },
-          "attributes": { 
+          "attributes": {
             "type": "object",
             "properties": {
-              "organization": {"$ref": "#/definitions/uri" },
-              "organizationName": {"type": "string" },
-              "position": {"$ref": "#/definitions/uri" }, 
-              "positionType": {"$ref": "#/definitions/uri" },
-              "profileURL": {"$ref": "#/definitions/uri" },
-              "imageModTime": {"type": "datetime" },
-              "imageUri": {"$ref": "#/definitions/uri" },
-              "imageDownload": {"$ref": "#/definitions/uri" },
-              "imageThumbnailUri": {"$ref": "#/definitions/uri" },
-              "imageThumbnailDownload": {"$ref": "#/definitions/uri" },
-              "overview": {"type": "string" },
-              "imageFileName": {"type": "string" }
+              "organization": {"$ref": "#/definitions/uri","description":"URI for the organization, built from the organization ID in SAP" },
+              "organizationName": {"type": "string", "description":"display name for the organization" },
+              "position": {"$ref": "#/definitions/uri", "description":"a URI that describes a person's affiliation with or appointment in an organization" },
+              "positionType": {"$ref": "#/definitions/uri", "description":"desribes the type of affiliation or appointment" },
+              "profileURL": {"$ref": "#/definitions/uri", "description": "the human-readable URL for a profile" },
+              "imageModTime": {"type": "datetime", "description": "the most recent modification time for the profile image" },
+              "imageUri": {"$ref": "#/definitions/uri", "description":"URI for intermediate page that links to full image and thumbnail downloads" },
+              "imageDownload": {"$ref": "#/definitions/uri", "description":"link to full profile image" },
+              "imageThumbnailUri": {"$ref": "#/definitions/uri","description":"URI for page that links to thumbnail download" },
+              "imageThumbnailDownload": {"$ref": "#/definitions/uri", "description":"link to thumbnail of profile image" },
+              "overview": {"type": "string", "description":"the overview paragraph that summarizes a person’s research" },
+              "imageFileName": {"type": "string", "description":"standardized name for image that includes the Scholars URI" }
             }
           }
         }
       },
       "Publication": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/PublicationAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"the unique identifier for a publication in Scholars@Duke.  The six-digit value after “pub” represents the identifier that comes from Elements.  The URI redirects to the URL for the publication’s entity page in Scholars@Duke." },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"the type of publication as designated in Elements.  The list of publication types is fairly static, however it is possible for a new type to be added to Elements" },
+          "label": { "type": "string", "description":"the title of the publication" },
+          "attributes": { "$ref": "#/definitions/PublicationAttributes", "description":"this section contains 4 pre-formatted publication citations, as well as the individual data elements that make up these citations" }
        }
       },
       "Award": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/AwardAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"The unique identifier for an award in Scholars@Duke." },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"an award as defined in the VIVO-ISF ontology (vivo:Award)" },
+          "label": { "type": "string", "description":"a concatenation of the award name & awarding body" },
+          "attributes": { "$ref": "#/definitions/AwardAttributes", "description":"includes the level of the award (department, national, international, etc.), the name of the award, the award sponsor, and the award date" }
        }
       },
       "ArtisticWork": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/ArtisticWorkAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description": "The unique identifier for an artitsic work" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"The category that the work best falls into.  If more than one category is selected, then 'MultipeTypes' will be the value here" },
+          "label": { "type": "string", "description":"Title of the artisic work"},
+          "attributes": { "$ref": "#/definitions/ArtisticWorkAttributes", "description":"details about the work, including role, abstract, dates, and collaborators" }
        }
       },
       "Grant": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/GrantAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"the unique identifier for a grant built off of the most recent proposal id in Duke's Sponsored Project System" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"The category of the grant" },
+          "label": { "type": "string", "description":"the full title of grant" },
+          "attributes": { "$ref": "#/definitions/GrantAttributes", "description": "details about the grant, including the person's role, sponsor, Duke administrating department, and dates" }
        }
       },
       "Course": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/CourseAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"the unique identifier for a course build off of the course number" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"http://vivoweb.org/ontology/core#Course" },
+          "label": { "type": "string", "description":"title of course" },
+          "attributes": { "$ref": "#/definitions/CourseAttributes", "description":"details about the course including the person's role" }
        }
       },
       "ProfessionalActivity": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/ProfessionalActivityAttributes" }
+          "uri": { "$ref": "#/definitions/uri","description":"unique identifier for a professional activity" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"the category of professional activity" },
+          "label": { "type": "string", "description":"concatenation of the name of the professional activity and other details found in the attributes section" },
+          "attributes": { "$ref": "#/definitions/ProfessionalActivityAttributes", "description":"details about the professional activity including subcategories, role, description, and dates" }
        }
       },
       "Position": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/PositionAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"unique identifier for a person's affiliation or faculty appointment within an organization" },
+          "vivoType": { "$ref": "#/definitions/uri","description":"type of affiliation or faculty appointment" },
+          "label": { "type": "string", "description":"appointment title for faculty or generic job title for non-faculty" },
+          "attributes": { "$ref": "#/definitions/PositionAttributes","description":"details about the position including the related department, school, and display order for faculty with multiple affiliations" }
        }
       },
       "Address": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/AddressAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"unique identifier for a person's address.  The URI will specify if the address is the office location or the mailing address" },
+          "vivoType": { "$ref": "#/definitions/uri","description": "the type of address.  Office locations have the type 'Location' while mailing addresses have the type 'Address'" },
+          "label": { "type": "string","description":"text for address, a concatenation of the elements in the Attributes section" },
+          "attributes": { "$ref": "#/definitions/AddressAttributes","description":"details about the address inclding city, state, postal code, and street" }
        }
       },
       "Education": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/EducationAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"unique identifier for an academic degree or professional training" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"http://vivoweb.org/ontology/core#EducationalProcess" },
+          "label": { "type": "string", "description":"concatenation of the awarded degree (or training) and the year of completion" },
+          "attributes": { "$ref": "#/definitions/EducationAttributes","description":"details about the education record including the awarded degree, year of completion, and awarding institution" }
        }
       },
       "ResearchArea": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/ResearchAreaAttributes" }
+          "uri": { "$ref": "#/definitions/uri","description":"unique identifier for the subject heading/keyword taken from a controlled vocabulary" },
+          "vivoType": { "$ref": "#/definitions/uri","description":"http://www.w3.org/2004/02/skos/core#Concept" },
+          "label": { "type": "string","description":"label for the suject heading/keyword" },
+          "attributes": { "$ref": "#/definitions/ResearchAreaAttributes","description":"URI of the related person" }
        }
       },
       "Webpage": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/WebpageAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"the standardized identifier of a personal weblink that includes the person's Scholars URI" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"http://www.w3.org/2006/vcard/ns#URL" },
+          "label": { "type": "string","description":"manually added name for the link" },
+          "attributes": { "$ref": "#/definitions/WebpageAttributes", "description":"details about the weblink including related person and manually added URL" }
        }
       },
       "GeographicalFocus": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/GeographicalFocusAttributes" }
+          "uri": { "$ref": "#/definitions/uri","description":"the unique identifier for a country or state as specified by a controlled vocabulary" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"GeographicRegion" },
+          "label": { "type": "string","description":"name of country or state" },
+          "attributes": { "$ref": "#/definitions/GeographicalFocusAttributes" , "description":"details about the geographical focus including the related person and the category of relation that region (research, teaching, or expertise)"}
        }
       },
       "Newsfeed": {
         "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "$ref": "#/definitions/NewsfeedAttributes" }
+          "uri": { "$ref": "#/definitions/uri", "description":"standardized URI for a news article" },
+          "vivoType": { "$ref": "#/definitions/uri", "description":"http://vivoweb.org/ontology/core#NewsRelease" },
+          "label": { "type": "string","description":"title of the news article" },
+          "attributes": { "$ref": "#/definitions/NewsfeedAttributes","description":"details about the news article including related person, date, link to article, and news source" }
        }
       },
       "PublicationAttributes": {
         "type": "object",
-        "properties": { 
-          "icmjeCitation": { "type": "string" },
-          "mlaCitation": {},
-          "isFavorite": { "type": "boolean" },
-          "authorList": { "type": "string" },
-          "dateTime": { "$ref": "#/definitions/uri" },
-          "conferenceLocation": {"type": "string" },
-          "abstract":{"type": "string" },
-          "pmid": {"type": "string" },
-          "apaCitation": {"type": "string" },
-          "year": {"type": "datetime" },
-          "endPage": {"type": "integer" },
-          "publicationSource": {"type": "string" },
-          "chicagoCitation": {"type": "string" },
-          "authorshipType": { "$ref": "#/definitions/uri" },
-          "issue": {"type": "string" },
-          "subtypes": {"type": "string" },
-          "publicationVenue":{"type": "string" },
-          "publishedIn": {"type": "string" },
-          "startPage": {"type": "integer" },
-          "doi": {"type": "string" },
-          "volume": { "type": "string" }
+        "properties": {
+          "icmjeCitation": { "type": "string", "description":"publication citation in the ICMJE format" },
+          "mlaCitation": {"type": "string","description":"publication citation in the MLA format "},
+          "isFavorite": { "type": "boolean", "description":"a flag indicating whether a publication was marked as 'favorite' in elements.duke.edu" },
+          "authorList": { "type": "string", "description":"list of all authors as 'Last Name, First Initial'" },
+          "dateTime": { "$ref": "#/definitions/uri", "description":"publication date URI as 'YYYYMMDD'" },
+          "conferenceLocation": {"type": "string", "description":"Location where a conference paper was presented" },
+          "abstract":{"type": "string", "description":"publication abstract" },
+          "pmid": {"type": "string","description":"PubMed ID only available if the citation source is from PubMed or European PubMed" },
+          "apaCitation": {"type": "string", "description":"publication citation in the APA format" },
+          "year": {"type": "datetime","description":"publication date as 'YYYY-MM-DDT00:00:00'" },
+          "endPage": {"type": "integer", "description":"end page of publication (typically for an article or book section)." },
+          "publicationSource": {"type": "string", "description":"the source of the publication record.  Metadata will vary slightly between the various sources.  A preferred source (per publication) can be selected in Elements.  The default preferred source is PubMed / European PubMed." },
+          "chicagoCitation": {"type": "string", "description":"publication citation in the Chicago format"},
+          "authorshipType": { "$ref": "#/definitions/uri", "description":"categorizes the relationship to the publication (author, editor, translator, or contributor)" },
+          "issue": {"type": "string","description":"journal issue" },
+          "subtypes": {"type": "string","description":"while the vivoType generally represents the format of the publication, the subtype relays the genre and/or content of the publication" },
+          "publicationVenue":{"type": "string","description":"The journal represented as unlinked text (when the ISSN is not identified) or a URI (when the ISSN is identified)" },
+          "publishedIn": {"type": "string", "description":"publisher name" },
+          "startPage": {"type": "integer","description":"start page of publication (typically for an article or book section)." },
+          "doi": {"type": "string", "description":"digital object identifier.  To link to the full text on the publisher’s site, add the prefix “dx.doi.org/” followed by the DOI." },
+          "volume": { "type": "string", "description":"journal volume" }
         }
       },
       "AwardAttributes": {
         "type": "object",
         "properties": {
-          "serviceType": {"type": "string" },
-          "name": {"type": "string" },
-          "datePrecision": { "$ref": "#/definitions/uri" }, 
-          "awardedBy": {"type": "string" },
-          "awardedByUri": { "$ref": "#/definitions/uri" },
-          "date": {"type": "datetime" }
+          "serviceType": {"type": "string","description":"Represents the level of award.  Values can be “Department”, “International”, “National”, “Other”, “School, “State”, or “University”" },
+          "name": {"type": "string", "description":"The name of the award" },
+          "datePrecision": { "$ref": "#/definitions/uri", "description":"the Scholars URI for the date" },
+          "awardedBy": {"type": "string", "description":"the name of the awarding body" },
+          "awardedByUri": { "$ref": "#/definitions/uri", "description":"the Scholars URI for the awarding body" },
+          "date": {"type": "datetime", "description":"the award date in text form" }
         }
       },
       "ArtisticWorkAttributes": {
         "type": "object",
         "properties": {
           "role": {"type": "string" },
-          "abstract": {"type": "string" }, 
-          "role_description": {"type": "string" }, 
-          "date": {"type": "datetime" },
-          "type_description": {"type": "string" }, 
-          "date_precision": {"$ref": "#/definitions/uri" },
-          "collaborators": {"type": "string" }
+          "abstract": {"type": "string", "description":"name of role(s) that a person had on the work" },
+          "role_description": {"type": "string", "description":"paragraph description providing more details on a person's role" },
+          "date": {"type": "datetime", "description":"creation date of the work as 'YYYY-MM-DDT00'" },
+          "type_description": {"type": "string","description":"one or more cateogires describing the type of work " },
+          "date_precision": {"$ref": "#/definitions/uri","description":"provides the specified precision of the date attribute" },
+          "collaborators": {"type": "string", "description":"list of all Duke and non-Duke collaborators as specified by the faculty member." }
         }
       },
       "GrantAttributes": {
         "type": "object",
         "properties": {
-          "endDate": {"type": "datetime" },
-          "roleName": {"type": "string"},
-          "awardedBy": {"type": "string"},
-          "administeredBy": {"type": "string"},
-          "awardedByUri": {"$ref": "#/definitions/uri" },
-          "administeredByUri": {"$ref": "#/definitions/uri" },
-          "startDate": {"type": "datetime" }
+          "endDate": {"type": "datetime", "description":" project period end date for the proposal (most recent proposal if grant has been renewed)" },
+          "roleName": {"type": "string", "description":"person’s role on the grant"},
+          "awardedBy": {"type": "string", "description":"name of the grant sponsor"},
+          "administeredBy": {"type": "string", "description":"name of the Duke department that received the grant"},
+          "awardedByUri": {"$ref": "#/definitions/uri", "description":"URI of the grant sponsor" },
+          "administeredByUri": {"$ref": "#/definitions/uri", "description":"URI of the Duke department that received the grant" },
+          "startDate": {"type": "datetime", "description":"project period start date for the proposal (first proposal if grant has been renewed)" }
         }
       },
       "CourseAttributes": {
         "type": "object",
         "properties": {
-          "role": {"$ref": "#/definitions/uri" },
-          "roleName": {"type": "string"}
+          "role": {"$ref": "#/definitions/uri", "description":"the URI representing the role of a particular instructor on a course" },
+          "roleName": {"type": "string", "description":"currently, this field is a duplication to the course label (concatenation of the course name and course title)"}
         }
       },
       "ProfessionalActivityAttributes": {
         "type": "object",
         "properties": {
-          "startDatePrecision": {"$ref": "#/definitions/uri" },
-          "serviceOrEventName": {"type": "string" },
-          "serviceType": {"type": "string" },
+          "startDatePrecision": {"$ref": "#/definitions/uri", "description":"provides the specified precision of the startDate attribute" },
+          "serviceOrEventName": {"type": "string" }, "description":"title of the activity",
+          "serviceType": {"type": "string", "description":"subcategory for the professional activity" },
           "role": {"type": "string" },
-          "hostOrganization": {"type": "string" },
-          "locationOrVenue": {"type": "string" },
-          "startDate": {"type": "datetime" }
+          "hostOrganization": {"type": "string","description":"name of the organization associated with the activity" },
+          "locationOrVenue": {"type": "string", "description":"name of the event venue and/or geogrpahical location" },
+          "startDate": {"type": "datetime", "description":"start date of the activity as 'YYYY-MM-DDT00'" }
         }
       },
       "AddressAttributes": {
@@ -832,7 +832,7 @@
         "type": "object",
         "properties": {
           "personUri": {"$ref": "#/definitions/uri" }
-        }        
+        }
       },
       "WebpageAttributes": {
         "type": "object",
@@ -844,7 +844,7 @@
       "GeographicalFocusAttributes": {
         "type": "object",
         "properties": {
-          "focusTypeLabel": {"type": "string" },
+          "focusTypeLabel": {"type": "string", "description":"the category of academic relationship that a faculty member has to a geographic region" },
           "focusType": {"$ref": "#/definitions/uri" },
           "personUri": {"$ref": "#/definitions/uri" }
         }
@@ -867,7 +867,7 @@
           "uri": { "$ref": "#/definitions/uri" },
           "vivoType": { "$ref": "#/definitions/uri" },
           "label": { "type": "string" },
-          "attributes": { "type": "object", 
+          "attributes": { "type": "object",
               "properties": {
                 "schoolLabel": { "type": "string" },
                 "organizationLabel": { "type": "Biology" },
@@ -903,8 +903,7 @@
         "$ref": "#/definitions/uri"
       },
       "uri": { "type": "string" }
-     
-  }
-   
-}
 
+  }
+
+}
