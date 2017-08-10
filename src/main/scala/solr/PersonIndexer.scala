@@ -108,6 +108,8 @@ object PersonIndexer extends SimpleConversion
       val awards        = Award.fromUri(vivo, uriContext)
       log.debug("pull artisticWorks")
       val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
+      log.debug("pull artisticEvents")
+      val artisticEvents = ArtisticEvent.fromUri(vivo, uriContext)
       log.debug("pull grants")
       val grants        = Grant.fromUri(vivo, uriContext)
       log.debug("pull courses")
@@ -133,7 +135,8 @@ object PersonIndexer extends SimpleConversion
       
       var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
-                           artisticWorks, grants, courses,
+                           artisticWorks, artisticEvents, 
+                           grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
                            geoFocus, newsfeeds)
