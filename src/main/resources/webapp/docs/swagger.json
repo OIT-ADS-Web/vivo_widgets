@@ -879,14 +879,6 @@
           }
         }
       },
-      "SearchResults": {
-        "type": "object",
-        "properties": {
-          "numFound": { "type": "integer" },
-          "groups": {"type": "object" },
-          "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }}
-        }
-     },
      "ModifiedList": {
        "type": "object",
        "properties": {
@@ -894,13 +886,9 @@
         "offset": {"type": "integer" },
         "items": { "type": "array", "items": { "$ref": "#/definitions/ModifiedListItem" }} }
      },
-     "SearchResultItem": {
-       "uri" : { "$ref": "#/definitions/uri" },
-       "name": "string",
-       "group": "string"
-      },
-      "ModifiedListItem": {
-        "$ref": "#/definitions/uri"
+     "ModifiedListItem": {
+        "uri": {"$ref": "#/definitions/uri"},
+        "alternateId": "string"
       },
       "uri": { "type": "string" }
      
