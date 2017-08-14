@@ -23,3 +23,5 @@
     PREFIX dukeart: <http://vivo.duke.edu/vivo/ontology/duke-art-extension#>
     PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
     PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+    PREFIX dukecv: <http://vivo.duke.edu/vivo/ontology/duke-cv-extension#>
+
