@@ -96,7 +96,8 @@ case class Person(uri:String,
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
-    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} 
+    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} ++
+    academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} 
   }
 
   def personAttributes() = {
