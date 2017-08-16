@@ -25,10 +25,10 @@ object AcademicPosition extends AttributeParams {
   }
 
   def build(academicPosition:Map[Symbol,String]) = {
-    new AcademicPosition(uri         = academicPosition('uri).stripBrackets(),
+    new AcademicPosition(uri         = academicPosition('relationship).stripBrackets(),
                  vivoType    = academicPosition('type).stripBrackets(),
                  label       = academicPosition('label),
-                 attributes  = parseAttributes(academicPosition, List('uri,'type,'label)))
+                 attributes  = parseAttributes(academicPosition, List('relationship,'type,'label)))
   }
 
 }
