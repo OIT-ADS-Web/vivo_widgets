@@ -1,0 +1,17 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT
+  ?license
+  ?type
+  ?label
+  ?number
+  ?state
+
+WHERE {
+  <${uri}> core:relatedBy ?licence.
+  ?license a dukecv:MedicalLicensure ;
+    rdfs:label ?label ;
+    dukecv:licenseState ?state ;
+    core:licenseNumber ?number
+    }

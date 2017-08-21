@@ -129,6 +129,8 @@ object PersonIndexer extends SimpleConversion
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
 
+      val licenses     = License.fromUri(vivo, uriContext)
+
       var now = new Date
       
       var p = Person.build(uri, Option.apply(now), personData.head, 
@@ -136,7 +138,7 @@ object PersonIndexer extends SimpleConversion
                            artisticWorks, grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus, newsfeeds)
+                           geoFocus, newsfeeds, licenses)
       
       log.info("buildPerson uri: " + uri)
       return Option(p)
