@@ -11,6 +11,7 @@ SELECT
 WHERE {
   <${uri}> core:relatedBy ?licence.
   ?license a dukecv:MedicalLicensure ;
+    vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
     dukecv:licenseState ?state ;
     core:licenseNumber ?number
