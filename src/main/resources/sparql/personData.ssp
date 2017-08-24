@@ -7,7 +7,7 @@ SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
        ?imageThumbnailDownload ?netid ?officehours ?profileURL ?imageModTime ?imageFileName 
-       ?interestsOverview ?teachingActivities
+       ?interestsOverview ?teachingActivities ?academicActivities
 WHERE {
   <${ uri }> obo:ARG_2000028 ?individualVcard ;
     vitro:mostSpecificType ?type ;
@@ -52,5 +52,6 @@ WHERE {
   OPTIONAL { <${ uri }> duke:officehours ?officehours }
   OPTIONAL { <${ uri }> dukecv:interestsOverview ?interestsOverview }
   OPTIONAL { <${ uri }> dukecv:teachingOverview ?teachingActivities }
+  OPTIONAL { <${ uri }> dukecv:academicAdministrativeOverview ?academicActivities }
   OPTIONAL { <${ uri }> duke:profileURL ?profileURL }
 }
