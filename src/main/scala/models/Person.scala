@@ -34,7 +34,7 @@ object Person extends SolrModel
             webpages:List[Webpage],
             geographicalFocus:List[GeographicFocus],
             newsfeeds:List[Newsfeed],
-            cvInfo:PersonCVInfo): Person = {
+            cvInfo:Option[PersonCVInfo]): Person = {
     new Person(uri,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
@@ -86,7 +86,7 @@ case class Person(uri:String,
                   webpages:List[Webpage],
                   geographicalFocus:List[GeographicFocus],
                   newsfeeds:List[Newsfeed],
-                  cvInfo: PersonCVInfo,
+                  cvInfo: Option[PersonCVInfo],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) 
      with AddToJson
@@ -108,10 +108,10 @@ case class Person(uri:String,
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
-    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} ++
-    cvInfo.gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
-    cvInfo.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
-    cvInfo.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} /*++*/
+    //cvInfo.gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
+    //cvInfo.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
+    //cvInfo.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
   }
 
   def personAttributes() = {

@@ -61,6 +61,10 @@ object PersonIndexer extends SimpleConversion
   }
 
 
+  
+ 
+
+
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildPerson(uri,vivo).foreach{ p =>
 
@@ -84,8 +88,10 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("id",person.uri)
       solrDoc.addField("group","people")
-      solrDoc.addField("json",person.toJson)
-      
+
+      val personJson = person.toJson
+
+      solrDoc.addField("json",personJson)
       solrDoc.addField("updatedAt", person.updatedAt.get)
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
@@ -150,7 +156,7 @@ object PersonIndexer extends SimpleConversion
                            grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus, newsfeeds, cvInfo)
+                           geoFocus, newsfeeds, Option.apply(cvInfo))
       log.info("buildPerson uri: " + uri)
       return Option(p)
     }
