@@ -32,7 +32,8 @@ object Person extends SolrModel
             researchAreas:List[ResearchArea],
             webpages:List[Webpage],
             geographicalFocus:List[GeographicFocus],
-            newsfeeds:List[Newsfeed]): Person = {
+            newsfeeds:List[Newsfeed],
+            academicPositions:List[AcademicPosition]): Person = {
     new Person(uri,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
@@ -51,6 +52,7 @@ object Person extends SolrModel
                webpages               = webpages,
                geographicalFocus      = geographicalFocus,
                newsfeeds              = newsfeeds,
+               academicPositions      = academicPositions,
                attributes             = parseAttributes(personData, List('type,'label,'title)))
   }
 }
@@ -73,6 +75,7 @@ case class Person(uri:String,
                   webpages:List[Webpage],
                   geographicalFocus:List[GeographicFocus],
                   newsfeeds:List[Newsfeed],
+                  academicPositions:List[AcademicPosition],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) 
      with AddToJson
@@ -93,7 +96,8 @@ case class Person(uri:String,
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
-    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} 
+    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} ++
+    academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} 
   }
 
   def personAttributes() = {
