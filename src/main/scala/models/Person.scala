@@ -23,6 +23,7 @@ object Person extends SolrModel
             pubs:List[Publication],
             awards:List[Award],
             artisticWorks:List[ArtisticWork],
+            artisticEvents:List[ArtisticEvent],
             grants:List[Grant],
             courses:List[Course],
             professionalActivities:List[ProfessionalActivity],
@@ -42,6 +43,7 @@ object Person extends SolrModel
                publications       = pubs,
                awards             = awards,
                artisticWorks      = artisticWorks,
+               artisticEvents     = artisticEvents,
                grants             = grants,
                courses            = courses,
                professionalActivities = professionalActivities,
@@ -65,6 +67,7 @@ case class Person(uri:String,
                   publications:List[Publication],
                   awards:List[Award],
                   artisticWorks:List[ArtisticWork],
+                  artisticEvents:List[ArtisticEvent],
                   grants:List[Grant],
                   courses:List[Course],
                   professionalActivities:List[ProfessionalActivity],
@@ -87,6 +90,7 @@ case class Person(uri:String,
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
     awards.foldLeft(List[String]()) {(u,award) => u ++ award.uris} ++
     artisticWorks.foldLeft(List[String]()) {(u,artisticWork) => u ++ artisticWork.uris} ++
+    artisticEvents.foldLeft(List[String]()) {(u,artisticEvent) => u ++ artisticEvent.uris} ++
     grants.foldLeft(List[String]()) {(u,grant) => u ++ grant.uris} ++
     courses.foldLeft(List[String]()) {(u,course) => u ++ course.uris} ++
     professionalActivities.foldLeft(List[String]()) {(u,professionalActivity) => u ++ professionalActivity.uris} ++
