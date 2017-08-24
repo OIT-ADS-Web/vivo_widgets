@@ -136,6 +136,9 @@ object PersonIndexer extends SimpleConversion
       
       log.debug("pull gifts")
       val gifts     = Gift.fromUri(vivo, uriContext)
+      
+      log.debug("pull licenses")
+      val licenses     = License.fromUri(vivo, uriContext)
 
       var now = new Date
       
@@ -145,7 +148,7 @@ object PersonIndexer extends SimpleConversion
                            grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus, newsfeeds, academicPositions, gifts)
+                           geoFocus, newsfeeds, academicPositions, gifts, licenses)
       
       log.info("buildPerson uri: " + uri)
       return Option(p)

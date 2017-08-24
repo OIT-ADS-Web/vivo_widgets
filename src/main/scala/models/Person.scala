@@ -35,7 +35,8 @@ object Person extends SolrModel
             geographicalFocus:List[GeographicFocus],
             newsfeeds:List[Newsfeed],
             academicPositions:List[AcademicPosition],
-            gifts:List[Gift]): Person = {
+            gifts:List[Gift],
+            licenses:List[License]): Person = {
     new Person(uri,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
@@ -57,6 +58,7 @@ object Person extends SolrModel
                newsfeeds              = newsfeeds,
                academicPositions      = academicPositions,
                gifts                  = gifts,
+               licenses               = licenses,
                attributes             = parseAttributes(personData, List('type,'label,'title)))
   }
 }
@@ -82,6 +84,7 @@ case class Person(uri:String,
                   newsfeeds:List[Newsfeed],
                   academicPositions:List[AcademicPosition],
                   gifts:List[Gift],
+                  licenses:List[License],
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) 
      with AddToJson
@@ -105,7 +108,8 @@ case class Person(uri:String,
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
     newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} ++
     academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
-    gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris}
+    gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
+    licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
   }
 
   def personAttributes() = {
