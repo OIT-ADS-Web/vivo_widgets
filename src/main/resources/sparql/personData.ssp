@@ -7,6 +7,7 @@ SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
        ?imageThumbnailDownload ?netid ?officehours ?profileURL ?imageModTime ?imageFileName 
+       ?leadershipPositions
        ?interestsOverview ?teachingActivities ?academicActivities
 WHERE {
   <${ uri }> obo:ARG_2000028 ?individualVcard ;
@@ -54,4 +55,5 @@ WHERE {
   OPTIONAL { <${ uri }> dukecv:teachingOverview ?teachingActivities }
   OPTIONAL { <${ uri }> dukecv:academicAdministrativeOverview ?academicActivities }
   OPTIONAL { <${ uri }> duke:profileURL ?profileURL }
+  OPTIONAL { <${ uri }> dukecv:NonAppointmentsOverview ?leadershipPositions }
 }
