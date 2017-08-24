@@ -34,9 +34,7 @@ object Person extends SolrModel
             webpages:List[Webpage],
             geographicalFocus:List[GeographicFocus],
             newsfeeds:List[Newsfeed],
-            academicPositions:List[AcademicPosition],
-            gifts:List[Gift],
-            licenses:List[License]): Person = {
+            cvInfo:PersonCVInfo): Person = {
     new Person(uri,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
@@ -56,12 +54,18 @@ object Person extends SolrModel
                webpages               = webpages,
                geographicalFocus      = geographicalFocus,
                newsfeeds              = newsfeeds,
-               academicPositions      = academicPositions,
-               gifts                  = gifts,
-               licenses               = licenses,
+               cvInfo                 = cvInfo,
                attributes             = parseAttributes(personData, List('type,'label,'title)))
   }
 }
+
+
+case class PersonCVInfo(gifts:List[Gift],
+                        academicPositions:List[AcademicPosition],
+                        licenses:List[License]) {
+
+}
+
 
 case class Person(uri:String,
                   updatedAt:Option[Date],
@@ -82,9 +86,7 @@ case class Person(uri:String,
                   webpages:List[Webpage],
                   geographicalFocus:List[GeographicFocus],
                   newsfeeds:List[Newsfeed],
-                  academicPositions:List[AcademicPosition],
-                  gifts:List[Gift],
-                  licenses:List[License],
+                  cvInfo: PersonCVInfo,
                   attributes:Option[Map[String, String]])
      extends VivoAttributes(uri, vivoType, label, attributes) 
      with AddToJson
@@ -107,9 +109,9 @@ case class Person(uri:String,
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
     newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} ++
-    academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
-    gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
-    licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+    cvInfo.gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
+    cvInfo.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
+    cvInfo.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
   }
 
   def personAttributes() = {

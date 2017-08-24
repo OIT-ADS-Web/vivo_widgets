@@ -141,15 +141,16 @@ object PersonIndexer extends SimpleConversion
       val licenses     = License.fromUri(vivo, uriContext)
 
       var now = new Date
-      
+ 
+      var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses)
+
       var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
                            artisticWorks, artisticEvents, 
                            grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus, newsfeeds, academicPositions, gifts, licenses)
-      
+                           geoFocus, newsfeeds, cvInfo)
       log.info("buildPerson uri: " + uri)
       return Option(p)
     }
