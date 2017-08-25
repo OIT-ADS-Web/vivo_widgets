@@ -117,11 +117,11 @@ case class Person(uri:String,
     if (cvInfo.isDefined) {
       log.debug("cvInfo.isDefined")
 
-      results ++ cvInfo.get.gifts.foldLeft(List[String]()) { (u, gift) => u ++ gift.uris }
-      results ++ cvInfo.get.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris}
-      results ++ cvInfo.get.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+      results = results ++ cvInfo.get.gifts.foldLeft(List[String]()) { (u, gift) => u ++ gift.uris }
+      results = results ++ cvInfo.get.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris}
+      results = results ++ cvInfo.get.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
     }  
-    
+  
     results
   }
 
