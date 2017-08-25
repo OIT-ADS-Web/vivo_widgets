@@ -5,6 +5,8 @@ import edu.duke.oit.vw.utils._
 
 import java.util.Date
 
+import org.slf4j.{Logger, LoggerFactory}
+
 object Person extends SolrModel 
   with AttributeParams {
 
@@ -93,8 +95,10 @@ case class Person(uri:String,
      with Timestamped
 {
 
+  val log =  LoggerFactory.getLogger(getClass)
+
   override def uris() = {
-    (uri :: super.uris) ++
+    var results = (uri :: super.uris) ++
     publications.foldLeft(List[String]()) {(u,publication) => u ++ publication.uris} ++
     awards.foldLeft(List[String]()) {(u,award) => u ++ award.uris} ++
     artisticWorks.foldLeft(List[String]()) {(u,artisticWork) => u ++ artisticWork.uris} ++
@@ -108,10 +112,17 @@ case class Person(uri:String,
     researchAreas.foldLeft(List[String]()) {(u,area) => u ++ area.uris} ++
     webpages.foldLeft(List[String]()) {(u,page) => u ++ page.uris} ++
     geographicalFocus.foldLeft(List[String]()) {(u,focus) => u ++ focus.uris} ++
-    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris} /*++*/
-    //cvInfo.gifts.foldLeft(List[String]()) {(u,gift) => u ++ gift.uris} ++
-    //cvInfo.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris} ++
-    //cvInfo.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+    newsfeeds.foldLeft(List[String]()) {(u,newsfeed) => u ++ newsfeed.uris }
+    
+    if (cvInfo.isDefined) {
+      log.debug("cvInfo.isDefined")
+
+      results ++ cvInfo.get.gifts.foldLeft(List[String]()) { (u, gift) => u ++ gift.uris }
+      results ++ cvInfo.get.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris}
+      results ++ cvInfo.get.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+    }  
+    
+    results
   }
 
   def personAttributes() = {
