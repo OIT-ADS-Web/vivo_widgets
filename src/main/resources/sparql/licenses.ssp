@@ -9,7 +9,7 @@ SELECT
   ?state
 
 WHERE {
-  <${uri}> core:relatedBy ?licence.
+  <${uri}> core:relatedBy ?license.
   ?license a dukecv:MedicalLicensure ;
     vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
