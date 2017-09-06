@@ -64,7 +64,8 @@ object Person extends SolrModel
 
 case class PersonCVInfo(gifts:List[Gift],
                         academicPositions:List[AcademicPosition],
-                        licenses:List[License]) {
+                        licenses:List[License],
+                        pastAppointments:List[PastAppointment]) {
 
 }
 
@@ -120,6 +121,7 @@ case class Person(uri:String,
       results = results ++ cvInfo.get.gifts.foldLeft(List[String]()) { (u, gift) => u ++ gift.uris }
       results = results ++ cvInfo.get.academicPositions.foldLeft(List[String]()) {(u,academicPosition) => u ++ academicPosition.uris}
       results = results ++ cvInfo.get.licenses.foldLeft(List[String]()) {(u,license) => u ++ license.uris}
+      results = results ++ cvInfo.get.pastAppointments.foldLeft(List[String]()) {(u,PastAppointment) => u ++ PastAppointment.uris}
     }  
   
     results

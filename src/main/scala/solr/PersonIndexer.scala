@@ -146,9 +146,12 @@ object PersonIndexer extends SimpleConversion
       log.debug("pull licenses")
       val licenses     = License.fromUri(vivo, uriContext)
 
+      log.debug("pull past appointments")
+      var pastAppointments = PastAppointment.fromUri(vivo, uriContext)
+
       var now = new Date
  
-      var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses)
+      var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses, pastAppointments)
 
       var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
