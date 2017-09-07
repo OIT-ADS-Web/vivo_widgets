@@ -21,5 +21,4 @@ OPTIONAL {
   ?dateUri core:end ?endDatetimeUri . 
   ?endDatetimeUri core:dateTime ?endYear .
 }
-  BIND(<${uri}> AS ?personUri)
 }
