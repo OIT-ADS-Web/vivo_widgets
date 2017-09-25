@@ -18,8 +18,9 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX core: <http://vivoweb.org/ontology/core#>
     PREFIX vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#>
+    PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
     PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
     PREFIX duke-geo: <http://vivo.duke.edu/vivo/ontology/duke-geo-extension#>
     PREFIX dukeart: <http://vivo.duke.edu/vivo/ontology/duke-art-extension#>
     PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
-    PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+    PREFIX dukecv: <http://vivo.duke.edu/vivo/ontology/duke-cv-extension#>

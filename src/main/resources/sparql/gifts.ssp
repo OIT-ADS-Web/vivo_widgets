@@ -1,0 +1,50 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT
+	?gift 
+  ?type
+  ?label
+  ?donor
+  ?role
+  ?giftAmount
+  ?description
+  ?dateTimeInterval
+  ?dateTimeStartValue
+  ?dateTimeStart
+  ?dateTimeEndValue
+  ?dateTimeEnd
+  (MONTH(?dateTimeStart) AS ?dateTimeStartMonth)
+  (YEAR(?dateTimeStart) AS ?dateTimeStartYear)
+  (DAY(?dateTimeStart) AS ?dateTimeStartDay)
+  (MONTH(?dateTimeEnd) AS ?dateTimeEndMonth)
+  (YEAR(?dateTimeEnd) AS ?dateTimeEndYear)
+  (DAY(?dateTimeEnd) AS ?dateTimeEndDay)
+
+WHERE {
+  <${uri}> core:relatedBy ?gift .
+  ?gift a dukecv:Gift ;
+    vitro:mostSpecificType ?type ;
+    rdfs:label ?label ;
+    dukecv:donor ?donor .
+  OPTIONAL { 
+    ?gift dukecv:role ?role .
+  }
+  OPTIONAL { 
+    ?gift dukecv:giftAmount ?giftAmount .
+  } 
+  OPTIONAL { 
+    ?gift dukecv:description ?description .
+  }
+	OPTIONAL { 
+    ?gift core:dateTimeInterval ?dateTimeInterval .
+    ?dateTimeInterval core:start ?dateTimeStartValue .                     
+    ?dateTimeStartValue core:dateTime ?dateTimeStart .
+  }
+  OPTIONAL { 
+    ?gift core:dateTimeInterval ?dateTimeInterval .
+    ?dateTimeInterval core:end ?dateTimeEndValue .   
+    ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+  }
+}
+ORDER BY DESC(?dateTimeStart)

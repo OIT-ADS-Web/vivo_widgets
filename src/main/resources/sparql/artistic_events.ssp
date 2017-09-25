@@ -1,0 +1,15 @@
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?event ?label ?type ?venue ?description
+WHERE {
+  ?personUri a foaf:Person. 
+  ?personUri event:isAgentIn ?event .
+  ?event a event:Event. 
+  ?event rdfs:label ?label .
+  ?event vitro:mostSpecificType ?type.
+  OPTIONAL {  ?event dukeart:venue ?venue }
+  OPTIONAL {  ?event core:description ?description }   
+  FILTER(?personUri =  <${uri}>)
+} 
+

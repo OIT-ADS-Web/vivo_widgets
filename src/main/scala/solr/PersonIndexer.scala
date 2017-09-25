@@ -61,6 +61,10 @@ object PersonIndexer extends SimpleConversion
   }
 
 
+  
+ 
+
+
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildPerson(uri,vivo).foreach{ p =>
 
@@ -84,8 +88,10 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("id",person.uri)
       solrDoc.addField("group","people")
-      solrDoc.addField("json",person.toJson)
-      
+
+      val personJson = person.toJson
+
+      solrDoc.addField("json",personJson)
       solrDoc.addField("updatedAt", person.updatedAt.get)
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
@@ -108,6 +114,8 @@ object PersonIndexer extends SimpleConversion
       val awards        = Award.fromUri(vivo, uriContext)
       log.debug("pull artisticWorks")
       val artisticWorks = ArtisticWork.fromUri(vivo, uriContext)
+      log.debug("pull artisticEvents")
+      val artisticEvents = ArtisticEvent.fromUri(vivo, uriContext)
       log.debug("pull grants")
       val grants        = Grant.fromUri(vivo, uriContext)
       log.debug("pull courses")
@@ -128,16 +136,30 @@ object PersonIndexer extends SimpleConversion
       val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
+      
+      log.debug("pull academic positions")
+      val academicPositions     = AcademicPosition.fromUri(vivo, uriContext)
+      
+      log.debug("pull gifts")
+      val gifts     = Gift.fromUri(vivo, uriContext)
+      
+      log.debug("pull licenses")
+      val licenses     = License.fromUri(vivo, uriContext)
+
+      log.debug("pull past appointments")
+      var pastAppointments = PastAppointment.fromUri(vivo, uriContext)
 
       var now = new Date
-      
+ 
+      var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses, pastAppointments)
+
       var p = Person.build(uri, Option.apply(now), personData.head, 
                            pubs, awards,
-                           artisticWorks, grants, courses,
+                           artisticWorks, artisticEvents, 
+                           grants, courses,
                            professionalActivities, positions,
                            addresses, educations, rAreas, webpages,
-                           geoFocus, newsfeeds)
-      
+                           geoFocus, newsfeeds, Option.apply(cvInfo))
       log.info("buildPerson uri: " + uri)
       return Option(p)
     }

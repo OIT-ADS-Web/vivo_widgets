@@ -1,0 +1,24 @@
+<%--  -*- sparql -*- --%>
+<%@ val uri: String = "http://nothing.com" %>
+${include("sparql/prefixes.ssp")}
+
+SELECT ?uri ?label ?type ?organizationLabel ?dateUri ?startDatetimeUri ?startYear ?endDatetimeUri ?endYear  ?schoolUri ?schoolLabel
+
+WHERE
+{
+  <${uri}> core:relatedBy ?uri .
+  ?uri a dukecv:DukePastPosition ;
+   vitro:mostSpecificType ?type ;
+    rdfs:label ?label ;
+    core:relates ?organizationUri .
+  ?organizationUri a foaf:Organization.
+ ?organizationUri rdfs:label ?organizationLabel .
+ 
+OPTIONAL {
+  ?uri core:dateTimeInterval ?dateUri .
+  ?dateUri core:start ?startDatetimeUri . 
+  ?startDatetimeUri core:dateTime ?startYear .
+  ?dateUri core:end ?endDatetimeUri . 
+  ?endDatetimeUri core:dateTime ?endYear .
+}
+}

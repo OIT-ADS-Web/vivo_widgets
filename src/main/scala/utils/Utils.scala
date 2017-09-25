@@ -68,11 +68,22 @@ object Int {
   }
 }
 
+
+import net.liftweb.json._
+import edu.duke.oit.vw.models.Person
+
+/*
+ * // FIXME: other ways to do remove something from Json
+ * //https://stackoverflow.com/questions/6822406/how-to-flatten-the-json-representation-of-a-composite-object
+ * //https://stackoverflow.com/questions/14216069/scala-remove-field-from-json-files-in-the-nested-object-with-defined-name
+ *
+ */
+
 /**
  * Json helper methods
  */
 object Json {
-  
+
   /**
    * Covert <code>item</item> to a json string representation format.
    *
@@ -81,8 +92,21 @@ object Json {
   def toJson[T](item:T) = {
     import net.liftweb.json.{JsonAST,Printer,Extraction,Merge}
     implicit val formats = net.liftweb.json.DefaultFormats
+    
     Printer.compact(JsonAST.render(Extraction.decompose(item)))
   }
+
+  
+  def toJson[T](person:Person) = {
+    implicit val formats = net.liftweb.json.DefaultFormats
+
+    var cvInfoJson = Extraction decompose person.cvInfo 
+    var personCopy = person.copy(cvInfo=Option(null))
+    val composite = (Extraction decompose personCopy) merge cvInfoJson
+ 
+    Printer.compact(JsonAST.render(Extraction.decompose(composite)))
+  }
+  
 
   def toJson[T](collectionName:String, item:T) = {
     val wrappedItem = Map(collectionName -> item)
