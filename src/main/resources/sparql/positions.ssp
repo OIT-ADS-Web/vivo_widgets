@@ -28,6 +28,8 @@ WHERE
   ?uri core:dateTimeInterval ?dateUri .
   ?dateUri core:start ?startDatetimeUri . 
   ?startDatetimeUri core:dateTime ?startYear .
+  }
+  OPTIONAL {
     ?dateUri core:end ?endDatetimeUri . 
     ?endDatetimeUri core:dateTime ?endYear .
   }
