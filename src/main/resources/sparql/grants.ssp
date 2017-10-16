@@ -2,7 +2,9 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT ?agreement ?type ?label 
-  ?roleName ?startDate ?endDate ?awardedBy ?awardedByUri 
+  ?roleName ?startDate ?endDate 
+  MAX(?awardedBy)
+  MAX(?awardedByUri) 
   ?administeredBy ?administeredByUri
   ?piUri ?piName
 WHERE {
@@ -38,4 +40,11 @@ WHERE {
    ?piRole obo:RO_0000052 ?piUri .
    ?piUri rdfs:label ?piName .
   }
-} ORDER BY desc(?endDate) desc(?startDate)
+} 
+GROUP BY 
+ ?agreement ?type ?label 
+ ?roleName ?startDate ?endDate 
+ ?awardedBy ?awardedByUri 
+ ?administeredBy ?administeredByUri
+ ?piUri ?piName
+ORDER BY desc(?endDate) desc(?startDate)
