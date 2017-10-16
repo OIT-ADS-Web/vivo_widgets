@@ -1,10 +1,15 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?agreement ?type ?label 
-  ?roleName ?startDate ?endDate ?awardedBy ?awardedByUri 
-  ?administeredBy ?administeredByUri
-  ?piUri ?piName
+SELECT ?agreement ?type ?label ?roleName 
+  (MIN(?startDateVal) as ?startDate)
+  (MIN(?endDateVal) as ?endDate) 
+  (MIN(?awardedByVal) as ?awardedBy)
+  (MIN(?awardedByUriVal) as ?awardedByUri) 
+  (MIN(?administeredByVal) as ?administeredBy)
+  (MIN(?administeredByUriVal) as ?administeredByUri)
+  (MIN(?piUriVal) as ?piUri)
+  (MIN(?piNameVal) as ?piName)
 WHERE {
   <${uri}> obo:RO_0000053 ?role .
   ?role a core:ResearcherRole .
@@ -15,27 +20,29 @@ WHERE {
   ?agreement core:dateTimeInterval ?dateUri .
   OPTIONAL {
     ?dateUri core:start ?startDateUri.
-    ?startDateUri core:dateTime ?startDate.
+    ?startDateUri core:dateTime ?startDateVal .
   }
   OPTIONAL {
     ?dateUri core:end ?endDateUri.
-    ?endDateUri core:dateTime ?endDate.
+    ?endDateUri core:dateTime ?endDateVal .
   }
   OPTIONAL {
-    ?agreement core:assignedBy ?awardedByUri.
-    ?awardedByUri rdfs:label ?awardedBy .
+    ?agreement core:assignedBy ?awardedByUriVal .
+    ?awardedByUriVal rdfs:label ?awardedByVal .
   }
   OPTIONAL {
     ?agreement core:relates ?administratorRole .
     ?administratorRole a core:AdministratorRole .
-    ?administratorRole obo:RO_0000052 ?administeredByUri.
-    ?administeredByUri rdfs:label ?administeredBy .
+    ?administratorRole obo:RO_0000052 ?administeredByUriVal .
+    ?administeredByUriVal rdfs:label ?administeredByVal .
   }
-
   OPTIONAL {
    ?agreement core:relates ?piRole .
    ?piRole a core:PrincipalInvestigatorRole .
-   ?piRole obo:RO_0000052 ?piUri .
-   ?piUri rdfs:label ?piName .
+   ?piRole obo:RO_0000052 ?piUriVal .
+   ?piUriVal rdfs:label ?piNameVal .
   }
-} ORDER BY desc(?endDate) desc(?startDate)
+} 
+GROUP BY 
+ ?agreement ?type ?label ?roleName 
+ORDER BY desc(?endDate) desc(?startDate)
