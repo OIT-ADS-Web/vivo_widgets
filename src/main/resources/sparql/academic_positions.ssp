@@ -2,12 +2,24 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-select ?relationship ?type ?label ?institute ?role {
+select ?relationship ?type ?label ?institute ?role ?startDate ?endDate
+WHERE{
     ?personUri core:relatedBy ?relationship .
     ?relationship a dukecv:NonDukePosition .
     ?relationship vitro:mostSpecificType ?type .
     ?relationship rdfs:label ?label .
     ?relationship dukecv:nonDukeAcademicInstitution ?institute .
     ?relationship dukecv:nonDukeAcademicRole ?role .
+    ?relationship  core:dateTimeInterval ?dateUri .
     FILTER(?personUri=<${uri}>)
+OPTIONAL {
+  ?uri core:dateTimeInterval ?dateUri .
+  ?dateUri core:start ?startDatetimeUri .
+  ?startDatetimeUri core:dateTime ?startDate .
+}
+OPTIONAL {
+    ?dateUri core:end ?endDatetimeUri . 
+    ?endDatetimeUri core:dateTime ?endDate .
+  }
+
 }
