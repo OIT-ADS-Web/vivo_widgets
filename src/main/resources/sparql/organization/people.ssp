@@ -23,6 +23,15 @@ WHERE {{
         ?imageUri  vitro-public:filename  ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
       }
+      OPTIONAL {
+        ?person vitro-public:mainImage ?imageUri .
+        ?imageUri duke:thumbnailImage500 ?imageThumbnail500Uri .
+        ?imageThumbnail500Uri vitro-public:downloadLocation ?imageThumbnail500Download .
+        ?imageUri duke:crop_x ?crop_x .
+        ?imageUri duke:crop_y ?crop_y .
+        ?imageUri duke:crop_w ?crop_w .
+        ?imageUri duke:crop_h ?crop_h .      
+      }
       OPTIONAL { ?person core:overview ?overview . }
       BIND(<${uri}> AS ?organization)
       }
@@ -47,6 +56,15 @@ WHERE {{
         ?imageUri  vitro:modTime ?imageModTime .
         ?imageUri  vitro-public:filename  ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+      }
+      OPTIONAL {
+        ?person vitro-public:mainImage ?imageUri .
+        ?imageUri duke:thumbnailImage500 ?imageThumbnail500Uri .
+        ?imageThumbnail500Uri vitro-public:downloadLocation ?imageThumbnail500Download .
+        ?imageUri duke:crop_x ?crop_x .
+        ?imageUri duke:crop_y ?crop_y .
+        ?imageUri duke:crop_w ?crop_w .
+        ?imageUri duke:crop_h ?crop_h .      
       }
       OPTIONAL { ?person core:overview ?overview . }
       }} ORDER BY ?label ?displayOrder
