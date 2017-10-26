@@ -19,9 +19,9 @@ WHERE {{
         ?person vitro-public:mainImage ?imageUri .
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
-        ?imageUri  vitro:modTime ?imageModTime .
         ?imageUri  vitro-public:filename  ?imageFileName .
-        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload .
+        ?imageThumbnailUri vitro:modTime ?imageModTime
       }
       OPTIONAL { ?person core:overview ?overview . }
       BIND(<${uri}> AS ?organization)
