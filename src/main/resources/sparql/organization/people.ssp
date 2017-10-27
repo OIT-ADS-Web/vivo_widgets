@@ -21,13 +21,7 @@ WHERE {{
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageUri  vitro-public:filename  ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
-        {
-          SELECT (MAX(?modTime) as ?imageModTime) 
-          WHERE {             
-             ?imageThumbnailDownload vitro:modTime ?modTime .
-         }
-         GROUP BY ?imageThumnailDowload
-       }      
+        ?imageThumbnailDownload  vitro:modTime ?imageModTime . 
       }
       OPTIONAL {
         ?person vitro-public:mainImage ?imageUri .
@@ -61,13 +55,7 @@ WHERE {{
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageUri  vitro-public:filename  ?imageFileName .
         ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
-        {
-          SELECT (MAX(?modTime) as ?imageModTime) 
-          WHERE {             
-             ?imageThumbnailDownload vitro:modTime ?modTime .
-         }
-         GROUP BY ?imageThumnailDowload
-       }      
+        ?imageThumbnailDownload  vitro:modTime ?imageModTime .
       }
       OPTIONAL {
         ?person vitro-public:mainImage ?imageUri .
