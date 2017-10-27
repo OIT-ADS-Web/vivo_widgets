@@ -20,7 +20,7 @@ WHERE {{
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageUri  vitro-public:filename  ?imageFileName .
-        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload .
         ?imageThumbnailDownload  vitro:modTime ?imageModTime . 
       }
       OPTIONAL {
@@ -54,7 +54,7 @@ WHERE {{
         ?imageUri  vitro-public:downloadLocation ?imageDownload .
         ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
         ?imageUri  vitro-public:filename  ?imageFileName .
-        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+        ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload .
         ?imageThumbnailDownload  vitro:modTime ?imageModTime .
       }
       OPTIONAL {
