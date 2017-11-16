@@ -7,7 +7,6 @@ SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
        ?preferredCitationFormat ?imageUri ?imageDownload ?imageModTime ?imageFileName 
        ?imageThumbnailUri ?imageThumbnailDownload ?imageThumbnail500Uri ?imageThumbnail500Download  
-       ?crop_x ?crop_y ?crop_w ?crop_h
        ?netid ?officehours ?profileURL 
        ?leadershipPositions ?clinicalOverview
        ?interestsOverview ?teachingActivities ?academicActivities
@@ -55,10 +54,6 @@ WHERE {
     <${ uri }> vitro-public:mainImage ?imageUri .
     ?imageUri  duke:thumbnailImage500 ?imageThumbnail500Uri .
     ?imageThumbnail500Uri vitro-public:downloadLocation ?imageThumbnail500Download .  
-    ?imageUri duke:crop_x ?crop_x .
-    ?imageUri duke:crop_y ?crop_y .
-    ?imageUri duke:crop_w ?crop_w .
-    ?imageUri duke:crop_h ?crop_h .
   }
   OPTIONAL { <${ uri }> duke:scopedNetid ?netid }
   OPTIONAL { <${ uri }> duke:officehours ?officehours }
