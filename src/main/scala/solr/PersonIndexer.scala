@@ -93,7 +93,6 @@ object PersonIndexer extends SimpleConversion
 
       solrDoc.addField("json",personJson)
       solrDoc.addField("updatedAt", person.updatedAt.get)
-      solrDoc.addField("active", "true")
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
       return Option(solrDoc)
