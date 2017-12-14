@@ -154,7 +154,7 @@ object PersonIndexer extends SimpleConversion
  
       var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses, pastAppointments)
 
-      var p = Person.build(uri, Boolean(true), Option.apply(now), personData.head, 
+      var p = Person.build(uri, Option.apply(true), Option.apply(now), personData.head, 
                            pubs, awards,
                            artisticWorks, artisticEvents, 
                            grants, courses,
