@@ -20,7 +20,7 @@ object Person extends SolrModel
   // NOTE: person and organization have Option[Date] instead of Date for updatedAt because some people exist
   // in the index preceding the existence of that field.  If it is not Option[], it returns an error
   def build(uri:String,
-            active:Boolean,
+            active:Option[Boolean],
             updatedAt:Option[Date],
             personData:Map[Symbol,String],
             pubs:List[Publication],
@@ -39,7 +39,7 @@ object Person extends SolrModel
             newsfeeds:List[Newsfeed],
             cvInfo:Option[PersonCVInfo]): Person = {
     new Person(uri,
-               active,
+               active_b,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
                label              = personData('label),
@@ -74,7 +74,7 @@ case class PersonCVInfo(gifts:List[Gift],
 
 
 case class Person(uri:String,
-                  active:Boolean,
+                  active_b:Option[Boolean],
                   updatedAt:Option[Date],
                   vivoType:String,
                   label:String,
