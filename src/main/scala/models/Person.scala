@@ -39,7 +39,7 @@ object Person extends SolrModel
             newsfeeds:List[Newsfeed],
             cvInfo:Option[PersonCVInfo]): Person = {
     new Person(uri,
-               active_b,
+               active,
                updatedAt,
                vivoType           = personData('type).stripBrackets(),
                label              = personData('label),
