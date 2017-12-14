@@ -74,7 +74,7 @@ case class PersonCVInfo(gifts:List[Gift],
 
 
 case class Person(uri:String,
-                  active_b:Option[Boolean],
+                  active:Option[Boolean],
                   updatedAt:Option[Date],
                   vivoType:String,
                   label:String,
