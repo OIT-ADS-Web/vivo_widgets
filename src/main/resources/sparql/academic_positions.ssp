@@ -13,7 +13,6 @@ WHERE{
     ?relationship  core:dateTimeInterval ?dateUri .
     FILTER(?personUri=<${uri}>)
 OPTIONAL {
-  ?uri core:dateTimeInterval ?dateUri .
   ?dateUri core:start ?startDatetimeUri .
   ?startDatetimeUri core:dateTime ?startDate .
 }
