@@ -120,16 +120,18 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("id",person.uri)
 
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-      solrDoc.set("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
-      solrDoc.addField("active_b",false)
+      //solrDoc.set("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
+      //solrDoc.addField("active_b",false)
 
-      HashMap<String, Object> date_value = new HashMap<String, Object>(); 
-      date_value.put("set",dateFormatter.format(Calendar.getInstance().getTime())); 
-      solrDoc.addField("updatedAt",date_value);
+      /*HashMap<String, Object> date_value = new HashMap<String, Object>(); 
+      date_value.put("set",dateFormatter.format(Calendar.getInstance().getTime()));
+      solrDoc.addField("updatedAt",date_value)
 
-      HashMap<String, Object> bool_value = new HashMap<Boolean, Object>(); 
+      HashMap<String, Object> bool_value = new HashMap<String, Object>(); 
       bool_value.put("set",false); 
-      solrDoc.addField("active_b",bool_value);
+      solrDoc.set("active_b",bool_value)*/
+      solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
+      solrDoc.setField("active_b",false)
 
       return Option(solrDoc)
       
