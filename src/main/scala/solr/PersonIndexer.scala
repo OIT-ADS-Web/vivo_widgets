@@ -116,34 +116,21 @@ object PersonIndexer extends SimpleConversion
     buildPerson(uri,vivo).foreach{ p =>
 
       var person:Person = p.copy()
-      val existing = checkExisting(p.uri)
-      
-      if (existing.isDefined && existing.get.updatedAt.isDefined) {
-        // NOTE: need to compare with a person with the same updatedAt value so 
-        // it doesn't diff merely on that field alone
-        val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))
-
-        if (!changes) {
-          // if we are skipping (no changes) reset updated at
-          person = p.copy(updatedAt = existing.get.updatedAt)
-          log.info(String.format("Skipping index for %s. No changes detected", uri))
-       } 
-      }
-     
       val solrDoc = new SolrInputDocument()
-      
-      solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("id",person.uri)
-      solrDoc.addField("group","people")
 
-      val personJson = person.toJson
-
-      solrDoc.addField("json",personJson)
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-      solrDoc.addField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
+      solrDoc.set("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       solrDoc.addField("active_b",false)
-      person.uris.map {uri => solrDoc.addField("uris",uri)}
-     
+
+      HashMap<String, Object> date_value = new HashMap<String, Object>(); 
+      date_value.put("set",dateFormatter.format(Calendar.getInstance().getTime())); 
+      solrDoc.addField("updatedAt",date_value);
+
+      HashMap<String, Object> bool_value = new HashMap<Boolean, Object>(); 
+      bool_value.put("set",false); 
+      solrDoc.addField("active_b",bool_value);
+
       return Option(solrDoc)
       
     }
