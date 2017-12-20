@@ -27,10 +27,19 @@ object PersonIndexer extends SimpleConversion
   }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
-    log.info("Buidling URIS:" + uris)
+    log.info("Building PersonIndexer.indexAll URIS:" + uris)
     uris.grouped(100).foreach{ groupedUris =>
-      log.info("Grouped URIS:" + uris)
+      log.info("_Grouped URIS:" + uris)
       val docs = groupedUris.map( uri => buildDoc(uri,vivo)).flatten
+      solr.add(docs.toIterable)
+    }
+  }
+
+  def updateAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
+    log.info("Building PersonIndexer.updateAll URIS:" + uris)
+    uris.grouped(100).foreach{ groupedUris =>
+      log.info("_Grouped URIS:" + uris)
+      val docs = groupedUris.map( uri => updateDoc(uri,vivo)).flatten
       solr.add(docs.toIterable)
     }
   }
@@ -60,9 +69,9 @@ object PersonIndexer extends SimpleConversion
 
   }
 
-
-  
- 
+  def update(uri: String,vivo: Vivo, solr: SolrServer) = {
+    updateAll(List(uri),vivo,solr)
+  }
 
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
@@ -79,7 +88,7 @@ object PersonIndexer extends SimpleConversion
         if (!changes) {
           // if we are skipping (no changes) reset updated at
           person = p.copy(updatedAt = existing.get.updatedAt)
-          log.debug(String.format("Skipping index for %s. No changes detected", uri))
+          log.info(String.format("Skipping index for %s. No changes detected", uri))
        } 
       }
      
@@ -94,6 +103,44 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("json",personJson)
       solrDoc.addField("updatedAt", person.updatedAt.get)
       solrDoc.addField("active_b",true)
+      person.uris.map {uri => solrDoc.addField("uris",uri)}
+     
+      return Option(solrDoc)
+      
+    }
+    return None
+  }
+
+   def updateDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
+    buildPerson(uri,vivo).foreach{ p =>
+
+      var person:Person = p.copy()
+      val existing = checkExisting(p.uri)
+      
+      if (existing.isDefined && existing.get.updatedAt.isDefined) {
+        // NOTE: need to compare with a person with the same updatedAt value so 
+        // it doesn't diff merely on that field alone
+        val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))
+
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          person = p.copy(updatedAt = existing.get.updatedAt)
+          log.info(String.format("Skipping index for %s. No changes detected", uri))
+       } 
+      }
+     
+      val solrDoc = new SolrInputDocument()
+      
+      solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
+      solrDoc.addField("id",person.uri)
+      solrDoc.addField("group","people")
+
+      val personJson = person.toJson
+
+      solrDoc.addField("json",personJson)
+      solrDoc.addField("updatedAt",new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+)
+      solrDoc.addField("active_b",false)
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
       return Option(solrDoc)
@@ -137,13 +184,10 @@ object PersonIndexer extends SimpleConversion
       val geoFocus      = GeographicFocus.fromUri(vivo, uriContext)
       log.debug("pull newsfeeds")
       val newsfeeds     = Newsfeed.fromUri(vivo, uriContext)
-      
       log.debug("pull academic positions")
       val academicPositions     = AcademicPosition.fromUri(vivo, uriContext)
-      
       log.debug("pull gifts")
       val gifts     = Gift.fromUri(vivo, uriContext)
-      
       log.debug("pull licenses")
       val licenses     = License.fromUri(vivo, uriContext)
 
