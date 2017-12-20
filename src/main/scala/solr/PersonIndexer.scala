@@ -11,6 +11,7 @@ import edu.duke.oit.vw.jena.Sparqler
 
 import java.util.NoSuchElementException
 import java.util.Date
+import java.util.Calendar 
 import scala.collection.JavaConversions._
 
 import java.text.SimpleDateFormat
@@ -138,8 +139,8 @@ object PersonIndexer extends SimpleConversion
       val personJson = person.toJson
 
       solrDoc.addField("json",personJson)
-      solrDoc.addField("updatedAt",new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-)
+      val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+      solrDoc.addField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       solrDoc.addField("active_b",false)
       person.uris.map {uri => solrDoc.addField("uris",uri)}
      
