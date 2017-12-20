@@ -117,7 +117,9 @@ object PersonIndexer extends SimpleConversion
 
       var person:Person = p.copy()
       val solrDoc = new SolrInputDocument()
+      
       solrDoc.addField("id",person.uri)
+      solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
 
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
       //solrDoc.set("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
@@ -132,7 +134,7 @@ object PersonIndexer extends SimpleConversion
       solrDoc.set("active_b",bool_value)*/
       solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       solrDoc.setField("active_b",false)
-
+      person.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
       
     }
