@@ -120,7 +120,8 @@ object PersonIndexer extends SimpleConversion
       
       solrDoc.addField("id",person.uri)
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
-
+      solrDoc.addField("group","people")
+      
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
       //solrDoc.set("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       //solrDoc.addField("active_b",false)
