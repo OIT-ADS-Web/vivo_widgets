@@ -81,7 +81,7 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   }
 
    def updatePerson(uri:String) = {
-    PersonIndexer.index(uri.replaceAll("<|>",""), vivo, solr)
+    PersonIndexer.update(uri.replaceAll("<|>",""), vivo, solr)
     solr.commit()
   }
 

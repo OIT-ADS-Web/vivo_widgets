@@ -138,8 +138,10 @@ object PersonIndexer extends SimpleConversion
       sdoc.addField("active_b", fieldModifier);  */
 
       solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
-      solrDoc.removeField("active_b");
-      solrDoc.addField("active_b",false);
+      solrDoc.setField("active_b",false);
+      
+      //solrDoc.removeField("active_b");
+      //solrDoc.addField("active_b",false);
 
       person.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
