@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat
 import net.liftweb.json._
 
 import edu.duke.oit.vw.scalatra.WidgetsConfig
-import scala.collection.mutable.HashMap
  
 object PersonIndexer extends SimpleConversion
   with WidgetLogging {
@@ -134,13 +133,14 @@ object PersonIndexer extends SimpleConversion
       bool_value.put("set",false); 
       solrDoc.set("active_b",bool_value)*/
 
-      //MapString,Object> fieldModifier = new HashMap<>(1);
-      val fieldModifier: HashMap[String, Boolean] =  HashMap.empty[String,Boolean]
+      /*Map<String,Object> fieldModifier = new HashMap<>(1);
       fieldModifier.put("set",false);
-      solrDoc.addField("active", fieldModifier);  
+      sdoc.addField("active_b", fieldModifier);  */
 
       solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
-      
+      solrDoc.removeField("active_b");
+      solrDoc.addField("active_b",false);
+
       person.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)
       
