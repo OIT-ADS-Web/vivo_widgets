@@ -76,7 +76,7 @@ object PersonIndexer extends SimpleConversion
 
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
-    buildPerson(uri,vivo).foreach{ p =>
+    buildPerson(uri,vivo,true).foreach{ p =>
 
       var person:Person = p.copy()
       val existing = checkExisting(p.uri)
@@ -113,7 +113,7 @@ object PersonIndexer extends SimpleConversion
   }
 
    def updateDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
-    buildPerson(uri,vivo).foreach{ p =>
+    buildPerson(uri,vivo,false).foreach{ p =>
 
       var person:Person = p.copy()
       val existing = checkExisting(p.uri)
@@ -169,7 +169,7 @@ object PersonIndexer extends SimpleConversion
     return None
   }
 
-  def buildPerson(uri: String,vivo: Vivo): Option[Person] = {
+  def buildPerson(uri: String,vivo: Vivo,active: Boolean): Option[Person] = {
     log.debug("pull uri: " + uri)
     val uriContext = Map("uri" -> uri)
     
@@ -218,7 +218,7 @@ object PersonIndexer extends SimpleConversion
  
       var cvInfo = new PersonCVInfo(gifts, academicPositions, licenses, pastAppointments)
 
-      var p = Person.build(uri, Option.apply(true), Option.apply(now), personData.head, 
+      var p = Person.build(uri, Option.apply(active), Option.apply(now), personData.head, 
                            pubs, awards,
                            artisticWorks, artisticEvents, 
                            grants, courses,
