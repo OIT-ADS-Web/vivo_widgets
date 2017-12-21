@@ -137,7 +137,7 @@ object PersonIndexer extends SimpleConversion
       //MapString,Object> fieldModifier = new HashMap<>(1);
       val fieldModifier: HashMap[String, Boolean] =  HashMap.empty[String,Boolean]
       fieldModifier.put("set",false);
-      solrDoc.addField("active_b", fieldModifier);  
+      solrDoc.addField("active", fieldModifier);  
 
       solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       
