@@ -129,6 +129,8 @@ object PersonIndexer extends SimpleConversion
           log.info(String.format("Skipping index for %s. No changes detected", uri))
        } 
       }
+
+      val solrDoc = new SolrInputDocument()
       
       solrDoc.addField("id",person.uri)
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
