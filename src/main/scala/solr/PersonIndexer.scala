@@ -45,6 +45,15 @@ object PersonIndexer extends SimpleConversion
     }
   }
 
+  def updateWithBuildAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
+    log.info("Building PersonIndexer.updateWithBuildAll URIS:" + uris)
+    uris.grouped(100).foreach{ groupedUris =>
+      log.info("_Grouped URIS:" + uris)
+      val docs = groupedUris.map( uri => updateDocWithBuild(uri,vivo)).flatten
+      solr.add(docs.toIterable)
+    }
+  }
+
   def checkExisting(uri: String): Option[Person] = {
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     return vsi.getPerson(uri)
@@ -74,6 +83,9 @@ object PersonIndexer extends SimpleConversion
     updateAll(List(uri),vivo,solr)
   }
 
+  def updateWithBuild(uri: String,vivo: Vivo, solr: SolrServer) = {
+    updateWithBuildAll(List(uri),vivo,solr)
+  }
 
   def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     buildPerson(uri,vivo,true).foreach{ p =>
@@ -144,6 +156,46 @@ object PersonIndexer extends SimpleConversion
      
       solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
       solrDoc.setField("active_b",false);
+      
+      person.uris.map {uri => solrDoc.addField("uris",uri)}
+      return Option(solrDoc)
+      
+    }
+    return None
+  }
+
+  def updateDocWithBuild(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
+    buildPerson(uri,vivo,false).foreach{ p =>
+
+      var person:Person = p.copy()
+      val existing = checkExisting(p.uri)
+      
+      if (existing.isDefined && existing.get.updatedAt.isDefined) {
+        // NOTE: need to compare with a person with the same updatedAt value so 
+        // it doesn't diff merely on that field alone
+        val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))
+
+        if (!changes) {
+          // if we are skipping (no changes) reset updated at
+          person = p.copy(updatedAt = existing.get.updatedAt)
+          log.info(String.format("Skipping index for %s. No changes detected", uri))
+       } 
+      }
+
+      val solrDoc = new SolrInputDocument()
+      
+      solrDoc.addField("id",person.uri)
+      solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
+      solrDoc.addField("group","people")
+
+      val personJson = person.toJson
+
+      solrDoc.addField("json",personJson)
+      
+      val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+     
+      solrDoc.setField("updatedAt",dateFormatter.format(Calendar.getInstance().getTime()));
+      solrDoc.addField("active_b",true);
       
       person.uris.map {uri => solrDoc.addField("uris",uri)}
       return Option(solrDoc)

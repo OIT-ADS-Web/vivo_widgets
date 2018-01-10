@@ -130,6 +130,22 @@ class WidgetUpdatesFilter extends ScalatraFilter
 
   }
 
+  post("/updates/reactivate/person"){
+    basicAuth
+    log.info("reactivating the person index...")
+    params.get("uri") match {
+      case Some(uri:String) => {
+        log.info("reactivating for: " + uri)
+        WidgetsConfig.prepareCore
+        val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+        vsi.updateWithBuildPerson(uri)
+        Json.toJson(Map("complete" -> true))
+      }
+      case _ => "Not a valid request"
+    }
+
+  }
+
 
   get("/updates/test") {
     "test---"
