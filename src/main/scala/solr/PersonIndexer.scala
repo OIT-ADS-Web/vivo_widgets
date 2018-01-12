@@ -115,7 +115,7 @@ object PersonIndexer extends SimpleConversion
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     vsi.getPerson(uri).foreach{ p =>
       log.debug("Person >>>>>>>>> " + p)
-      var person:Person = p.copy()
+      var person:Person = p.copy(active=Option.apply(false))
 
       val solrDoc = new SolrInputDocument()
       
@@ -123,7 +123,7 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
 
-      val personJson = person.toJson + ("active" -> "false")
+      val personJson = person.toJson
       
       //personJson + ("active" -> Json.toJson(false))
       //personJson = personJson.append(Json.obj{"active" -> "false"})
