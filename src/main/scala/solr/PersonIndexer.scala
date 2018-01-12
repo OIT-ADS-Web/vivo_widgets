@@ -114,7 +114,7 @@ object PersonIndexer extends SimpleConversion
    def updateDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     vsi.getPerson(uri).foreach{ p =>
-
+      log.debug("Person >>>>>>>>> " + p)
       var person:Person = p.copy()
 
       val solrDoc = new SolrInputDocument()
@@ -138,6 +138,7 @@ object PersonIndexer extends SimpleConversion
       return Option(solrDoc)
       
     }
+    log.debug(" <<<<<<<< RETURNING NONE >>>>>>>>>")
     return None
   }
 
