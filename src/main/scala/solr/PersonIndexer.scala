@@ -125,16 +125,13 @@ object PersonIndexer extends SimpleConversion
 
       val personJson = person.toJson
 
-      log.info(" JSON >>>>>>>> " + personJson)
-
-      if (!isEmpty(personJson)) {
-        val j = JsonParser.parse(personJson)
-        j.addField("active",false)
-        personJson = j.toJson
+      if (personJson != null) {
+        //person = person ++ ("active" => "false")
+        personJson + ("active" -> Json.toJson(false))
       }
 
       log.info("Modified JSON >>>>>>>> " + personJson)
-      
+
       solrDoc.addField("json",personJson)
       
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
