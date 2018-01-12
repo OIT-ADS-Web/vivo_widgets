@@ -123,10 +123,12 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("alternateId", person.personAttributes.get("alternateId").get)
       solrDoc.addField("group","people")
 
-      val personJson = person.toJson
+      val personJson = person.toJson + ("active" -> "false")
       
-      personJson + ("active" -> Json.toJson(false))
-
+      //personJson + ("active" -> Json.toJson(false))
+      //personJson = personJson.append(Json.obj{"active" -> "false"})
+      //personJson = personJson ~ ("active" -> "false")
+      
       log.info("Modified JSON >>>>>>>> " + personJson)
 
       solrDoc.addField("json",personJson)
