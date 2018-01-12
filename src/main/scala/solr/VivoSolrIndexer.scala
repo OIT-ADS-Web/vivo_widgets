@@ -85,11 +85,6 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     solr.commit()
   }
 
-  def updateWithBuildPerson(uri:String) = {
-    PersonIndexer.updateWithBuild(uri.replaceAll("<|>",""), vivo, solr)
-    solr.commit()
-  }
-
   def reindexUri(uri: String) = {
     vivo.loadDriver()
     var query = new SolrQuery();
