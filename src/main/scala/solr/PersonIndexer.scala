@@ -124,11 +124,8 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("group","people")
 
       val personJson = person.toJson
-
-      if (personJson != null) {
-        //person = person ++ ("active" => "false")
-        personJson + ("active" -> Json.toJson(false))
-      }
+      
+      personJson + ("active" -> Json.toJson(false))
 
       log.info("Modified JSON >>>>>>>> " + personJson)
 
