@@ -114,7 +114,7 @@ object PersonIndexer extends SimpleConversion
    def updateDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     vsi.getPerson(uri).foreach{ p =>
-      log.debug("Person >>>>>>>>> " + p)
+    
       var person:Person = p.copy(active=Option.apply(false))
 
       val solrDoc = new SolrInputDocument()
@@ -124,13 +124,7 @@ object PersonIndexer extends SimpleConversion
       solrDoc.addField("group","people")
 
       val personJson = person.toJson
-      
-      //personJson + ("active" -> Json.toJson(false))
-      //personJson = personJson.append(Json.obj{"active" -> "false"})
-      //personJson = personJson ~ ("active" -> "false")
-      
-      log.info("Modified JSON >>>>>>>> " + personJson)
-
+    
       solrDoc.addField("json",personJson)
       
       val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
