@@ -80,6 +80,11 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     solr.commit()
   }
 
+  def updatePerson(uri:String) = {
+    PersonIndexer.update(uri.replaceAll("<|>",""), vivo, solr)
+    solr.commit()
+  }
+
   def reindexUri(uri: String) = {
     vivo.loadDriver()
     var query = new SolrQuery();
@@ -132,6 +137,8 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
   def getOrganization(uri: String): Option[Organization] = {
     Organization.find(uri, solr)
   }
+
+
 
 
 }
