@@ -18,6 +18,7 @@ SELECT ?publication
 ?isbn13 ?publicationVenue
 ?publishedIn ?authorList
 ?editorList ?translatorList
+?contributorList
 ?publishedBy ?startPage
 ?endPage
 ?datetime
@@ -62,6 +63,7 @@ WHERE {
   OPTIONAL { ?publication duke:onlineContent ?onlineContent }
   OPTIONAL { ?publication duke:editorList ?editorList }
   OPTIONAL { ?publication duke:translatorList ?translatorList }
+  OPTIONAL { ?publication duke:contributorList ?contributorList }
   OPTIONAL {
     ?publication core:publisher ?publisher. ?publisher rdfs:label ?publishedBy .
   }
@@ -97,7 +99,7 @@ WHERE {
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
 
 
-  FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship))
+  FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship, core:Contribution))
 
 } 
 ORDER BY desc(?datetime)
