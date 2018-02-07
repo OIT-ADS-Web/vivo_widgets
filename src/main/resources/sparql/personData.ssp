@@ -5,8 +5,9 @@ ${include("sparql/prefixes.ssp")}
 SELECT ?title ?type ?label ?alternateId (?title AS ?preferredTitle) ?overview
        ?mentorshipOverview ?mentorshipAvailabilities ?firstName ?lastName
        ?middleName ?primaryEmail ?phoneNumber ?suffixName ?prefixName
-       ?preferredCitationFormat ?imageUri ?imageDownload ?imageThumbnailUri
-       ?imageThumbnailDownload ?netid ?officehours ?profileURL ?imageModTime ?imageFileName 
+       ?preferredCitationFormat ?imageUri ?imageDownload ?imageModTime ?imageFileName 
+       ?imageThumbnailUri ?imageThumbnailDownload ?imageThumbnail500Uri ?imageThumbnail500Download  
+       ?netid ?officehours ?profileURL 
        ?leadershipPositions ?clinicalOverview
        ?interestsOverview ?teachingActivities ?academicActivities
 WHERE {
@@ -47,7 +48,12 @@ WHERE {
     ?imageUri  vitro-public:thumbnailImage ?imageThumbnailUri .
     ?imageUri  vitro:modTime ?imageModTime .
     ?imageUri  vitro-public:filename  ?imageFileName .
-    ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload
+    ?imageThumbnailUri vitro-public:downloadLocation ?imageThumbnailDownload .
+  }
+  OPTIONAL {
+    <${ uri }> vitro-public:mainImage ?imageUri .
+    ?imageUri  duke:thumbnailImage500 ?imageThumbnail500Uri .
+    ?imageThumbnail500Uri vitro-public:downloadLocation ?imageThumbnail500Download .  
   }
   OPTIONAL { <${ uri }> duke:scopedNetid ?netid }
   OPTIONAL { <${ uri }> duke:officehours ?officehours }
