@@ -5,26 +5,25 @@
     "title": "Swagger for Vivo Widgets",
     "description": "Vivo widgets API in the swagger-2.0 specification"
   },
- "produces": [
+  "produces": [
     "application/json",
     "application/html",
     "application/javascript"
   ],
- "paths": {
+  "paths": {
     "/api/v0.9/people/complete/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person or attributes of a person - in a variety of formats",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description":
+          "Returns a person or attributes of a person - in a variety of formats",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -39,18 +38,16 @@
     },
     "/api/v0.9/people/publications/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's publications",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's publications",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -68,18 +65,16 @@
     },
     "/api/v0.9/people/artistic_works/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's artistic works",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's artistic works",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -95,20 +90,18 @@
         }
       }
     },
-     "/api/v0.9/people/awards/{count}.{format}": {
+    "/api/v0.9/people/awards/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's awards",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's awards",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -124,20 +117,18 @@
         }
       }
     },
-     "/api/v0.9/people/grants/{count}.{format}": {
+    "/api/v0.9/people/grants/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's grants",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's grants",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -153,20 +144,18 @@
         }
       }
     },
-     "/api/v0.9/people/courses/{count}.{format}": {
+    "/api/v0.9/people/courses/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's courses",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's courses",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -182,20 +171,18 @@
         }
       }
     },
-     "/api/v0.9/people/newsfeeds/{count}.{format}": {
+    "/api/v0.9/people/newsfeeds/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's newsfeeds",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's newsfeeds",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -211,20 +198,18 @@
         }
       }
     },
-     "/api/v0.9/people/professional_activities/{count}.{format}": {
+    "/api/v0.9/people/professional_activities/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's professional activities",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's professional activities",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -240,20 +225,18 @@
         }
       }
     },
-     "/api/v0.9/people/positions/{count}.{format}": {
+    "/api/v0.9/people/positions/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's positions",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's positions",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -269,20 +252,18 @@
         }
       }
     },
-     "/api/v0.9/people/addresses/{count}.{format}": {
+    "/api/v0.9/people/addresses/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's addresses",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's addresses",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -298,20 +279,18 @@
         }
       }
     },
-     "/api/v0.9/people/overview/{count}.{format}": {
+    "/api/v0.9/people/overview/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's overview",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's overview",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -327,20 +306,18 @@
         }
       }
     },
-     "/api/v0.9/people/contact/{count}.{format}": {
+    "/api/v0.9/people/contact/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns a person's contact information",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" },
-         { "$ref": "#/parameters/startParam" },
-         { "$ref": "#/parameters/endParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description": "Returns a person's contact information",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" },
+          { "$ref": "#/parameters/startParam" },
+          { "$ref": "#/parameters/endParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
@@ -358,65 +335,62 @@
     },
     "/api/v0.9/organizations/people/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description":
+          "Returns an organization (or specific attributes of an organization) - in a variety of formats",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
-             "schema": {
-               "type": "array",
-               "items": {
-                  "$ref": "#/definitions/OrganizationPerson"
-                }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrganizationPerson"
+              }
             }
           },
           "404": {
             "$ref": "#/responses/NotFound"
           }
+        }
       }
-    }
-  },
-  "/api/v0.9/organizations/grants/{count}.{format}": {
+    },
+    "/api/v0.9/organizations/grants/{count}.{format}": {
       "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "Returns an organization (or specific attributes of an organization) - in a variety of formats",
-       "parameters": [
-         { "$ref": "#/parameters/countParam" },
-         { "$ref": "#/parameters/formatParam" },
-         { "$ref": "#/parameters/uriParam" }
-       ],
-       "responses": {
+        "tags": ["widgets"],
+        "description":
+          "Returns an organization (or specific attributes of an organization) - in a variety of formats",
+        "parameters": [
+          { "$ref": "#/parameters/countParam" },
+          { "$ref": "#/parameters/formatParam" },
+          { "$ref": "#/parameters/uriParam" }
+        ],
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
-             "schema": {
-               "type": "array",
-               "items": {
-                  "$ref": "#/definitions/OrganizationGrant"
-                }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrganizationGrant"
+              }
             }
           },
           "404": {
             "$ref": "#/responses/NotFound"
           }
+        }
       }
-    }
-  },
-  "/search/modified.{format}": {
-    "get": {
-       "tags": [
-          "widgets"
-       ],
-       "description": "search for most recently modified URIs - starting from a specified date",
-       "parameters": [
+    },
+    "/search/modified.{format}": {
+      "get": {
+        "tags": ["widgets"],
+        "description":
+          "search for most recently modified URIs - starting from a specified date",
+        "parameters": [
           {
             "name": "since",
             "in": "query",
@@ -429,481 +403,1079 @@
             "in": "path",
             "enum": ["json"],
             "required": true,
-            "description": "format is requested by *.extension - but the only returned format is 'json' at the moment"
+            "description":
+              "format is requested by *.extension - but the only returned format is 'json' at the moment"
           },
           {
             "name": "offset",
-            "in" : "query",
+            "in": "query",
             "type": "integer",
             "required": false,
-            "description": "where to start the list (if there are more than 1000)"
+            "description":
+              "where to start the list (if there are more than 1000)"
           }
         ],
-       "responses": {
+        "responses": {
           "200": {
             "description": "Expected response to a valid request",
             "schema": {
               "$ref": "#/definitions/ModifiedList"
             }
+          }
         }
-
-     }
-   }
-  }
- },
- "parameters": {
+      }
+    }
+  },
+  "parameters": {
     "countParam": {
-       "name": "count",
-       "in": "path",
-       "required": "true",
-       "description": "how many records to show - 'all' is a valid value",
-       "enum": ["5", "10", "15", "all"]
+      "name": "count",
+      "in": "path",
+      "required": "true",
+      "description": "how many records to show - 'all' is a valid value",
+      "enum": ["5", "10", "15", "all"]
     },
     "formatParam": {
-       "name": "format",
-       "description": "In what format to return results ('js' and 'html' are valid, but redirect)",
-       "enum": ["json", "jsonp"],
-       "required": true,
-       "in": "path"
+      "name": "format",
+      "description":
+        "In what format to return results ('js' and 'html' are valid, but redirect)",
+      "enum": ["json", "jsonp"],
+      "required": true,
+      "in": "path"
     },
     "formatParamExt": {
-       "name": "format",
-       "description": "In what format to return results",
-       "enum": ["json", "jsonp", "html", "js"],
-       "required": true,
-       "in": "path"
+      "name": "format",
+      "description": "In what format to return results",
+      "enum": ["json", "jsonp", "html", "js"],
+      "required": true,
+      "in": "path"
     },
     "uriParam": {
-       "name": "uri",
-       "in": "query",
-       "required": true,
-       "description": "which URI to look at.  If missing will return 'key not found: uri'.  This can be simply a duid (e.g. Duke Unique Identifier - 7 digits)."
+      "name": "uri",
+      "in": "query",
+      "required": true,
+      "description":
+        "which URI to look at.  If missing will return 'key not found: uri'.  This can be simply a duid (e.g. Duke Unique Identifier - 7 digits)."
     },
     "formattingParam": {
-       "name": "formatting",
-       "in": "query",
-       "required": false,
-       "enum": ["detailed", "abbreviated"]
+      "name": "formatting",
+      "in": "query",
+      "required": false,
+      "enum": ["detailed", "abbreviated"]
     },
     "styleParam": {
-       "name": "style",
-       "in": "query",
-       "required": false,
-       "enum": ["styled", "unstyled"]
+      "name": "style",
+      "in": "query",
+      "required": false,
+      "enum": ["styled", "unstyled"]
     },
     "startParam": {
-       "name": "start",
-       "in": "query",
-       "required": false,
-       "description": "start range in yyyy-mm-dd format"
+      "name": "start",
+      "in": "query",
+      "required": false,
+      "description": "start range in yyyy-mm-dd format"
     },
     "endParam": {
-       "name": "end",
-       "in": "query",
-       "required": false,
-       "description": "end range in yyyy-mm-dd format"
+      "name": "end",
+      "in": "query",
+      "required": false,
+      "description": "end range in yyyy-mm-dd format"
     }
   },
   "responses": {
     "NotFound": {
-       "description": "Nothing found to return"
+      "description": "Nothing found to return"
     }
   },
   "definitions": {
-      "WidgetItem": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "type": "object" }
+    "WidgetItem": {
+      "type": "object",
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string" },
+        "attributes": { "type": "object" }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string" },
+        "attributes": { "type": "object" }
+      }
+    },
+    "PersonAttributes": {
+      "type": "object",
+      "properties": {
+        "preferredTitle": {
+          "type": "string",
+          "description":
+            "The title in the Positions section of the widgets that has the lowest 'rank' value (highest precedence value)"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number from the Duke directory (LDAP)"
+        },
+        "primaryEmail": {
+          "type": "string",
+          "description": "Email adddress from the Duke directory (LDAP)"
+        },
+        "middleName": {
+          "type": "string",
+          "description": "The person's middle name (if available)"
+        },
+        "profileURL": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The customizable and human-readable URL for the profile.  The default profileURL is based on the Duke email alias"
+        },
+        "imageModTime": {
+          "type": "datetime",
+          "description":
+            "The latest modification date and time of the profile image"
+        },
+        "suffixName": {
+          "type": "string",
+          "description":
+            "The suffix in the professional name as specified in Duke's faculty appointment system (dFAc)"
+        },
+        "imageUri": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "URI for the page that links to the full profle image and thumbnail"
+        },
+        "mentorshipAvailabilities": {
+          "type": "string",
+          "description":
+            "A text description about a person's availability to mentor others at Duke"
+        },
+        "netid": { "type": "string", "description": "Duke Net ID" },
+        "uri": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The unique identifier for a person in Scholars@Duke. Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile."
+        },
+        "alternateId": { "type": "string", "description": "Duke Unique ID" },
+        "prefixName": {
+          "type": "string",
+          "description":
+            "The prefix in the professional name as specified in Duke's faculty appointment system (dFac)"
+        },
+        "imageDownload": {
+          "$ref": "#/definitions/uri",
+          "description": "A link to the full-size profile image"
+        },
+        "lastName": {
+          "type": "string",
+          "description":
+            "The last name in the professional name as specified in Duke's faculty appointment system (dFac)"
+        },
+        "firstName": {
+          "type": "string",
+          "description":
+            "The first name in the professional name as specified in Duke's faculty appointment system (dFac)"
+        },
+        "imageThumbnailUri": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The URI for a page that contains a link to the thumbnail profile image"
+        },
+        "imageThumbnailDownload": {
+          "$ref": "#/definitions/uri",
+          "description": "The link to the thumbnail of a profile image"
+        },
+        "overview": {
+          "type": "string",
+          "description": "The text description summarizing a person’s research."
+        },
+        "preferredCitationFormat": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The preferred citation style in which publications are displayed on the profile.  This preference is set by the user."
+        },
+        "imageFileName": {
+          "type": "string",
+          "description":
+            "The standardized file name for the profile image based off of the person's Scholars URI"
         }
-      },
-      "Organization": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "type": "object" }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The unique identifier for a person in Scholars@Duke.  Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile."
+        },
+        "updatedAt": {
+          "type": "date",
+          "description":
+            "The last modified date for an individual profile. The updatedAt is also returned by an endpoint (https://scholars.duke.edu/widgets/search/modified.json?since=2016-04-15) where you can query all profiles that have changed since a given date. "
+        },
+        "vivoType": {
+          "$ref": "#/definitions/uri",
+          "description":
+            "The category of profile determined by the affiliation with Duke.  This is value distinguishes faculty profiles from non-faculty profies "
+        },
+        "label": {
+          "type": "string",
+          "description":
+            "The Professional Name (Last, First, Middle) designated in dFac "
+        },
+        "title": {
+          "type": "string",
+          "description":
+            "The Preferred title as designated in dFac.  This is the title in which the attribute of 'rank' has the lowest value."
+        },
+        "publications": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Publication" },
+          "description":
+            "A list of publications metadata coming from elements.duke.edu"
+        },
+        "awards": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Award" },
+          "description":
+            "A list of awards & honors metadata that are manually entered in Scholars@Duke.  Because the data is manually entered, this section may also include grants that were not submitted to Duke’s grants database, SPS"
+        },
+        "artisticWorks": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ArtisticWork" },
+          "description":
+            "A list of non-print scholarly outputs that represent a faculty member’s primary scholarship and are not adequately captured as a publication citation"
+        },
+        "artisticEvents": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ArtisticEvent" },
+          "description":
+            "A list of non-print scholarly outputs that represent a faculty member’s primary scholarship and are not adequately captured as a publication citation"
+        },
+        "grants": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Grant" },
+          "description":
+            "A list of select awarded grants from Duke’s Sponsored Project System (SPS). If applicable, one grant uri will represent multiple renewal years, as well as any associated mini grants.  Grants with publicity restrictions are not included."
+        },
+        "courses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Course" },
+          "description": "A list of courses taught in the past 3 years"
+        },
+        "professionalActivities": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ProfessionalActivity" },
+          "description":
+            "A list of manually-entered activites falling into the categories of Service to Duke, Service to the Profession, Outreach & Engaged Scholarsip, or Presentations."
+        },
+        "positions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Position" },
+          "description":
+            "A list of faculty appointments and center memberships captured in dFac. For non-faculty, this section includes the HR job title as well as affiliations entered through Scholars@Duke."
+        },
+        "addresses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Address" },
+          "description":
+            "Both the physical office location (aka External Mailing Address) and the Duke PO Box address (aka Interoffice Address) as entered in Duke@Work"
+        },
+        "educations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Education" },
+          "description":
+            "Awarded degrees and professional training as entered in dFac.  This section is only available for faculty."
+        },
+        "researchAreas": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResearchArea" },
+          "description":
+            "Areas of expertise using subject headings from MesH, Library of Congress, and a custom Duke University vocabulary."
+        },
+        "webpages": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Webpage" },
+          "description":
+            "Web links that were manually entered onto a person’s profile (typically includes links to a CV, department site, personal site, lab page, or Google Scholar page)"
+        },
+        "geographicalFocus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeographicalFocus",
+            "description":
+              "Geographic regions in which a person has expertise, has conducted teaching activities, or has conducted research.  Currently available regions are current countries and US states"
+          }
+        },
+        "newsfeeds": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Newsfeed" },
+          "description":
+            "A combination of news articles automatically reported by the Office of News & Communications (Duke Today) or manually entered on a Scholars profile. into the profile"
+        },
+        "academicPositions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AcademicPositions" },
+          "description":
+            "Previous and current academic positions outside of Duke.  This would include visiting professorships.  In Scholars@Duke this section is labeled“Academic Positions Outside Duke."
+        },
+        "gifts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Gifts" },
+          "description":
+            "This section contains competitive funding that is not captured in Duke’s Sponsored Projects System, but rather awarded directly to the PI.  In Scholars@Duke this section is labeled Fellowships, Supported Research, & Other Grants"
+        },
+        "licenses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Licenses" },
+          "description":
+            "Medical licensure and other credentials not captured in dFac"
+        },
+        "pastAppointments": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PastAppointments" },
+          "description":
+            "Duke appointment history, not including active appointments which are listed separately in the Positions section of the widgets"
+        },
+        "attributes": {
+          "$ref": "#/definitions/PersonAttributes",
+          "description":
+            "Additional non-array person attributes such as the overview, pretty profile URL, phone number, and profile picture"
         }
-      },
-      "PersonAttributes": {
-        "type": "object",
-        "properties": {
-          "preferredTitle": {"type": "string", "description":"The title in the Positions section of the widgets that has the lowest 'rank' value (highest precedence value)" },
-          "phoneNumber": {"type": "string", "description": "Phone number from the Duke directory (LDAP)" },
-          "primaryEmail": {"type": "string", "description": "Email adddress from the Duke directory (LDAP)" },
-          "middleName": {"type": "string", "description":"The person's middle name (if available)" },
-          "profileURL": { "$ref": "#/definitions/uri", "description":"The customizable and human-readable URL for the profile.  The default profileURL is based on the Duke email alias" },
-          "imageModTime": {"type": "datetime", "description": "The latest modification date and time of the profile image"},
-          "suffixName": {"type": "string", "description":"The suffix in the professional name as specified in Duke's faculty appointment system (dFAc)" },
-          "imageUri": { "$ref": "#/definitions/uri", "description":"URI for the page that links to the full profle image and thumbnail" },
-          "mentorshipAvailabilities": {"type": "string", "description":"A text description about a person's availability to mentor others at Duke" },
-          "netid": {"type": "string", "description":"Duke Net ID"  },
-          "uri": { "$ref": "#/definitions/uri", "description":"The unique identifier for a person in Scholars@Duke. Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile." },
-          "alternateId": {"type": "string", "description":"Duke Unique ID" },
-          "prefixName": {"type": "string", "description":"The prefix in the professional name as specified in Duke's faculty appointment system (dFac)" },
-          "imageDownload": { "$ref": "#/definitions/uri", "description":"A link to the full-size profile image" },
-          "lastName": {"type": "string", "description":"The last name in the professional name as specified in Duke's faculty appointment system (dFac)" },
-          "firstName": {"type": "string", "description":"The first name in the professional name as specified in Duke's faculty appointment system (dFac)" },
-          "imageThumbnailUri":{ "$ref": "#/definitions/uri", "description":"The URI for a page that contains a link to the thumbnail profile image" },
-          "imageThumbnailDownload": { "$ref": "#/definitions/uri", "description":"The link to the thumbnail of a profile image" },
-          "overview": {"type": "string", "description":"The text description summarizing a person’s research." },
-          "preferredCitationFormat": { "$ref": "#/definitions/uri", "description":"The preferred citation style in which publications are displayed on the profile.  This preference is set by the user." },
-          "imageFileName": {"type": "string","description":"The standardized file name for the profile image based off of the person's Scholars URI" }
-        }
-      },
-      "Person": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri", "description":"The unique identifier for a person in Scholars@Duke.  Faculty URIs include a value that is their hashed Duke Unique ID.  Non-faculty URIs include their Duke Net IDs.  The URI redirects to the URL of the Scholars@Duke profile." },
-          "updatedAt": { "type": "date", "description":"The last modified date for an individual profile. The updatedAt is also returned by an endpoint (https://scholars.duke.edu/widgets/search/modified.json?since=2016-04-15) where you can query all profiles that have changed since a given date. " },
-          "vivoType": { "$ref": "#/definitions/uri" , "description":"The category of profile determined by the affiliation with Duke.  This is value distinguishes faculty profiles from non-faculty profies "},
-          "label": { "type": "string", "description":"The Professional Name (Last, First, Middle) designated in dFac " },
-          "title": { "type": "string", "description":"The Preferred title as designated in dFac.  This is the title in which the attribute of 'rank' has the lowest value." },
-          "publications": { "type": "array", "items": { "$ref": "#/definitions/Publication"}, "description":"A list of publications metadata coming from elements.duke.edu" },
-          "awards": { "type": "array", "items": { "$ref": "#/definitions/Award"},"description":"A list of awards & honors metadata that are manually entered in Scholars@Duke.  Because the data is manually entered, this section may also include grants that were not submitted to Duke’s grants database, SPS" },
-          "artisticWorks": { "type": "array" , "items": { "$ref": "#/definitions/ArtisticWork"}, "description":"A list of non-print scholarly outputs that represent a faculty member’s primary scholarship and are not adequately captured as a publication citation]" },
-          "grants": { "type": "array" , "items": { "$ref": "#/definitions/Grant"},"description":"A list of select awarded grants from Duke’s Sponsored Project System (SPS). If applicable, one grant uri will represent multiple renewal years, as well as any associated mini grants.  Grants with publicity restrictions are not included." },
-          "courses": { "type": "array" , "items": { "$ref": "#/definitions/Course"},"description":"A list of courses taught in the past 3 years" },
-          "professionalActivities": { "type": "array" , "items": { "$ref": "#/definitions/ProfessionalActivity"}, "description":"A list of manually-entered activites falling into the categories of Service to Duke, Service to the Profession, Outreach & Engaged Scholarsip, or Presentations." },
-          "positions":  { "type": "array" , "items": { "$ref": "#/definitions/Position"}, "description":"A list of faculty appointments and center memberships captured in dFac. For non-faculty, this section includes the HR job title as well as affiliations entered through Scholars@Duke." },
-          "addresses": { "type": "array" , "items": { "$ref": "#/definitions/Address"},"description":"Both the physical office location (aka External Mailing Address) and the Duke PO Box address (aka Interoffice Address) as entered in Duke@Work" },
-          "educations": { "type": "array" , "items": { "$ref": "#/definitions/Education"}, "description":"Awarded degrees and professional training as entered in dFac.  This section is only available for faculty." },
-          "researchAreas": { "type": "array" , "items": { "$ref": "#/definitions/ResearchArea"}, "description":"Areas of expertise using subject headings from MesH, Library of Congress, and a custom Duke University vocabulary." },
-          "webpages": { "type": "array" , "items": { "$ref": "#/definitions/Webpage"}, "description":"Web links that were manually entered onto a person’s profile (typically includes links to a CV, department site, personal site, lab page, or Google Scholar page)" },
-          "geographicalFocus": { "type": "array" , "items": { "$ref": "#/definitions/GeographicalFocus", "description":"Geographic regions in which a person has expertise, has conducted teaching activities, or has conducted research.  Currently available regions are current countries and US states"} },
-          "newsfeeds": { "type": "array" , "items": { "$ref": "#/definitions/Newsfeed"}, "description": "A combination of news articles automatically reported by the Office of News & Communications (Duke Today) or manually entered on a Scholars profile. into the profile" },
-          "attributes": {"$ref": "#/definitions/PersonAttributes", "description":"Additional non-array person attributes such as the overview, pretty profile URL, phone number, and profile picture"}
-        }
-      },
-      "Contact": {
-        "$ref": "#/definitions/PersonAttributes"
-      },
-      "OrganizationGrant": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": {
-            "type": "object",
-            "properties": {
-              "organization": {"$ref": "#/definitions/uri" },
-              "organizationName": {"type": "string" }
-             }
+      }
+    },
+    "Contact": {
+      "$ref": "#/definitions/PersonAttributes"
+    },
+    "OrganizationGrant": {
+      "type": "object",
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string" },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "organization": { "$ref": "#/definitions/uri" },
+            "organizationName": { "type": "string" }
           }
         }
-      },
-      "OrganizationPerson": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": {
-            "type": "object",
-            "properties": {
-              "organization": {"$ref": "#/definitions/uri","description":"URI for the organization, built from the organization ID in SAP" },
-              "organizationName": {"type": "string", "description":"display name for the organization" },
-              "position": {"$ref": "#/definitions/uri", "description":"a URI that describes a person's affiliation with or appointment in an organization" },
-              "positionType": {"$ref": "#/definitions/uri", "description":"desribes the type of affiliation or appointment" },
-              "profileURL": {"$ref": "#/definitions/uri", "description": "the human-readable URL for a profile" },
-              "imageModTime": {"type": "datetime", "description": "the most recent modification time for the profile image" },
-              "imageUri": {"$ref": "#/definitions/uri", "description":"URI for intermediate page that links to full image and thumbnail downloads" },
-              "imageDownload": {"$ref": "#/definitions/uri", "description":"link to full profile image" },
-              "imageThumbnailUri": {"$ref": "#/definitions/uri","description":"URI for page that links to thumbnail download" },
-              "imageThumbnailDownload": {"$ref": "#/definitions/uri", "description":"link to thumbnail of profile image" },
-              "overview": {"type": "string", "description":"the overview paragraph that summarizes a person’s research" },
-              "imageFileName": {"type": "string", "description":"standardized name for image that includes the Scholars URI" }
+      }
+    },
+    "OrganizationPerson": {
+      "type": "object",
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string" },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "organization": {
+              "$ref": "#/definitions/uri",
+              "description":
+                "URI for the organization, built from the organization ID in SAP"
+            },
+            "organizationName": {
+              "type": "string",
+              "description": "display name for the organization"
+            },
+            "position": {
+              "$ref": "#/definitions/uri",
+              "description":
+                "a URI that describes a person's affiliation with or appointment in an organization"
+            },
+            "positionType": {
+              "$ref": "#/definitions/uri",
+              "description": "desribes the type of affiliation or appointment"
+            },
+            "profileURL": {
+              "$ref": "#/definitions/uri",
+              "description": "the human-readable URL for a profile"
+            },
+            "imageModTime": {
+              "type": "datetime",
+              "description":
+                "the most recent modification time for the profile image"
+            },
+            "imageUri": {
+              "$ref": "#/definitions/uri",
+              "description":
+                "URI for intermediate page that links to full image and thumbnail downloads"
+            },
+            "imageDownload": {
+              "$ref": "#/definitions/uri",
+              "description": "link to full profile image"
+            },
+            "imageThumbnailUri": {
+              "$ref": "#/definitions/uri",
+              "description": "URI for page that links to thumbnail download"
+            },
+            "imageThumbnailDownload": {
+              "$ref": "#/definitions/uri",
+              "description": "link to thumbnail of profile image"
+            },
+            "overview": {
+              "type": "string",
+              "description":
+                "the overview paragraph that summarizes a person’s research"
+            },
+            "imageFileName": {
+              "type": "string",
+              "description":
+                "standardized name for image that includes the Scholars URI"
             }
           }
         }
-      },
-      "Publication": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"The title of the publication" },
-          "attributes": { "$ref": "#/definitions/PublicationAttributes", "description":"The individual metadata elements that make up a citation, as well as 4 pre-formatted citation styles" }
-       }
-      },
-      "Award": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"A concatenation of the Award Name & the Award Sponsor" },
-          "attributes": { "$ref": "#/definitions/AwardAttributes", "description":"Awards metadata including the award type, award name, award sponsor, and the award date" }
-       }
-      },
-      "ArtisticWork": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"Title of the artisic work"},
-          "attributes": { "$ref": "#/definitions/ArtisticWorkAttributes", "description":"Metadata about the work, including the abstract, weblink, dates, and roles / collaborators" }
-       }
-      },
-      "Grant": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri"},
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"The full title of a grant" },
-          "attributes": { "$ref": "#/definitions/GrantAttributes", "description": "Metadata about the grant, including the person's role, sponsor, Duke administrating department, and dates" }
-       }
-      },
-      "Course": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"The course number and title " },
-          "attributes": { "$ref": "#/definitions/CourseAttributes", "description":"Details about the course including the person's role" }
-       }
-      },
-      "ProfessionalActivity": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"A concatenation of the name of the professional activity and other details found in the attributes section" },
-          "attributes": { "$ref": "#/definitions/ProfessionalActivityAttributes", "description":"Metadata about the activity including subcategories, role, description, and dates" }
-       }
-      },
-      "Position": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string", "description":"The appointment or affiliation title (for faculty) or HR job title (for non-faculty)" },
-          "attributes": { "$ref": "#/definitions/PositionAttributes","description":"Details about the position including the associated department, school, and title precedence" }
-       }
-      },
-      "Address": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string","description":"Text for the address" },
-          "attributes": { "$ref": "#/definitions/AddressAttributes","description":"Individual data elements that make up the address label" }
-       }
-      },
-      "Education": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string", "description":"A concatenation of the Awarded Degree (or training) and the year of completion" },
-          "attributes": { "$ref": "#/definitions/EducationAttributes","description":"Education record metadata including the awarded degree, year of completion, and awarding institution" }
-       }
-      },
-      "ResearchArea": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string","description":"The label of a suject heading" },
-          "attributes": { "$ref": "#/definitions/ResearchAreaAttributes","description":"URI of the person associated with the subject heading" }
-       }
-      },
-      "Webpage": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri"},
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string","description":"Display label for a manually added web link" },
-          "attributes": { "$ref": "#/definitions/WebpageAttributes", "description":"Details about the weblink including the related person and the underlying URL" }
-       }
-      },
-      "GeographicalFocus": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string","description": "The official name of the country or state" },
-          "attributes": { "$ref": "#/definitions/GeographicalFocusAttributes" , "description":"Details about the geographical focus including the related person and the category of the focus (research, teaching, or expertise)"}
-       }
-      },
-      "Newsfeed": {
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri"},
-          "vivoType": { "$ref": "#/definitions/uri"},
-          "label": { "type": "string","description":"The title of the news article" },
-          "attributes": { "$ref": "#/definitions/NewsfeedAttributes","description":"Details about the news article including related person, date, link to article, and news source" }
-       }
-      },
-      "PublicationAttributes": {
-        "type": "object",
-        "properties": {
-          "icmjeCitation": { "type": "string", "description":"The publication citation in the ICMJE format" },
-          "mlaCitation": {"type": "string","description":"The publication citation in the MLA format "},
-          "isFavorite": { "type": "boolean", "description":"A flag indicating whether a publication was marked as 'favorite' in elements.duke.edu" },
-          "authorList": { "type": "string", "description":"A list of all authors as 'Last Name, First Initial'" },
-          "dateTime": { "$ref": "#/definitions/uri" },
-          "conferenceLocation": {"type": "string", "description":"Location where a conference paper was presented" },
-          "abstract":{"type": "string", "description":"Publication abstract" },
-          "pmid": {"type": "string","description":"The PubMed ID only available if the citation source is from PubMed or European PubMed" },
-          "apaCitation": {"type": "string", "description":"The publication citation in the APA format" },
-          "year": {"type": "datetime","description":"The publication date as 'YYYY-MM-DDT00:00:00'" },
-          "endPage": {"type": "integer", "description":"The end page for an article or book section" },
-          "publicationSource": {"type": "string", "description":"The source of the publication record.  Metadata will vary slightly between the various sources.  The default source is PubMed or European PubMed." },
-          "chicagoCitation": {"type": "string", "description":"The publication citation in the Chicago format"},
-          "authorshipType": { "$ref": "#/definitions/uri" },
-          "issue": {"type": "string","description":"The journal issue" },
-          "subtypes": {"type": "string","description":"While the vivoType generally represents major publishing formats, the subtype relays the genre and/or content of the publication" },
-          "publicationVenue":{"type": "string","description":"The journal represented as unlinked text (when the ISSN is not identified) or a URI (when the ISSN is identified)" },
-          "publishedIn": {"type": "string", "description":"The publisher name" },
-          "startPage": {"type": "integer","description":"The start page of an article or book section" },
-          "doi": {"type": "string", "description":"The digital object identifier" },
-          "volume": { "type": "string", "description":"The journal volume" }
+      }
+    },
+    "Publication": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The title of the publication"
+        },
+        "attributes": {
+          "$ref": "#/definitions/PublicationAttributes",
+          "description":
+            "The individual metadata elements that make up a citation, as well as 4 pre-formatted citation styles"
         }
-      },
-      "AwardAttributes": {
-        "type": "object",
-        "properties": {
-          "serviceType": {"type": "string","description":"Represents the level of award.  Values can be “Department”, “International”, “National”, “Other”, “School, “State”, or “University”" },
-          "name": {"type": "string", "description":"The name of the award" },
-          "datePrecision": { "$ref": "#/definitions/uri"},
-          "awardedBy": {"type": "string", "description":"The name of the awarding body or sponsor" },
-          "awardedByUri": { "$ref": "#/definitions/uri"},
-          "date": {"type": "datetime", "description":"The award date" }
+      }
+    },
+    "Award": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "A concatenation of the Award Name & the Award Sponsor"
+        },
+        "attributes": {
+          "$ref": "#/definitions/AwardAttributes",
+          "description":
+            "Awards metadata including the award type, award name, award sponsor, and the award date"
         }
-      },
-      "ArtisticWorkAttributes": {
-        "type": "object",
-        "properties": {
-          "role": {"type": "string", "description":"One or many roles that a person had on the work"  },
-          "abstract": {"type": "string", "description":"A description of the work itself.  Collaborators will share the same abstract" },
-          "role_description": {"type": "string", "description":"A description providing more details on a person's role" },
-          "date": {"type": "datetime", "description":"The creation date of the work as 'YYYY-MM-DDT00'" },
-          "type_description": {"type": "string","description":"One or more cateogires tagging the type of work " },
-          "date_precision": {"$ref": "#/definitions/uri" },
-          "collaborators": {"type": "string", "description":"A list of all manually-entered Duke and non-Duke collaborators." }
+      }
+    },
+    "ArtisticWork": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "Title of the artisic work"
+        },
+        "attributes": {
+          "$ref": "#/definitions/ArtisticWorkAttributes",
+          "description":
+            "Metadata about the work, including the abstract, weblink, dates, and roles / collaborators"
         }
-      },
-      "GrantAttributes": {
-        "type": "object",
-        "properties": {
-          "endDate": {"type": "datetime", "description":"The project period end date for the most recent proposal in a series" },
-          "roleName": {"type": "string", "description":"A person’s role on the grant"},
-          "awardedBy": {"type": "string", "description":"The name of the grant sponsor"},
-          "administeredBy": {"type": "string", "description":"The name of the Duke department that received the grant"},
-          "awardedByUri": {"$ref": "#/definitions/uri"},
-          "administeredByUri": {"$ref": "#/definitions/uri"},
-          "startDate": {"type": "datetime", "description":"The project period start date for the first proposal in a series" }
+      }
+    },
+    "ArtisticEvent": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "Title of the artisic event"
+        },
+        "attributes": {
+          "$ref": "#/definitions/ArtisticEventAttributes",
+          "description": "Metadata about an event"
         }
-      },
-      "CourseAttributes": {
-        "type": "object",
-        "properties": {
-          "role": {"$ref": "#/definitions/uri"},
-          "roleName": {"type": "string", "description":"Currently, this field is a duplication to the course label (concatenation of the course name and course title)"}
+      }
+    },
+    "Grant": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The full title of a grant"
+        },
+        "attributes": {
+          "$ref": "#/definitions/GrantAttributes",
+          "description":
+            "Metadata about the grant, including the person's role, sponsor, Duke administrating department, and dates"
         }
-      },
-      "ProfessionalActivityAttributes": {
-        "type": "object",
-        "properties": {
-          "startDatePrecision": {"$ref": "#/definitions/uri" },
-          "serviceOrEventName": {"type": "string", "description":"The title of the activity"},
-          "serviceType": {"type": "string", "description":"The subcategory for the activity" },
-          "role": {"type": "string", "desccription":"The person's role on an activity" },
-          "hostOrganization": {"type": "string","description":"The name of the organization that hosted the activity" },
-          "locationOrVenue": {"type": "string", "description":"The name of the event venue or geogrpahical location for the activity" },
-          "startDate": {"type": "datetime", "description":"The start date of the activity as 'YYYY-MM-DDT00'" }
+      }
+    },
+    "Course": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The course number and title "
+        },
+        "attributes": {
+          "$ref": "#/definitions/CourseAttributes",
+          "description": "Details about the course including the person's role"
         }
-      },
-      "AddressAttributes": {
-        "type": "object",
-        "properties": {
-          "city": {"type": "string"},
-          "state": {"type": "string"},
-          "postalCode": {"type": "string"},
-          "personUri": {"$ref": "#/definitions/uri"},
-          "address1": {"type": "string"}
+      }
+    },
+    "ProfessionalActivity": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description":
+            "A concatenation of the name of the professional activity and other details found in the attributes section"
+        },
+        "attributes": {
+          "$ref": "#/definitions/ProfessionalActivityAttributes",
+          "description":
+            "Metadata about the activity including subcategories, role, description, and dates"
         }
-      },
-      "EducationAttributes": {
-        "type": "object",
-        "properties": {
-          "degreeUri":  {"$ref": "#/definitions/uri"},
-          "endDate": {"type": "datetime" },
-          "degree":  {"type": "string" },
-          "organizationUri":  {"$ref": "#/definitions/uri"},
-          "institution": {"type": "string"},
-          "dateTimeUri":  {"$ref": "#/definitions/uri"},
-          "personUri":  {"$ref": "#/definitions/uri"},
-          "endUri":  {"$ref": "#/definitions/uri"}
+      }
+    },
+    "Position": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description":
+            "The appointment or affiliation title (for faculty) or HR job title (for non-faculty)"
+        },
+        "attributes": {
+          "$ref": "#/definitions/PositionAttributes",
+          "description":
+            "Details about the position including the associated department, school, and title precedence"
         }
-      },
-      "ResearchAreaAttributes": {
-        "type": "object",
-        "properties": {
-          "personUri": {"$ref": "#/definitions/uri" }
+      }
+    },
+    "Address": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string", "description": "Text for the address" },
+        "attributes": {
+          "$ref": "#/definitions/AddressAttributes",
+          "description":
+            "Individual data elements that make up the address label"
         }
-      },
-      "WebpageAttributes": {
-        "type": "object",
-        "properties": {
-          "personUri": {"$ref": "#/definitions/uri" },
-          "linkURI": {"$ref": "#/definitions/uri" }
+      }
+    },
+    "Education": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description":
+            "A concatenation of the Awarded Degree (or training) and the year of completion"
+        },
+        "attributes": {
+          "$ref": "#/definitions/EducationAttributes",
+          "description":
+            "Education record metadata including the awarded degree, year of completion, and awarding institution"
         }
-      },
-      "GeographicalFocusAttributes": {
-        "type": "object",
-        "properties": {
-          "focusTypeLabel": {"type": "string", "description":"The category of relationship between a person andna geographic region" },
-          "focusType": {"$ref": "#/definitions/uri" },
-          "personUri": {"$ref": "#/definitions/uri" }
+      }
+    },
+    "ResearchArea": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The label of a suject heading"
+        },
+        "attributes": {
+          "$ref": "#/definitions/ResearchAreaAttributes",
+          "description": "URI of the person associated with the subject heading"
         }
-      },
-      "NewsfeedAttributes": {
-        "type": "object",
-        "properties": {
-          "newsDatetimeObj": {"$ref": "#/definitions/uri"},
-          "newsLink": {"$ref": "#/definitions/uri" },
-          "newsDatetime": {"type": "datetime"},
-          "newsMonth": {"type": "integer"},
-          "newsDay": {"type": "integer"},
-          "newsYear": {"type": "integer"},
-          "newsSource": {"type": "string" }
+      }
+    },
+    "Webpage": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "Display label for a manually added web link"
+        },
+        "attributes": {
+          "$ref": "#/definitions/WebpageAttributes",
+          "description":
+            "Details about the weblink including the related person and the underlying URL"
         }
-      },
-      "PositionAttributes": {
-        "type": "object",
-        "properties": {
-          "uri": { "$ref": "#/definitions/uri" },
-          "vivoType": { "$ref": "#/definitions/uri" },
-          "label": { "type": "string" },
-          "attributes": { "type": "object",
-              "properties": {
-                "schoolLabel": { "type": "string" },
-                "organizationLabel": { "type": "Biology" },
-                "organizationUri": { "$ref": "#/definitions/uri" },
-                "rank" : { "type": "integer" },
-                "personUri": { "$ref": "#/definitions/uri" },
-                "schoolUri": { "$ref": "#/definitions/uri" }
-              }
+      }
+    },
+    "GeographicalFocus": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The official name of the country or state"
+        },
+        "attributes": {
+          "$ref": "#/definitions/GeographicalFocusAttributes",
+          "description":
+            "Details about the geographical focus including the related person and the category of the focus (research, teaching, or expertise)"
+        }
+      }
+    },
+    "Newsfeed": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The title of the news article"
+        },
+        "attributes": {
+          "$ref": "#/definitions/NewsfeedAttributes",
+          "description":
+            "Details about the news article including related person, date, link to article, and news source"
+        }
+      }
+    },
+    "Gifts": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "Name of the competitive funds"
+        },
+        "attributes": {
+          "$ref": "#/definitions/GiftsAttributes",
+          "description": "Details about the gift"
+        }
+      }
+    },
+    "Licenes": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "A concatenation of the license number, the licensing state, and the license year"
+        },
+        "attributes": {
+          "$ref": "#/definitions/LicensesAttributes",
+          "description": "Details about the license"
+        }
+      }
+    },
+    "PastAppointments": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The appointment title"
+        },
+        "attributes": {
+          "$ref": "#/definitions/PastAppointmentsAttributes",
+          "description": "Details about the appointment"
+        }
+      }
+    },
+    "AcademicPositions": {
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": {
+          "type": "string",
+          "description": "The title of the news article"
+        },
+        "attributes": {
+          "$ref": "#/definitions/AcademicPositionsAttributes",
+          "description": "Details about the position"
+        }
+      }
+    },
+    "PublicationAttributes": {
+      "type": "object",
+      "properties": {
+        "icmjeCitation": {
+          "type": "string",
+          "description": "The publication citation in the ICMJE format"
+        },
+        "mlaCitation": {
+          "type": "string",
+          "description": "The publication citation in the MLA format "
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "description":
+            "A flag indicating whether a publication was marked as 'favorite' in elements.duke.edu"
+        },
+        "authorList": {
+          "type": "string",
+          "description": "A list of all authors as 'Last Name, First Initial'"
+        },
+        "dateTime": { "$ref": "#/definitions/uri" },
+        "conferenceLocation": {
+          "type": "string",
+          "description": "Location where a conference paper was presented"
+        },
+        "abstract": { "type": "string", "description": "Publication abstract" },
+        "pmid": {
+          "type": "string",
+          "description":
+            "The PubMed ID only available if the citation source is from PubMed or European PubMed"
+        },
+        "apaCitation": {
+          "type": "string",
+          "description": "The publication citation in the APA format"
+        },
+        "year": {
+          "type": "datetime",
+          "description": "The publication date as 'YYYY-MM-DDT00:00:00'"
+        },
+        "endPage": {
+          "type": "integer",
+          "description": "The end page for an article or book section"
+        },
+        "publicationSource": {
+          "type": "string",
+          "description":
+            "The source of the publication record.  Metadata will vary slightly between the various sources.  The default source is PubMed or European PubMed."
+        },
+        "chicagoCitation": {
+          "type": "string",
+          "description": "The publication citation in the Chicago format"
+        },
+        "authorshipType": { "$ref": "#/definitions/uri" },
+        "issue": { "type": "string", "description": "The journal issue" },
+        "subtypes": {
+          "type": "string",
+          "description":
+            "While the vivoType generally represents major publishing formats, the subtype relays the genre and/or content of the publication"
+        },
+        "publicationVenue": {
+          "type": "string",
+          "description":
+            "The journal represented as unlinked text (when the ISSN is not identified) or a URI (when the ISSN is identified)"
+        },
+        "publishedIn": {
+          "type": "string",
+          "description": "The publisher name"
+        },
+        "startPage": {
+          "type": "integer",
+          "description": "The start page of an article or book section"
+        },
+        "doi": {
+          "type": "string",
+          "description": "The digital object identifier"
+        },
+        "volume": { "type": "string", "description": "The journal volume" }
+      }
+    },
+    "AwardAttributes": {
+      "type": "object",
+      "properties": {
+        "serviceType": {
+          "type": "string",
+          "description":
+            "Represents the level of award.  Values can be “Department”, “International”, “National”, “Other”, “School, “State”, or “University”"
+        },
+        "name": { "type": "string", "description": "The name of the award" },
+        "datePrecision": { "$ref": "#/definitions/uri" },
+        "awardedBy": {
+          "type": "string",
+          "description": "The name of the awarding body or sponsor"
+        },
+        "awardedByUri": { "$ref": "#/definitions/uri" },
+        "date": { "type": "datetime", "description": "The award date" }
+      }
+    },
+    "ArtisticWorkAttributes": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "One or many roles that a person had on the work"
+        },
+        "abstract": {
+          "type": "string",
+          "description":
+            "A description of the work itself.  Collaborators will share the same abstract"
+        },
+        "role_description": {
+          "type": "string",
+          "description":
+            "A description providing more details on a person's role"
+        },
+        "date": {
+          "type": "datetime",
+          "description": "The creation date of the work as 'YYYY-MM-DDT00'"
+        },
+        "type_description": {
+          "type": "string",
+          "description": "One or more cateogires tagging the type of work "
+        },
+        "date_precision": { "$ref": "#/definitions/uri" },
+        "collaborators": {
+          "type": "string",
+          "description":
+            "A list of all manually-entered Duke and non-Duke collaborators."
+        }
+      }
+    },
+    "ArtisticEventAttributes": {
+      "type": "object",
+      "properties": {
+        "venue": {
+          "type": "string",
+          "description": "venue"
+        },
+        "description": {
+          "type": "string",
+          "description": "event description"
+        },
+        "startYear": {
+          "type": "integer",
+          "description": ""
+        },
+        "endYear": {
+          "type": "integer",
+          "description": ""
+        }
+      }
+    },
+    "GrantAttributes": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "datetime",
+          "description":
+            "The project period end date for the most recent proposal in a series"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A person’s role on the grant"
+        },
+        "awardedBy": {
+          "type": "string",
+          "description": "The name of the grant sponsor"
+        },
+        "administeredBy": {
+          "type": "string",
+          "description":
+            "The name of the Duke department that received the grant"
+        },
+        "awardedByUri": { "$ref": "#/definitions/uri" },
+        "administeredByUri": { "$ref": "#/definitions/uri" },
+        "startDate": {
+          "type": "datetime",
+          "description":
+            "The project period start date for the first proposal in a series"
+        }
+      }
+    },
+    "CourseAttributes": {
+      "type": "object",
+      "properties": {
+        "role": { "$ref": "#/definitions/uri" },
+        "roleName": {
+          "type": "string",
+          "description":
+            "Currently, this field is a duplication to the course label (concatenation of the course name and course title)"
+        }
+      }
+    },
+    "ProfessionalActivityAttributes": {
+      "type": "object",
+      "properties": {
+        "startDatePrecision": { "$ref": "#/definitions/uri" },
+        "serviceOrEventName": {
+          "type": "string",
+          "description": "The title of the activity"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The subcategory for the activity"
+        },
+        "role": {
+          "type": "string",
+          "desccription": "The person's role on an activity"
+        },
+        "hostOrganization": {
+          "type": "string",
+          "description": "The name of the organization that hosted the activity"
+        },
+        "locationOrVenue": {
+          "type": "string",
+          "description":
+            "The name of the event venue or geogrpahical location for the activity"
+        },
+        "startDate": {
+          "type": "datetime",
+          "description": "The start date of the activity as 'YYYY-MM-DDT00'"
+        }
+      }
+    },
+    "AddressAttributes": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "personUri": { "$ref": "#/definitions/uri" },
+        "address1": { "type": "string" }
+      }
+    },
+    "EducationAttributes": {
+      "type": "object",
+      "properties": {
+        "degreeUri": { "$ref": "#/definitions/uri" },
+        "endDate": { "type": "datetime" },
+        "degree": { "type": "string" },
+        "organizationUri": { "$ref": "#/definitions/uri" },
+        "institution": { "type": "string" },
+        "dateTimeUri": { "$ref": "#/definitions/uri" },
+        "personUri": { "$ref": "#/definitions/uri" },
+        "endUri": { "$ref": "#/definitions/uri" }
+      }
+    },
+    "ResearchAreaAttributes": {
+      "type": "object",
+      "properties": {
+        "personUri": { "$ref": "#/definitions/uri" }
+      }
+    },
+    "WebpageAttributes": {
+      "type": "object",
+      "properties": {
+        "personUri": { "$ref": "#/definitions/uri" },
+        "linkURI": { "$ref": "#/definitions/uri" }
+      }
+    },
+    "GeographicalFocusAttributes": {
+      "type": "object",
+      "properties": {
+        "focusTypeLabel": {
+          "type": "string",
+          "description":
+            "The category of relationship between a person andna geographic region"
+        },
+        "focusType": { "$ref": "#/definitions/uri" },
+        "personUri": { "$ref": "#/definitions/uri" }
+      }
+    },
+    "NewsfeedAttributes": {
+      "type": "object",
+      "properties": {
+        "newsDatetimeObj": { "$ref": "#/definitions/uri" },
+        "newsLink": { "$ref": "#/definitions/uri" },
+        "newsDatetime": { "type": "datetime" },
+        "newsMonth": { "type": "integer" },
+        "newsDay": { "type": "integer" },
+        "newsYear": { "type": "integer" },
+        "newsSource": { "type": "string" }
+      }
+    },
+    "GiftsAttributes": {
+      "type": "object",
+      "properties": {
+        "dateTimeEnd": { "type": "datetime" },
+        "dateTimeEndDay": { "type": "integer" },
+        "dateTimeEndMonth": { "type": "integer" },
+        "dateTimeEndYear": { "type": "integer" },
+        "dateTimeEndValue": { "$ref": "#/definitions/uri" },
+        "dateTimeInterval": { "$ref": "#/definitions/uri" },
+        "dateTimeStart": { "type": "datetime" },
+        "dateTimeStartDay": { "type": "integer" },
+        "dateTimeStartMonth": { "type": "integer" },
+        "dateTimeStartYear": { "type": "integer" },
+        "dateTimeStartValue": { "$ref": "#/definitions/uri" },
+        "description": { "type": "string" },
+        "donor": { "type": "string" },
+        "giftAmount": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "LicensesAttributes": {
+      "type": "object",
+      "properties": {
+        "datetime": { "$ref": "#/definitions/uri" },
+        "number": { "type": "string" },
+        "state": { "type": "string" },
+        "year": { "type": "integer" }
+      }
+    },
+    "PastAppointmentsAttributes": {
+      "type": "object",
+      "properties": {
+        "dateUri": { "$ref": "#/definitions/uri" },
+        "endDateiimeUri": { "type": "datetime" },
+        "endYear": { "type": "integer" },
+        "organizationLabel": { "type": "string" },
+        "schoolLabel": { "type": "string" },
+        "schoolUri": { "$ref": "#/definitions/uri" },
+        "startDateiimeUri": { "type": "datetime" },
+        "startYear": { "type": "integer" }
+      }
+    },
+    "#/definitions/AcademicPositionsAttributes": {
+      "type": "object",
+      "properties": {
+        "institute": { "type": "string" },
+        "roles": { "type": "string" },
+        "startDate": { "type": "datetime" },
+        "endDate": { "type": "datetime" }
+      }
+    },
+    "PositionAttributes": {
+      "type": "object",
+      "properties": {
+        "uri": { "$ref": "#/definitions/uri" },
+        "vivoType": { "$ref": "#/definitions/uri" },
+        "label": { "type": "string" },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "schoolLabel": { "type": "string" },
+            "organizationLabel": { "type": "Biology" },
+            "organizationUri": { "$ref": "#/definitions/uri" },
+            "rank": { "type": "integer" },
+            "personUri": { "$ref": "#/definitions/uri" },
+            "schoolUri": { "$ref": "#/definitions/uri" }
           }
         }
-      },
-      "SearchResults": {
-        "type": "object",
-        "properties": {
-          "numFound": { "type": "integer" },
-          "groups": {"type": "object" },
-          "items": { "type": "array", "items": { "$ref": "#/definitions/SearchResultItem" }}
-        }
-     },
-     "ModifiedList": {
-       "type": "object",
-       "properties": {
+      }
+    },
+    "SearchResults": {
+      "type": "object",
+      "properties": {
         "numFound": { "type": "integer" },
-        "offset": {"type": "integer" },
-        "items": { "type": "array", "items": { "$ref": "#/definitions/ModifiedListItem" }} }
-     },
-     "SearchResultItem": {
-       "uri" : { "$ref": "#/definitions/uri" },
-       "name": "string",
-       "group": "string"
-      },
-      "ModifiedListItem": {
-        "$ref": "#/definitions/uri"
-      },
-      "uri": { "type": "string" }
-
+        "groups": { "type": "object" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SearchResultItem" }
+        }
+      }
+    },
+    "ModifiedList": {
+      "type": "object",
+      "properties": {
+        "numFound": { "type": "integer" },
+        "offset": { "type": "integer" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ModifiedListItem" }
+        }
+      }
+    },
+    "SearchResultItem": {
+      "uri": { "$ref": "#/definitions/uri" },
+      "name": "string",
+      "group": "string"
+    },
+    "ModifiedListItem": {
+      "$ref": "#/definitions/uri"
+    },
+    "uri": { "type": "string" }
   }
-
 }
