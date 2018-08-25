@@ -16,40 +16,22 @@ object BatchPeopleUpdater {
 
 import edu.duke.oit.vw.utils._
 
-/*
-case class BatchUpdateMessage(uris:List[String], from:Option[String])
-*/
-
-/**
- * Wraps the lift-json parsing and extraction of a person.
- */
-/*
-object BatchUpdateMessage {
-  def apply(json:String) = {
-    import net.liftweb.json._
-    // Brings in default date formats etc.
-    implicit val formats = DefaultFormats 
-
-    val j = JsonParser.parse(json)
-    j.extract[BatchUpdateMessage]
-  }
-}
-*/
-
-class BatchPeopleUpdater extends Actor {
+class BatchPeopleUpdater extends Actor with WidgetLogging {
 
   def receive = {
     case msg:String => {
+      log.debug(msg)
       val updateMessage = BatchUpdateMessage(msg)
 
       import edu.duke.oit.vw.solr.VivoSolrIndexer
       import edu.duke.oit.vw.scalatra.WidgetsConfig
 
+      log.debug(updateMessage.uris.mkString(","))
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
       vsi.reindexPeople(updateMessage.uris)
     }
     case _ => { 
-      println(">> no message!!")
+      log.debug("no message!!")
     }
   }
 
