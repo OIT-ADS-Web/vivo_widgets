@@ -14,6 +14,10 @@ case class Newsfeed(uri:String,
     uri :: super.uris
   }
 
+  override def officialDateKey = {
+    "newsDatetime"
+  }
+
 }
 
 object Newsfeed extends AttributeParams {
