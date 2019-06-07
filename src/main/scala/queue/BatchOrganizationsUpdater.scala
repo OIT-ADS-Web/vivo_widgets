@@ -33,7 +33,7 @@ class BatchOrganizationsUpdater extends Actor {
       vsi.reindexOrganizations(updateMessage.uris)
       val endAt = DateTime.now()
       val duration = (startAt to endAt).millis
-      MetricsRecorder.recordProcessedBatch("organizations",updateMessage.uris.length,duration)
+      if (WidgetsConfig.sendMetrics) MetricsRecorder.recordProcessedBatch("organizations",updateMessage.uris.length,duration)
     }
     case _ => { 
       println(">> no message!!")

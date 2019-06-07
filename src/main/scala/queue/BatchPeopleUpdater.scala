@@ -33,7 +33,7 @@ class BatchPeopleUpdater extends Actor with WidgetLogging {
       vsi.reindexPeople(updateMessage.uris)
       val endAt = DateTime.now()
       val duration = (startAt to endAt).millis
-      MetricsRecorder.recordProcessedBatch("people",updateMessage.uris.length,duration)
+      if (WidgetsConfig.sendMetrics) MetricsRecorder.recordProcessedBatch("people",updateMessage.uris.length,duration)
     }
     case _ => { 
       log.debug("no message!!")

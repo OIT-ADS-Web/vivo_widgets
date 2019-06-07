@@ -92,7 +92,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     params.get("message") match {
       case Some(message:String) => {
-        MetricsRecorder.recordIncomingBatch("people",message)
+        if (WidgetsConfig.sendMetrics) MetricsRecorder.recordIncomingBatch("people",message)
         BatchPeopleUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to BatchPeopleUpdater"))
       }
@@ -105,7 +105,7 @@ class WidgetUpdatesFilter extends ScalatraFilter
     WidgetsConfig.prepareCore
     params.get("message") match {
       case Some(message:String) => {
-        MetricsRecorder.recordIncomingBatch("organizations",message)
+        if (WidgetsConfig.sendMetrics) MetricsRecorder.recordIncomingBatch("organizations",message)
         BatchOrganizationsUpdater.actor ! message
         Json.toJson(Map("message" -> "Sent to BatchOrganizationUpdater"))
       }

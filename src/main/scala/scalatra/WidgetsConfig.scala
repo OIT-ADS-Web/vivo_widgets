@@ -16,7 +16,7 @@ object WidgetsConfig {
   val system = ActorSystem()
   val log =  LoggerFactory.getLogger(getClass)
 
-  // TODO: put somewhere else - temporary 
+  // TODO: put somewhere else - temporary
   // WARNING!! This will overwrite your properties whenever WidgetsConfig
   // is called - which could cause problems for alternative configurations
   // (for example, in tests) ENDWARNING!!!!
@@ -27,7 +27,7 @@ object WidgetsConfig {
     setupConfig
   }
   def properties = this._properties
-  
+
   def baseUri = {
     properties("Vitro.defaultNamespace")
   }
@@ -51,7 +51,11 @@ object WidgetsConfig {
   def baseProtocolAndDomain = {
     properties.get("Widgets.baseProtocolAndDomain")
   }
-  
+
+  def sendMetrics = {
+    properties.getOrElse("WidgetsMetrics.kafka.enabled","false") == "true"
+  }
+
   var server:Vivo = _
   var widgetConfiguration:SolrConfig = _
   var widgetServer:SolrServer = _
@@ -70,10 +74,10 @@ object WidgetsConfig {
     log.debug("Connecting Widgets Core")
     widgetServer = Solr.solrServer(properties("vitro.local.solr.url") + "/" + coreName)
   }
-  
+
   def setupConfig = {
     log.debug("Configuring VIVO Widgets...")
-    
+
     server = new Vivo(url      = properties("VitroConnection.DataSource.url"),
                       user     = properties("VitroConnection.DataSource.username"),
                       password = properties("VitroConnection.DataSource.password"),
@@ -91,7 +95,7 @@ object WidgetsConfig {
     import java.util.Properties
     import java.io.FileInputStream
     val props:Properties = new Properties
-    
+
     try {
       var inStream:InputStream = classOf[WidgetInitialization].getClassLoader().
         getResourceAsStream("deploy.properties")
@@ -111,7 +115,7 @@ object WidgetsConfig {
 
       }
     } finally {
-      
+
     }
     // create a real immutable map out of the java Properties
     props.foldLeft(Map[String,String]()){(m, p) => m ++ Map(p._1 -> p._2)}
