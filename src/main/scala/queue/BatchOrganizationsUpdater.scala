@@ -7,6 +7,8 @@ import edu.duke.oit.vw.solr.VivoSolrIndexer
 import akka.actor.Actor._
 import akka.actor.{Actor,ActorSystem,Props}
 
+import com.github.nscala_time.time.Imports._
+
 object BatchOrganizationsUpdater {
 
   val system = ActorSystem("BatchOrganizationsUpdater")
@@ -21,6 +23,7 @@ class BatchOrganizationsUpdater extends Actor {
 
   def receive = {
     case msg:String => {
+      val startAt = DateTime.now()
       val updateMessage = BatchUpdateMessage(msg)
 
       import edu.duke.oit.vw.solr.VivoSolrIndexer
@@ -28,6 +31,9 @@ class BatchOrganizationsUpdater extends Actor {
 
       val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
       vsi.reindexOrganizations(updateMessage.uris)
+      val endAt = DateTime.now()
+      val duration = (startAt to endAt).millis
+      MetricsRecorder.recordProcessedBatch("organizations",updateMessage.uris.length,duration)
     }
     case _ => { 
       println(">> no message!!")

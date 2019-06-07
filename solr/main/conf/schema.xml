@@ -20,6 +20,7 @@
   <types>
     <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
     <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="boolean" class="solr.BoolField" />
   </types>
 
  <fields>   
@@ -31,7 +32,7 @@
    <field name="uris" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
    <field name="updatedAt" type="date" indexed="true" stored="true" multiValued="false" required="false"/> 
 
-   <dynamicField name="*_b"  type="boolean" indexed="true"  stored="true"/> 
+   <dynamicField name="*_b"  type="boolean" indexed="true"  stored="true"/>
  </fields>
 
  <!-- field to use to determine and enforce document uniqueness. -->

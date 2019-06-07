@@ -1,6 +1,5 @@
 package edu.duke.oit.vw.queue
 
-import com.github.nscala_time.time.Imports._
 import edu.duke.oit.vw.scalatra.WidgetsConfig
 import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
@@ -22,18 +21,26 @@ object MetricsRecorder {
   props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   val producer = new KafkaProducer[String, String](props)
 
-  def lineProtocol(measurement:String,tags:Map[String,String],fields:Map[String,Any],timestamp:DateTime = DateTime.now()) = {
+  def lineProtocol(measurement:String,tags:Map[String,String],fields:Map[String,Any]) = {
     val metadata = tags.map(kv => kv._1 + "=" + kv._2).mkString(",")
     val data = fields.map(kv => kv._1 + "=" + kv._2).mkString(",")
-    val nano = timestamp.millis
-    s"$measurement,$metadata $data $nano"
+    s"$measurement,$metadata $data"
   }
 
-  def recordBatch(json:String) = {
-    val message = BatchUpdateMessage(json)
-    val metric = lineProtocol("incoming.uris",Map(),Map("count" -> message.uris.length))
-    val data = new ProducerRecord[String, String](WidgetsConfig.properties("WidgetsMetrics.kafka.batchTopic"),"0",metric)
+  def sendMetric(metric:String) = {
+    val data = new ProducerRecord[String, String](WidgetsConfig.properties("WidgetsMetrics.kafka.batchTopic"), metric)
     producer.send(data)
+  }
+
+  def recordIncomingBatch(batchType:String,batchJSON:String) = {
+    val message = BatchUpdateMessage(batchJSON)
+    val metric = lineProtocol("widgets.incoming_batch",Map("type" -> batchType),Map("count" -> message.uris.length))
+    sendMetric(metric)
+  }
+
+  def recordProcessedBatch(batchType:String,count:Int,duration:Long) = {
+    val metric = lineProtocol("widgets.processed_batch",Map("type" -> batchType),Map("count" -> count, "duration" -> duration))
+    sendMetric(metric)
   }
 
 }
