@@ -11,35 +11,53 @@ PREFIX duke: <http://vivo.duke.edu/vivo/ontology/duke-extension#>
 PREFIX dukeact: <http://vivo.duke.edu/vivo/ontology/duke-activity-extension#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-SELECT ?publication
-?label ?type
-?numPages ?edition
-?volume ?issue ?isbn10
-?isbn13 ?publicationVenue
-?publishedIn ?authorList
-?editorList ?translatorList
-?contributorList
-?publishedBy ?startPage
-?endPage
-?datetime
-?year
-?isFavorite ?parentBookTitle
-?doi ?onlineContent ?abstract ?pmid
-?pmcid ?publicationSource
-?subtypes ?conferenceName
-?conferenceLocation ?chicagoCitation
-?mlaCitation ?apaCitation
-?icmjeCitation ?authorshipType
-?conferenceDatetimeStart 
-?conferenceDatetimeFinish
-?conferenceStartDate 
-?conferenceFinishDate
-(MONTH(?conferenceStartDate) AS ?conferenceStartDateMonth)
-(YEAR(?conferenceStartDate) AS ?conferenceStartDateYear)
-(DAY(?conferenceStartDate) AS ?conferenceStartDateDay)
-(MONTH(?conferenceFinishDate) AS ?conferenceFinishDateMonth)
-(YEAR(?conferenceFinishDate) AS ?conferenceFinishDateYear)
-(DAY(?conferenceFinishDate) AS ?conferenceFinishDateDay)
+SELECT
+MIN(?publication)
+MIN(?label)
+MIN(?type)
+MIN(?numPages)
+MIN(?edition)
+MIN(?volume)
+MIN(?issue)
+MIN(?isbn10)
+MIN(?isbn13)
+MIN(?publicationVenue)
+MIN(?publishedIn)
+MIN(?authorList)
+MIN(?editorList)
+MIN(?translatorList)
+MIN(?contributorList)
+MIN(?publishedBy)
+MIN(?startPage)
+MIN(?endPage)
+MIN(?datetime)
+MIN(?year)
+MIN(?isFavorite)
+MIN(?parentBookTitle)
+MIN(?doi)
+MIN(?onlineContent)
+MIN(?abstract)
+MIN(?pmid)
+MIN(?pmcid)
+MIN(?publicationSource)
+MIN(?subtypes)
+MIN(?conferenceName)
+MIN(?conferenceLocation)
+MIN(?chicagoCitation)
+MIN(?mlaCitation)
+MIN(?apaCitation)
+MIN(?icmjeCitation)
+MIN(?authorshipType)
+MIN(?conferenceDatetimeStart)
+MIN(?conferenceDatetimeFinish)
+MIN(?conferenceStartDate)
+MIN(?conferenceFinishDate)
+(MIN(MONTH(?conferenceStartDate)) AS ?conferenceStartDateMonth)
+(MIN(YEAR(?conferenceStartDate)) AS ?conferenceStartDateYear)
+(MIN(DAY(?conferenceStartDate)) AS ?conferenceStartDateDay)
+(MIN(MONTH(?conferenceFinishDate)) AS ?conferenceFinishDateMonth)
+(MIN(YEAR(?conferenceFinishDate)) AS ?conferenceFinishDateYear)
+(MIN(DAY(?conferenceFinishDate)) AS ?conferenceFinishDateDay)
 
 WHERE {
   <${uri}> core:relatedBy ?authorship .
@@ -89,17 +107,16 @@ WHERE {
     ?publication core:end ?conferenceDatetimeFinish .
     ?conferenceDatetimeFinish core:dateTime ?conferenceFinishDate .
   }
-  OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}  
+  OPTIONAL {?publication dukeact:serviceOrEventName ?conferenceName .}
   OPTIONAL {?publication dukeact:locationOrVenue ?conferenceLocation .}
-
-
   OPTIONAL {?publication duke:chicagoCitation ?chicagoCitation.}
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
 
+  VALUES (?authorshipType ?rank) { (core:Authorship 1) (core:Translatorship 2) (core:Editorship 3) (core:Contribution 4) }
 
   FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship, core:Contribution))
 
-} 
-ORDER BY desc(?datetime)
+} GROUP by ?publication
+ORDER BY desc(?datetime) ?rank
