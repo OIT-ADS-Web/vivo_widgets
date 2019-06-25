@@ -24,6 +24,9 @@ case class Grant(uri:String,
     val endDateString = get("endDate")
     if (endDateString == null) {
       true
+    } else if (endDateString.length() == 10) {
+      val endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDateString)
+      (start.before(endDate) || start.equals(endDate))
     } else {
       val endDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(endDateString)
       (start.before(endDate) || start.equals(endDate))
@@ -34,6 +37,9 @@ case class Grant(uri:String,
     val startDateString = get("startDate")
     if (startDateString == null) {
       true
+    } else if (startDateString.length() == 10) {
+      val startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDateString)
+      (end.after(startDate) || end.equals(startDate))
     } else {
       val startDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(startDateString)
       (end.after(startDate) || end.equals(startDate))
