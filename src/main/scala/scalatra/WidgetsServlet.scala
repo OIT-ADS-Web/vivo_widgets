@@ -121,7 +121,7 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   get("/api/v0.9/people/endpoints.:format") {
     WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
-    val context = new WebAppContext();
+    val context = request.getContextPath()
     val fmt = params("format")
     val uri = params("uri")
     Person.find(uri, WidgetsConfig.widgetServer) match {
@@ -135,15 +135,19 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
             "updatedAt" -> person.updatedAt,
             "vivoType" -> person.vivoType,
             "sections" -> Map(
+              "academicPositions"      -> personEndpointUrl(context,"academic_positions",fmt,uri),
               "addresses"      -> personEndpointUrl(context,"addresses",fmt,uri),
-              "artistic_works" -> personEndpointUrl(context,"artistic_works",fmt,uri),
+              "artisticWorks" -> personEndpointUrl(context,"artistic_works",fmt,uri),
               "awards"         -> personEndpointUrl(context,"awards",fmt,uri),
               "courses"        -> personEndpointUrl(context,"courses",fmt,uri),
+              "gifts"         -> personEndpointUrl(context,"gifts",fmt,uri),
               "grants"         -> personEndpointUrl(context,"grants",fmt,uri),
+              "licenses"      -> personEndpointUrl(context,"licenses",fmt,uri),
               "newsfeeds"      -> personEndpointUrl(context,"newsfeeds",fmt,uri),
               "overview"       -> personEndpointUrl(context,"overview",fmt,uri),
+              "pastAppointments"      -> personEndpointUrl(context,"past_appointments",fmt,uri),
               "positions"      -> personEndpointUrl(context,"positions",fmt,uri),
-              "professional_actvities"  -> personEndpointUrl(context,"professional_activities",fmt,uri),
+              "professionalActvities"  -> personEndpointUrl(context,"professional_activities",fmt,uri),
               "publications"   -> personEndpointUrl(context,"publications",fmt,uri)
             )
           )
@@ -159,8 +163,12 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     }
   }
 
-  protected def personEndpointUrl(context: WebAppContext, collection: String, format: String, uri: String): String = {
-    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + context.getContextPath() + "/widgets/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
+  protected def personEndpointUrl(context: String, collection: String, format: String, uri: String): String = {
+    val contextPath = context match {
+      case "/" => ""
+      case p: String => p
+    }
+    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + context + "/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
     return url
   }
 
@@ -170,15 +178,19 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
+          case "academic_positions"      => renderPersonCollection(person,person.academicPositions)
           case "addresses"      => renderPersonCollection(person,person.addresses)
           case "artistic_works" => renderPersonCollection(person,person.artisticWorks)
           case "awards"         => renderPersonCollection(person,person.awards)
           case "complete"       => render(person)
           case "contact"        => renderPersonCollection(person,List(person.personAttributes()))
           case "courses"        => renderPersonCollection(person,person.courses)
+          case "gifts"         => renderPersonCollection(person,person.gifts)
           case "grants"         => renderPersonCollection(person,person.grants)
+          case "licenses"      => renderPersonCollection(person,person.licenses)
           case "newsfeeds"      => renderPersonCollection(person,person.newsfeeds)
           case "overview"       => renderPersonCollection(person,List(person.personAttributes()))
+          case "past_appointments"  => renderPersonCollection(person,person.pastAppointments)
           case "positions"      => renderPersonCollection(person,person.positions)
           case "professional_activities"  => renderPersonCollection(person,person.professionalActivities)
           case "publications"   => renderPersonCollection(person,person.publications)
