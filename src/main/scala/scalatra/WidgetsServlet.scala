@@ -128,27 +128,32 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
       case Some(person) => {
         val result = Map(
           "data" -> Map(
-            "uri" -> uri,
-            "label" -> person.label,
-            "active" -> person.active,
-            "complete" -> personEndpointUrl(context,"complete",fmt,uri),
+            "uri"       -> uri,
+            "label"     -> person.label,
+            "active"    -> person.active,
+            "complete"  -> personEndpointUrl(context,"complete",fmt,uri),
             "updatedAt" -> person.updatedAt,
-            "vivoType" -> person.vivoType,
-            "sections" -> Map(
-              "academicPositions"      -> personEndpointUrl(context,"academic_positions",fmt,uri),
-              "addresses"      -> personEndpointUrl(context,"addresses",fmt,uri),
-              "artisticWorks" -> personEndpointUrl(context,"artistic_works",fmt,uri),
-              "awards"         -> personEndpointUrl(context,"awards",fmt,uri),
-              "courses"        -> personEndpointUrl(context,"courses",fmt,uri),
-              "gifts"         -> personEndpointUrl(context,"gifts",fmt,uri),
-              "grants"         -> personEndpointUrl(context,"grants",fmt,uri),
-              "licenses"      -> personEndpointUrl(context,"licenses",fmt,uri),
-              "newsfeeds"      -> personEndpointUrl(context,"newsfeeds",fmt,uri),
-              "overview"       -> personEndpointUrl(context,"overview",fmt,uri),
-              "pastAppointments"      -> personEndpointUrl(context,"past_appointments",fmt,uri),
-              "positions"      -> personEndpointUrl(context,"positions",fmt,uri),
-              "professionalActvities"  -> personEndpointUrl(context,"professional_activities",fmt,uri),
-              "publications"   -> personEndpointUrl(context,"publications",fmt,uri)
+            "vivoType"  -> person.vivoType,
+            "sections"  -> Map(
+              "academicPositions" -> personEndpointUrl(context,"academic_positions",fmt,uri),
+              "addresses"         -> personEndpointUrl(context,"addresses",fmt,uri),
+              "artisticEvents"    -> personEndpointUrl(context,"artistic_events",fmt,uri),
+              "artisticWorks"     -> personEndpointUrl(context,"artistic_works",fmt,uri),
+              "awards"            -> personEndpointUrl(context,"awards",fmt,uri),
+              "courses"           -> personEndpointUrl(context,"courses",fmt,uri),
+              "educations"        -> personEndpointUrl(context,"educations",fmt,uri),
+              "geographicalFocus" -> personEndpointUrl(context,"geographical_focus",fmt,uri),
+              "gifts"             -> personEndpointUrl(context,"gifts",fmt,uri),
+              "grants"            -> personEndpointUrl(context,"grants",fmt,uri),
+              "licenses"          -> personEndpointUrl(context,"licenses",fmt,uri),
+              "newsfeeds"         -> personEndpointUrl(context,"newsfeeds",fmt,uri),
+              "overview"          -> personEndpointUrl(context,"overview",fmt,uri),
+              "pastAppointments"  -> personEndpointUrl(context,"past_appointments",fmt,uri),
+              "positions"         -> personEndpointUrl(context,"positions",fmt,uri),
+              "professionalActvities" -> personEndpointUrl(context,"professional_activities",fmt,uri),
+              "publications"      -> personEndpointUrl(context,"publications",fmt,uri),
+              "researchAreas"     -> personEndpointUrl(context,"research_areas",fmt,uri),
+              "webpages"          -> personEndpointUrl(context,"webpages",fmt,uri)
             )
           )
         )
@@ -178,23 +183,28 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
-          case "academic_positions"      => renderPersonCollection(person,person.academicPositions)
-          case "addresses"      => renderPersonCollection(person,person.addresses)
-          case "artistic_works" => renderPersonCollection(person,person.artisticWorks)
-          case "awards"         => renderPersonCollection(person,person.awards)
-          case "complete"       => render(person)
-          case "contact"        => renderPersonCollection(person,List(person.personAttributes()))
-          case "courses"        => renderPersonCollection(person,person.courses)
-          case "gifts"         => renderPersonCollection(person,person.gifts)
-          case "grants"         => renderPersonCollection(person,person.grants)
-          case "licenses"      => renderPersonCollection(person,person.licenses)
-          case "newsfeeds"      => renderPersonCollection(person,person.newsfeeds)
-          case "overview"       => renderPersonCollection(person,List(person.personAttributes()))
+          case "academic_positions" => renderPersonCollection(person,person.academicPositions)
+          case "addresses"       => renderPersonCollection(person,person.addresses)
+          case "artistic_events" => renderPersonCollection(person,person.artisticEvents)
+          case "artistic_works"  => renderPersonCollection(person,person.artisticWorks)
+          case "awards"          => renderPersonCollection(person,person.awards)
+          case "complete"        => render(person)
+          case "contact"         => renderPersonCollection(person,List(person.personAttributes()))
+          case "courses"         => renderPersonCollection(person,person.courses)
+          case "educations"      => renderPersonCollection(person,person.educations)
+          case "geographical_focus" => renderPersonCollection(person,person.geographicalFocus)
+          case "gifts"           => renderPersonCollection(person,person.gifts)
+          case "grants"          => renderPersonCollection(person,person.grants)
+          case "licenses"        => renderPersonCollection(person,person.licenses)
+          case "newsfeeds"       => renderPersonCollection(person,person.newsfeeds)
+          case "overview"        => renderPersonCollection(person,List(person.personAttributes()))
           case "past_appointments"  => renderPersonCollection(person,person.pastAppointments)
-          case "positions"      => renderPersonCollection(person,person.positions)
-          case "professional_activities"  => renderPersonCollection(person,person.professionalActivities)
-          case "publications"   => renderPersonCollection(person,person.publications)
-          case x                => "Collection not found: " + x
+          case "positions"       => renderPersonCollection(person,person.positions)
+          case "professional_activities" => renderPersonCollection(person,person.professionalActivities)
+          case "publications"    => renderPersonCollection(person,person.publications)
+          case "research_areas"  => renderPersonCollection(person,person.researchAreas)
+          case "webpages"        => renderPersonCollection(person,person.webpages)
+          case x                 => "Collection not found: " + x
         }
       }
       case _ => NotFound("Not Found")
