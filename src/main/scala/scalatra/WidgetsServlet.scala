@@ -1,5 +1,6 @@
 package edu.duke.oit.vw.scalatra
 
+import org.eclipse.jetty.webapp.WebAppContext
 import edu.duke.oit.vw.utils.{ElvisOperator,Json,Int,Timer}
 import edu.duke.oit.vw.solr._
 import edu.duke.oit.vw.models._
@@ -157,7 +158,8 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   }
 
   protected def personEndpointUrl(collection: String, format: String, uri: String): String = {
-    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + "/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
+    val context = new WebAppContext();
+    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + context.getContextPath() + "/widgets/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
     return url
   }
 
