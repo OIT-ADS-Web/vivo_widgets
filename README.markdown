@@ -226,4 +226,3 @@ or to run only a few tests:
 * There is an old version of a Jena listener in ``listener/src`` that will no
   longer work with this version of vivo widgets.  It needs to be updated to
 support a new format of the json to update widgets.
-

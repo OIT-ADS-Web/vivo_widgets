@@ -116,6 +116,51 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     }
   }
 
+  // GET /api/v0.9/people/endpoints.json?uri=<uri>
+  get("/api/v0.9/people/endpoints.:format") {
+    WidgetsConfig.prepareCore(coreName, coreDirectory)
+    requestSetup
+    val fmt = params("format")
+    val uri = params("uri")
+    Person.find(uri, WidgetsConfig.widgetServer) match {
+      case Some(person) => {
+        val result = Map(
+          "data" -> Map(
+            "uri" -> uri,
+            "label" -> person.label,
+            "active" -> person.active,
+            "complete" -> personEndpointUrl("complete",fmt,uri),
+            "sections" -> Map(
+              "publications"   -> personEndpointUrl("publications",fmt,uri),
+              "artistic_works" -> personEndpointUrl("artistic_works",fmt,uri),
+              "awards"         -> personEndpointUrl("awards",fmt,uri),
+              "grants"         -> personEndpointUrl("grants",fmt,uri),
+              "courses"        -> personEndpointUrl("courses",fmt,uri),
+              "newsfeeds"      -> personEndpointUrl("newsfeeds",fmt,uri),
+              "professional_actvities"  -> personEndpointUrl("professional_activities",fmt,uri),
+              "positions"      -> personEndpointUrl("positions",fmt,uri),
+              "addresses"      -> personEndpointUrl("addresses",fmt,uri),
+              "overview"       -> personEndpointUrl("overview",fmt,uri),
+              "contact"        -> personEndpointUrl("contact",fmt,uri)
+            )
+          )
+        )
+        format(FormatJSONP) match {
+          case FormatJSON => Json.toJson(result)
+          case FormatHTML => "Not available: html"
+          case FormatJSONP => jsonpCallback() + "("+Json.toJson(result)+")"
+          case _ => "NoContent"
+        }
+      }
+      case _ => NotFound("Not Found")
+    }
+  }
+
+  protected def personEndpointUrl(collection: String, format: String, uri: String): String = {
+    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + "/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
+    return url
+  }
+
   protected def renderPeople = {
     WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
