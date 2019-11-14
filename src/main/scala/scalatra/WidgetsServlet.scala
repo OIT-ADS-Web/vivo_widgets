@@ -121,28 +121,39 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
   get("/api/v0.9/people/endpoints.:format") {
     WidgetsConfig.prepareCore(coreName, coreDirectory)
     requestSetup
+    val context = request.getContextPath()
     val fmt = params("format")
     val uri = params("uri")
     Person.find(uri, WidgetsConfig.widgetServer) match {
       case Some(person) => {
         val result = Map(
           "data" -> Map(
-            "uri" -> uri,
-            "label" -> person.label,
-            "active" -> person.active,
-            "complete" -> personEndpointUrl("complete",fmt,uri),
-            "sections" -> Map(
-              "publications"   -> personEndpointUrl("publications",fmt,uri),
-              "artistic_works" -> personEndpointUrl("artistic_works",fmt,uri),
-              "awards"         -> personEndpointUrl("awards",fmt,uri),
-              "grants"         -> personEndpointUrl("grants",fmt,uri),
-              "courses"        -> personEndpointUrl("courses",fmt,uri),
-              "newsfeeds"      -> personEndpointUrl("newsfeeds",fmt,uri),
-              "professional_actvities"  -> personEndpointUrl("professional_activities",fmt,uri),
-              "positions"      -> personEndpointUrl("positions",fmt,uri),
-              "addresses"      -> personEndpointUrl("addresses",fmt,uri),
-              "overview"       -> personEndpointUrl("overview",fmt,uri),
-              "contact"        -> personEndpointUrl("contact",fmt,uri)
+            "uri"       -> uri,
+            "label"     -> person.label,
+            "active"    -> person.active,
+            "complete"  -> personEndpointUrl(context,"complete",fmt,uri),
+            "updatedAt" -> person.updatedAt,
+            "vivoType"  -> person.vivoType,
+            "sections"  -> Map(
+              "academicPositions" -> personEndpointUrl(context,"academic_positions",fmt,uri),
+              "addresses"         -> personEndpointUrl(context,"addresses",fmt,uri),
+              "artisticEvents"    -> personEndpointUrl(context,"artistic_events",fmt,uri),
+              "artisticWorks"     -> personEndpointUrl(context,"artistic_works",fmt,uri),
+              "awards"            -> personEndpointUrl(context,"awards",fmt,uri),
+              "courses"           -> personEndpointUrl(context,"courses",fmt,uri),
+              "educations"        -> personEndpointUrl(context,"educations",fmt,uri),
+              "geographicalFocus" -> personEndpointUrl(context,"geographical_focus",fmt,uri),
+              "gifts"             -> personEndpointUrl(context,"gifts",fmt,uri),
+              "grants"            -> personEndpointUrl(context,"grants",fmt,uri),
+              "licenses"          -> personEndpointUrl(context,"licenses",fmt,uri),
+              "newsfeeds"         -> personEndpointUrl(context,"newsfeeds",fmt,uri),
+              "overview"          -> personEndpointUrl(context,"overview",fmt,uri),
+              "pastAppointments"  -> personEndpointUrl(context,"past_appointments",fmt,uri),
+              "positions"         -> personEndpointUrl(context,"positions",fmt,uri),
+              "professionalActvities" -> personEndpointUrl(context,"professional_activities",fmt,uri),
+              "publications"      -> personEndpointUrl(context,"publications",fmt,uri),
+              "researchAreas"     -> personEndpointUrl(context,"research_areas",fmt,uri),
+              "webpages"          -> personEndpointUrl(context,"webpages",fmt,uri)
             )
           )
         )
@@ -157,9 +168,12 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     }
   }
 
-  protected def personEndpointUrl(collection: String, format: String, uri: String): String = {
-    val context = new WebAppContext();
-    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + context.getContextPath() + "/widgets/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
+  protected def personEndpointUrl(context: String, collection: String, format: String, uri: String): String = {
+    val contextPath = context match {
+      case "/" => ""
+      case p: String => p
+    }
+    val url = WidgetsConfig.properties("Widgets.baseProtocolAndDomain") + context + "/api/v0.9/people/" + collection + "/all." + format + "?uri=" + uri
     return url
   }
 
@@ -169,19 +183,28 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     Person.find(params("uri"), WidgetsConfig.widgetServer) match {
       case Some(person) => {
         params.getOrElse('collectionName, "") match {
-          case "complete"       => render(person)
-          case "publications"   => renderPersonCollection(person,person.publications)
-          case "artistic_works" => renderPersonCollection(person,person.artisticWorks)
-          case "awards"         => renderPersonCollection(person,person.awards)
-          case "grants"         => renderPersonCollection(person,person.grants)
-          case "courses"        => renderPersonCollection(person,person.courses)
-          case "newsfeeds"      => renderPersonCollection(person,person.newsfeeds)
-          case "professional_activities"  => renderPersonCollection(person,person.professionalActivities)
-          case "positions"      => renderPersonCollection(person,person.positions)
-          case "addresses"      => renderPersonCollection(person,person.addresses)
-          case "overview"       => renderPersonCollection(person,List(person.personAttributes()))
-          case "contact"        => renderPersonCollection(person,List(person.personAttributes()))
-          case x                => "Collection not found: " + x
+          case "academic_positions" => renderPersonCollection(person,person.academicPositions)
+          case "addresses"       => renderPersonCollection(person,person.addresses)
+          case "artistic_events" => renderPersonCollection(person,person.artisticEvents)
+          case "artistic_works"  => renderPersonCollection(person,person.artisticWorks)
+          case "awards"          => renderPersonCollection(person,person.awards)
+          case "complete"        => render(person)
+          case "contact"         => renderPersonCollection(person,List(person.personAttributes()))
+          case "courses"         => renderPersonCollection(person,person.courses)
+          case "educations"      => renderPersonCollection(person,person.educations)
+          case "geographical_focus" => renderPersonCollection(person,person.geographicalFocus)
+          case "gifts"           => renderPersonCollection(person,person.gifts)
+          case "grants"          => renderPersonCollection(person,person.grants)
+          case "licenses"        => renderPersonCollection(person,person.licenses)
+          case "newsfeeds"       => renderPersonCollection(person,person.newsfeeds)
+          case "overview"        => renderPersonCollection(person,List(person.personAttributes()))
+          case "past_appointments"  => renderPersonCollection(person,person.pastAppointments)
+          case "positions"       => renderPersonCollection(person,person.positions)
+          case "professional_activities" => renderPersonCollection(person,person.professionalActivities)
+          case "publications"    => renderPersonCollection(person,person.publications)
+          case "research_areas"  => renderPersonCollection(person,person.researchAreas)
+          case "webpages"        => renderPersonCollection(person,person.webpages)
+          case x                 => "Collection not found: " + x
         }
       }
       case _ => NotFound("Not Found")

@@ -137,6 +137,35 @@ case class Person(uri:String,
     }
   }
 
+  def academicPositions() = {
+    this.cvInfo match {
+      case Some(cvInfo: PersonCVInfo) => cvInfo.academicPositions
+      case _ => List()
+    }
+  }
+
+  def gifts() = {
+    this.cvInfo match {
+      case Some(cvInfo: PersonCVInfo) => cvInfo.gifts
+      case _ => List()
+    }
+  }
+
+  def licenses() = {
+    this.cvInfo match {
+      case Some(cvInfo: PersonCVInfo) => cvInfo.licenses
+      case _ => List()
+    }
+  }
+
+  def pastAppointments() = {
+    this.cvInfo match {
+      case Some(cvInfo: PersonCVInfo) => cvInfo.pastAppointments
+      case _ => List()
+    }
+  }
+
+
 }
 
 /**
