@@ -246,6 +246,14 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     }.asInstanceOf[String]
   }
 
+  protected def filterCollectionByCount(collection: List[AnyRef], items: Option[Int]) = {
+    var values = items match {
+      case Some(x:Int) =>  collection.slice(0, x)
+      case _ => collection
+    }
+    Json.toJson(values)
+  }
+
   protected def formatOrganizationCollection(organization: Organization, formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     modelData.put("organization", Organization)
@@ -301,8 +309,9 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     })
 
     request("format") match {
-      case FormatJSON => Json.toJson(dateFilteredCollection)
-      case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
+      case FormatJSON => filterCollectionByCount(dateFilteredCollection, Int(params.getOrElse("count", "all")))
+      case FormatJSONP => jsonpCallback + "(" + filterCollectionByCount(dateFilteredCollection,
+                                                Int(params.getOrElse("count", "all"))) + ");"
       case FormatHTML => {
         timer("WidgetsServlet.renderCollection") {
           formatPersonCollection(person, FormatHTML, params("collectionName"),
@@ -356,8 +365,9 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     })
 
     request("format") match {
-      case FormatJSON => Json.toJson(dateFilteredCollection)
-      case FormatJSONP => jsonpCallback + "(" + Json.toJson(dateFilteredCollection) + ");"
+      case FormatJSON => filterCollectionByCount(dateFilteredCollection, Int(params.getOrElse("count", "all")))
+      case FormatJSONP => jsonpCallback + "(" + filterCollectionByCount(dateFilteredCollection,
+                                                Int(params.getOrElse("count", "all"))) + ");"
       case FormatHTML => {
         timer("WidgetsServlet.renderCollection") {
           formatOrganizationCollection(organization, FormatHTML, params("collectionName"),
