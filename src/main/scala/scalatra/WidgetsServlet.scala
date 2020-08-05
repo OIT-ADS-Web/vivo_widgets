@@ -254,16 +254,6 @@ class WidgetsFilter(val coreName: String, val coreDirectory: String) extends Sca
     Json.toJson(values)
   }
 
-  /*
-   protected def filterOrganizationCollection(collection: List[AnyRef], items: Option[Int]) = {
-    var values = items match {
-      case Some(x:Int) =>  collection.slice(0, x)
-      case _ => collection
-    }
-    Json.toJson(values)
-  }
-  */
- 
   protected def formatOrganizationCollection(organization: Organization, formatType: FormatType, collectionName: String, collection: List[AnyRef], items: Option[Int], formatting: String, style: String, start: String, end: String):String  = {
     var modelData = scala.collection.mutable.Map[String,Any]()
     modelData.put("organization", Organization)
