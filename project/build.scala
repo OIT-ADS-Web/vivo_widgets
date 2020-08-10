@@ -31,7 +31,7 @@ object VivowidgetsBuild extends Build {
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
-        "net.liftweb" %% "lift-json" % "3.0-SNAPSHOT",
+        "net.liftweb" %% "lift-json" % "3.0-M1",
 
         "log4j" % "log4j" % "1.2.15" exclude("javax.jms", "jms"),
 
