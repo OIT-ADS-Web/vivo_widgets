@@ -62,7 +62,7 @@ class VivoAttributes(uri:String,
 
   def withinTimePeriod(start: Date, end: Date): Boolean = {
     if (get(officialDateKey) == null) {
-      true
+      false
     } else {
       (officialDate.after(start) || officialDate.equals(start)) &&
       (officialDate.before(end) || officialDate.equals(end))
