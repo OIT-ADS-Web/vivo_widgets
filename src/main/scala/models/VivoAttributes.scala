@@ -6,6 +6,8 @@ import edu.duke.oit.vw.utils._
 import java.util.Date
 import java.text.SimpleDateFormat
 
+import java.util.GregorianCalendar
+import java.util.Calendar
 
 /**
  * The <code>VivoAttributes</code> value is a catch all hash that
@@ -61,8 +63,14 @@ class VivoAttributes(uri:String,
 
 
   def withinTimePeriod(start: Date, end: Date): Boolean = {
+    val calendar1 = new GregorianCalendar()
+    calendar1.setTime(start);
+    val calendar2 = new GregorianCalendar()
+    calendar2.setTime(end)
     if (get(officialDateKey) == null) {
-      true
+      // defaults are: start="1000-01-01", end = "9999-12-31"
+      // so if it's default (same as blank), include publications with null date, otherwise not
+      if ((calendar1.get(Calendar.YEAR) == 1000) && (calendar2.get(Calendar.YEAR) == 9999)) { true } else { false }
     } else {
       (officialDate.after(start) || officialDate.equals(start)) &&
       (officialDate.before(end) || officialDate.equals(end))
