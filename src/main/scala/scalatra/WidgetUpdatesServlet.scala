@@ -37,6 +37,10 @@ class WidgetUpdatesFilter extends ScalatraFilter
         log.info("rebuilding for: " + uri)
         WidgetsConfig.prepareCore
         val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
+        params.get("force") match {
+          case Some("true") => { vsi.forceIndexPerson(uri) }
+          case _ => vsi.indexPerson(uri)
+        }
         vsi.indexPerson(uri)
         Json.toJson(Map("complete" -> true))
       }
