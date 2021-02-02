@@ -26,6 +26,10 @@ object PersonIndexer extends SimpleConversion
   def index(uri: String,vivo: Vivo, solr: SolrServer) = {
     indexAll(List(uri),vivo,solr)
   }
+  
+  def forceIndex(uri: String,vivo: Vivo, solr: SolrServer) = {
+    forceAll(List(uri),vivo,solr)
+  }
 
   def indexAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
     log.info("Building PersonIndexer.indexAll URIS:" + uris)
@@ -45,6 +49,16 @@ object PersonIndexer extends SimpleConversion
     }
   }
 
+  def forceAll(uris: List[String],vivo: Vivo, solr: SolrServer) = {
+    log.info("Building PersonIndexer.forceAll URIS:" + uris)
+    uris.grouped(100).foreach{ groupedUris =>
+      log.info("_Grouped URIS:" + uris)
+      val docs = groupedUris.map( uri => buildDoc(uri,vivo,true)).flatten
+      solr.add(docs.toIterable)
+    }
+  }
+
+ 
   def checkExisting(uri: String): Option[Person] = {
     val vsi = new VivoSolrIndexer(WidgetsConfig.server, WidgetsConfig.widgetServer)
     return vsi.getPerson(uri)
@@ -74,13 +88,13 @@ object PersonIndexer extends SimpleConversion
     updateAll(List(uri),vivo,solr)
   }
 
-  def buildDoc(uri: String,vivo: Vivo): Option[SolrInputDocument] = {
+  def buildDoc(uri: String,vivo: Vivo,forceUpdate: Boolean = false): Option[SolrInputDocument] = {
     buildPerson(uri,vivo,true).foreach{ p =>
 
       var person:Person = p.copy()
       val existing = checkExisting(p.uri)
       
-      if (existing.isDefined && existing.get.updatedAt.isDefined) {
+      if (existing.isDefined && existing.get.updatedAt.isDefined && !forceUpdate) {
         // NOTE: need to compare with a person with the same updatedAt value so 
         // it doesn't diff merely on that field alone
         val changes:Boolean = hasChanges(existing.get, p.copy(updatedAt=existing.get.updatedAt))

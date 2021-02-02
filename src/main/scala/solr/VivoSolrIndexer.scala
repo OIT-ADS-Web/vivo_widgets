@@ -85,6 +85,11 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
     solr.commit()
   }
 
+  def forceIndexPerson(uri:String) = {
+    PersonIndexer.forceIndex(uri.replaceAll("<|>",""), vivo, solr)
+    solr.commit()
+  }
+
   def reindexUri(uri: String) = {
     vivo.loadDriver()
     var query = new SolrQuery();
