@@ -29,7 +29,7 @@ SELECT ?publication
 ?subtypes ?conferenceName
 ?conferenceLocation ?chicagoCitation
 ?mlaCitation ?apaCitation
-?icmjeCitation ?authorshipType
+?icmjeCitation ?nlmCitation ?authorshipType
 ?conferenceDatetimeStart 
 ?conferenceDatetimeFinish
 ?conferenceStartDate 
@@ -97,7 +97,7 @@ WHERE {
   OPTIONAL {?publication duke:mlaCitation ?mlaCitation.}
   OPTIONAL {?publication duke:apaCitation ?apaCitation.}
   OPTIONAL {?publication duke:icmjeCitation ?icmjeCitation.}
-
+  OPTIONAL {?publication duke:nlmCitation ?nlmCitation.}
 
   FILTER(?authorshipType IN (core:Authorship, core:Translatorship, core:Editorship, core:Contribution))
 

@@ -1104,6 +1104,11 @@
           "type": "string",
           "description": "The publication citation in the MLA format "
         },
+        "nlmCitation": {
+          "type": "string",
+          "description": "The publication citation in the NLM format "
+        },
+        
         "isFavorite": {
           "type": "boolean",
           "description":
