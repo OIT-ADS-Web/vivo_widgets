@@ -8,6 +8,7 @@ SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?rank) AS ?rank) 
   (MIN(?schoolUri) AS ?schoolUri) (MIN(?schoolLabel) AS ?schoolLabel)
   (MIN(?endDatetimeUri) AS ?endDatetimeUri) (MIN(?endYear) AS ?endYear)
   (MIN(?personUri) AS ?personUri)
+  (MIN(?appointmentTypeCode) AS ?appointmentTypeCode)
 WHERE
 {
   <${uri}> core:relatedBy ?uri .
@@ -23,7 +24,6 @@ WHERE
   ?schoolUri vitro:mostSpecificType core:School; rdfs:label ?schoolLabel.
   FILTER (?schoolUri NOT IN (<https://scholars.duke.edu/individual/org50000021>))
 
-
   OPTIONAL {
     ?uri core:dateTimeInterval ?dateUri .
     ?dateUri core:start ?startDatetimeUri .
@@ -35,6 +35,7 @@ WHERE
     ?endDatetimeUri core:dateTime ?endYear .
   }
   ?uri core:rank ?rank .
+  ?uri vcard:category ?appointmentTypeCode .
   BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?rank
