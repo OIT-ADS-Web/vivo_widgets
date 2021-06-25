@@ -2,8 +2,8 @@
 <%@ val uri: String = "http://nothing.com" %>
 ${include("sparql/prefixes.ssp")}
 
-SELECT ?uri ?label ?type ?organizationLabel ?dateUri ?startDatetimeUri ?startYear ?endDatetimeUri ?endYear  ?schoolUri ?schoolLabel
-
+SELECT ?uri ?label ?type ?organizationLabel ?dateUri ?startDatetimeUri ?startYear 
+?endDatetimeUri ?endYear ?schoolUri ?schoolLabel ?appointmentTypeCode
 WHERE
 {
   <${uri}> core:relatedBy ?uri .
@@ -12,13 +12,14 @@ WHERE
     rdfs:label ?label ;
     core:relates ?organizationUri .
   ?organizationUri a foaf:Organization.
- ?organizationUri rdfs:label ?organizationLabel .
+  ?organizationUri rdfs:label ?organizationLabel .
  
-OPTIONAL {
-  ?uri core:dateTimeInterval ?dateUri .
-  ?dateUri core:start ?startDatetimeUri . 
-  ?startDatetimeUri core:dateTime ?startYear .
-  ?dateUri core:end ?endDatetimeUri . 
-  ?endDatetimeUri core:dateTime ?endYear .
-}
+  OPTIONAL {
+    ?uri core:dateTimeInterval ?dateUri .
+    ?dateUri core:start ?startDatetimeUri . 
+    ?startDatetimeUri core:dateTime ?startYear .
+    ?dateUri core:end ?endDatetimeUri . 
+    ?endDatetimeUri core:dateTime ?endYear .
+    ?uri vcard:category ?appointmentTypeCode . 
+  }
 }
