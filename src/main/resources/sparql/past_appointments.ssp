@@ -20,6 +20,6 @@ WHERE
     ?startDatetimeUri core:dateTime ?startYear .
     ?dateUri core:end ?endDatetimeUri . 
     ?endDatetimeUri core:dateTime ?endYear .
-    ?uri vcard:category ?appointmentTypeCode . 
   }
+  OPTIONAL { ?uri vcard:category ?appointmentTypeCode . } 
 }
