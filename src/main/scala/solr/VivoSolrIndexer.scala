@@ -66,6 +66,11 @@ class VivoSolrIndexer(vivo: Vivo, solr: SolrServer)
         log.info("done indexing people and organizations.")
       }
     }
+    future onFailure {
+      case exception => {
+        log.info("FAILURE indexing people and organizations ${exception.getMessage}")
+      }
+    }
     Await.ready(future, Duration(22, HOURS))
   }
 
