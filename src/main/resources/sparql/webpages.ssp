@@ -9,8 +9,8 @@ WHERE {
   ?individualVcard vcard:hasURL ?uri .
   ?uri vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
-    vcard:category ?category ;
     vcard:url ?linkURI .
+  ?individualVcard vcard:category ?category .
   BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?label
