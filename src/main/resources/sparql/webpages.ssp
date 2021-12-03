@@ -3,13 +3,14 @@
 ${include("sparql/prefixes.ssp")}
 
 SELECT ?uri (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?linkText) AS ?linkText) (MIN(?linkURI) AS ?linkURI)
-  (MIN(?personUri) AS ?personUri)
+  (MIN(?personUri) AS ?personUri) (MIN(?category) AS ?category)
 WHERE {
   <${uri}> obo:ARG_2000028 ?individualVcard.
   ?individualVcard vcard:hasURL ?uri .
   ?uri vitro:mostSpecificType ?type ;
     rdfs:label ?label ;
     vcard:url ?linkURI .
+  ?individualVcard vcard:category ?category .
   BIND(<${uri}> AS ?personUri)
 } GROUP BY ?uri
 order by ?label
