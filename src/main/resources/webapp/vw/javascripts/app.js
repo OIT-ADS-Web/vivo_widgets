@@ -62,46 +62,38 @@
         viewModel.chosenFormat() + ' format <em>' +  style + '</em>');
   }
 
-
-  // Clipboard from http://code.google.com/p/zeroclipboard/
-  
+  // Clipboard from https://github.com/zenorocha/clipboard.js
   function initializeClipboard() {
     var clip = null;
 
-    clip = new ZeroClipboard.Client();
-    clip.setHandCursor( true );
-
-    // clip.addEventListener('load', function (client) {
-    //   //alert("Flash movie loaded and ready.");
-    // });
-    //
-    clip.addEventListener('mouseOver', function (client) {
-      clip.setText( $('#embed').val() );
+    clip = new ClipboardJS('#d_clip_button', {
+      text: function (trigger) {
+        return $("#embed").val();
+      }
     });
-    clip.addEventListener('complete', function (client, text) {
+
+    // NOTE: not handling on('error')
+    clip.on('success', function (e) {
       $('#embed').effect("highlight", {}, 1500);
     });
-    clip.glue( 'd_clip_button', 'd_clip_container' );
   }
 
 
   // Clipboard code for handling JavaScript URL
-
   function initializeClipboard2() {
     var clip2 = null;
 
-    clip2 = new ZeroClipboard.Client();
-    clip2.setHandCursor( true );
-
-    clip2.addEventListener('mouseOver', function (client) {
-      // clip2.setText( text_to_get );
-      clip2.setText( $('#embed2').val() );
-
+    clip2 = new ClipboardJS('#js_d_clip_button', {
+      text: function (trigger) {
+        return $("#embed2").val();
+      }
     });
-    clip2.addEventListener('complete', function (client, text) {
+
+    // NOTE: not handling on('error')
+    clip2.on('success', function (e) {
+      // #embed2 (what is copied) is hidden, so this effect is slightly misleading
       $('#embed').effect("highlight", {}, 1500);
     });
-    clip2.glue( 'js_d_clip_button', 'js_d_clip_container' );
   }
 
 

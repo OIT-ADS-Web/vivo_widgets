@@ -19,26 +19,20 @@ function openModal(obj) {
       });
 }
 
-/* Clipboard from http://code.google.com/p/zeroclipboard/ */
+// Clipboard from https://github.com/zenorocha/clipboard.js
 function initializeClipboard() {
   var clip = null;
 
-  clip = new ZeroClipboard.Client();
-  clip.setHandCursor( true );
+  clip = new ClipboardJS('#d_clip_button', {
+    text: function (trigger) {
+      return $("#embed").val();
+    }
+  });
 
-  clip.addEventListener('load', function (client) {
-
-      });
-  //
-    clip.addEventListener('mouseOver', function (client) {
-        clip.setText( $('#embed').val() );
-        document});
-  clip.addEventListener('complete', function (client, text) {
-      $('#embed').effect("highlight", {}, 1500);
-
-      });
-  clip.glue( 'd_clip_button', 'd_clip_container' );
-  $('#modal').hide();
+  // NOTE: not handling on('error')
+  clip.on('success', function (e) {
+    $('#embed').effect("highlight", {}, 1500);
+  });
 }
 
 $(document).ready(function(){
