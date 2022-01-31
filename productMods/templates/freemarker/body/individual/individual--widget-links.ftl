@@ -32,7 +32,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
   </ul>
 </div>
 
-${headScripts.add('<script type="text/javascript" src="${urls.base}/js/individual/ZeroClipboard.js"></script>',
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/individual/clipboard.min.js"></script>',
                   '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/widgetUtils.js"></script>')}
