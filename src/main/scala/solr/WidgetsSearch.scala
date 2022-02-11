@@ -23,7 +23,8 @@ object WidgetsSearcher extends SolrModel {
   def searchByUpdatedAt(since: Date, offset: Integer, solr:SolrServer): WidgetsSearchResult = {
     // NOTE: syntax for searh in SOLR looks this:
     // updatedAt:[2016-02-10T00:00:00Z TO NOW]
-    val format = new SimpleDateFormat("YYYY-MM-dd'T'00:00:00'Z'")
+    // NOTE: YYYY is 'week year', yyyy is actual year
+    val format = new SimpleDateFormat("yyyy-MM-dd'T'00:00:00'Z'")
     //see: http://stackoverflow.com/questions/26037324/solrj-date-request
 
     val dateSince = format.format(since)
