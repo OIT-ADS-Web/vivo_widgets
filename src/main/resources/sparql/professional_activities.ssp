@@ -5,7 +5,7 @@ SELECT ?activity (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?serviceType
        (MIN(?serviceOrEventName) AS ?serviceOrEventName) (MIN(?hostOrganization) AS ?hostOrganization) (MIN(?locationOrVenue) AS ?locationOrVenue) 
        (MIN(?description) AS ?description) (MIN(?committeeType) AS ?committeeType) (MIN(?committeeName) AS ?committeeName) (MIN(?nameOfTalk) AS ?nameOfTalk) 
        (MIN(?startDate) AS ?startDate) (MIN(?startDatePrecision) AS ?startDatePrecision) (MIN(?endDate) AS ?endDate) (MIN(?endDatePrecision) AS ?endDatePrecision) 
-       (MIN(?geoFocus) AS ?geoFocus)
+       (MIN(?geoFocus) AS ?geoFocus) (MIN(?weblink) AS ?webLink)
 WHERE {
   <${uri}> dukeact:performs ?activity.
   ?activity rdf:type dukeact:ProfessionalActivity.
@@ -20,6 +20,7 @@ WHERE {
   OPTIONAL {?activity dukeact:description ?description.}
   OPTIONAL {?activity dukeact:committeeType ?committeeType.}
   OPTIONAL {?activity dukeact:committeeName ?committeeName.}
+  OPTIONAL {?activity duke:linkToItem ?weblink.}
   OPTIONAL {
     ?activity core:geographicFocus ?geoFocusUri.
     ?geoFocusUri rdfs:label ?geoFocus.
