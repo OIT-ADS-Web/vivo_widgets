@@ -3,6 +3,7 @@ ${include("sparql/prefixes.ssp")}
 
 SELECT ?award (MIN(?label) AS ?label) (MIN(?name) AS ?name) (MIN(?serviceType) AS ?serviceType) (MIN(?awardedBy) AS ?awardedBy) (MIN(?awardedByUri) AS ?awardedByUri) 
        (MIN(?date) AS ?date) (MIN(?datePrecision) AS ?datePrecision) (MIN(?type) AS ?type) (MIN(?description) AS ?description) 
+(MIN(?weblink) as ?weblink)
 WHERE {
   <${uri}> core:relatedBy ?awardReceipt.
   ?awardReceipt a core:AwardReceipt.
@@ -11,6 +12,7 @@ WHERE {
   ?award a core:Award.
   ?award dukeact:awardName ?name.
   ?award vitro:mostSpecificType ?type.
+  OPTIONAL {?award duke:linkToItem ?weblink.}
   OPTIONAL {?award dukeact:serviceType ?serviceType.}
   OPTIONAL {?awardReceipt core:description ?description.}
 
