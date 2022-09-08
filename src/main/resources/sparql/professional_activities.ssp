@@ -5,7 +5,7 @@ SELECT ?activity (MIN(?type) AS ?type) (MIN(?label) AS ?label) (MIN(?serviceType
        (MIN(?serviceOrEventName) AS ?serviceOrEventName) (MIN(?hostOrganization) AS ?hostOrganization) (MIN(?locationOrVenue) AS ?locationOrVenue) 
        (MIN(?description) AS ?description) (MIN(?committeeType) AS ?committeeType) (MIN(?committeeName) AS ?committeeName) (MIN(?nameOfTalk) AS ?nameOfTalk) 
        (MIN(?startDate) AS ?startDate) (MIN(?startDatePrecision) AS ?startDatePrecision) (MIN(?endDate) AS ?endDate) (MIN(?endDatePrecision) AS ?endDatePrecision) 
-       (MIN(?geoFocus) AS ?geoFocus) (MIN(?weblink) AS ?webLink)
+       (MIN(?geoFocus) AS ?geoFocus) (MIN(?weblink) AS ?weblink)
 WHERE {
   <${uri}> dukeact:performs ?activity.
   ?activity rdf:type dukeact:ProfessionalActivity.
